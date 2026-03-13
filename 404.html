@@ -3,102 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found | ASAP Pest &amp; Wildlife</title>
+  <title>Page Not Found — ASAP Pest &amp; Wildlife</title>
   <meta name="robots" content="noindex, nofollow">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            forest: '#2D6A4F',
-            'forest-dark': '#1B4332',
-            warm: '#FAF9F6',
-            amber: '#E8A317',
-            dark: '#1B1B1B',
-          },
-          fontFamily: {
-            heading: ['Poppins', 'sans-serif'],
-            body: ['Inter', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
 
-  <!-- Google Analytics placeholder -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- DataLayer event for 404 tracking -->
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script> -->
+    window.dataLayer.push({
+      'event': 'page_not_found',
+      'event_category': 'error',
+      'event_label': window.location.pathname
+    });
+  </script>
+</head>
+<body>
 
-  <!-- Microsoft Clarity placeholder -->
-  <!-- <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "CLARITY_ID");
-  </script> -->
-    <meta property="og:title" content="Page Not Found | ASAP Pest & Wildlife">
-    <meta property="og:description" content="Page not found.">
-    <meta property="og:image" content="https://bwm-asap.pages.dev/og-image.png">
-    <meta property="og:url" content="https://wildliferemovalasap.com/404">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-  </head>
-<body class="bg-warm text-dark">
-
-  <!-- Nav -->
-  <nav class="sticky top-0 z-50 bg-forest shadow-md">
-    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="/" class="text-white font-heading font-bold text-xl">ASAP Pest &amp; Wildlife</a>
-      <a href="/" class="text-white/80 hover:text-white text-sm font-medium transition">&larr; Back to Home</a>
+  <header class="site-header header-dark" style="background:rgba(255,255,255,.97);box-shadow:0 2px 20px rgba(0,0,0,.06);">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-icon">A</div><span class="logo-text" style="color:var(--green);">ASAP Pest &amp; Wildlife</span></a>
+      <nav class="nav-links" aria-label="Main navigation"><a href="/services.html" class="nav-link">Services</a><a href="/how-it-works.html" class="nav-link">How It Works</a><a href="/results.html" class="nav-link">Results</a><a href="/about.html" class="nav-link">About</a></nav>
+      <div class="header-cta"><a href="tel:7706913636" class="header-phone" style="color:var(--green);">(770) 691-3636</a><a href="/book.html" class="btn btn-primary">Book Your Free Inspection</a></div>
+      <button class="mobile-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
-  </nav>
+  </header>
 
-  <!-- 404 Content -->
-  <main class="max-w-2xl mx-auto px-4 py-24 text-center">
-    <p class="text-6xl font-heading font-bold text-forest/20 mb-4">404</p>
-    <h1 class="text-3xl md:text-4xl font-heading font-bold text-dark mb-4">Page Not Found</h1>
-    <p class="text-lg text-dark/60 mb-8">The page you're looking for doesn't exist or has moved.</p>
-
-    <div class="space-y-4">
-      <a href="/book" class="inline-block bg-amber hover:bg-amber/90 text-dark font-heading font-bold text-lg px-8 py-4 rounded-lg shadow-lg transition">
-        Book Your Free Inspection
-      </a>
-      <p>
-        <a href="/" class="text-forest underline hover:text-forest-dark transition">Go back to the homepage</a>
-      </p>
+  <section style="padding:200px 0 120px;background:#fff;text-align:center;">
+    <div class="container" style="max-width:600px;">
+      <h1 style="font-size:clamp(80px,12vw,140px);color:var(--green);margin-bottom:16px;line-height:1;">404</h1>
+      <h2 style="margin-bottom:16px;">This Page Went Into Hiding</h2>
+      <p style="color:var(--text-muted);font-size:18px;margin-bottom:40px;">The page you're looking for isn't here. But we're still here — 24 hours a day, 6 days a week.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/" class="btn btn-primary">Back to Home</a>
+        <a href="/book.html" class="btn btn-secondary">Book Your Free Inspection</a>
+      </div>
+      <p style="margin-top:40px;color:var(--text-muted);font-size:15px;">Need help now? Call <a href="tel:7706913636" style="color:var(--green);font-weight:600;">(770) 691-3636</a></p>
     </div>
+  </section>
 
-    <div class="mt-12 pt-8 border-t border-dark/10">
-      <p class="text-dark/60">Need help right now? Call us anytime.</p>
-      <a href="tel:+17706913636" class="text-2xl font-heading font-bold text-forest hover:text-forest-dark transition">(770) 691-3636</a>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-forest-dark text-white/70 text-sm py-8">
-    <div class="max-w-5xl mx-auto px-4 text-center space-y-2">
-      <p>&copy; 2026 ASAP Pest and Wildlife Removal. All rights reserved.</p>
-      <p>
-        <a href="/privacy" class="underline hover:text-white">Privacy Policy</a>
-        <span class="mx-2">|</span>
-        <a href="/terms" class="underline hover:text-white">Terms of Service</a>
-      </p>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="logo" style="margin-bottom:16px;"><div class="logo-icon">A</div><span class="logo-text">ASAP Pest &amp; Wildlife</span></div><p>Humane, eco-friendly wildlife removal and pest control for Metro Atlanta.</p><a href="tel:7706913636" class="footer-phone">(770) 691-3636</a><p class="footer-hours">24 hours Mon–Sat | Closed Sunday</p></div>
+        <div class="footer-col"><h4>Services</h4><a href="/services/wildlife-removal.html">Wildlife Removal</a><a href="/services/pest-control.html">Pest Control</a><a href="/services/exclusion.html">Exclusion &amp; Sealing</a><a href="/services/disinfection.html">Disinfection &amp; Cleanup</a><a href="/services/dead-animal-removal.html">Dead Animal Removal</a><a href="/services/commercial.html">Commercial</a></div>
+        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/how-it-works.html">How It Works</a><a href="/results.html">Results</a><a href="/book.html">Book Inspection</a></div>
+        <div class="footer-col"><h4>Legal</h4><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 ASAP Pest and Wildlife Removal. All rights reserved.</p><div class="footer-badges"><span>GA DNR Licensed</span><span>Dept. of Agriculture</span><span>State Licensed</span></div></div>
     </div>
   </footer>
-
+  <script src="/js/main.js"></script>
 </body>
 </html>
