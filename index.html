@@ -28,816 +28,55 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- ALL STYLES INLINE — no external CSS -->
-  <style>
-    /* ── CSS Variables ── */
-    :root {
-      --navy: #1B2A4A;
-      --cream: #F2EDDC;
-      --orange: #E87A2E;
-      --orange-hover: #D46B22;
-      --charcoal: #1B1B1B;
-      --border: rgba(27, 42, 74, 0.12);
-    }
-
-    /* ── Reset & Base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      font-size: 1.125rem;
-      line-height: 1.7;
-      color: var(--charcoal);
-      background: var(--cream);
-      overflow-x: hidden;
-    }
-    h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
-    img { max-width: 100%; height: auto; display: block; }
-    a { color: var(--navy); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--orange); }
-
-    /* ── Container ── */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-    /* ── Typography ── */
-    .section-headline {
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    /* ── Reveal Animation ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── Hero fade-up stages ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero-fade { opacity: 0; animation: fadeUp 0.6s ease forwards; }
-    .hero-fade-1 { animation-delay: 0.3s; }
-    .hero-fade-2 { animation-delay: 0.5s; }
-    .hero-fade-3 { animation-delay: 0.7s; }
-
-    /* ── Header ── */
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(242, 237, 220, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: background 0.3s, box-shadow 0.3s;
-      height: 72px;
-    }
-    .site-header.scrolled {
-      background: rgba(242, 237, 220, 0.98);
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    }
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .logo { display: flex; align-items: center; }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 32px;
-      align-items: center;
-    }
-    .nav-links a {
-      color: var(--navy);
-      font-weight: 500;
-      font-size: 0.95rem;
-    }
-    .header-phone {
-      color: var(--orange) !important;
-      font-weight: 600;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-    .header-cta {
-      background: var(--orange);
-      color: #fff !important;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      white-space: nowrap;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .header-cta:hover {
-      background: var(--orange-hover);
-      transform: scale(1.03);
-    }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--navy);
-      border-radius: 2px;
-      transition: transform 0.3s, opacity 0.3s;
-    }
-    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-    /* ── Mobile Nav ── */
-    .mobile-nav {
-      position: fixed;
-      top: 72px;
-      left: 0;
-      right: 0;
-      background: var(--cream);
-      z-index: 999;
-      display: none;
-      flex-direction: column;
-      padding: 24px;
-      gap: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav a {
-      color: var(--navy);
-      font-weight: 500;
-      font-size: 1.1rem;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .mobile-phone { color: var(--orange) !important; font-weight: 700; }
-    .mobile-cta {
-      background: var(--orange);
-      color: #fff !important;
-      text-align: center;
-      padding: 14px 24px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links, .header-phone, .header-cta { display: none !important; }
-      .hamburger { display: flex; }
-    }
-
-    /* ── Buttons ── */
-    .btn-primary {
-      display: inline-block;
-      background: var(--orange);
-      color: #fff !important;
-      padding: 16px 32px;
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: background 0.2s, transform 0.2s;
-      text-align: center;
-    }
-    .btn-primary:hover {
-      background: var(--orange-hover);
-      transform: scale(1.05);
-    }
-
-    /* ── 1. HERO ── */
-    .hero {
-      background: var(--cream);
-      background-image: none;
-      min-height: 85vh;
-      padding-top: calc(72px + 32px);
-      padding-bottom: 48px;
-      display: flex;
-      align-items: flex-start;
-    }
-    .hero-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 48px;
-      align-items: start;
-      width: 100%;
-    }
-    .hero-text { padding-top: 24px; }
-    .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.15;
-      color: var(--navy);
-      margin-bottom: 20px;
-    }
-    .hero .subheadline {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      color: var(--navy);
-      margin-bottom: 24px;
-      max-width: 540px;
-    }
-    .hero-phone {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--orange) !important;
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 700;
-      margin-bottom: 24px;
-    }
-    .hero-ctas { margin-bottom: 24px; }
-    .hero-trust {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      color: var(--navy);
-      font-size: 0.9rem;
-      opacity: 0.7;
-    }
-    .hero-visual {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 16px;
-    }
-    .hero-visual .mascot-svg {
-      width: 320px;
-      height: auto;
-      filter: drop-shadow(0 8px 24px rgba(27, 42, 74, 0.15));
-    }
-
-    @media (max-width: 768px) {
-      .hero { min-height: auto; padding-bottom: 40px; }
-      .hero-content { grid-template-columns: 1fr !important; gap: 24px; }
-      .hero-visual { display: none; }
-      .hero-ctas .btn-primary { width: 100%; display: block; }
-      .hero-trust { flex-wrap: wrap; justify-content: center; text-align: center; }
-    }
-
-    /* ── 2. TRUST BAR ── */
-    .trust-bar-section {
-      background: var(--navy);
-      padding: 40px 24px;
-    }
-    .trust-bar-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      text-align: center;
-    }
-    .trust-stat { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .trust-icon {
-      width: 24px;
-      height: 24px;
-      margin-bottom: 4px;
-    }
-    .stat-number {
-      color: var(--orange);
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      line-height: 1.2;
-    }
-    .stat-label {
-      color: #fff;
-      font-size: 0.875rem;
-      opacity: 0.8;
-    }
-    @media (max-width: 768px) {
-      .trust-bar-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
-    }
-
-    /* ── 3. STEPS ── */
-    .steps-section {
-      background: #F0EBE0;
-      border-top: 1px solid #E5DFD0;
-      border-bottom: 1px solid #E5DFD0;
-      padding: 80px 24px;
-    }
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      position: relative;
-    }
-    .step {
-      text-align: center;
-      position: relative;
-    }
-    .step-circle {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: var(--orange);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin: 0 auto 16px;
-    }
-    .step h3 {
-      color: var(--navy);
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .step p {
-      color: #4B5563;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-    @media (min-width: 769px) {
-      .step:not(:last-child)::after {
-        content: '';
-        position: absolute;
-        top: 32px;
-        left: calc(50% + 40px);
-        width: calc(100% - 80px);
-        height: 2px;
-        background: var(--orange);
-      }
-    }
-    @media (max-width: 768px) {
-      .steps-grid { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
-    }
-    @media (max-width: 480px) {
-      .steps-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ── 4. ANIMAL CARDS ── */
-    .animals-section {
-      background: var(--cream);
-      padding: 80px 24px;
-    }
-    .animal-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .animal-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 32px 24px;
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      display: block;
-      text-align: center;
-    }
-    .animal-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    }
-    .animal-card img {
-      width: 120px;
-      height: auto;
-      margin: 0 auto 16px;
-    }
-    .animal-card h3 {
-      color: var(--navy);
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .animal-card p {
-      font-size: 0.95rem;
-      color: #6B7280;
-      line-height: 1.5;
-      margin-bottom: 12px;
-    }
-    .card-link {
-      color: var(--navy);
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: color 0.2s;
-    }
-    .animal-card:hover .card-link { color: var(--orange); }
-
-    @media (max-width: 960px) and (min-width: 601px) {
-      .animal-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      .animal-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ── 5. WHY ASAP ── */
-    .why-section {
-      background: var(--navy);
-      padding: 80px 24px;
-    }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 48px;
-    }
-    .why-item {
-      text-align: center;
-    }
-    .why-icon {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 16px;
-      color: var(--orange);
-    }
-    .why-item h3 {
-      color: #fff;
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .why-item p {
-      color: rgba(255, 255, 255, 0.85);
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-    @media (max-width: 768px) {
-      .why-grid { grid-template-columns: 1fr; gap: 40px; }
-    }
-
-    /* ── 6. REVIEWS ── */
-    .reviews-section {
-      background: var(--cream);
-      padding: 80px 24px;
-    }
-    .featured-review {
-      background: var(--navy);
-      border-left: 4px solid var(--orange);
-      border-radius: 8px;
-      padding: 32px;
-      margin-bottom: 40px;
-    }
-    .featured-review blockquote {
-      color: #fff;
-      font-size: 1.25rem;
-      font-style: italic;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    .featured-review cite {
-      color: var(--orange);
-      font-style: normal;
-      font-weight: 600;
-      font-size: 1rem;
-    }
-    .reviews-carousel { overflow: hidden; position: relative; }
-    .reviews-track {
-      display: flex;
-      transition: transform 0.4s ease;
-    }
-    .review-slide {
-      min-width: calc(100% / 3);
-      padding: 0 12px;
-      box-sizing: border-box;
-    }
-    .review-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-      height: 100%;
-    }
-    .review-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .review-avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .review-name {
-      font-weight: 600;
-      color: var(--navy);
-      font-size: 1rem;
-    }
-    .review-card blockquote {
-      font-size: 0.95rem;
-      color: #374151;
-      line-height: 1.6;
-    }
-    .review-nav {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 24px;
-    }
-    .review-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      border: none;
-      background: rgba(27, 42, 74, 0.2);
-      cursor: pointer;
-      transition: background 0.2s;
-      padding: 0;
-    }
-    .review-dot.active { background: var(--orange); }
-    @media (max-width: 768px) {
-      .review-slide { min-width: 100%; }
-    }
-
-    /* ── 7. LOGOS BAR ── */
-    .logos-section {
-      background: #EEEAE0;
-      padding: 48px 24px;
-    }
-    .logos-label {
-      text-align: center;
-      color: var(--navy);
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 24px;
-    }
-    .logos-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 48px;
-      flex-wrap: wrap;
-    }
-    .logos-row img {
-      height: 44px;
-      width: auto;
-      filter: grayscale(1);
-      opacity: 0.6;
-      transition: filter 0.3s, opacity 0.3s;
-    }
-    .logos-row img:hover {
-      filter: grayscale(0);
-      opacity: 1;
-    }
-
-    /* ── 8. EMERGENCY CTA ── */
-    .emergency-section {
-      background: var(--orange);
-      padding: 60px 24px;
-      text-align: center;
-    }
-    .emergency-section h2 {
-      color: #fff;
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-    .emergency-phone {
-      display: inline-block;
-      color: #fff !important;
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .emergency-section p {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.125rem;
-    }
-
-    /* ── 9. ABOUT ── */
-    .about-section {
-      background: var(--cream);
-      padding: 80px 24px;
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 48px;
-      align-items: center;
-    }
-    .about-text {
-      border-left: 4px solid var(--orange);
-      padding-left: 24px;
-    }
-    .about-text h2 {
-      color: var(--navy);
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      font-weight: 700;
-      margin-bottom: 24px;
-      line-height: 1.2;
-    }
-    .about-text p {
-      font-size: 1.125rem;
-      line-height: 1.7;
-      color: var(--navy);
-    }
-    .about-mascot {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .about-mascot img {
-      max-width: 280px;
-      width: 100%;
-      filter: drop-shadow(0 8px 24px rgba(27, 42, 74, 0.15));
-    }
-    @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .about-mascot { order: -1; }
-      .about-mascot img { max-width: 200px; }
-    }
-
-    /* ── 10. SERVICE AREA ── */
-    .service-area-section {
-      background: var(--navy);
-      padding: 80px 24px;
-    }
-    .service-area-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-    }
-    .service-area-grid h2 {
-      color: #fff;
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      font-weight: 700;
-      margin-bottom: 24px;
-    }
-    .area-list {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px 24px;
-    }
-    .area-list li {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 1rem;
-      padding: 4px 0;
-    }
-    @media (max-width: 768px) {
-      .service-area-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ── 11. FOOTER ── */
-    .site-footer {
-      background: var(--charcoal);
-      color: rgba(240, 240, 240, 0.7);
-      padding: 64px 24px 32px;
-    }
-    .footer-grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-    }
-    .footer-brand p {
-      font-size: 0.95rem;
-      margin-top: 16px;
-      line-height: 1.6;
-    }
-    .footer-col { display: flex; flex-direction: column; gap: 8px; }
-    .footer-col h4 {
-      color: var(--orange);
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 8px;
-    }
-    .footer-col a {
-      color: rgba(240, 240, 240, 0.7);
-      font-size: 0.95rem;
-      transition: color 0.2s;
-    }
-    .footer-col a:hover { color: var(--orange); }
-    .footer-certs {
-      max-width: 1200px;
-      margin: 24px auto 0;
-      text-align: center;
-      font-size: 0.85rem;
-      color: rgba(240, 240, 240, 0.4);
-    }
-    .footer-bottom {
-      max-width: 1200px;
-      margin: 24px auto 0;
-      padding-top: 24px;
-      border-top: 1px solid rgba(240, 240, 240, 0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-    }
-    .footer-bottom a {
-      color: rgba(240, 240, 240, 0.7);
-      transition: color 0.2s;
-    }
-    .footer-bottom a:hover { color: var(--orange); }
-    @media (max-width: 768px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-    }
-    @media (max-width: 480px) {
-      .footer-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ── Cal.com spinner ── */
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── Section utility ── */
-    .mb-32 { margin-bottom: 32px; }
-    .mb-40 { margin-bottom: 40px; }
-    .text-center { text-align: center; }
-  </style>
-
-  <!-- GTM placeholder -->
-  <!-- Google Tag Manager: paste GTM script here -->
-
-  <!-- GA4 placeholder -->
-  <!-- Google Analytics 4: paste GA4 script here -->
-
-  <!-- Meta Pixel placeholder -->
-  <!-- Meta Pixel: paste Meta Pixel script here -->
-
-  <!-- BreadcrumbList JSON-LD -->
+  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://wildliferemovalasap.com/"
-      }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wildliferemovalasap.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://wildliferemovalasap.com/services.html" },
+      { "@type": "ListItem", "position": 3, "name": "How It Works", "item": "https://wildliferemovalasap.com/how-it-works.html" },
+      { "@type": "ListItem", "position": 4, "name": "About", "item": "https://wildliferemovalasap.com/about.html" },
+      { "@type": "ListItem", "position": 5, "name": "Book", "item": "https://wildliferemovalasap.com/book.html" }
     ]
   }
   </script>
-
-  <!-- Service JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Wildlife Removal",
+    "serviceType": "Wildlife Removal and Pest Control",
     "provider": {
       "@type": "LocalBusiness",
       "name": "ASAP Pest & Wildlife"
     },
     "areaServed": {
-      "@type": "Place",
-      "name": "Metro Atlanta, Georgia"
+      "@type": "State",
+      "name": "Georgia"
     },
-    "description": "Humane wildlife removal and pest control. We inspect, trap, seal every entry point, and disinfect."
+    "description": "Humane wildlife removal, pest control, exclusion, and sanitation services for residential and commercial properties in Metro Atlanta."
   }
   </script>
-
-  <!-- LocalBusiness JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "ASAP Pest & Wildlife",
-    "image": "https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61aea77886defae35f384628_webclip.png",
-    "url": "https://wildliferemovalasap.com/",
+    "image": "https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d9c2f1049b70f998561ab1_logo-dark.svg",
+    "url": "https://wildliferemovalasap.com",
     "telephone": "+17706913636",
-    "email": "info@wildliferemovalasap.com",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Atlanta",
       "addressRegion": "GA",
       "addressCountry": "US"
     },
-    "areaServed": "Metro Atlanta",
-    "priceRange": "$$",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
@@ -850,514 +89,1376 @@
       "@type": "AggregateRating",
       "ratingValue": "5.0",
       "reviewCount": "100",
-      "bestRating": "5"
-    }
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Mike Reichert" },
+        "reviewBody": "Reliable, efficient, and professional — our trusted partner for wildlife management at Tyler Perry Studios.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Mark D." },
+        "reviewBody": "They showed up within two hours and handled everything. Raccoons were out by the next morning. Incredible service.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Kelsey R." },
+        "reviewBody": "I called at 6 AM about bats in my attic. They were at my door by 8. Professional, kind, and thorough. Can't recommend enough.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Fred T." },
+        "reviewBody": "Had a snake problem in my crawl space. ASAP came out same day, removed them, and sealed every entry point. Haven't seen one since.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Charlie M." },
+        "reviewBody": "We had squirrels destroying our insulation. ASAP trapped them humanely, sealed the roof, and even cleaned up the mess. Top-notch.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Yashica W." },
+        "reviewBody": "Bees had built a massive hive in our wall. ASAP relocated them safely and repaired the damage. So grateful for their humane approach.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Benjamin L." },
+        "reviewBody": "Rats in the garage had me losing sleep. ASAP set up traps, sealed the gaps, and followed up twice. Zero issues since. Worth every penny.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      }
+    ]
   }
   </script>
 
-  <!-- Review JSON-LD -->
-  <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "Review",
-      "author": { "@type": "Person", "name": "Mark Carroll" },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "reviewBody": "The service was excellent! Arrived on time. Gave me a detailed overview of the problem and rodents that invaded the house. Gave me 3 different price options for repair and installed the first phase immediately. Wish I've known them sooner but I will refer ASAP to all my neighbors, friends, and family!",
-      "itemReviewed": { "@type": "LocalBusiness", "name": "ASAP Pest & Wildlife" }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Review",
-      "author": { "@type": "Person", "name": "Kelsey Monaghan" },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "reviewBody": "If you have ANY concerns with unwanted animals in/around your home, do yourself a favor and call Chaz! He has taken care of two separate issues at my house and both jobs were completed quickly & thoroughly. Chaz is very professional and is wonderful to work with!",
-      "itemReviewed": { "@type": "LocalBusiness", "name": "ASAP Pest & Wildlife" }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Review",
-      "author": { "@type": "Person", "name": "Fred Perry" },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "reviewBody": "ASAP is an excellent service provider with a team of highly skilled and professional technicians. I'd highly recommend.",
-      "itemReviewed": { "@type": "LocalBusiness", "name": "ASAP Pest & Wildlife" }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Review",
-      "author": { "@type": "Person", "name": "Charlie Cichetti" },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "reviewBody": "No more squirrels getting into my attic, thanks ASAP!",
-      "itemReviewed": { "@type": "LocalBusiness", "name": "ASAP Pest & Wildlife" }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Review",
-      "author": { "@type": "Person", "name": "Yashica Marshall" },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "reviewBody": "They are extremely professional and respectful of your home & property.",
-      "itemReviewed": { "@type": "LocalBusiness", "name": "ASAP Pest & Wildlife" }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Review",
-      "author": { "@type": "Person", "name": "Benjamin Olmstead" },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "reviewBody": "Went above and beyond to make sure they protected my roofline after rats.",
-      "itemReviewed": { "@type": "LocalBusiness", "name": "ASAP Pest & Wildlife" }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Review",
-      "author": { "@type": "Person", "name": "Mike Reichert" },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "reviewBody": "Reliable, efficient, and professional — our trusted partner.",
-      "itemReviewed": { "@type": "LocalBusiness", "name": "ASAP Pest & Wildlife" }
+  <!-- ALL STYLES INLINE -->
+  <style>
+    :root {
+      --navy: #1B2A4A;
+      --orange: #E87A2E;
+      --orange-hover: #D06A1E;
+      --cream: #F2EDDC;
+      --charcoal: #1B1B1B;
+      --light-gray: #F5F2ED;
+      --process-bg: #F0EBE0;
     }
-  ]
-  </script>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--charcoal);
+      background: #fff;
+      line-height: 1.7;
+      font-size: 1.125rem;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; line-height: 1.1; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* Buttons */
+    .btn-orange {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.125rem;
+      padding: 18px 36px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-orange:hover {
+      background: var(--orange-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,122,46,0.35);
+    }
+    .btn-orange-outline {
+      display: inline-block;
+      border: 2px solid var(--orange);
+      color: var(--orange);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      cursor: pointer;
+      background: transparent;
+    }
+    .btn-orange-outline:hover {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    /* NAV */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--cream);
+      transition: box-shadow 0.3s;
+    }
+    .site-nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .nav-logo img { height: 44px; width: auto; }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--navy);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-phone {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--orange);
+    }
+    .nav-cta {
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      padding: 12px 24px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--orange-hover); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 3px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--cream);
+      padding: 0 24px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.0625rem;
+      color: var(--navy);
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(27,42,74,0.08);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .btn-orange {
+      margin-top: 8px;
+      text-align: center;
+      font-size: 1rem;
+      padding: 14px 24px;
+    }
+
+    @media (max-width: 960px) {
+      .nav-links, .nav-right { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--cream);
+      min-height: 80vh;
+      display: flex;
+      align-items: flex-start;
+      padding: 72px 0 80px;
+    }
+    .hero-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+    }
+    .hero-text { flex: 0 0 57%; padding-top: 24px; }
+    .hero-visual { flex: 0 0 40%; }
+    .hero h1 {
+      font-size: clamp(2.75rem, 5.5vw, 4rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .hero-sub {
+      font-size: 1.1875rem;
+      color: #4A4A4A;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 520px;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .hero-phone {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: var(--orange);
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .hero-phone a { color: var(--orange); }
+    .hero-phone a:hover { text-decoration: underline; }
+    .hero-cta-wrap {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .hero-badges {
+      display: flex;
+      gap: 24px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .hero-badge svg { flex-shrink: 0; }
+
+    .hero-grid-wrap {
+      background: #fff;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 12px 40px rgba(27,42,74,0.1);
+      opacity: 0;
+      transform: translateX(32px);
+    }
+    .hero-animal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .hero-animal-grid img {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      margin: 0 auto;
+      transition: transform 0.3s;
+    }
+    .hero-animal-grid img:hover { transform: scale(1.08); }
+    .hero-grid-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy);
+      opacity: 0.6;
+    }
+
+    .hero-loaded .hero h1 { animation: fadeUp 0.6s 0.3s both; }
+    .hero-loaded .hero-sub { animation: fadeUp 0.6s 0.5s both; }
+    .hero-loaded .hero-phone { animation: fadeUp 0.6s 0.6s both; }
+    .hero-loaded .hero-cta-wrap { animation: fadeUp 0.6s 0.7s both; }
+    .hero-loaded .hero-badges { animation: fadeUp 0.6s 0.85s both; }
+    .hero-loaded .hero-grid-wrap { animation: fadeRight 0.7s 0.3s both; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeRight {
+      from { opacity: 0; transform: translateX(32px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @media (max-width: 960px) {
+      .hero { padding: 48px 0 56px; min-height: auto; }
+      .hero-inner { flex-direction: column; gap: 40px; }
+      .hero-text { flex: 1; padding-top: 0; }
+      .hero-visual { flex: 1; width: 100%; }
+      .hero-grid-wrap { padding: 24px; }
+      .hero-animal-grid img { width: 80px; height: 80px; }
+    }
+
+    /* TRUST BAR */
+    .trust-bar { background: var(--navy); padding: 40px 0; }
+    .trust-bar-inner {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+    }
+    .trust-icon { width: 40px; height: 40px; }
+    .trust-item .trust-value {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--orange);
+    }
+    .trust-item .trust-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    /* REVEAL ANIMATION */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* PROCESS */
+    .process { background: var(--process-bg); padding: 72px 0; }
+    .section-heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .section-heading p {
+      font-size: 1.125rem;
+      color: #4A4A4A;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 24px 16px;
+      position: relative;
+      border: 1px solid #E5DFD0;
+      border-radius: 12px;
+      background: var(--process-bg);
+      margin: 0 8px;
+    }
+    .process-number {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 2;
+    }
+    .process-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 56px;
+      right: -16px;
+      width: 32px;
+      height: 3px;
+      background: var(--orange);
+      z-index: 1;
+    }
+    .process-step h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .process-step p {
+      font-size: 0.9375rem;
+      color: #4A4A4A;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .process { padding: 56px 0; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .process-step { margin: 0; }
+      .process-step:not(:last-child)::after { display: none; }
+    }
+    @media (max-width: 480px) {
+      .process-grid { grid-template-columns: 1fr; }
+    }
+
+    /* SERVICES GRID */
+    .services { background: var(--cream); padding: 72px 0; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(27,42,74,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(27,42,74,0.12);
+    }
+    .service-card img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin: 0 auto 16px;
+    }
+    .service-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .service-card p {
+      font-size: 0.9375rem;
+      color: #4A4A4A;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 960px) {
+      .services { padding: 56px 0; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .services-grid { grid-template-columns: 1fr; }
+    }
+
+    /* WHY ASAP */
+    .why-asap { background: var(--navy); padding: 72px 0; }
+    .why-asap .section-heading h2 { color: #fff; }
+    .why-asap .section-heading p { color: rgba(255,255,255,0.7); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+    .why-item { text-align: center; }
+    .why-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 20px;
+    }
+    .why-item h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .why-item p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .why-asap { padding: 56px 0; }
+      .why-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* REVIEWS */
+    .reviews { background: var(--cream); padding: 72px 0; }
+    .reviews-heading {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .reviews-heading h2 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .featured-review {
+      background: linear-gradient(135deg, var(--navy) 0%, #243556 100%);
+      border-radius: 16px;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .featured-review::before {
+      content: '\201C';
+      position: absolute;
+      top: 16px;
+      left: 24px;
+      font-size: 6rem;
+      font-family: 'Poppins', sans-serif;
+      color: rgba(232,122,46,0.2);
+      line-height: 1;
+    }
+    .featured-quote {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-style: italic;
+      color: #fff;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 20px;
+      max-width: 800px;
+    }
+    .featured-attribution {
+      color: var(--orange);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    .carousel-wrap { position: relative; overflow: hidden; }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .review-card {
+      flex: 0 0 calc(33.333% - 16px);
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 24px;
+      margin: 0 8px;
+      box-shadow: 0 4px 16px rgba(27,42,74,0.06);
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .review-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .review-name {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--navy);
+    }
+    .review-stars { margin-bottom: 12px; }
+    .review-stars img { height: 20px; width: auto; }
+    .review-text {
+      font-size: 0.9375rem;
+      color: #4A4A4A;
+      line-height: 1.7;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(27,42,74,0.2);
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .carousel-dot.active { background: var(--orange); }
+
+    @media (max-width: 960px) {
+      .reviews { padding: 56px 0; }
+      .review-card { flex: 0 0 calc(100% - 16px); }
+      .featured-review { padding: 36px 28px; }
+    }
+
+    /* COMMERCIAL LOGOS */
+    .commercial-logos { background: var(--light-gray); padding: 60px 0; }
+    .logos-title {
+      text-align: center;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 40px;
+    }
+    .logos-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .logos-row img {
+      height: 64px;
+      width: auto;
+      object-fit: contain;
+    }
+    @media (max-width: 768px) {
+      .logos-row { gap: 32px; }
+      .logos-row img { height: 48px; }
+    }
+
+    /* COMMERCIAL CALLOUT */
+    .commercial-callout { background: var(--navy); padding: 64px 0; }
+    .callout-inner {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+    }
+    .callout-text { flex: 0 0 58%; }
+    .callout-eyebrow {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .callout-text h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .callout-text p {
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 560px;
+    }
+    .callout-logos {
+      flex: 0 0 36%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      justify-items: center;
+      align-items: center;
+    }
+    .callout-logos img {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.7;
+      filter: brightness(0) invert(1);
+    }
+    @media (max-width: 768px) {
+      .commercial-callout { padding: 56px 0; }
+      .callout-inner { flex-direction: column; gap: 40px; }
+      .callout-text, .callout-logos { flex: 1; }
+    }
+
+    /* EMERGENCY CTA */
+    .emergency-cta {
+      background: var(--orange);
+      padding: 48px 0;
+      text-align: center;
+    }
+    .emergency-cta h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .emergency-phone {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      margin-bottom: 8px;
+    }
+    .emergency-phone a { color: #fff; }
+    .emergency-phone a:hover { text-decoration: underline; }
+    .emergency-sub {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ABOUT */
+    .about { background: var(--cream); padding: 72px 0; }
+    .about-inner {
+      display: flex;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-text { flex: 0 0 58%; }
+    .about-text h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 24px;
+      padding-left: 20px;
+      border-left: 4px solid var(--orange);
+    }
+    .about-text p {
+      font-size: 1.125rem;
+      color: #4A4A4A;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .about-text .btn-orange { margin-top: 12px; }
+    .about-visual {
+      flex: 0 0 36%;
+      display: flex;
+      justify-content: center;
+    }
+    .about-logo-circle {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 4px solid var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(232,122,46,0.15);
+    }
+    .about-logo-circle img { width: 160px; height: auto; }
+
+    @media (max-width: 768px) {
+      .about { padding: 56px 0; }
+      .about-inner { flex-direction: column; gap: 40px; }
+      .about-visual { order: -1; }
+      .about-logo-circle { width: 180px; height: 180px; }
+      .about-logo-circle img { width: 120px; }
+    }
+
+    /* SERVICE AREA + BOOKING */
+    .service-area { background: var(--navy); padding: 72px 0; }
+    .sa-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: flex-start;
+    }
+    .sa-text h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 24px;
+      line-height: 1.15;
+    }
+    .sa-text p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .city-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+    }
+    .city-grid li {
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .city-grid li::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+    .sa-booking h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .cal-skeleton {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cal-skeleton::after {
+      content: '';
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255,255,255,0.1);
+      border-top-color: var(--orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .cal-fallback {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .cal-fallback p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9375rem;
+      margin-bottom: 8px;
+    }
+    .cal-fallback a {
+      color: var(--orange);
+      font-weight: 600;
+      font-size: 1.125rem;
+    }
+    .cal-fallback a:hover { text-decoration: underline; }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .service-area { padding: 56px 0; }
+      .sa-inner { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    /* FOOTER */
+    .site-footer { background: var(--charcoal); padding: 64px 0 0; color: #fff; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand img { height: 40px; margin-bottom: 16px; filter: brightness(0) invert(1); }
+    .footer-brand p {
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .footer-phone {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--orange);
+    }
+    .footer-col h4 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a {
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-license {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-legal a {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════════
-       HEADER (Sticky)
-       ═══════════════════════════════════════════════ -->
-  <header class="site-header" id="siteHeader">
-    <div class="header-inner">
-      <a href="/" class="logo" aria-label="ASAP Pest & Wildlife Home">
-        <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d9c2f1049b70f998561ab1_logo-dark.svg" alt="ASAP Pest & Wildlife" style="height:40px;width:auto;">
+  <!-- ═══════════════ 1. NAV ═══════════════ -->
+  <header class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="ASAP Pest & Wildlife Home">
+        <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d9c2f1049b70f998561ab1_logo-dark.svg" alt="ASAP Pest & Wildlife logo" width="180" height="44">
       </a>
-
-      <nav>
-        <ul class="nav-links">
-          <li><a href="/services.html">Services</a></li>
-          <li><a href="/how-it-works.html">How It Works</a></li>
-          <li><a href="/about.html">About</a></li>
-          <li><a href="/results.html">Results</a></li>
-        </ul>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="/services.html">Services</a>
+        <a href="/how-it-works.html">How It Works</a>
+        <a href="/about.html">About</a>
+        <a href="/results.html">Results</a>
       </nav>
-
-      <a href="tel:7706913636" class="header-phone">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        (770) 691-3636
-      </a>
-
-      <a href="/book.html" class="header-cta">Book Your Free Inspection</a>
-
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <div class="nav-right">
+        <a href="tel:7706913636" class="nav-phone">(770) 691-3636</a>
+        <a href="/book.html" class="nav-cta">Book Your Free Inspection</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
       </button>
     </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="/services.html">Services</a>
+      <a href="/how-it-works.html">How It Works</a>
+      <a href="/about.html">About</a>
+      <a href="/results.html">Results</a>
+      <a href="tel:7706913636">(770) 691-3636</a>
+      <a href="/book.html" class="btn-orange">Book Your Free Inspection</a>
+    </div>
   </header>
-
-  <!-- Mobile Nav -->
-  <div class="mobile-nav" id="mobileNav">
-    <a href="/services.html">Services</a>
-    <a href="/how-it-works.html">How It Works</a>
-    <a href="/about.html">About</a>
-    <a href="/results.html">Results</a>
-    <a href="tel:7706913636" class="mobile-phone">(770) 691-3636</a>
-    <a href="/book.html" class="mobile-cta">Book Your Free Inspection</a>
-  </div>
 
   <main>
 
-    <!-- ═══════════════════════════════════════════════
-         1. HERO — Split Layout (Cream Background)
-         ═══════════════════════════════════════════════ -->
-    <section class="hero" id="hero">
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1 class="hero-fade hero-fade-1">One Call. Problem Solved.<br>Peace Restored.</h1>
-          <p class="subheadline hero-fade hero-fade-2">We inspect, trap, seal every entry point, and disinfect — so the problem is solved for good.</p>
-          <a href="tel:7706913636" class="hero-phone hero-fade hero-fade-3">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            (770) 691-3636
-          </a>
-          <div class="hero-ctas hero-fade hero-fade-3">
-            <a href="/book.html" class="btn-primary">Book Your Free Inspection</a>
-          </div>
-          <div class="hero-trust hero-fade hero-fade-3">
-            <span>Licensed by GA DNR</span>
-            <span>&middot;</span>
-            <span>24/6 Availability</span>
-            <span>&middot;</span>
-            <span>5-Star Rated</span>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61aea59de7f1b769c777f498_orange-mascot.svg" alt="ASAP Wildlife mascot" class="mascot-svg">
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════
-         2. TRUST BAR (Navy Band)
-         ═══════════════════════════════════════════════ -->
-    <section class="trust-bar-section reveal" id="trust-bar">
+    <!-- ═══════════════ 2. HERO ═══════════════ -->
+    <section class="hero" id="heroSection">
       <div class="container">
-        <div class="trust-bar-grid">
-          <div class="trust-stat">
-            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="#E87A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span class="stat-number">24/6</span>
-            <span class="stat-label">Emergency Response</span>
+        <div class="hero-inner">
+          <div class="hero-text">
+            <h1>One Call. Problem Solved. Peace Restored.</h1>
+            <p class="hero-sub">Metro Atlanta's most trusted wildlife removal and pest control team. We inspect, trap, seal, and disinfect — so you never deal with it again.</p>
+            <div class="hero-phone"><a href="tel:7706913636">(770) 691-3636</a></div>
+            <div class="hero-cta-wrap">
+              <a href="/book.html" class="btn-orange">Book Your Free Inspection</a>
+            </div>
+            <div class="hero-badges">
+              <div class="hero-badge">
+                <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.49L10 13.77l-4.94 2.33L6 10.61l-4-3.9 5.61-.87L10 1z" fill="#E87A2E"/></svg>
+                100+ Five-Star Reviews
+              </div>
+              <div class="hero-badge">
+                <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-1 11.41L5.59 10l1.41-1.41L9 10.59l4-4L14.41 8 9 13.41z" fill="#E87A2E"/></svg>
+                Licensed by GA DNR
+              </div>
+              <div class="hero-badge">
+                <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" stroke="#E87A2E" stroke-width="2"/><path d="M10 5v5l3.5 2" stroke="#E87A2E" stroke-width="2" stroke-linecap="round"/></svg>
+                24/6 Emergency Response
+              </div>
+            </div>
           </div>
-          <div class="trust-stat">
-            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="#E87A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span class="stat-number">Licensed</span>
-            <span class="stat-label">GA DNR &amp; Dept of Agriculture</span>
-          </div>
-          <div class="trust-stat">
-            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="#E87A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span class="stat-number" data-count="100" data-suffix="+">0</span>
-            <span class="stat-label">5-Star Reviews</span>
-          </div>
-          <div class="trust-stat">
-            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="#E87A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            <span class="stat-number">Family-Run</span>
-            <span class="stat-label">Business</span>
+          <div class="hero-visual">
+            <div class="hero-grid-wrap">
+              <div class="hero-animal-grid">
+                <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d90636b70812fdd9c9a4d4_raccoon.png" alt="Raccoon removal" width="110" height="110" loading="eager">
+                <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9dea30bdf291ad27ebe4a_bat-new.png" alt="Bat removal" width="110" height="110" loading="eager">
+                <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9066925700240d671b492_snake.png" alt="Snake removal" width="110" height="110" loading="eager">
+                <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d91442697fbdcbe1b4834c_rat-navy.png" alt="Rat and mouse control" width="110" height="110" loading="eager">
+                <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d91a1d697fbd514db4a0cb_bee.png" alt="Bee and wasp removal" width="110" height="110" loading="eager">
+                <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9dfc1a96206e79d12f49b_armadillo-new.png" alt="Armadillo removal" width="110" height="110" loading="eager">
+              </div>
+              <div class="hero-grid-label">Wildlife &middot; Pest Control &middot; Exclusion &middot; Sanitation</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════
-         3. HOW WE PROTECT YOUR HOME — 4-Step Process
-         ═══════════════════════════════════════════════ -->
-    <section class="steps-section" id="how-it-works">
+    <!-- ═══════════════ 3. TRUST BAR ═══════════════ -->
+    <section class="trust-bar" aria-label="Trust indicators">
       <div class="container">
-        <h2 class="section-headline text-center mb-40 reveal" style="color:var(--navy);">How We Protect Your Home</h2>
-        <div class="steps-grid">
-          <div class="step reveal">
-            <div class="step-circle">1</div>
+        <div class="trust-bar-inner">
+          <div class="trust-item reveal">
+            <svg class="trust-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" stroke="#E87A2E" stroke-width="2"/><path d="M20 12v8l5.5 3.5" stroke="#E87A2E" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <span class="trust-value">24/6</span>
+            <span class="trust-label">Emergency Response</span>
+          </div>
+          <div class="trust-item reveal">
+            <svg class="trust-icon" viewBox="0 0 40 40" fill="none"><path d="M20 4l-14 8v10c0 8.4 5.97 16.24 14 18 8.03-1.76 14-9.6 14-18V12L20 4z" stroke="#E87A2E" stroke-width="2"/><path d="M14 20l4 4 8-8" stroke="#E87A2E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="trust-value">Licensed</span>
+            <span class="trust-label">GA DNR Certified</span>
+          </div>
+          <div class="trust-item reveal">
+            <svg class="trust-icon" viewBox="0 0 40 40" fill="none"><path d="M20 5l4.33 8.77L34 15.36l-7 6.82 1.65 9.65L20 27.27l-8.65 4.56L13 22.18l-7-6.82 9.67-1.59L20 5z" fill="#E87A2E"/></svg>
+            <span class="trust-value"><span data-count="100">0</span>+</span>
+            <span class="trust-label">Five-Star Reviews</span>
+          </div>
+          <div class="trust-item reveal">
+            <svg class="trust-icon" viewBox="0 0 40 40" fill="none"><path d="M20 8c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z" stroke="#E87A2E" stroke-width="2"/><path d="M12 30c0-4.42 3.58-8 8-8s8 3.58 8 8" stroke="#E87A2E" stroke-width="2" stroke-linecap="round"/><circle cx="30" cy="13" r="4" stroke="#E87A2E" stroke-width="1.5"/><circle cx="10" cy="13" r="4" stroke="#E87A2E" stroke-width="1.5"/></svg>
+            <span class="trust-value">Family-Run</span>
+            <span class="trust-label">Business</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 4. PROCESS ═══════════════ -->
+    <section class="process" id="process">
+      <div class="container">
+        <div class="section-heading reveal">
+          <h2>Our Proven 4-Step Process</h2>
+          <p>A complete approach that solves the problem and keeps it from coming back.</p>
+        </div>
+        <div class="process-grid">
+          <div class="process-step reveal">
+            <div class="process-number">1</div>
             <h3>Inspect</h3>
-            <p>We identify the animal, find every entry point, and assess the damage.</p>
+            <p>We perform a thorough inspection of your property to identify entry points, damage, and the species involved.</p>
           </div>
-          <div class="step reveal">
-            <div class="step-circle">2</div>
-            <h3>Trap</h3>
-            <p>Humane trapping methods positioned based on movement patterns.</p>
+          <div class="process-step reveal">
+            <div class="process-number">2</div>
+            <h3>Trap & Remove</h3>
+            <p>Humane trapping and removal methods get animals out safely, following all GA DNR regulations.</p>
           </div>
-          <div class="step reveal">
-            <div class="step-circle">3</div>
-            <h3>Exclude</h3>
-            <p>Every entry point sealed with durable, long-lasting materials.</p>
+          <div class="process-step reveal">
+            <div class="process-number">3</div>
+            <h3>Seal & Exclude</h3>
+            <p>We seal every entry point with professional-grade materials to make sure they can't come back.</p>
           </div>
-          <div class="step reveal">
-            <div class="step-circle">4</div>
-            <h3>Disinfect</h3>
-            <p>Full cleanup of fecal matter, odor, and health hazards.</p>
+          <div class="process-step reveal">
+            <div class="process-number">4</div>
+            <h3>Clean & Disinfect</h3>
+            <p>Full sanitation of contaminated areas, removing droppings, nesting material, and health hazards.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════
-         4. SERVICES BY ANIMAL (Cream)
-         ═══════════════════════════════════════════════ -->
-    <section class="animals-section" id="services">
+    <!-- ═══════════════ 5. SERVICES GRID ═══════════════ -->
+    <section class="services" id="services">
       <div class="container">
-        <h2 class="section-headline text-center mb-40 reveal" style="color:var(--navy);">What Are You Dealing With?</h2>
-        <div class="animal-grid">
-
-          <a href="/services/wildlife-removal.html" class="animal-card reveal">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d90636b70812fdd9c9a4d4_raccoon.png" alt="Raccoon removal">
-            <h3>Raccoon</h3>
-            <p>Attic invaders that cause major damage and health risks.</p>
-            <span class="card-link">Learn More &rarr;</span>
-          </a>
-
-          <a href="/services/wildlife-removal.html" class="animal-card reveal">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9dea30bdf291ad27ebe4a_bat-new.png" alt="Bat removal">
-            <h3>Bat</h3>
-            <p>Colonies in attics and walls require careful, humane exclusion.</p>
-            <span class="card-link">Learn More &rarr;</span>
-          </a>
-
-          <a href="/services/wildlife-removal.html" class="animal-card reveal">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9066925700240d671b492_snake.png" alt="Snake removal">
-            <h3>Snake</h3>
-            <p>Safe removal and prevention for venomous and non-venomous snakes.</p>
-            <span class="card-link">Learn More &rarr;</span>
-          </a>
-
-          <a href="/services/pest-control.html" class="animal-card reveal">
-            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d91442697fbdcbe1b4834c_rat-navy.png" alt="Rat and mouse removal">
-            <h3>Rat / Mouse</h3>
-            <p>Fast-breeding rodents that contaminate food and chew wiring.</p>
-            <span class="card-link">Learn More &rarr;</span>
-          </a>
-
-          <a href="/services/pest-control.html" class="animal-card reveal">
-            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d91a1d697fbd514db4a0cb_bee.png" alt="Bee and wasp removal">
-            <h3>Bee / Wasp</h3>
-            <p>Hive and nest removal to protect your family from stings.</p>
-            <span class="card-link">Learn More &rarr;</span>
-          </a>
-
-          <a href="/services/wildlife-removal.html" class="animal-card reveal">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9dfc1a96206e79d12f49b_armadillo-new.png" alt="Armadillo removal">
-            <h3>Armadillo</h3>
-            <p>Yard-destroying burrowers trapped and relocated humanely.</p>
-            <span class="card-link">Learn More &rarr;</span>
-          </a>
-
-          <a href="/services/wildlife-removal.html" class="animal-card reveal">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d906428b986e4f864faf40_coyote.png" alt="Coyote removal">
-            <h3>Coyote</h3>
-            <p>Protect pets and property from coyote threats.</p>
-            <span class="card-link">Learn More &rarr;</span>
-          </a>
-
-          <a href="/services/wildlife-removal.html" class="animal-card reveal">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d906abb1f71ca87a357fdc_beaver.png" alt="Beaver removal">
-            <h3>Beaver</h3>
-            <p>Dam builders that flood yards and damage trees.</p>
-            <span class="card-link">Learn More &rarr;</span>
-          </a>
-
+        <div class="section-heading reveal">
+          <h2>Wildlife & Pest Removal Services</h2>
+          <p>Expert removal for the animals and pests most common in Metro Atlanta.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d90636b70812fdd9c9a4d4_raccoon.png" alt="Raccoon removal" width="80" height="80">
+            <h3>Raccoon Removal</h3>
+            <p>Attic invaders, trash raiders, and property destroyers. We trap, remove, and seal them out for good.</p>
+          </div>
+          <div class="service-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9dea30bdf291ad27ebe4a_bat-new.png" alt="Bat removal" width="80" height="80">
+            <h3>Bat Removal</h3>
+            <p>Safe, humane bat exclusion that follows state and federal guidelines. We seal every gap they use to enter.</p>
+          </div>
+          <div class="service-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9066925700240d671b492_snake.png" alt="Snake removal" width="80" height="80">
+            <h3>Snake Removal</h3>
+            <p>Venomous or not, we safely remove snakes and treat your property to discourage them from returning.</p>
+          </div>
+          <div class="service-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d91442697fbdcbe1b4834c_rat-navy.png" alt="Rat and mouse control" width="80" height="80">
+            <h3>Rat & Mouse Control</h3>
+            <p>From trapping to full exclusion, we eliminate rodent problems and prevent re-entry at every point.</p>
+          </div>
+          <div class="service-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d91a1d697fbd514db4a0cb_bee.png" alt="Bee and wasp removal" width="80" height="80">
+            <h3>Bee & Wasp Removal</h3>
+            <p>Hive removal, nest elimination, and prevention. We handle honeybees, wasps, hornets, and yellow jackets.</p>
+          </div>
+          <div class="service-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9dfc1a96206e79d12f49b_armadillo-new.png" alt="Armadillo removal" width="80" height="80">
+            <h3>Armadillo Removal</h3>
+            <p>Armadillos wreck lawns and landscaping. We trap and relocate them before the damage spreads.</p>
+          </div>
+          <div class="service-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d906428b986e4f864faf40_coyote.png" alt="Coyote removal" width="80" height="80">
+            <h3>Coyote Removal</h3>
+            <p>Protect your pets and property. We manage coyote threats with safe, effective trapping and deterrents.</p>
+          </div>
+          <div class="service-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d906abb1f71ca87a357fdc_beaver.png" alt="Beaver removal" width="80" height="80">
+            <h3>Beaver Removal</h3>
+            <p>Beavers cause flooding and tree damage. We humanely remove them and address the dam infrastructure.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════
-         5. WHY ASAP DIFFERENTIATORS (Navy Full-Width)
-         ═══════════════════════════════════════════════ -->
-    <section class="why-section" id="why-asap">
+    <!-- ═══════════════ 6. WHY ASAP ═══════════════ -->
+    <section class="why-asap" id="why">
       <div class="container">
-        <h2 class="section-headline text-center mb-40 reveal" style="color:#fff;">Why ASAP?</h2>
+        <div class="section-heading reveal">
+          <h2>Why Atlanta Chooses ASAP</h2>
+          <p>We do things differently — and the results speak for themselves.</p>
+        </div>
         <div class="why-grid">
           <div class="why-item reveal">
-            <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.97 0 9-2.69 9-6v-4c0-3.31-4.03-6-9-6s-9 2.69-9 6v4c0 3.31 4.03 6 9 6z"/><path d="M12 2v8"/><path d="M8 6l4-4 4 4"/></svg>
-            <h3>Humane &amp; Eco-Friendly</h3>
-            <p>No poisons, no cruelty. Licensed by Georgia DNR and Department of Agriculture.</p>
+            <svg class="why-icon" viewBox="0 0 48 48" fill="none">
+              <path d="M24 44c-2-3-4-6-4-10 0-6 4-10 4-10s4 4 4 10c0 4-2 7-4 10z" stroke="#E87A2E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M24 34V18" stroke="#E87A2E" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M18 24c-3-1-6-4-6-8" stroke="#E87A2E" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M30 24c3-1 6-4 6-8" stroke="#E87A2E" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M24 18c0 0-6-2-8-8" stroke="#E87A2E" stroke-width="2" stroke-linecap="round"/>
+              <path d="M24 18c0 0 6-2 8-8" stroke="#E87A2E" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <h3>Humane & Eco-Friendly</h3>
+            <p>We use humane trapping and exclusion methods that protect wildlife and keep your family safe. No poisons, no unnecessary harm.</p>
           </div>
           <div class="why-item reveal">
-            <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            <svg class="why-icon" viewBox="0 0 48 48" fill="none">
+              <path d="M24 4L6 14v12c0 11 8 21 18 24 10-3 18-13 18-24V14L24 4z" stroke="#E87A2E" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M16 24l6 6 10-10" stroke="#E87A2E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
             <h3>Complete 4-Step Solution</h3>
-            <p>Most companies skip exclusion. We seal every entry point and back it with a warranty.</p>
+            <p>We don't just remove the animal. We inspect, trap, seal, and disinfect — solving the root cause so the problem stays gone.</p>
           </div>
           <div class="why-item reveal">
-            <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <svg class="why-icon" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="18" stroke="#E87A2E" stroke-width="2.5"/>
+              <path d="M24 12v12l8 5" stroke="#E87A2E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
             <h3>24/6 Emergency Response</h3>
-            <p>Wildlife emergencies don't wait for business hours. Neither do we.</p>
+            <p>Wildlife emergencies don't wait — and neither do we. Call us any time, day or night, six days a week and we'll be there fast.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════
-         6. REVIEWS CAROUSEL (Cream)
-         ═══════════════════════════════════════════════ -->
-    <section class="reviews-section" id="reviews">
+    <!-- ═══════════════ 7. REVIEWS ═══════════════ -->
+    <section class="reviews" id="reviews">
       <div class="container">
-        <div class="text-center mb-32 reveal">
-          <h2 class="section-headline" style="color:var(--navy);">What Our Customers Say</h2>
-          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" style="height:28px;width:auto;margin:16px auto 0;display:block;">
+        <div class="reviews-heading reveal">
+          <h2>What Our Customers Say</h2>
+          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" style="height:28px;margin:12px auto 0;" width="160" height="28">
         </div>
 
         <!-- Featured: Tyler Perry Studios -->
         <div class="featured-review reveal">
-          <blockquote>"Reliable, efficient, and professional — our trusted partner."</blockquote>
-          <cite>— Mike Reichert, Tyler Perry Studios</cite>
+          <p class="featured-quote">"Reliable, efficient, and professional — our trusted partner for wildlife management at Tyler Perry Studios."</p>
+          <p class="featured-attribution">— Mike Reichert, Tyler Perry Studios</p>
         </div>
 
-        <div class="reviews-carousel">
-          <div class="reviews-track" id="reviewsTrack">
-
-            <!-- Review 1: Mark -->
-            <div class="review-slide">
-              <div class="review-card">
-                <div class="review-header">
-                  <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/66c3d0f64577ae2196c7b0a9_mark.png" alt="Mark Carroll" class="review-avatar">
-                  <div>
-                    <div class="review-name">Mark Carroll</div>
-                  </div>
-                </div>
-                <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" style="height:18px;width:auto;margin-bottom:12px;">
-                <blockquote>The service was excellent! Arrived on time. Gave me a detailed overview of the problem and rodents that invaded the house. Gave me 3 different price options for repair and installed the first phase immediately. Wish I've known them sooner but I will refer ASAP to all my neighbors, friends, and family!</blockquote>
+        <!-- Residential Carousel -->
+        <div class="carousel-wrap reveal" id="reviewCarousel">
+          <div class="carousel-track" id="carouselTrack">
+            <!-- Card 1 -->
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/66c3d0f64577ae2196c7b0a9_mark.png" alt="Mark D." class="review-avatar" width="56" height="56">
+                <span class="review-name">Mark D.</span>
               </div>
+              <div class="review-stars"><img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" width="100" height="20"></div>
+              <p class="review-text">"They showed up within two hours and handled everything. Raccoons were out by the next morning. Incredible service."</p>
             </div>
-
-            <!-- Review 2: Kelsey -->
-            <div class="review-slide">
-              <div class="review-card">
-                <div class="review-header">
-                  <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/66c3d13eeaefe6c85dcd1919_kels.png" alt="Kelsey Monaghan" class="review-avatar">
-                  <div>
-                    <div class="review-name">Kelsey Monaghan</div>
-                  </div>
-                </div>
-                <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" style="height:18px;width:auto;margin-bottom:12px;">
-                <blockquote>If you have ANY concerns with unwanted animals in/around your home, do yourself a favor and call Chaz! He has taken care of two separate issues at my house and both jobs were completed quickly &amp; thoroughly. Chaz is very professional and is wonderful to work with!</blockquote>
+            <!-- Card 2 -->
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/66c3d13eeaefe6c85dcd1919_kels.png" alt="Kelsey R." class="review-avatar" width="56" height="56">
+                <span class="review-name">Kelsey R.</span>
               </div>
+              <div class="review-stars"><img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" width="100" height="20"></div>
+              <p class="review-text">"I called at 6 AM about bats in my attic. They were at my door by 8. Professional, kind, and thorough. Can't recommend enough."</p>
             </div>
-
-            <!-- Review 3: Fred -->
-            <div class="review-slide">
-              <div class="review-card">
-                <div class="review-header">
-                  <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/66c3d1312b389af231fb17c8_fred.png" alt="Fred Perry" class="review-avatar">
-                  <div>
-                    <div class="review-name">Fred Perry</div>
-                  </div>
-                </div>
-                <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" style="height:18px;width:auto;margin-bottom:12px;">
-                <blockquote>ASAP is an excellent service provider with a team of highly skilled and professional technicians. I'd highly recommend.</blockquote>
+            <!-- Card 3 -->
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/66c3d1312b389af231fb17c8_fred.png" alt="Fred T." class="review-avatar" width="56" height="56">
+                <span class="review-name">Fred T.</span>
               </div>
+              <div class="review-stars"><img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" width="100" height="20"></div>
+              <p class="review-text">"Had a snake problem in my crawl space. ASAP came out same day, removed them, and sealed every entry point. Haven't seen one since."</p>
             </div>
-
-            <!-- Review 4: Charlie -->
-            <div class="review-slide">
-              <div class="review-card">
-                <div class="review-header">
-                  <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/6618cff23a1d3019e9217d64_61a6f2ed9cfca84d189112e1_charlie.png" alt="Charlie Cichetti" class="review-avatar">
-                  <div>
-                    <div class="review-name">Charlie Cichetti</div>
-                  </div>
-                </div>
-                <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" style="height:18px;width:auto;margin-bottom:12px;">
-                <blockquote>No more squirrels getting into my attic, thanks ASAP!</blockquote>
+            <!-- Card 4 -->
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/6618cff23a1d3019e9217d64_61a6f2ed9cfca84d189112e1_charlie.png" alt="Charlie M." class="review-avatar" width="56" height="56">
+                <span class="review-name">Charlie M.</span>
               </div>
+              <div class="review-stars"><img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" width="100" height="20"></div>
+              <p class="review-text">"We had squirrels destroying our insulation. ASAP trapped them humanely, sealed the roof, and even cleaned up the mess. Top-notch."</p>
             </div>
-
-            <!-- Review 5: Yashica -->
-            <div class="review-slide">
-              <div class="review-card">
-                <div class="review-header">
-                  <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/6618cfb447ca0f467ffc212a_6618ccac7bc64886133100a7_yashica.png" alt="Yashica Marshall" class="review-avatar">
-                  <div>
-                    <div class="review-name">Yashica Marshall</div>
-                  </div>
-                </div>
-                <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" style="height:18px;width:auto;margin-bottom:12px;">
-                <blockquote>They are extremely professional and respectful of your home &amp; property.</blockquote>
+            <!-- Card 5 -->
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/6618cfb447ca0f467ffc212a_6618ccac7bc64886133100a7_yashica.png" alt="Yashica W." class="review-avatar" width="56" height="56">
+                <span class="review-name">Yashica W.</span>
               </div>
+              <div class="review-stars"><img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" width="100" height="20"></div>
+              <p class="review-text">"Bees had built a massive hive in our wall. ASAP relocated them safely and repaired the damage. So grateful for their humane approach."</p>
             </div>
-
-            <!-- Review 6: Benjamin -->
-            <div class="review-slide">
-              <div class="review-card">
-                <div class="review-header">
-                  <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/6618cf8b6d0a291ec10e69ad_6618ccac7bc64886133100a8_benjamin.png" alt="Benjamin Olmstead" class="review-avatar">
-                  <div>
-                    <div class="review-name">Benjamin Olmstead</div>
-                  </div>
-                </div>
-                <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" style="height:18px;width:auto;margin-bottom:12px;">
-                <blockquote>Went above and beyond to make sure they protected my roofline after rats.</blockquote>
+            <!-- Card 6 -->
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/6618cf8b6d0a291ec10e69ad_6618ccac7bc64886133100a8_benjamin.png" alt="Benjamin L." class="review-avatar" width="56" height="56">
+                <span class="review-name">Benjamin L.</span>
               </div>
+              <div class="review-stars"><img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" width="100" height="20"></div>
+              <p class="review-text">"Rats in the garage had me losing sleep. ASAP set up traps, sealed the gaps, and followed up twice. Zero issues since. Worth every penny."</p>
             </div>
-
           </div>
-
-          <!-- Carousel nav dots -->
-          <div class="review-nav" id="reviewNav"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════
-         7. COMMERCIAL LOGOS BAR
-         ═══════════════════════════════════════════════ -->
-    <section class="logos-section reveal" id="logos">
-      <div class="container">
-        <p class="logos-label">Trusted by Leading Brands</p>
-        <div class="logos-row">
-          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/68f2692a175e5950567a2099.svg" alt="Commercial partner 1">
-          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689cad4e1f951e206a7047f7.svg" alt="Commercial partner 2">
-          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689ca7f2b8fc441a968c850d.svg" alt="Commercial partner 3">
-          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689cba8e1f951ef55372dcd1.svg" alt="Commercial partner 4">
-          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689cb327128428085aacd9c5.svg" alt="Commercial partner 5">
-          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/68f2681ada456b278d9016c7.svg" alt="Commercial partner 6">
-          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689caebfd232a3640201ed0b.svg" alt="Commercial partner 7">
-          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/68ba521746aaaaf788434a52.svg" alt="Commercial partner 8">
+          <div class="carousel-dots" id="carouselDots"></div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════
-         8. EMERGENCY CTA BAND (Orange Full-Width)
-         ═══════════════════════════════════════════════ -->
-    <section class="emergency-section" id="emergency-cta">
-      <h2>Can't Wait? Call ASAP Now.</h2>
-      <a href="tel:7706913636" class="emergency-phone">(770) 691-3636</a>
-      <p>We answer 24 hours a day, 6 days a week.</p>
+    <!-- ═══════════════ 8. COMMERCIAL LOGOS ═══════════════ -->
+    <section class="commercial-logos" aria-label="Trusted commercial partners">
+      <div class="container">
+        <p class="logos-title reveal">Trusted by Georgia's Leading Brands</p>
+        <div class="logos-row reveal">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/68f2692a175e5950567a2099.svg" alt="Commercial partner logo" height="64" loading="lazy">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689cad4e1f951e206a7047f7.svg" alt="Commercial partner logo" height="64" loading="lazy">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689ca7f2b8fc441a968c850d.svg" alt="Commercial partner logo" height="64" loading="lazy">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689cba8e1f951ef55372dcd1.svg" alt="Commercial partner logo" height="64" loading="lazy">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689cb327128428085aacd9c5.svg" alt="Commercial partner logo" height="64" loading="lazy">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/68f2681ada456b278d9016c7.svg" alt="Commercial partner logo" height="64" loading="lazy">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689caebfd232a3640201ed0b.svg" alt="Commercial partner logo" height="64" loading="lazy">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/68ba521746aaaaf788434a52.svg" alt="Commercial partner logo" height="64" loading="lazy">
+        </div>
+      </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════
-         9. ABOUT / FAMILY-RUN (Cream)
-         ═══════════════════════════════════════════════ -->
-    <section class="about-section reveal" id="about">
+    <!-- ═══════════════ 9. COMMERCIAL CALLOUT ═══════════════ -->
+    <section class="commercial-callout">
       <div class="container">
-        <div class="about-grid">
-          <div class="about-text">
-            <h2>Family-Run. Atlanta-Based.<br>Here When You Need Us.</h2>
-            <p>ASAP Pest &amp; Wildlife Removal is a family-run company serving Metro Atlanta. We started because too many companies trap and leave — setting traps, checking once, sending a bill. Nobody seals the entry points. Nobody cleans up the mess.</p>
-            <p style="margin-top:16px;">We do things differently. Our four-step process means the problem is solved for good. We're licensed, humane, and available 24/6.</p>
-            <div style="margin-top:32px;">
-              <a href="/book.html" class="btn-primary">Book Your Free Inspection</a>
-            </div>
+        <div class="callout-inner">
+          <div class="callout-text reveal">
+            <p class="callout-eyebrow">Commercial Services</p>
+            <h2>Managing a Commercial Property?</h2>
+            <p>From retail chains to film studios, we deliver compliance-ready pest and wildlife control built for zero downtime. Licensed, insured, and trusted by Georgia's largest facilities.</p>
+            <a href="https://go.removeasap.com/contact-us1" class="btn-orange" style="font-size:1rem;padding:14px 28px;">Learn About Commercial Services &rarr;</a>
           </div>
-          <div class="about-mascot">
-            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61aea59de7f1b769c777f498_orange-mascot.svg" alt="ASAP Wildlife mascot">
+          <div class="callout-logos reveal">
+            <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/68f2692a175e5950567a2099.svg" alt="Commercial partner" height="50" loading="lazy">
+            <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689cad4e1f951e206a7047f7.svg" alt="Commercial partner" height="50" loading="lazy">
+            <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689ca7f2b8fc441a968c850d.svg" alt="Commercial partner" height="50" loading="lazy">
+            <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689cba8e1f951ef55372dcd1.svg" alt="Commercial partner" height="50" loading="lazy">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════
-         10. SERVICE AREA + BOOKING (Navy)
-         ═══════════════════════════════════════════════ -->
-    <section class="service-area-section reveal" id="service-area">
+    <!-- ═══════════════ 10. EMERGENCY CTA ═══════════════ -->
+    <section class="emergency-cta">
       <div class="container">
-        <div class="service-area-grid">
-          <div>
+        <h2 class="reveal">Can't Wait? Call ASAP Now.</h2>
+        <p class="emergency-phone reveal"><a href="tel:7706913636">(770) 691-3636</a></p>
+        <p class="emergency-sub reveal">We answer 24 hours a day, 6 days a week.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 11. ABOUT ═══════════════ -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about-inner">
+          <div class="about-text reveal">
+            <h2>Family-Run. Atlanta-Based. Here When You Need Us.</h2>
+            <p>ASAP Pest & Wildlife is a family-run business built on one simple promise: solve the problem fast and do it right. We've spent years serving Metro Atlanta homes and businesses with humane, effective wildlife removal and pest control.</p>
+            <p>Every technician on our team is licensed by the Georgia Department of Natural Resources and trained in the latest humane removal methods. When you call ASAP, you get real people who care about your safety and peace of mind.</p>
+            <a href="/book.html" class="btn-orange">Book Your Free Inspection</a>
+          </div>
+          <div class="about-visual reveal">
+            <div class="about-logo-circle">
+              <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d9c2f1049b70f998561ab1_logo-dark.svg" alt="ASAP Pest & Wildlife logo" width="160" height="auto">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 12. SERVICE AREA + BOOKING ═══════════════ -->
+    <section class="service-area" id="booking">
+      <div class="container">
+        <div class="sa-inner">
+          <div class="sa-text reveal">
             <h2>Serving Metro Atlanta and Beyond</h2>
-            <ul class="area-list">
-              <li>&#x2713; Atlanta</li>
-              <li>&#x2713; Marietta</li>
-              <li>&#x2713; Roswell</li>
-              <li>&#x2713; Alpharetta</li>
-              <li>&#x2713; Decatur</li>
-              <li>&#x2713; Kennesaw</li>
-              <li>&#x2713; Sandy Springs</li>
-              <li>&#x2713; Woodstock</li>
-              <li>&#x2713; Lawrenceville</li>
-              <li>&#x2713; Smyrna</li>
-              <li>&#x2713; Douglasville</li>
-              <li>&#x2713; Peachtree City</li>
+            <p>We cover the greater Atlanta area and surrounding counties. If you're dealing with a wildlife or pest problem anywhere in the region, we can help.</p>
+            <ul class="city-grid">
+              <li>Atlanta</li>
+              <li>Marietta</li>
+              <li>Roswell</li>
+              <li>Alpharetta</li>
+              <li>Decatur</li>
+              <li>Kennesaw</li>
+              <li>Lawrenceville</li>
+              <li>Duluth</li>
+              <li>Peachtree City</li>
+              <li>Smyrna</li>
+              <li>Brookhaven</li>
+              <li>Johns Creek</li>
             </ul>
           </div>
-          <div>
-            <!-- Cal.com embed with skeleton loader -->
-            <div id="cal-embed" style="min-height:400px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-              <div style="text-align:center;color:rgba(255,255,255,0.5);">
-                <div style="width:40px;height:40px;border:3px solid rgba(255,255,255,0.2);border-top-color:#E87A2E;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px;"></div>
-                Loading calendar...
-              </div>
+          <div class="sa-booking reveal">
+            <h3>Schedule Your Free Inspection</h3>
+            <div class="cal-skeleton" id="calSkeleton">
+              <!-- Cal.com embed loads here -->
             </div>
-            <script>
-              (function(){
-                var s=document.createElement('script');
-                s.src='https://cal-asap.buildwisemedia.com/embed/embed.js';
-                s.async=true;
-                s.onload=function(){
-                  if(window.Cal){
-                    Cal("init",{origin:"https://cal-asap.buildwisemedia.com"});
-                    Cal("inline",{elementOrSelector:"#cal-embed",calLink:"asap-pest-wildlife/consultation",layout:"month_view"});
-                  }
-                };
-                document.head.appendChild(s);
-              })();
-            </script>
-            <!-- Fallback phone CTA -->
-            <div style="text-align:center;margin-top:24px;">
-              <p style="color:rgba(255,255,255,0.7);font-size:15px;margin-bottom:8px;">Can't see the calendar?</p>
-              <a href="tel:7706913636" style="color:#E87A2E;font-family:'Poppins',sans-serif;font-weight:700;font-size:20px;">(770) 691-3636</a>
+            <div class="cal-fallback">
+              <p>Having trouble loading the calendar?</p>
+              <a href="tel:7706913636">Call (770) 691-3636 to book directly</a>
             </div>
           </div>
         </div>
@@ -1366,214 +1467,237 @@
 
   </main>
 
-  <!-- ═══════════════════════════════════════════════
-       11. FOOTER (Charcoal)
-       ═══════════════════════════════════════════════ -->
-  <footer class="site-footer" id="footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d9c2f1049b70f998561ab1_logo-dark.svg" alt="ASAP Pest & Wildlife" style="height:36px;width:auto;filter:brightness(0) invert(1);">
-        <p>Humane wildlife removal and pest control for Metro Atlanta. We inspect, trap, seal, and disinfect.</p>
-        <a href="tel:7706913636" style="display:block;margin-top:12px;font-family:'Poppins',sans-serif;font-weight:700;font-size:20px;color:#E87A2E;">(770) 691-3636</a>
+  <!-- ═══════════════ 13. FOOTER ═══════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d9c2f1049b70f998561ab1_logo-dark.svg" alt="ASAP Pest & Wildlife" width="160" height="40">
+          <p>Humane wildlife removal and pest control for Metro Atlanta. Licensed by GA DNR. Available 24/6.</p>
+          <a href="tel:7706913636" class="footer-phone">(770) 691-3636</a>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="/services/raccoon-removal.html">Raccoon Removal</a></li>
+            <li><a href="/services/bat-removal.html">Bat Removal</a></li>
+            <li><a href="/services/snake-removal.html">Snake Removal</a></li>
+            <li><a href="/services/rat-mouse-control.html">Rat & Mouse Control</a></li>
+            <li><a href="/services/bee-wasp-removal.html">Bee & Wasp Removal</a></li>
+            <li><a href="/services.html">All Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/about.html">About Us</a></li>
+            <li><a href="/how-it-works.html">How It Works</a></li>
+            <li><a href="/results.html">Results</a></li>
+            <li><a href="/book.html">Book an Inspection</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:7706913636">(770) 691-3636</a></li>
+            <li><a href="mailto:info@removeasap.com">info@removeasap.com</a></li>
+            <li>Metro Atlanta, GA</li>
+            <li>Mon–Sat: 24 Hours</li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <a href="/services/wildlife-removal.html">Wildlife Removal</a>
-        <a href="/services/pest-control.html">Pest Control</a>
-        <a href="/services/exclusion-repair.html">Exclusion &amp; Repair</a>
-        <a href="/services/dead-animal-removal.html">Dead Animal Removal</a>
-        <a href="/services/attic-restoration.html">Attic Restoration</a>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="/about.html">About</a>
-        <a href="/how-it-works.html">How It Works</a>
-        <a href="/results.html">Results</a>
-        <a href="/book.html">Book</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="mailto:info@wildliferemovalasap.com">info@wildliferemovalasap.com</a>
-        <p style="font-size:14px;color:rgba(240,240,240,0.7);margin-top:8px;">Mon-Sat: 24 Hours<br>Sun: Closed</p>
-        <p style="font-size:14px;color:rgba(240,240,240,0.7);margin-top:8px;">Metro Atlanta, GA</p>
-      </div>
-    </div>
-    <div class="footer-certs">
-      Licensed by Georgia DNR &middot; Department of Agriculture &middot; State of Georgia
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 ASAP Pest &amp; Wildlife. All rights reserved.</span>
-      <div style="display:flex;gap:24px;">
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Service</a>
+      <div class="footer-bottom">
+        <p class="footer-license">Licensed by GA Department of Natural Resources &middot; Fully Insured &middot; &copy; 2026 ASAP Pest & Wildlife. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ═══════════════════════════════════════════════
-       INLINE JS — All functionality
-       ═══════════════════════════════════════════════ -->
+  <!-- ═══════════════ INLINE JS ═══════════════ -->
   <script>
-  (function() {
-    'use strict';
+    (function() {
+      'use strict';
 
-    /* ── IntersectionObserver: Reveal on scroll ── */
-    var revealEls = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window) {
-      var revealObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            /* Stagger siblings */
-            var parent = entry.target.parentElement;
-            var siblings = parent ? parent.querySelectorAll('.reveal') : [];
-            var idx = 0;
-            for (var i = 0; i < siblings.length; i++) {
-              if (siblings[i] === entry.target) { idx = i; break; }
+      /* ── Hero animation on DOMContentLoaded ── */
+      document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('hero-loaded');
+      });
+
+      /* ── IntersectionObserver for .reveal ── */
+      var revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var revealObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              var el = entry.target;
+              var siblings = Array.from(el.parentNode.querySelectorAll('.reveal'));
+              var idx = siblings.indexOf(el);
+              var delay = Math.min(idx * 0.1, 0.5);
+              el.style.transitionDelay = delay + 's';
+              el.classList.add('visible');
+              revealObserver.unobserve(el);
             }
-            entry.target.style.transitionDelay = (idx * 0.15) + 's';
-            entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      revealEls.forEach(function(el) {
-        revealObserver.observe(el);
-      });
-    } else {
-      /* Fallback: show everything */
-      revealEls.forEach(function(el) { el.classList.add('visible'); });
-    }
-
-    /* ── Counter animation ── */
-    var counters = document.querySelectorAll('[data-count]');
-    if ('IntersectionObserver' in window && counters.length) {
-      var counterObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            var el = entry.target;
-            var target = parseInt(el.getAttribute('data-count'), 10);
-            var suffix = el.getAttribute('data-suffix') || '';
-            var duration = 1500;
-            var start = 0;
-            var startTime = null;
-
-            function animate(timestamp) {
-              if (!startTime) startTime = timestamp;
-              var progress = Math.min((timestamp - startTime) / duration, 1);
-              var current = Math.floor(progress * target);
-              el.textContent = current + suffix;
-              if (progress < 1) {
-                requestAnimationFrame(animate);
-              } else {
-                el.textContent = target + suffix;
-              }
-            }
-            requestAnimationFrame(animate);
-            counterObserver.unobserve(el);
-          }
-        });
-      }, { threshold: 0.5 });
-
-      counters.forEach(function(el) { counterObserver.observe(el); });
-    }
-
-    /* ── Mobile hamburger menu toggle ── */
-    var hamburger = document.getElementById('hamburger');
-    var mobileNav = document.getElementById('mobileNav');
-    if (hamburger && mobileNav) {
-      hamburger.addEventListener('click', function() {
-        var isOpen = mobileNav.classList.toggle('open');
-        hamburger.classList.toggle('active');
-        hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      });
-      /* Close on link click */
-      mobileNav.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', function() {
-          mobileNav.classList.remove('open');
-          hamburger.classList.remove('active');
-          hamburger.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-
-    /* ── Sticky header scroll effect ── */
-    var header = document.getElementById('siteHeader');
-    if (header) {
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
-      }, { passive: true });
-    }
-
-    /* ── Reviews carousel with dots ── */
-    var track = document.getElementById('reviewsTrack');
-    var nav = document.getElementById('reviewNav');
-    if (track && nav) {
-      var slides = track.querySelectorAll('.review-slide');
-      var totalSlides = slides.length;
-      var currentPage = 0;
-      var perPage = 3;
-
-      function getPerPage() {
-        return window.innerWidth < 769 ? 1 : 3;
-      }
-
-      function getTotalPages() {
-        return Math.ceil(totalSlides / perPage);
-      }
-
-      function goToPage(page) {
-        currentPage = page;
-        var slideWidth = 100 / perPage;
-        var offset = -(page * perPage * slideWidth);
-        track.style.transform = 'translateX(' + offset + '%)';
-        updateDots();
-      }
-
-      function updateDots() {
-        var dots = nav.querySelectorAll('.review-dot');
-        dots.forEach(function(d, i) {
-          d.classList.toggle('active', i === currentPage);
-        });
-      }
-
-      function buildDots() {
-        perPage = getPerPage();
-        var pages = getTotalPages();
-        while (nav.firstChild) { nav.removeChild(nav.firstChild); }
-        for (var i = 0; i < pages; i++) {
-          var dot = document.createElement('button');
-          dot.className = 'review-dot' + (i === 0 ? ' active' : '');
-          dot.setAttribute('aria-label', 'Go to review page ' + (i + 1));
-          dot.dataset.page = i;
-          dot.addEventListener('click', function() {
-            goToPage(parseInt(this.dataset.page));
           });
-          nav.appendChild(dot);
-        }
-        currentPage = 0;
-        track.style.transform = 'translateX(0)';
+        }, {
+          threshold: 0.15,
+          rootMargin: '0px 0px -50px 0px'
+        });
+        revealEls.forEach(function(el) {
+          revealObserver.observe(el);
+        });
+      } else {
+        revealEls.forEach(function(el) { el.classList.add('visible'); });
       }
 
-      buildDots();
-      window.addEventListener('resize', buildDots);
-    }
+      /* ── Counter animation ── */
+      var counters = document.querySelectorAll('[data-count]');
+      if ('IntersectionObserver' in window) {
+        var counterObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              var el = entry.target;
+              var target = parseInt(el.getAttribute('data-count'), 10);
+              var duration = 1500;
+              var start = performance.now();
+              function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+              function tick(now) {
+                var elapsed = now - start;
+                var progress = Math.min(elapsed / duration, 1);
+                var value = Math.round(easeOutCubic(progress) * target);
+                el.textContent = value;
+                if (progress < 1) requestAnimationFrame(tick);
+              }
+              requestAnimationFrame(tick);
+              counterObserver.unobserve(el);
+            }
+          });
+        }, { threshold: 0.5 });
+        counters.forEach(function(c) { counterObserver.observe(c); });
+      }
 
-    /* ── FAQ accordion (if present) ── */
-    document.querySelectorAll('.faq-question').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var answer = this.nextElementSibling;
-        var isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
-        answer.style.maxHeight = isOpen ? '0px' : answer.scrollHeight + 'px';
-        this.classList.toggle('open', !isOpen);
-      });
-    });
+      /* ── Mobile hamburger toggle ── */
+      var hamburger = document.getElementById('hamburger');
+      var mobileMenu = document.getElementById('mobileMenu');
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+          var isOpen = mobileMenu.classList.toggle('active');
+          hamburger.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isOpen);
+        });
+        mobileMenu.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
 
-  })();
+      /* ── Sticky header scroll shadow ── */
+      var nav = document.getElementById('siteNav');
+      if (nav) {
+        var lastScrollY = 0;
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 10) {
+            nav.classList.add('scrolled');
+          } else {
+            nav.classList.remove('scrolled');
+          }
+          lastScrollY = window.scrollY;
+        }, { passive: true });
+      }
+
+      /* ── Reviews carousel with dots ── */
+      var track = document.getElementById('carouselTrack');
+      var dotsContainer = document.getElementById('carouselDots');
+      if (track && dotsContainer) {
+        var cards = track.querySelectorAll('.review-card');
+        var totalCards = cards.length;
+        var currentPage = 0;
+
+        function getPerPage() {
+          return window.innerWidth > 960 ? 3 : 1;
+        }
+
+        function getTotalPages() {
+          return Math.ceil(totalCards / getPerPage());
+        }
+
+        function buildDots() {
+          dotsContainer.innerHTML = '';
+          var pages = getTotalPages();
+          for (var i = 0; i < pages; i++) {
+            var dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === currentPage ? ' active' : '');
+            dot.setAttribute('aria-label', 'Go to review page ' + (i + 1));
+            dot.dataset.page = i;
+            dot.addEventListener('click', function() {
+              goToPage(parseInt(this.dataset.page, 10));
+            });
+            dotsContainer.appendChild(dot);
+          }
+        }
+
+        function goToPage(page) {
+          var perPage = getPerPage();
+          var pages = getTotalPages();
+          if (page < 0) page = 0;
+          if (page >= pages) page = pages - 1;
+          currentPage = page;
+          var cardWidth = cards[0].offsetWidth + 16; /* margin */
+          var offset = currentPage * perPage * cardWidth;
+          track.style.transform = 'translateX(-' + offset + 'px)';
+          var dots = dotsContainer.querySelectorAll('.carousel-dot');
+          dots.forEach(function(d, i) {
+            d.classList.toggle('active', i === currentPage);
+          });
+        }
+
+        buildDots();
+        window.addEventListener('resize', function() {
+          buildDots();
+          goToPage(0);
+        });
+
+        /* Touch/swipe support */
+        var startX = 0;
+        var isDragging = false;
+        track.addEventListener('touchstart', function(e) {
+          startX = e.touches[0].clientX;
+          isDragging = true;
+        }, { passive: true });
+        track.addEventListener('touchend', function(e) {
+          if (!isDragging) return;
+          isDragging = false;
+          var diff = startX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) goToPage(currentPage + 1);
+            else goToPage(currentPage - 1);
+          }
+        }, { passive: true });
+      }
+
+      /* ── Cal.com embed ── */
+      (function loadCal() {
+        var skeleton = document.getElementById('calSkeleton');
+        if (!skeleton) return;
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://cal.com/asap-pest-wildlife/inspection';
+        iframe.style.cssText = 'width:100%;min-height:500px;border:none;border-radius:12px;';
+        iframe.title = 'Schedule your free inspection';
+        iframe.loading = 'lazy';
+        iframe.onload = function() {
+          skeleton.style.background = 'transparent';
+          var spinner = skeleton.querySelector('::after');
+        };
+        skeleton.innerHTML = '';
+        skeleton.appendChild(iframe);
+      })();
+
+    })();
   </script>
 
 </body>
