@@ -33,32 +33,748 @@
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="css/styles.css">
-
-  <!-- Palette override — Approved Design Brief (navy/orange/cream) -->
+  <!-- ALL STYLES INLINE — no external CSS -->
   <style>
-    :root{--navy:#1B2A4A;--cream:#F2EDDC;--orange:#E87A2E;--orange-hover:#D46B22;--charcoal:#1B1B1B;--green:var(--navy);--green-dark:var(--navy);--amber:var(--orange);--amber-hover:var(--orange-hover);--border:rgba(27,42,74,0.12)}
-    .hero{background:var(--cream)!important;background-image:none!important;color:var(--navy)!important}
-    .hero h1,.hero .subheadline,.hero .hero-trust{color:var(--navy)!important}
-    .hero .icp-qualifier{color:var(--navy)!important;opacity:0.6}
-    .section-dark,.section-navy,.trust-bar-section{background:var(--navy)!important}
-    .section-cream,.section-white{background:var(--cream)!important}
-    .section-orange{background:var(--orange)!important}
-    .btn-primary,.header-cta,.mobile-cta{background:var(--orange)!important}
-    .btn-primary:hover,.header-cta:hover{background:var(--orange-hover)!important}
-    .site-header{background:rgba(242,237,220,0.95)!important;backdrop-filter:blur(12px)}
-    .site-header.scrolled{background:rgba(242,237,220,0.98)!important}
-    .logo,.nav-links a,.header-phone{color:var(--navy)!important}
-    .hero-phone{color:var(--orange)!important}
-    .hero-shield{background:var(--navy)!important}
-    .trust-stat .stat-number{color:var(--navy)!important}
-    .card-icon{background:rgba(27,42,74,0.08)!important}
-    a{color:var(--navy)}a:hover{color:var(--orange)}
-    .card-link,.section-label,.footer-col h4{color:var(--orange)!important}
-    .page-hero{background:var(--navy)!important}
-    .site-footer{background:var(--charcoal)!important}
-    .step::before{background:var(--navy)!important;color:#fff!important}
+    /* ── CSS Variables ── */
+    :root {
+      --navy: #1B2A4A;
+      --cream: #F2EDDC;
+      --orange: #E87A2E;
+      --orange-hover: #D46B22;
+      --charcoal: #1B1B1B;
+      --border: rgba(27, 42, 74, 0.12);
+    }
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--charcoal);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--navy); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--orange); }
+
+    /* ── Container ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Typography ── */
+    .section-headline {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    /* ── Reveal Animation ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Hero fade-up stages ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-fade { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+    .hero-fade-1 { animation-delay: 0.3s; }
+    .hero-fade-2 { animation-delay: 0.5s; }
+    .hero-fade-3 { animation-delay: 0.7s; }
+
+    /* ── Header ── */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(242, 237, 220, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: background 0.3s, box-shadow 0.3s;
+      height: 72px;
+    }
+    .site-header.scrolled {
+      background: rgba(242, 237, 220, 0.98);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .logo { display: flex; align-items: center; }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--navy);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .header-phone {
+      color: var(--orange) !important;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .header-cta {
+      background: var(--orange);
+      color: #fff !important;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .header-cta:hover {
+      background: var(--orange-hover);
+      transform: scale(1.03);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* ── Mobile Nav ── */
+    .mobile-nav {
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--cream);
+      z-index: 999;
+      display: none;
+      flex-direction: column;
+      padding: 24px;
+      gap: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      color: var(--navy);
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-phone { color: var(--orange) !important; font-weight: 700; }
+    .mobile-cta {
+      background: var(--orange);
+      color: #fff !important;
+      text-align: center;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .header-phone, .header-cta { display: none !important; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff !important;
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: background 0.2s, transform 0.2s;
+      text-align: center;
+    }
+    .btn-primary:hover {
+      background: var(--orange-hover);
+      transform: scale(1.05);
+    }
+
+    /* ── 1. HERO ── */
+    .hero {
+      background: var(--cream);
+      background-image: none;
+      min-height: 85vh;
+      padding-top: calc(72px + 32px);
+      padding-bottom: 48px;
+      display: flex;
+      align-items: flex-start;
+    }
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 48px;
+      align-items: start;
+      width: 100%;
+    }
+    .hero-text { padding-top: 24px; }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+    .hero .subheadline {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: var(--navy);
+      margin-bottom: 24px;
+      max-width: 540px;
+    }
+    .hero-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--orange) !important;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .hero-ctas { margin-bottom: 24px; }
+    .hero-trust {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      color: var(--navy);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    .hero-visual {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 16px;
+    }
+    .hero-visual .mascot-svg {
+      width: 320px;
+      height: auto;
+      filter: drop-shadow(0 8px 24px rgba(27, 42, 74, 0.15));
+    }
+
+    @media (max-width: 768px) {
+      .hero { min-height: auto; padding-bottom: 40px; }
+      .hero-content { grid-template-columns: 1fr !important; gap: 24px; }
+      .hero-visual { display: none; }
+      .hero-ctas .btn-primary { width: 100%; display: block; }
+      .hero-trust { flex-wrap: wrap; justify-content: center; text-align: center; }
+    }
+
+    /* ── 2. TRUST BAR ── */
+    .trust-bar-section {
+      background: var(--navy);
+      padding: 40px 24px;
+    }
+    .trust-bar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .trust-stat { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .trust-icon {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 4px;
+    }
+    .stat-number {
+      color: var(--orange);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .stat-label {
+      color: #fff;
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+    @media (max-width: 768px) {
+      .trust-bar-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
+    }
+
+    /* ── 3. STEPS ── */
+    .steps-section {
+      background: #F0EBE0;
+      border-top: 1px solid #E5DFD0;
+      border-bottom: 1px solid #E5DFD0;
+      padding: 80px 24px;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+    .step {
+      text-align: center;
+      position: relative;
+    }
+    .step-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 16px;
+    }
+    .step h3 {
+      color: var(--navy);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .step p {
+      color: #4B5563;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    @media (min-width: 769px) {
+      .step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 32px;
+        left: calc(50% + 40px);
+        width: calc(100% - 80px);
+        height: 2px;
+        background: var(--orange);
+      }
+    }
+    @media (max-width: 768px) {
+      .steps-grid { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
+    }
+    @media (max-width: 480px) {
+      .steps-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── 4. ANIMAL CARDS ── */
+    .animals-section {
+      background: var(--cream);
+      padding: 80px 24px;
+    }
+    .animal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .animal-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: block;
+      text-align: center;
+    }
+    .animal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+    .animal-card img {
+      width: 120px;
+      height: auto;
+      margin: 0 auto 16px;
+    }
+    .animal-card h3 {
+      color: var(--navy);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .animal-card p {
+      font-size: 0.95rem;
+      color: #6B7280;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .card-link {
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .animal-card:hover .card-link { color: var(--orange); }
+
+    @media (max-width: 960px) and (min-width: 601px) {
+      .animal-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .animal-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── 5. WHY ASAP ── */
+    .why-section {
+      background: var(--navy);
+      padding: 80px 24px;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+    .why-item {
+      text-align: center;
+    }
+    .why-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+      color: var(--orange);
+    }
+    .why-item h3 {
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .why-item p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    @media (max-width: 768px) {
+      .why-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ── 6. REVIEWS ── */
+    .reviews-section {
+      background: var(--cream);
+      padding: 80px 24px;
+    }
+    .featured-review {
+      background: var(--navy);
+      border-left: 4px solid var(--orange);
+      border-radius: 8px;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    .featured-review blockquote {
+      color: #fff;
+      font-size: 1.25rem;
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .featured-review cite {
+      color: var(--orange);
+      font-style: normal;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .reviews-carousel { overflow: hidden; position: relative; }
+    .reviews-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+    .review-slide {
+      min-width: calc(100% / 3);
+      padding: 0 12px;
+      box-sizing: border-box;
+    }
+    .review-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      height: 100%;
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .review-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .review-name {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 1rem;
+    }
+    .review-card blockquote {
+      font-size: 0.95rem;
+      color: #374151;
+      line-height: 1.6;
+    }
+    .review-nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .review-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(27, 42, 74, 0.2);
+      cursor: pointer;
+      transition: background 0.2s;
+      padding: 0;
+    }
+    .review-dot.active { background: var(--orange); }
+    @media (max-width: 768px) {
+      .review-slide { min-width: 100%; }
+    }
+
+    /* ── 7. LOGOS BAR ── */
+    .logos-section {
+      background: #EEEAE0;
+      padding: 48px 24px;
+    }
+    .logos-label {
+      text-align: center;
+      color: var(--navy);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+    .logos-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .logos-row img {
+      height: 44px;
+      width: auto;
+      filter: grayscale(1);
+      opacity: 0.6;
+      transition: filter 0.3s, opacity 0.3s;
+    }
+    .logos-row img:hover {
+      filter: grayscale(0);
+      opacity: 1;
+    }
+
+    /* ── 8. EMERGENCY CTA ── */
+    .emergency-section {
+      background: var(--orange);
+      padding: 60px 24px;
+      text-align: center;
+    }
+    .emergency-section h2 {
+      color: #fff;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .emergency-phone {
+      display: inline-block;
+      color: #fff !important;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .emergency-section p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.125rem;
+    }
+
+    /* ── 9. ABOUT ── */
+    .about-section {
+      background: var(--cream);
+      padding: 80px 24px;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .about-text {
+      border-left: 4px solid var(--orange);
+      padding-left: 24px;
+    }
+    .about-text h2 {
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    .about-text p {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--navy);
+    }
+    .about-mascot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-mascot img {
+      max-width: 280px;
+      width: 100%;
+      filter: drop-shadow(0 8px 24px rgba(27, 42, 74, 0.15));
+    }
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-mascot { order: -1; }
+      .about-mascot img { max-width: 200px; }
+    }
+
+    /* ── 10. SERVICE AREA ── */
+    .service-area-section {
+      background: var(--navy);
+      padding: 80px 24px;
+    }
+    .service-area-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+    .service-area-grid h2 {
+      color: #fff;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .area-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+    }
+    .area-list li {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1rem;
+      padding: 4px 0;
+    }
+    @media (max-width: 768px) {
+      .service-area-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── 11. FOOTER ── */
+    .site-footer {
+      background: var(--charcoal);
+      color: rgba(240, 240, 240, 0.7);
+      padding: 64px 24px 32px;
+    }
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+    }
+    .footer-brand p {
+      font-size: 0.95rem;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+    .footer-col { display: flex; flex-direction: column; gap: 8px; }
+    .footer-col h4 {
+      color: var(--orange);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .footer-col a {
+      color: rgba(240, 240, 240, 0.7);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-certs {
+      max-width: 1200px;
+      margin: 24px auto 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(240, 240, 240, 0.4);
+    }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 24px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(240, 240, 240, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+    .footer-bottom a {
+      color: rgba(240, 240, 240, 0.7);
+      transition: color 0.2s;
+    }
+    .footer-bottom a:hover { color: var(--orange); }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Cal.com spinner ── */
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Section utility ── */
+    .mb-32 { margin-bottom: 32px; }
+    .mb-40 { margin-bottom: 40px; }
+    .text-center { text-align: center; }
   </style>
 
   <!-- GTM placeholder -->
@@ -189,6 +905,14 @@
       "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
       "reviewBody": "Went above and beyond to make sure they protected my roofline after rats.",
       "itemReviewed": { "@type": "LocalBusiness", "name": "ASAP Pest & Wildlife" }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Mike Reichert" },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": "Reliable, efficient, and professional — our trusted partner.",
+      "itemReviewed": { "@type": "LocalBusiness", "name": "ASAP Pest & Wildlife" }
     }
   ]
   </script>
@@ -198,7 +922,7 @@
   <!-- ═══════════════════════════════════════════════
        HEADER (Sticky)
        ═══════════════════════════════════════════════ -->
-  <header class="site-header">
+  <header class="site-header" id="siteHeader">
     <div class="header-inner">
       <a href="/" class="logo" aria-label="ASAP Pest & Wildlife Home">
         <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d9c2f1049b70f998561ab1_logo-dark.svg" alt="ASAP Pest & Wildlife" style="height:40px;width:auto;">
@@ -213,14 +937,14 @@
         </ul>
       </nav>
 
-      <a href="tel:7706913636" class="header-phone" style="color:var(--orange);">
+      <a href="tel:7706913636" class="header-phone">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         (770) 691-3636
       </a>
 
       <a href="/book.html" class="header-cta">Book Your Free Inspection</a>
 
-      <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -229,12 +953,12 @@
   </header>
 
   <!-- Mobile Nav -->
-  <div class="mobile-nav">
+  <div class="mobile-nav" id="mobileNav">
     <a href="/services.html">Services</a>
     <a href="/how-it-works.html">How It Works</a>
     <a href="/about.html">About</a>
     <a href="/results.html">Results</a>
-    <a href="tel:7706913636" class="mobile-phone" style="color:var(--orange);">(770) 691-3636</a>
+    <a href="tel:7706913636" class="mobile-phone">(770) 691-3636</a>
     <a href="/book.html" class="mobile-cta">Book Your Free Inspection</a>
   </div>
 
@@ -244,18 +968,18 @@
          1. HERO — Split Layout (Cream Background)
          ═══════════════════════════════════════════════ -->
     <section class="hero" id="hero">
-      <div class="hero-content" style="grid-template-columns:3fr 2fr;">
+      <div class="hero-content">
         <div class="hero-text">
-          <h1 style="color:#1B2A4A;">One Call. Problem Solved.<br>Peace Restored.</h1>
-          <p class="subheadline">We inspect, trap, seal every entry point, and disinfect — so the problem is solved for good.</p>
-          <a href="tel:7706913636" class="hero-phone">
+          <h1 class="hero-fade hero-fade-1">One Call. Problem Solved.<br>Peace Restored.</h1>
+          <p class="subheadline hero-fade hero-fade-2">We inspect, trap, seal every entry point, and disinfect — so the problem is solved for good.</p>
+          <a href="tel:7706913636" class="hero-phone hero-fade hero-fade-3">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             (770) 691-3636
           </a>
-          <div class="hero-ctas">
-            <a href="/book.html" class="btn btn-primary" style="transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Book Your Free Inspection</a>
+          <div class="hero-ctas hero-fade hero-fade-3">
+            <a href="/book.html" class="btn-primary">Book Your Free Inspection</a>
           </div>
-          <div class="hero-trust">
+          <div class="hero-trust hero-fade hero-fade-3">
             <span>Licensed by GA DNR</span>
             <span>&middot;</span>
             <span>24/6 Availability</span>
@@ -264,9 +988,7 @@
           </div>
         </div>
         <div class="hero-visual">
-          <div class="hero-shield">
-            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61aea59de7f1b769c777f498_orange-mascot.svg" alt="ASAP Wildlife mascot" class="mascot-svg">
-          </div>
+          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61aea59de7f1b769c777f498_orange-mascot.svg" alt="ASAP Wildlife mascot" class="mascot-svg">
         </div>
       </div>
     </section>
@@ -274,214 +996,172 @@
     <!-- ═══════════════════════════════════════════════
          2. TRUST BAR (Navy Band)
          ═══════════════════════════════════════════════ -->
-    <section class="section section-navy reveal" id="trust-bar" style="padding:48px 24px;">
+    <section class="trust-bar-section reveal" id="trust-bar">
       <div class="container">
-        <div class="trust-bar-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;">
+        <div class="trust-bar-grid">
           <div class="trust-stat">
-            <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;">
-              <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f84bc1578e2662b0efd8_clock.svg" alt="" style="width:32px;height:32px;">
-              <span class="stat-number" style="color:#fff;font-family:'Poppins',sans-serif;font-size:clamp(28px,4vw,40px);font-weight:700;">24/6</span>
-            </div>
-            <div class="stat-label" style="color:rgba(255,255,255,0.7);">Emergency Response</div>
+            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="#E87A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="stat-number">24/6</span>
+            <span class="stat-label">Emergency Response</span>
           </div>
           <div class="trust-stat">
-            <div style="margin-bottom:8px;">
-              <span class="stat-number" style="color:#fff;font-family:'Poppins',sans-serif;font-size:clamp(28px,4vw,40px);font-weight:700;">Licensed</span>
-            </div>
-            <div class="stat-label" style="color:rgba(255,255,255,0.7);">GA DNR &amp; Dept of Agriculture</div>
+            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="#E87A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span class="stat-number">Licensed</span>
+            <span class="stat-label">GA DNR &amp; Dept of Agriculture</span>
           </div>
           <div class="trust-stat">
-            <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;">
-              <span class="stat-number" style="color:#fff;font-family:'Poppins',sans-serif;font-size:clamp(28px,4vw,40px);font-weight:700;" data-count="100" data-suffix="+">0</span>
-            </div>
-            <div style="display:flex;align-items:center;justify-content:center;gap:6px;">
-              <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" style="height:20px;width:auto;">
-              <span class="stat-label" style="color:rgba(255,255,255,0.7);">Reviews</span>
-            </div>
+            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="#E87A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span class="stat-number" data-count="100" data-suffix="+">0</span>
+            <span class="stat-label">5-Star Reviews</span>
           </div>
           <div class="trust-stat">
-            <div style="margin-bottom:8px;">
-              <span class="stat-number" style="color:#fff;font-family:'Poppins',sans-serif;font-size:clamp(28px,4vw,40px);font-weight:700;">Family-Run</span>
-            </div>
-            <div class="stat-label" style="color:rgba(255,255,255,0.7);">Business</div>
+            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="#E87A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="stat-number">Family-Run</span>
+            <span class="stat-label">Business</span>
           </div>
         </div>
       </div>
-      <style>
-        @media (max-width: 768px) {
-          .trust-bar-grid { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-      </style>
     </section>
 
     <!-- ═══════════════════════════════════════════════
-         3. HOW WE PROTECT YOUR HOME — 4-Step Process (Cream)
+         3. HOW WE PROTECT YOUR HOME — 4-Step Process
          ═══════════════════════════════════════════════ -->
-    <section class="section section-cream reveal" id="how-it-works" style="padding:120px 24px;">
+    <section class="steps-section" id="how-it-works">
       <div class="container">
-        <h2 class="text-center mb-48" style="color:#1B2A4A;">How We Protect Your Home</h2>
+        <h2 class="section-headline text-center mb-40 reveal" style="color:var(--navy);">How We Protect Your Home</h2>
         <div class="steps-grid">
-          <div class="step reveal" style="position:relative;">
-            <div style="width:56px;height:56px;border-radius:50%;background:#1B2A4A;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;margin:0 auto 16px;">1</div>
-            <h3 style="color:#1B2A4A;">Inspect</h3>
+          <div class="step reveal">
+            <div class="step-circle">1</div>
+            <h3>Inspect</h3>
             <p>We identify the animal, find every entry point, and assess the damage.</p>
           </div>
-          <div class="step reveal" style="position:relative;">
-            <div style="width:56px;height:56px;border-radius:50%;background:#1B2A4A;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;margin:0 auto 16px;">2</div>
-            <h3 style="color:#1B2A4A;">Trap</h3>
+          <div class="step reveal">
+            <div class="step-circle">2</div>
+            <h3>Trap</h3>
             <p>Humane trapping methods positioned based on movement patterns.</p>
           </div>
-          <div class="step reveal" style="position:relative;">
-            <div style="width:56px;height:56px;border-radius:50%;background:#1B2A4A;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;margin:0 auto 16px;">3</div>
-            <h3 style="color:#1B2A4A;">Exclude</h3>
+          <div class="step reveal">
+            <div class="step-circle">3</div>
+            <h3>Exclude</h3>
             <p>Every entry point sealed with durable, long-lasting materials.</p>
           </div>
-          <div class="step reveal" style="position:relative;">
-            <div style="width:56px;height:56px;border-radius:50%;background:#1B2A4A;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;margin:0 auto 16px;">4</div>
-            <h3 style="color:#1B2A4A;">Disinfect</h3>
+          <div class="step reveal">
+            <div class="step-circle">4</div>
+            <h3>Disinfect</h3>
             <p>Full cleanup of fecal matter, odor, and health hazards.</p>
           </div>
         </div>
       </div>
-      <style>
-        /* Override CSS counter auto-numbering since we use manual number divs */
-        #how-it-works .step::before { display: none; }
-        @media (min-width: 769px) {
-          #how-it-works .steps-grid { position: relative; }
-          #how-it-works .step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            top: 28px;
-            left: calc(50% + 40px);
-            width: calc(100% - 80px);
-            height: 2px;
-            background: rgba(27,42,74,0.2);
-          }
-        }
-      </style>
     </section>
 
     <!-- ═══════════════════════════════════════════════
          4. SERVICES BY ANIMAL (Cream)
          ═══════════════════════════════════════════════ -->
-    <section class="section section-cream reveal" id="services">
+    <section class="animals-section" id="services">
       <div class="container">
-        <h2 class="text-center mb-48" style="color:#1B2A4A;">What Are You Dealing With?</h2>
-        <div class="animal-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+        <h2 class="section-headline text-center mb-40 reveal" style="color:var(--navy);">What Are You Dealing With?</h2>
+        <div class="animal-grid">
 
-          <a href="/services/wildlife-removal.html" class="card reveal" style="text-decoration:none;color:inherit;">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d90636b70812fdd9c9a4d4_raccoon.png" alt="Raccoon removal" style="width:120px;height:auto;margin:0 auto 16px;">
-            <h3 style="text-align:center;color:#1B2A4A;">Raccoon</h3>
-            <p style="text-align:center;font-size:15px;color:#6B7280;">Attic invaders that cause major damage and health risks.</p>
-            <span class="card-link" style="display:block;text-align:center;margin-top:12px;">Learn More &rarr;</span>
+          <a href="/services/wildlife-removal.html" class="animal-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d90636b70812fdd9c9a4d4_raccoon.png" alt="Raccoon removal">
+            <h3>Raccoon</h3>
+            <p>Attic invaders that cause major damage and health risks.</p>
+            <span class="card-link">Learn More &rarr;</span>
           </a>
 
-          <a href="/services/wildlife-removal.html" class="card reveal" style="text-decoration:none;color:inherit;">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9dea30bdf291ad27ebe4a_bat-new.png" alt="Bat removal" style="width:120px;height:auto;margin:0 auto 16px;">
-            <h3 style="text-align:center;color:#1B2A4A;">Bat</h3>
-            <p style="text-align:center;font-size:15px;color:#6B7280;">Colonies in attics and walls require careful, humane exclusion.</p>
-            <span class="card-link" style="display:block;text-align:center;margin-top:12px;">Learn More &rarr;</span>
+          <a href="/services/wildlife-removal.html" class="animal-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9dea30bdf291ad27ebe4a_bat-new.png" alt="Bat removal">
+            <h3>Bat</h3>
+            <p>Colonies in attics and walls require careful, humane exclusion.</p>
+            <span class="card-link">Learn More &rarr;</span>
           </a>
 
-          <a href="/services/wildlife-removal.html" class="card reveal" style="text-decoration:none;color:inherit;">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9066925700240d671b492_snake.png" alt="Snake removal" style="width:120px;height:auto;margin:0 auto 16px;">
-            <h3 style="text-align:center;color:#1B2A4A;">Snake</h3>
-            <p style="text-align:center;font-size:15px;color:#6B7280;">Safe removal and prevention for venomous and non-venomous snakes.</p>
-            <span class="card-link" style="display:block;text-align:center;margin-top:12px;">Learn More &rarr;</span>
+          <a href="/services/wildlife-removal.html" class="animal-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9066925700240d671b492_snake.png" alt="Snake removal">
+            <h3>Snake</h3>
+            <p>Safe removal and prevention for venomous and non-venomous snakes.</p>
+            <span class="card-link">Learn More &rarr;</span>
           </a>
 
-          <a href="/services/pest-control.html" class="card reveal" style="text-decoration:none;color:inherit;">
-            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d91442697fbdcbe1b4834c_rat-navy.png" alt="Rat and mouse removal" style="width:120px;height:auto;margin:0 auto 16px;">
-            <h3 style="text-align:center;color:#1B2A4A;">Rat / Mouse</h3>
-            <p style="text-align:center;font-size:15px;color:#6B7280;">Fast-breeding rodents that contaminate food and chew wiring.</p>
-            <span class="card-link" style="display:block;text-align:center;margin-top:12px;">Learn More &rarr;</span>
+          <a href="/services/pest-control.html" class="animal-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d91442697fbdcbe1b4834c_rat-navy.png" alt="Rat and mouse removal">
+            <h3>Rat / Mouse</h3>
+            <p>Fast-breeding rodents that contaminate food and chew wiring.</p>
+            <span class="card-link">Learn More &rarr;</span>
           </a>
 
-          <a href="/services/pest-control.html" class="card reveal" style="text-decoration:none;color:inherit;">
-            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d91a1d697fbd514db4a0cb_bee.png" alt="Bee and wasp removal" style="width:120px;height:auto;margin:0 auto 16px;">
-            <h3 style="text-align:center;color:#1B2A4A;">Bee / Wasp</h3>
-            <p style="text-align:center;font-size:15px;color:#6B7280;">Hive and nest removal to protect your family from stings.</p>
-            <span class="card-link" style="display:block;text-align:center;margin-top:12px;">Learn More &rarr;</span>
+          <a href="/services/pest-control.html" class="animal-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61d91a1d697fbd514db4a0cb_bee.png" alt="Bee and wasp removal">
+            <h3>Bee / Wasp</h3>
+            <p>Hive and nest removal to protect your family from stings.</p>
+            <span class="card-link">Learn More &rarr;</span>
           </a>
 
-          <a href="/services/wildlife-removal.html" class="card reveal" style="text-decoration:none;color:inherit;">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9dfc1a96206e79d12f49b_armadillo-new.png" alt="Armadillo removal" style="width:120px;height:auto;margin:0 auto 16px;">
-            <h3 style="text-align:center;color:#1B2A4A;">Armadillo</h3>
-            <p style="text-align:center;font-size:15px;color:#6B7280;">Yard-destroying burrowers trapped and relocated humanely.</p>
-            <span class="card-link" style="display:block;text-align:center;margin-top:12px;">Learn More &rarr;</span>
+          <a href="/services/wildlife-removal.html" class="animal-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9dfc1a96206e79d12f49b_armadillo-new.png" alt="Armadillo removal">
+            <h3>Armadillo</h3>
+            <p>Yard-destroying burrowers trapped and relocated humanely.</p>
+            <span class="card-link">Learn More &rarr;</span>
           </a>
 
-          <a href="/services/wildlife-removal.html" class="card reveal" style="text-decoration:none;color:inherit;">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d906428b986e4f864faf40_coyote.png" alt="Coyote removal" style="width:120px;height:auto;margin:0 auto 16px;">
-            <h3 style="text-align:center;color:#1B2A4A;">Coyote</h3>
-            <p style="text-align:center;font-size:15px;color:#6B7280;">Protect pets and property from coyote threats.</p>
-            <span class="card-link" style="display:block;text-align:center;margin-top:12px;">Learn More &rarr;</span>
+          <a href="/services/wildlife-removal.html" class="animal-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d906428b986e4f864faf40_coyote.png" alt="Coyote removal">
+            <h3>Coyote</h3>
+            <p>Protect pets and property from coyote threats.</p>
+            <span class="card-link">Learn More &rarr;</span>
           </a>
 
-          <a href="/services/wildlife-removal.html" class="card reveal" style="text-decoration:none;color:inherit;">
-            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d906abb1f71ca87a357fdc_beaver.png" alt="Beaver removal" style="width:120px;height:auto;margin:0 auto 16px;">
-            <h3 style="text-align:center;color:#1B2A4A;">Beaver</h3>
-            <p style="text-align:center;font-size:15px;color:#6B7280;">Dam builders that flood yards and damage trees.</p>
-            <span class="card-link" style="display:block;text-align:center;margin-top:12px;">Learn More &rarr;</span>
+          <a href="/services/wildlife-removal.html" class="animal-card reveal">
+            <img src="https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d906abb1f71ca87a357fdc_beaver.png" alt="Beaver removal">
+            <h3>Beaver</h3>
+            <p>Dam builders that flood yards and damage trees.</p>
+            <span class="card-link">Learn More &rarr;</span>
           </a>
 
         </div>
       </div>
-      <style>
-        @media (max-width: 960px) and (min-width: 601px) {
-          .animal-grid { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-        @media (max-width: 600px) {
-          .animal-grid { grid-template-columns: 1fr !important; }
-        }
-      </style>
     </section>
 
     <!-- ═══════════════════════════════════════════════
          5. WHY ASAP DIFFERENTIATORS (Navy Full-Width)
          ═══════════════════════════════════════════════ -->
-    <section class="section section-navy reveal" id="why-asap">
+    <section class="why-section" id="why-asap">
       <div class="container">
-        <h2 class="text-center mb-48" style="color:#fff;">Why ASAP?</h2>
-        <div class="why-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;">
-          <div class="card reveal" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);text-align:center;padding:40px 32px;">
-            <div style="width:56px;height:56px;background:rgba(232,122,46,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E87A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.97 0 9-2.69 9-6v-4c0-3.31-4.03-6-9-6s-9 2.69-9 6v4c0 3.31 4.03 6 9 6z"/><path d="M12 2v8"/><path d="M8 6l4-4 4 4"/></svg>
-            </div>
-            <h3 style="color:#fff;margin-bottom:12px;">Humane &amp; Eco-Friendly</h3>
-            <p style="color:rgba(255,255,255,0.7);font-size:16px;">No poisons, no cruelty. Licensed by Georgia DNR and Department of Agriculture.</p>
+        <h2 class="section-headline text-center mb-40 reveal" style="color:#fff;">Why ASAP?</h2>
+        <div class="why-grid">
+          <div class="why-item reveal">
+            <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.97 0 9-2.69 9-6v-4c0-3.31-4.03-6-9-6s-9 2.69-9 6v4c0 3.31 4.03 6 9 6z"/><path d="M12 2v8"/><path d="M8 6l4-4 4 4"/></svg>
+            <h3>Humane &amp; Eco-Friendly</h3>
+            <p>No poisons, no cruelty. Licensed by Georgia DNR and Department of Agriculture.</p>
           </div>
-          <div class="card reveal" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);text-align:center;padding:40px 32px;">
-            <div style="width:56px;height:56px;background:rgba(232,122,46,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E87A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3 style="color:#fff;margin-bottom:12px;">Complete 4-Step Solution</h3>
-            <p style="color:rgba(255,255,255,0.7);font-size:16px;">Most companies skip exclusion. We seal every entry point and back it with a warranty.</p>
+          <div class="why-item reveal">
+            <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            <h3>Complete 4-Step Solution</h3>
+            <p>Most companies skip exclusion. We seal every entry point and back it with a warranty.</p>
           </div>
-          <div class="card reveal" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);text-align:center;padding:40px 32px;">
-            <div style="width:56px;height:56px;background:rgba(232,122,46,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-              <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f84bc1578e2662b0efd8_clock.svg" alt="" style="width:28px;height:28px;">
-            </div>
-            <h3 style="color:#fff;margin-bottom:12px;">24/6 Emergency Response</h3>
-            <p style="color:rgba(255,255,255,0.7);font-size:16px;">Wildlife emergencies don't wait for business hours. Neither do we.</p>
+          <div class="why-item reveal">
+            <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <h3>24/6 Emergency Response</h3>
+            <p>Wildlife emergencies don't wait for business hours. Neither do we.</p>
           </div>
         </div>
       </div>
-      <style>
-        @media (max-width: 768px) {
-          .why-grid { grid-template-columns: 1fr !important; }
-        }
-      </style>
     </section>
 
     <!-- ═══════════════════════════════════════════════
          6. REVIEWS CAROUSEL (Cream)
          ═══════════════════════════════════════════════ -->
-    <section class="section section-cream reveal" id="reviews">
+    <section class="reviews-section" id="reviews">
       <div class="container">
-        <div class="text-center mb-48">
-          <h2 style="color:#1B2A4A;">What Our Customers Say</h2>
+        <div class="text-center mb-32 reveal">
+          <h2 class="section-headline" style="color:var(--navy);">What Our Customers Say</h2>
           <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f1fab330503d3df9434c_5-stars.svg" alt="5 stars" style="height:28px;width:auto;margin:16px auto 0;display:block;">
+        </div>
+
+        <!-- Featured: Tyler Perry Studios -->
+        <div class="featured-review reveal">
+          <blockquote>"Reliable, efficient, and professional — our trusted partner."</blockquote>
+          <cite>— Mike Reichert, Tyler Perry Studios</cite>
         </div>
 
         <div class="reviews-carousel">
@@ -581,20 +1261,20 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════
-         7. COMMERCIAL LOGOS BAR (Light Gray)
+         7. COMMERCIAL LOGOS BAR
          ═══════════════════════════════════════════════ -->
-    <section class="logos-bar reveal" id="logos">
-      <div class="container" style="flex-direction:column;">
+    <section class="logos-section reveal" id="logos">
+      <div class="container">
         <p class="logos-label">Trusted by Leading Brands</p>
-        <div style="display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;">
-          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/66e7710e7cfb2ef43a2abdbe_chick-fil-a-chicken-sandwich.png" alt="Chick-fil-A">
-          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/66e7710e548b48ebd86d1dea_png-clipart-bank-of-america-logo-bank-of-america-logo-icons-logos-emojis-iconic-brands%20(1).png" alt="Bank of America">
-          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/6626aecaea4fa3bf0f711291_NMSDC_CERIFIED_2024.png" alt="NMSDC Certified 2024">
-          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/620d2de08fa1e736f00db20a_gfl.svg" alt="GFL">
-          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/620d2de11f40354d61e1d0ff_ccm.svg" alt="CCM">
-          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/620d2de134456288431c8981_c%26w.svg" alt="C&W">
-          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/620d2de1a42f27f6d64e0ae2_ksm.svg" alt="KSM">
-          <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/620d2de1b367493c5c03650d_tps.svg" alt="TPS">
+        <div class="logos-row">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/68f2692a175e5950567a2099.svg" alt="Commercial partner 1">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689cad4e1f951e206a7047f7.svg" alt="Commercial partner 2">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689ca7f2b8fc441a968c850d.svg" alt="Commercial partner 3">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689cba8e1f951ef55372dcd1.svg" alt="Commercial partner 4">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689cb327128428085aacd9c5.svg" alt="Commercial partner 5">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/68f2681ada456b278d9016c7.svg" alt="Commercial partner 6">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/689caebfd232a3640201ed0b.svg" alt="Commercial partner 7">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/1T9xEQiw8gH0PGTxtwmB/media/68ba521746aaaaf788434a52.svg" alt="Commercial partner 8">
         </div>
       </div>
     </section>
@@ -602,30 +1282,28 @@
     <!-- ═══════════════════════════════════════════════
          8. EMERGENCY CTA BAND (Orange Full-Width)
          ═══════════════════════════════════════════════ -->
-    <section class="section section-orange" id="emergency-cta">
-      <div class="container emergency-cta">
-        <h2 style="color:#fff;">Can't Wait? Call ASAP Now.</h2>
-        <a href="tel:7706913636" class="emergency-phone">(770) 691-3636</a>
-        <p style="font-size:18px;opacity:0.9;">We answer 24 hours a day, 6 days a week.</p>
-      </div>
+    <section class="emergency-section" id="emergency-cta">
+      <h2>Can't Wait? Call ASAP Now.</h2>
+      <a href="tel:7706913636" class="emergency-phone">(770) 691-3636</a>
+      <p>We answer 24 hours a day, 6 days a week.</p>
     </section>
 
     <!-- ═══════════════════════════════════════════════
          9. ABOUT / FAMILY-RUN (Cream)
          ═══════════════════════════════════════════════ -->
-    <section class="section section-cream reveal" id="about">
+    <section class="about-section reveal" id="about">
       <div class="container">
-        <div class="two-col" style="grid-template-columns:3fr 2fr;">
-          <div>
-            <h2 style="color:#1B2A4A;margin-bottom:24px;">Family-Run. Atlanta-Based.<br>Here When You Need Us.</h2>
-            <p style="font-size:18px;line-height:1.7;color:#1B2A4A;">ASAP Pest &amp; Wildlife Removal is a family-run company serving Metro Atlanta. We started because too many companies trap and leave — setting traps, checking once, sending a bill. Nobody seals the entry points. Nobody cleans up the mess.</p>
-            <p style="font-size:18px;line-height:1.7;color:#1B2A4A;margin-top:16px;">We do things differently. Our four-step process means the problem is solved for good. We're licensed, humane, and available 24/6.</p>
+        <div class="about-grid">
+          <div class="about-text">
+            <h2>Family-Run. Atlanta-Based.<br>Here When You Need Us.</h2>
+            <p>ASAP Pest &amp; Wildlife Removal is a family-run company serving Metro Atlanta. We started because too many companies trap and leave — setting traps, checking once, sending a bill. Nobody seals the entry points. Nobody cleans up the mess.</p>
+            <p style="margin-top:16px;">We do things differently. Our four-step process means the problem is solved for good. We're licensed, humane, and available 24/6.</p>
             <div style="margin-top:32px;">
-              <a href="/book.html" class="btn btn-primary">Book Your Free Inspection</a>
+              <a href="/book.html" class="btn-primary">Book Your Free Inspection</a>
             </div>
           </div>
-          <div style="display:flex;align-items:center;justify-content:center;">
-            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61a6f5480450e4fb7d3c7f04_darkmascot.svg" alt="ASAP Wildlife dark mascot" style="max-width:300px;width:100%;height:auto;">
+          <div class="about-mascot">
+            <img src="https://cdn.prod.website-files.com/61a68c3ac2bbdc9f4c356d55/61aea59de7f1b769c777f498_orange-mascot.svg" alt="ASAP Wildlife mascot">
           </div>
         </div>
       </div>
@@ -634,24 +1312,24 @@
     <!-- ═══════════════════════════════════════════════
          10. SERVICE AREA + BOOKING (Navy)
          ═══════════════════════════════════════════════ -->
-    <section class="section section-navy reveal" id="service-area">
+    <section class="service-area-section reveal" id="service-area">
       <div class="container">
-        <div class="two-col">
+        <div class="service-area-grid">
           <div>
-            <h2 style="color:#fff;margin-bottom:24px;">Serving Metro Atlanta and Beyond</h2>
-            <ul style="list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;">
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Atlanta</li>
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Marietta</li>
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Roswell</li>
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Alpharetta</li>
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Decatur</li>
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Kennesaw</li>
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Sandy Springs</li>
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Woodstock</li>
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Lawrenceville</li>
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Smyrna</li>
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Douglasville</li>
-              <li style="color:rgba(255,255,255,0.8);font-size:16px;padding:4px 0;">&#x2713; Peachtree City</li>
+            <h2>Serving Metro Atlanta and Beyond</h2>
+            <ul class="area-list">
+              <li>&#x2713; Atlanta</li>
+              <li>&#x2713; Marietta</li>
+              <li>&#x2713; Roswell</li>
+              <li>&#x2713; Alpharetta</li>
+              <li>&#x2713; Decatur</li>
+              <li>&#x2713; Kennesaw</li>
+              <li>&#x2713; Sandy Springs</li>
+              <li>&#x2713; Woodstock</li>
+              <li>&#x2713; Lawrenceville</li>
+              <li>&#x2713; Smyrna</li>
+              <li>&#x2713; Douglasville</li>
+              <li>&#x2713; Peachtree City</li>
             </ul>
           </div>
           <div>
@@ -662,7 +1340,6 @@
                 Loading calendar...
               </div>
             </div>
-            <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
             <script>
               (function(){
                 var s=document.createElement('script');
@@ -721,7 +1398,7 @@
         <p style="font-size:14px;color:rgba(240,240,240,0.7);margin-top:8px;">Metro Atlanta, GA</p>
       </div>
     </div>
-    <div class="footer-certs" style="max-width:1200px;margin:24px auto 0;text-align:center;">
+    <div class="footer-certs">
       Licensed by Georgia DNR &middot; Department of Agriculture &middot; State of Georgia
     </div>
     <div class="footer-bottom">
@@ -733,65 +1410,169 @@
     </div>
   </footer>
 
-  <!-- Main JS -->
-  <script src="js/main.js"></script>
-
-  <!-- Reviews carousel logic -->
+  <!-- ═══════════════════════════════════════════════
+       INLINE JS — All functionality
+       ═══════════════════════════════════════════════ -->
   <script>
-  (function(){
-    var track = document.getElementById('reviewsTrack');
-    var nav = document.getElementById('reviewNav');
-    if (!track || !nav) return;
+  (function() {
+    'use strict';
 
-    var slides = track.querySelectorAll('.review-slide');
-    var totalSlides = slides.length;
-    var currentPage = 0;
-    var perPage = 3;
+    /* ── IntersectionObserver: Reveal on scroll ── */
+    var revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            /* Stagger siblings */
+            var parent = entry.target.parentElement;
+            var siblings = parent ? parent.querySelectorAll('.reveal') : [];
+            var idx = 0;
+            for (var i = 0; i < siblings.length; i++) {
+              if (siblings[i] === entry.target) { idx = i; break; }
+            }
+            entry.target.style.transitionDelay = (idx * 0.15) + 's';
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
 
-    function getPerPage() {
-      return window.innerWidth < 769 ? 1 : 3;
+      revealEls.forEach(function(el) {
+        revealObserver.observe(el);
+      });
+    } else {
+      /* Fallback: show everything */
+      revealEls.forEach(function(el) { el.classList.add('visible'); });
     }
 
-    function getTotalPages() {
-      return Math.ceil(totalSlides / perPage);
+    /* ── Counter animation ── */
+    var counters = document.querySelectorAll('[data-count]');
+    if ('IntersectionObserver' in window && counters.length) {
+      var counterObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var target = parseInt(el.getAttribute('data-count'), 10);
+            var suffix = el.getAttribute('data-suffix') || '';
+            var duration = 1500;
+            var start = 0;
+            var startTime = null;
+
+            function animate(timestamp) {
+              if (!startTime) startTime = timestamp;
+              var progress = Math.min((timestamp - startTime) / duration, 1);
+              var current = Math.floor(progress * target);
+              el.textContent = current + suffix;
+              if (progress < 1) {
+                requestAnimationFrame(animate);
+              } else {
+                el.textContent = target + suffix;
+              }
+            }
+            requestAnimationFrame(animate);
+            counterObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(function(el) { counterObserver.observe(el); });
     }
 
-    function goToPage(page) {
-      currentPage = page;
-      var slideWidth = 100 / perPage;
-      var offset = -(page * perPage * slideWidth);
-      track.style.transform = 'translateX(' + offset + '%)';
-      updateDots();
-    }
-
-    function updateDots() {
-      var dots = nav.querySelectorAll('.review-dot');
-      dots.forEach(function(d, i) {
-        d.classList.toggle('active', i === currentPage);
+    /* ── Mobile hamburger menu toggle ── */
+    var hamburger = document.getElementById('hamburger');
+    var mobileNav = document.getElementById('mobileNav');
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', function() {
+        var isOpen = mobileNav.classList.toggle('open');
+        hamburger.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      /* Close on link click */
+      mobileNav.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          mobileNav.classList.remove('open');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
       });
     }
 
-    function buildDots() {
-      perPage = getPerPage();
-      var pages = getTotalPages();
-      /* Clear existing dots safely */
-      while (nav.firstChild) { nav.removeChild(nav.firstChild); }
-      for (var i = 0; i < pages; i++) {
-        var dot = document.createElement('button');
-        dot.className = 'review-dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', 'Go to review page ' + (i + 1));
-        dot.dataset.page = i;
-        dot.addEventListener('click', function() {
-          goToPage(parseInt(this.dataset.page));
-        });
-        nav.appendChild(dot);
-      }
-      currentPage = 0;
-      track.style.transform = 'translateX(0)';
+    /* ── Sticky header scroll effect ── */
+    var header = document.getElementById('siteHeader');
+    if (header) {
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }, { passive: true });
     }
 
-    buildDots();
-    window.addEventListener('resize', buildDots);
+    /* ── Reviews carousel with dots ── */
+    var track = document.getElementById('reviewsTrack');
+    var nav = document.getElementById('reviewNav');
+    if (track && nav) {
+      var slides = track.querySelectorAll('.review-slide');
+      var totalSlides = slides.length;
+      var currentPage = 0;
+      var perPage = 3;
+
+      function getPerPage() {
+        return window.innerWidth < 769 ? 1 : 3;
+      }
+
+      function getTotalPages() {
+        return Math.ceil(totalSlides / perPage);
+      }
+
+      function goToPage(page) {
+        currentPage = page;
+        var slideWidth = 100 / perPage;
+        var offset = -(page * perPage * slideWidth);
+        track.style.transform = 'translateX(' + offset + '%)';
+        updateDots();
+      }
+
+      function updateDots() {
+        var dots = nav.querySelectorAll('.review-dot');
+        dots.forEach(function(d, i) {
+          d.classList.toggle('active', i === currentPage);
+        });
+      }
+
+      function buildDots() {
+        perPage = getPerPage();
+        var pages = getTotalPages();
+        while (nav.firstChild) { nav.removeChild(nav.firstChild); }
+        for (var i = 0; i < pages; i++) {
+          var dot = document.createElement('button');
+          dot.className = 'review-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Go to review page ' + (i + 1));
+          dot.dataset.page = i;
+          dot.addEventListener('click', function() {
+            goToPage(parseInt(this.dataset.page));
+          });
+          nav.appendChild(dot);
+        }
+        currentPage = 0;
+        track.style.transform = 'translateX(0)';
+      }
+
+      buildDots();
+      window.addEventListener('resize', buildDots);
+    }
+
+    /* ── FAQ accordion (if present) ── */
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var answer = this.nextElementSibling;
+        var isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+        answer.style.maxHeight = isOpen ? '0px' : answer.scrollHeight + 'px';
+        this.classList.toggle('open', !isOpen);
+      });
+    });
+
   })();
   </script>
 
