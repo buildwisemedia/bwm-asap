@@ -1,21 +1,28 @@
 /* ASAP Pest & Wildlife — Custom Styles
-   Colors from Niche Design Brief (BVC-validated 2026-03-17)
-   Forest Green #2D6A4F | Warm White #FAF9F6 | Amber #E8A317
-   Deep Charcoal #1B1B1B | Near Black #212121 | Soft White #F0F0F0 */
+   Approved Design Brief palette (from live Webflow site)
+   Navy #1B2A4A | Orange #E87A2E | Cream #F2EDDC
+   Brown-Orange #B77537 | White #FFFFFF | Charcoal #1B1B1B */
 
 :root {
-  --green: #2D6A4F;
-  --green-dark: #1B4332;
-  --white: #FAF9F6;
-  --amber: #E8A317;
-  --amber-hover: #D49515;
+  --navy: #1B2A4A;
+  --navy-light: #243756;
+  --cream: #F2EDDC;
+  --orange: #E87A2E;
+  --orange-hover: #D46B22;
+  --brown: #B77537;
   --charcoal: #1B1B1B;
+  --white: #FFFFFF;
   --text: #212121;
   --text-light: #F0F0F0;
   --gray: #6B7280;
-  --border: rgba(45, 106, 79, 0.12);
+  --border: rgba(27, 42, 74, 0.12);
   --header-height: 72px;
   --section-pad: clamp(60px, 8vw, 100px);
+  /* Aliases for backwards compat with existing class names */
+  --green: var(--navy);
+  --green-dark: var(--navy);
+  --amber: var(--orange);
+  --amber-hover: var(--orange-hover);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,7 +37,7 @@ body {
   font-size: 18px;
   line-height: 1.7;
   color: var(--text);
-  background: var(--white);
+  background: var(--cream);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -155,7 +162,7 @@ img { max-width: 100%; height: auto; display: block; }
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--white);
+  background: var(--cream);
   z-index: 40;
   padding: 32px 24px;
   flex-direction: column;
@@ -239,7 +246,7 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--green);
 }
 .btn-white:hover {
-  background: var(--white);
+  background: var(--cream);
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
@@ -254,8 +261,8 @@ img { max-width: 100%; height: auto; display: block; }
   margin: 0 auto;
 }
 
-.section-dark {
-  background: var(--green);
+.section-dark, .section-navy {
+  background: var(--navy);
   color: var(--text-light);
 }
 .section-dark h2, .section-dark h3 { color: #fff; }
@@ -273,7 +280,7 @@ img { max-width: 100%; height: auto; display: block; }
 .section-amber h2, .section-amber h3 { color: #fff; }
 
 .section-white {
-  background: var(--white);
+  background: var(--cream);
 }
 
 .section-label {
@@ -300,8 +307,8 @@ img { max-width: 100%; height: auto; display: block; }
   display: flex;
   align-items: center;
   padding: calc(var(--header-height) + 40px) 24px var(--section-pad);
-  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
-  color: #fff;
+  background: var(--cream);
+  color: var(--navy);
   position: relative;
   overflow: hidden;
 }
@@ -312,7 +319,7 @@ img { max-width: 100%; height: auto; display: block; }
   right: 0;
   width: 50%;
   height: 100%;
-  background: radial-gradient(ellipse at 80% 50%, rgba(232,163,23,0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 80% 50%, rgba(232,122,46,0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -326,7 +333,7 @@ img { max-width: 100%; height: auto; display: block; }
   width: 100%;
 }
 
-.hero-text h1 { margin-bottom: 20px; color: #fff; }
+.hero-text h1 { margin-bottom: 20px; color: var(--navy); }
 .hero-text .subheadline {
   font-size: clamp(18px, 2.5vw, 22px);
   opacity: 0.9;
@@ -365,26 +372,31 @@ img { max-width: 100%; height: auto; display: block; }
   position: relative;
 }
 .hero-shield {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  border: 2px solid rgba(255,255,255,0.1);
+  width: 320px;
+  height: 320px;
+  border-radius: 24px;
+  background: var(--navy);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 32px;
+  box-shadow: 0 20px 60px rgba(27, 42, 74, 0.15);
 }
 .hero-shield .shield-icon { font-size: 48px; margin-bottom: 12px; }
-.hero-shield .shield-text { font-size: 14px; opacity: 0.8; }
+.hero-shield .shield-text { font-size: 14px; opacity: 0.8; color: rgba(255,255,255,0.7); }
 .hero-shield .shield-phone {
   font-family: 'Poppins', sans-serif;
   font-size: 24px;
   font-weight: 700;
   margin-top: 8px;
-  color: var(--amber);
+  color: var(--orange);
+}
+.hero-shield img.mascot-svg {
+  width: 200px;
+  height: auto;
+  margin-bottom: 12px;
 }
 
 @media (max-width: 768px) {
@@ -398,7 +410,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ── Trust Bar ───────────────────────── */
 .trust-bar {
-  background: var(--white);
+  background: var(--cream);
   border-bottom: 1px solid var(--border);
 }
 .trust-bar .container {
@@ -721,4 +733,155 @@ img { max-width: 100%; height: auto; display: block; }
   border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
+}
+
+/* ── Commercial Logos Bar ───────────────────────── */
+.logos-bar {
+  background: #F5F5F5;
+  padding: 48px 24px;
+}
+.logos-bar .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.logos-bar img {
+  height: 48px;
+  width: auto;
+  filter: grayscale(100%);
+  opacity: 0.5;
+  transition: filter 0.3s, opacity 0.3s;
+}
+.logos-bar img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+.logos-bar .logos-label {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+
+/* ── Reviews Carousel ───────────────────────── */
+.reviews-carousel {
+  position: relative;
+  overflow: hidden;
+}
+.reviews-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.review-slide {
+  min-width: 100%;
+  padding: 0 24px;
+}
+@media (min-width: 769px) {
+  .review-slide { min-width: 33.333%; }
+}
+.review-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.review-card .review-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.review-card .review-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.review-card .review-name {
+  font-weight: 600;
+  color: var(--navy);
+}
+.review-card .review-title {
+  font-size: 14px;
+  color: var(--gray);
+}
+.review-card blockquote {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  flex: 1;
+}
+.review-nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+.review-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.review-dot.active {
+  background: var(--orange);
+}
+
+/* ── Section Cream ───────────────────────── */
+.section-cream {
+  background: var(--cream);
+}
+
+/* ── Hero phone prominent ───────────────────────── */
+.hero-phone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 24px;
+}
+.hero-phone:hover { color: var(--orange-hover); }
+
+/* ── Section Orange (emergency CTA) ───────────────────────── */
+.section-orange {
+  background: var(--orange);
+  color: #fff;
+}
+.section-orange h2, .section-orange h3 { color: #fff; }
+
+/* ── Page hero navy ───────────────────────── */
+.page-hero {
+  background: var(--navy);
+  color: #fff;
+  padding: calc(var(--header-height) + 48px) 24px 64px;
+  text-align: center;
+}
+.page-hero h1 { color: #fff; margin-bottom: 12px; }
+.page-hero p { font-size: 20px; opacity: 0.85; max-width: 640px; margin: 0 auto; }
+
+/* ── Connecting line for steps ───────────────────────── */
+@media (min-width: 769px) {
+  .steps-grid { position: relative; }
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: calc(50% + 40px);
+    width: calc(100% - 80px);
+    height: 2px;
+    background: var(--border);
+  }
+  .step { position: relative; }
 }
