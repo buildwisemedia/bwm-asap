@@ -21,4 +21,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://asap-pest-wildlife.pages.dev/sitemap-index.xml
+Sitemap: https://www.removeasap.com/sitemap-index.xml
