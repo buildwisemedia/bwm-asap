@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://use.typekit.net" crossorigin>
   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preload" as="image" href="/assets/images/backgrounds/home-hero-bg.svg" type="image/svg+xml" fetchpriority="high">
   <link rel="preload" as="image" href="/assets/images/logos/logo-orange.png" type="image/png" fetchpriority="high">
 
   <title>ASAP Pest & Wildlife Removal | Atlanta Wildlife & Pest Control</title>
@@ -57,72 +56,70 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "ASAP Pest & Wildlife Removal",
-    "image": "https://removeasap.com/assets/images/logos/logo-orange.png",
-    "url": "https://removeasap.com",
-    "telephone": "(770) 691-3636",
-    "email": "info@removeasap.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Atlanta",
-      "addressRegion": "GA",
-      "addressCountry": "US"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 33.749,
-      "longitude": -84.388
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-      "opens": "00:00",
-      "closes": "23:59"
-    },
-    "areaServed": {
-      "@type": "City",
-      "name": "Atlanta"
-    },
-    "priceRange": "$$",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "reviewCount": "100"
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Wildlife Removal and Pest Control",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "ASAP Pest & Wildlife Removal",
-      "telephone": "(770) 691-3636",
-      "url": "https://removeasap.com"
-    },
-    "areaServed": {
-      "@type": "City",
-      "name": "Atlanta",
-      "containedInPlace": { "@type": "State", "name": "Georgia" }
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "ASAP Pest & Wildlife Services",
-      "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wildlife Removal", "url": "https://removeasap.com/wildlife/" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pest Control", "url": "https://removeasap.com/pest-control-services/" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial Services", "url": "https://removeasap.com/commercial-services/" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Warranty Assurance", "url": "https://removeasap.com/warranty-assurance/" } }
-      ]
-    }
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://removeasap.com/#business",
+        "name": "ASAP Pest & Wildlife Removal",
+        "image": "https://removeasap.com/assets/images/logos/logo-orange.png",
+        "url": "https://removeasap.com",
+        "telephone": "(770) 691-3636",
+        "email": "info@removeasap.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "2990 Pine Canyon Dr SW, Unit 11",
+          "addressLocality": "Atlanta",
+          "addressRegion": "GA",
+          "postalCode": "30331",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 33.749,
+          "longitude": -84.388
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "08:00",
+          "closes": "18:00"
+        },
+        "areaServed": { "@type": "City", "name": "Atlanta" },
+        "priceRange": "$$",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "reviewCount": "100"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://removeasap.com/#wildlife-service",
+        "serviceType": "Wildlife Removal and Pest Control",
+        "provider": { "@id": "https://removeasap.com/#business" },
+        "areaServed": {
+          "@type": "City",
+          "name": "Atlanta",
+          "containedInPlace": { "@type": "State", "name": "Georgia" }
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "ASAP Pest & Wildlife Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wildlife Removal", "url": "https://removeasap.com/wildlife/" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pest Control", "url": "https://removeasap.com/pest-control-services/" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial Services", "url": "https://removeasap.com/commercial-services/" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Warranty Assurance", "url": "https://removeasap.com/warranty-assurance/" } }
+          ]
+        }
+      }
+    ]
   }
   </script>
 </head>
 <body class="bg-cream text-dark-text font-sans">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-navy focus:text-cream focus:px-4 focus:py-2 focus:z-50">Skip to content</a>
+
   <!-- GTM noscript -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K953HZ9R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
@@ -185,7 +182,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <!-- Hero Section — cream bg with scattered animal illustrations -->
     <section class="bg-cream relative overflow-hidden py-16 md:py-24 lg:py-32">
       <!-- Background SVG pattern — prominent, matching the live site's organic leaf texture -->
