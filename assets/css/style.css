@@ -15,22 +15,38 @@
    OUTLINED TEXT EFFECTS
    The signature visual — transparent fill with stroked border
    ============================================ */
-.text-outlined-cream {
+.text-outlined-cream,
+.outlined-cream {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 2px #F2EDDC;
-  color: transparent;
 }
 
-.text-outlined-orange {
+.text-outlined-orange,
+.outlined-orange {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 2px #B77537;
-  color: transparent;
 }
 
-.text-outlined-navy {
+.text-outlined-navy,
+.outlined-navy {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 2px #212936;
-  color: transparent;
+}
+
+/* Skip-to-content link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+.skip-link:focus {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 1000;
+  background: #212936;
+  color: #F2EDDC;
+  padding: 8px 16px;
+  border-radius: 4px;
 }
 
 /* Responsive stroke width — thinner on mobile */
@@ -153,4 +169,72 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   V5 SIGNATURE MOTIFS — Webflow "tooth" language
+   Orange CTA bar with a right-side tapered tooth hanging
+   below, plus the small "tooth tab" mark that appears
+   beneath every section eyebrow.
+   ============================================ */
+
+/* Horizontal orange bar that spans the page; the hanging tooth
+   extends BELOW the bar on the right side. We build this as two
+   layers: the bar itself, and an absolutely-positioned tooth
+   pseudo-element with clip-path for the downward triangle. */
+.tooth-bar {
+  position: relative;
+  background: #B77537;
+}
+.tooth-bar::after {
+  content: "";
+  position: absolute;
+  right: 6%;
+  top: 100%;
+  width: 210px;
+  height: 130px;
+  background: #B77537;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+@media (max-width: 768px) {
+  .tooth-bar::after {
+    width: 90px;
+    height: 58px;
+    right: 8%;
+  }
+}
+
+/* Small tooth tab under section eyebrows ("WE REMOVE & EXCLUDE"
+   etc). Downward-pointing orange triangle, same visual language
+   as the hero CTA bar tooth. */
+.tooth-tab {
+  display: inline-block;
+  width: 140px;
+  height: 14px;
+  background: #B77537;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+@media (max-width: 768px) {
+  .tooth-tab {
+    width: 100px;
+    height: 10px;
+  }
+}
+
+/* Compact right-aligned contact pill (top-right of every page). */
+.top-pill {
+  background: #212936;
+  color: #F2EDDC;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+}
+.top-pill a {
+  color: #F2EDDC;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.top-pill a:hover {
+  color: #B77537;
 }
