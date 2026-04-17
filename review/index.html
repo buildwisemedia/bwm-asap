@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your new ASAP website — ready for review</title>
+  <meta name="description" content="Preview of the new ASAP Pest & Wildlife website built by Buildwise Media. Side-by-side comparison + what's included.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/assets/images/logos/favicon.png">
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+  <script src="https://use.typekit.net/dmg8gvn.js"></script><script>try{Typekit.load({async:true});}catch(e){}</script>
+  <link rel="stylesheet" href="/assets/css/webflow-shared.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <style>
+    /* Review page — scoped styles so we don't leak into the marketing site */
+    .review-body { background: #F2EDDC; color: #212936; }
+    .review-hero {
+      background: #212936; color: #F2EDDC;
+      padding: 56px 24px; text-align: center;
+    }
+    .review-hero h1 {
+      font-family: urw-din, Arial, sans-serif;
+      font-weight: 900; text-transform: uppercase;
+      font-size: clamp(32px, 6vw, 68px); line-height: .95;
+      margin: 0 0 16px;
+    }
+    .review-hero .outlined { -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px #F2EDDC; }
+    .review-hero p { max-width: 640px; margin: 0 auto 24px; font-size: 18px; line-height: 1.5; opacity: .9; }
+    .review-cta-primary {
+      display: inline-block; background: #B77537; color: #F2EDDC;
+      padding: 18px 36px; text-decoration: none; font-weight: 900;
+      text-transform: uppercase; letter-spacing: .5px; font-size: 18px;
+      border-radius: 4px; transition: background .2s;
+    }
+    .review-cta-primary:hover { background: #9a6230; }
+
+    .review-section { max-width: 1100px; margin: 0 auto; padding: 48px 24px; }
+    .review-section h2 {
+      font-family: urw-din, Arial, sans-serif;
+      font-weight: 900; text-transform: uppercase;
+      font-size: clamp(26px, 4vw, 42px); line-height: 1;
+      margin: 0 0 8px; color: #212936;
+    }
+    .review-section .eyebrow {
+      text-transform: uppercase; font-weight: 800; letter-spacing: .18em;
+      font-size: 13px; color: #B77537; margin-bottom: 10px;
+      display: inline-block; border-bottom: 3px solid #B77537; padding-bottom: 4px;
+    }
+    .review-section p.lead { font-size: 18px; line-height: 1.5; margin: 16px 0; max-width: 720px; }
+
+    .compare-grid { display: grid; gap: 20px; margin-top: 24px; }
+    @media (min-width: 860px) { .compare-grid.desktop-pair { grid-template-columns: 1fr 1fr; } }
+    .compare-card { background: #fff; border: 2px solid #e8dfc8; border-radius: 8px; overflow: hidden; }
+    .compare-card .label {
+      padding: 10px 16px; font-weight: 900; text-transform: uppercase;
+      font-size: 13px; letter-spacing: .1em;
+    }
+    .compare-card.ref .label { background: #888; color: #fff; }
+    .compare-card.v5 .label { background: #B77537; color: #F2EDDC; }
+    .compare-card img { display: block; width: 100%; height: auto; border-top: 1px solid #e8dfc8; }
+    .compare-grid.mobile-pair { grid-template-columns: 1fr 1fr; }
+    .compare-grid.mobile-pair img { max-height: 720px; object-fit: cover; object-position: top; }
+
+    .deliverables-grid { display: grid; gap: 16px; margin-top: 24px; }
+    @media (min-width: 720px) { .deliverables-grid { grid-template-columns: 1fr 1fr; } }
+    .deliverable {
+      background: #fff; border-left: 4px solid #B77537; padding: 18px 22px;
+      border-radius: 0 4px 4px 0;
+    }
+    .deliverable h3 {
+      margin: 0 0 6px; font-family: urw-din, Arial, sans-serif;
+      font-weight: 900; text-transform: uppercase; font-size: 16px; letter-spacing: .05em;
+    }
+    .deliverable p { margin: 0; font-size: 15px; line-height: 1.45; color: #333; }
+
+    .attribution-callout {
+      background: #212936; color: #F2EDDC; border-radius: 8px;
+      padding: 32px; margin-top: 32px;
+    }
+    .attribution-callout .eyebrow { color: #B77537; border-bottom-color: #B77537; }
+    .attribution-callout h2 { color: #F2EDDC; }
+    .attribution-callout ul { margin: 16px 0 0; padding-left: 20px; font-size: 16px; line-height: 1.6; }
+    .attribution-callout li { margin-bottom: 8px; }
+
+    .checklist { margin-top: 24px; display: grid; gap: 12px; }
+    .check-item {
+      background: #fff; border: 2px solid #212936; border-radius: 6px;
+      padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start;
+    }
+    .check-item .num {
+      flex: 0 0 32px; height: 32px; width: 32px;
+      background: #B77537; color: #F2EDDC; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 16px;
+    }
+    .check-item h3 { margin: 0 0 4px; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }
+    .check-item p { margin: 0; font-size: 15px; line-height: 1.45; color: #333; }
+
+    .review-footer {
+      background: #212936; color: #F2EDDC; padding: 48px 24px; text-align: center; margin-top: 48px;
+    }
+    .review-footer h2 { color: #F2EDDC; margin: 0 0 12px; }
+    .review-footer p { max-width: 520px; margin: 0 auto 20px; opacity: .9; }
+    .review-footer a { color: #B77537; text-decoration: underline; }
+  </style>
+</head>
+<body class="review-body">
+
+<section class="review-hero">
+  <span style="text-transform:uppercase;letter-spacing:.2em;font-size:12px;color:#B77537;font-weight:800;">A private preview for</span>
+  <h1>Nehemiah — your <span class="outlined">new website</span> is ready</h1>
+  <p>Built from scratch by Buildwise Media on top of a faster, smarter stack. Visually the same site your customers recognize — but under the hood, it's a different animal.</p>
+  <a href="https://rebuild-visual-100-clone-v5.asap-pest-wildlife.pages.dev" class="review-cta-primary">View the live preview →</a>
+  <p style="margin-top:18px;font-size:14px;opacity:.7;">Not yet public. Works on your phone — tap around, test the call button, fill the form.</p>
+</section>
+
+<section class="review-section">
+  <span class="eyebrow">Before &amp; After — Desktop</span>
+  <h2>The site your customers already love — rebuilt</h2>
+  <p class="lead">Left is what removeasap.com looks like today. Right is the new version we built. The design stays true to your brand — orange, navy, the "Peace of Mind" typography — because we rebuilt it pixel for pixel, not redesigned it.</p>
+  <div class="compare-grid desktop-pair">
+    <div class="compare-card ref">
+      <div class="label">Current site (removeasap.com)</div>
+      <img src="/assets/review-images/ref-home-desktop.png" alt="Current removeasap.com homepage" loading="lazy">
+    </div>
+    <div class="compare-card v5">
+      <div class="label">New build (rebuild preview)</div>
+      <img src="/assets/review-images/v5-home-desktop.png" alt="New ASAP homepage v5" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="review-section" style="padding-top:0;">
+  <span class="eyebrow">Before &amp; After — Mobile</span>
+  <h2>And on your phone too</h2>
+  <p class="lead">Most of your leads come from Meta ads on mobile — so we tuned the mobile experience first, then made sure desktop followed.</p>
+  <div class="compare-grid mobile-pair">
+    <div class="compare-card ref">
+      <div class="label">Current</div>
+      <img src="/assets/review-images/ref-home-mobile.png" alt="Current mobile homepage" loading="lazy">
+    </div>
+    <div class="compare-card v5">
+      <div class="label">New</div>
+      <img src="/assets/review-images/v5-home-mobile.png" alt="New mobile homepage v5" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="review-section">
+  <span class="eyebrow">What's different underneath</span>
+  <h2>Your website, built the Buildwise way</h2>
+  <p class="lead">Same look. Very different machine. Here's what we rebuilt in under the hood:</p>
+
+  <div class="deliverables-grid">
+    <div class="deliverable">
+      <h3>📞 Phone number fixed</h3>
+      <p>Your current site still shows (770) 450-1744 — the old number. Every page on the new site uses (770) 450-1744. One less missed call a day adds up fast.</p>
+    </div>
+    <div class="deliverable">
+      <h3>⚡ Faster everywhere</h3>
+      <p>Hosted on Cloudflare's global edge network instead of Webflow. Your customers in Alpharetta, Marietta, Decatur — all load from a server near them.</p>
+    </div>
+    <div class="deliverable">
+      <h3>🤖 AI-discoverable</h3>
+      <p>ChatGPT, Claude, Perplexity, and Google's AI can now read your site and recommend your services when people ask "who removes raccoons in Atlanta?" — a growing source of leads.</p>
+    </div>
+    <div class="deliverable">
+      <h3>🔍 Stronger in Google search</h3>
+      <p>FAQ schema and breadcrumb schema mean Google can show your answers directly in search results — bigger footprint, more clicks, no extra work from you.</p>
+    </div>
+    <div class="deliverable">
+      <h3>📊 Full analytics stack</h3>
+      <p>Google Analytics, Meta Pixel, Microsoft Clarity heatmaps — all wired up. You'll finally be able to see what ads drive calls, which pages convert, where visitors drop off.</p>
+    </div>
+    <div class="deliverable">
+      <h3>⚖️ Legal pages live</h3>
+      <p>Privacy Policy and Terms of Service — both required for Meta ads and Google, both missing from your current site. Done.</p>
+    </div>
+    <div class="deliverable">
+      <h3>📱 Mobile-first</h3>
+      <p>Every touch target, font size, spacing, and menu interaction tested at phone sizes before desktop. The majority of your leads are on phones.</p>
+    </div>
+    <div class="deliverable">
+      <h3>🏎️ Core Web Vitals</h3>
+      <p>We target Google's performance benchmarks (LCP &lt; 2.5s, CLS &lt; 0.1, Lighthouse ≥ 90 mobile). A faster site ranks higher in Google search.</p>
+    </div>
+  </div>
+
+  <div class="attribution-callout">
+    <span class="eyebrow">Lead attribution — new for every Buildwise client</span>
+    <h2>We now track every phone click and every form submit</h2>
+    <p style="font-size:16px;line-height:1.55;max-width:700px;">Starting with your site, every time a visitor taps a phone number or submits the contact form, we record:</p>
+    <ul>
+      <li><strong>Which CTA they tapped</strong> — the hero bar, the top pill, the mobile menu, the footer. You'll know which calls-to-action are pulling weight.</li>
+      <li><strong>Which page they were on</strong> — homepage? raccoon detail? contact? — so you can spot your highest-converting content.</li>
+      <li><strong>Where the traffic came from</strong> — Meta ad, Google search, direct — automatically stitched in from our tracking setup.</li>
+    </ul>
+    <p style="font-size:16px;line-height:1.55;margin-top:16px;">Bottom line: <strong>you finally see what your website is actually driving</strong>. Not vague "engagement." Real calls and real leads, attributed to the source.</p>
+  </div>
+</section>
+
+<section class="review-section">
+  <span class="eyebrow">What we need from you</span>
+  <h2>Three quick things to get this live</h2>
+
+  <div class="checklist">
+    <div class="check-item">
+      <div class="num">1</div>
+      <div>
+        <h3>Approve the design</h3>
+        <p>Tap around the <a href="https://rebuild-visual-100-clone-v5.asap-pest-wildlife.pages.dev">live preview</a>. Click the phone number, fill out the contact form (it'll email you), open the menu. Reply to Robert with a ✅ or any tweaks you want.</p>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="num">2</div>
+      <div>
+        <h3>Meta Pixel ID — or let us create one</h3>
+        <p>The Pixel is installed with a placeholder. If you've already got a Meta Pixel for removeasap.com, send Robert the ID. If not, tell him and he'll set it up for you in Meta Events Manager.</p>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="num">3</div>
+      <div>
+        <h3>Confirm your contact email</h3>
+        <p>Your current site uses two different emails — <code>info@removeasap.com</code> in the footer and <code>info@wildliferemovalasap.com</code> in the top bar. We've standardized everything on <code>info@removeasap.com</code>. Tell Robert if that's wrong and we'll switch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="review-section">
+  <span class="eyebrow">What happens next</span>
+  <h2>Timeline</h2>
+  <div class="checklist">
+    <div class="check-item"><div class="num">✓</div><div><h3>Today</h3><p>Homepage, wildlife index, pest control, and contact pages live on the preview URL. Lead attribution firing. Ready for your review.</p></div></div>
+    <div class="check-item"><div class="num">W</div><div><h3>This weekend</h3><p>Remaining 20+ wildlife detail pages, commercial, services, warranty, about, and blog — all built to the same standard.</p></div></div>
+    <div class="check-item"><div class="num">M</div><div><h3>Monday</h3><p>If you approve the design, we cut over <strong>removeasap.com</strong> to the new site Monday morning. Your current Webflow site is archived (we never delete — always reversible). Customers see the new experience, phones start ringing with full attribution.</p></div></div>
+  </div>
+</section>
+
+<div class="review-footer">
+  <h2>Ready?</h2>
+  <p>Reply to Robert's text with a ✅ to approve, or tell him what you'd like changed. Either way, he's on call.</p>
+  <a href="tel:7704501744" style="color:#F2EDDC;font-size:20px;font-weight:900;">ASAP on the other side: 770-450-1744</a>
+</div>
+
+<script src="/assets/js/tracking.js" defer></script>
+</body>
+</html>
