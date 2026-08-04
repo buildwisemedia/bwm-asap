@@ -543,29 +543,28 @@
 
       <div id="five-star-panel" class="response-panel" hidden>
         <h2 tabindex="-1">Thank you!</h2>
-        <p class="thank-you">We are glad we could help. Your kind words mean a lot to our team.</p>
-        <a class="button" href="https://search.google.com/local/writereview?placeid=ChIJV-ndmxkd9YgRcgzlBLBNemc">Share it on Google</a>
+        <p class="thank-you">Taking you to Google now…</p>
       </div>
 
       <div id="follow-up-panel" class="response-panel" hidden>
         <h2 tabindex="-1">We want to make it right</h2>
-        <p class="thank-you">Tell us what went wrong. We will call you soon.</p>
+        <p class="thank-you">Your note goes directly to Nehemiah so he can follow up with you.</p>
 
         <div class="w-form">
-          <form data-bwm-source-form-type="rating-followup" method="post">
+          <form data-no-bwm-lead-flow data-bwm-source-form-type="rating-followup" novalidate>
             <div class="field">
               <label for="rating-name">Name</label>
-              <input id="rating-name" type="text" name="Name" autocomplete="name">
+              <input id="rating-name" type="text" name="name" autocomplete="name">
             </div>
 
             <div class="field">
               <label for="rating-phone">Best number to call you back</label>
-              <input id="rating-phone" type="tel" name="Phone" autocomplete="tel" inputmode="tel" required>
+              <input id="rating-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" required>
             </div>
 
             <div class="field">
-              <label for="rating-message">What happened?</label>
-              <textarea id="rating-message" name="Message" required></textarea>
+              <label for="rating-message">How could we have made your experience five stars?</label>
+              <textarea id="rating-message" name="feedback" required></textarea>
             </div>
 
             <input id="rating-value" type="hidden" name="rating" value="">
@@ -573,8 +572,8 @@
             <button class="button" type="submit">Send my note</button>
           </form>
 
-          <div class="w-form-done" style="display:none">Thank you. We got your note and will call you soon.</div>
-          <div class="w-form-fail" style="display:none">We could not send your note. Please call <a href="tel:7704501744">(770) 450-1744</a>.</div>
+          <div class="w-form-done" role="status" aria-live="polite" tabindex="-1" style="display:none">Thank you. Your note was sent directly to Nehemiah. He will follow up with you.</div>
+          <div class="w-form-fail" role="alert" aria-live="assertive" style="display:none">We could not send your note. Please use the link from your text or email, or call <a href="tel:7704501744">(770) 450-1744</a>.</div>
         </div>
 
         <p class="public-review-link">You can also <a href="https://search.google.com/local/writereview?placeid=ChIJV-ndmxkd9YgRcgzlBLBNemc">share your experience publicly on Google</a>.</p>
@@ -591,8 +590,11 @@
       "use strict";
 
       var reviewUrl = "https://search.google.com/local/writereview?placeid=ChIJV-ndmxkd9YgRcgzlBLBNemc";
+      var responseEndpoint = "https://bwm-form-handler.robert-ba0.workers.dev/asap/review-response";
       var params = new URLSearchParams(window.location.search);
       var score = Number(params.get("score"));
+      var requestId = params.get("request_id") || params.get("r") || "";
+      var sourceLabel = params.get("label") || "";
 
       if (score >= 5 && params.get("go") === "1") {
         window.location.replace(reviewUrl);
@@ -603,6 +605,51 @@
       var fiveStarPanel = document.getElementById("five-star-panel");
       var followUpPanel = document.getElementById("follow-up-panel");
       var ratingInput = document.getElementById("rating-value");
+      var feedbackForm = followUpPanel.querySelector("form");
+      var doneMessage = followUpPanel.querySelector(".w-form-done");
+      var failMessage = followUpPanel.querySelector(".w-form-fail");
+
+      function browserSubmissionId() {
+        var key = "asap-review-submission-id";
+        try {
+          var existing = window.sessionStorage.getItem(key);
+          if (existing) return existing;
+          var next = window.crypto && typeof window.crypto.randomUUID === "function"
+            ? window.crypto.randomUUID()
+            : "review-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+          window.sessionStorage.setItem(key, next);
+          return next;
+        } catch (_) {
+          return "review-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+        }
+      }
+
+      function responsePayload(rating, action, feedback) {
+        return {
+          request_id: requestId,
+          rating: rating,
+          action: action,
+          feedback: feedback || "",
+          name: feedbackForm.elements.name.value,
+          phone: feedbackForm.elements.phone.value,
+          website: feedbackForm.elements.website.value,
+          label: sourceLabel,
+          page_url: window.location.origin + window.location.pathname,
+          submission_id: browserSubmissionId()
+        };
+      }
+
+      function recordGoogleHandoff() {
+        if (!requestId) return;
+        try {
+          fetch(responseEndpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(responsePayload(5, "google_redirect", "")),
+            keepalive: true
+          }).catch(function () {});
+        } catch (_) {}
+      }
 
       function selectRating(rating, moveFocus) {
         buttons.forEach(function (button) {
@@ -625,8 +672,45 @@
 
       buttons.forEach(function (button) {
         button.addEventListener("click", function () {
-          selectRating(Number(button.getAttribute("data-rating")), true);
+          var rating = Number(button.getAttribute("data-rating"));
+          selectRating(rating, true);
+          if (rating === 5) {
+            recordGoogleHandoff();
+            window.location.assign(reviewUrl);
+          }
         });
+      });
+
+      feedbackForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        doneMessage.style.display = "none";
+        failMessage.style.display = "none";
+
+        if (!feedbackForm.reportValidity() || !requestId) {
+          if (!requestId) failMessage.style.display = "block";
+          return;
+        }
+
+        var submitButton = feedbackForm.querySelector('[type="submit"]');
+        submitButton.disabled = true;
+
+        try {
+          var response = await fetch(responseEndpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(responsePayload(Number(ratingInput.value), "private_feedback", feedbackForm.elements.feedback.value))
+          });
+          var result = {};
+          try { result = await response.json(); } catch (_) {}
+          if (!response.ok || !result.ok) throw new Error("Review response failed");
+          feedbackForm.style.display = "none";
+          doneMessage.style.display = "block";
+          doneMessage.focus();
+        } catch (_) {
+          failMessage.style.display = "block";
+        } finally {
+          submitButton.disabled = false;
+        }
       });
 
       if (Number.isFinite(score) && score >= 1) {
@@ -634,6 +718,5 @@
       }
     })();
   </script>
-  <script src="/assets/js/asap-lead-flow.js" defer></script>
 </body>
 </html>

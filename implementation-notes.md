@@ -1,5 +1,26 @@
 # Implementation Notes
 
+## 2026-08-04 - ASAP Review Engine Phase 1 Resume
+
+Robert confirmed the two remaining Phase 1 inputs: sub-five feedback must ask
+exactly, "How could we have made your experience five stars?", and the private
+response must route directly to Nehemiah. This session resumes the approved
+`/rate` direction from `feat/review-engine-rate` plus the Robert-approved visual
+elevation at `design/rate-page-2026-07-17`.
+
+- Primary module: `website_landing`; secondary module: `campaign_email_social`.
+- Tier: `locked-direction-implementation`; the behavior and visual direction
+  are already approved, so this pass does not reopen the design system.
+- Identity: ASAP Pest & Wildlife, client + single composition. BWM, HRE, and
+  cross-client visual inheritance remain forbidden.
+- Current evidence boundary: the `/rate` page and both rating-path previews
+  exist. Production `/rate`, job-completion automation, SMS delivery, private
+  feedback delivery, and labeled end-to-end smoke are not yet claimed live.
+- Preflight finding: the repo still carries a legacy plain-text marker from
+  2026-05-12. It must be replaced with a valid hash-bound v4 marker before any
+  HTML/CSS/JS authoring.
+
+
 ## 2026-06-23 - Human-Approval Production Gate
 
 Added release infrastructure so approved live client content is promoted deliberately instead of auto-published from `main`.
