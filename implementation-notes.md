@@ -20,6 +20,15 @@ elevation at `design/rate-page-2026-07-17`.
   2026-05-12. It must be replaced with a valid hash-bound v4 marker before any
   HTML/CSS/JS authoring.
 
+### 2026-08-05 review-safe Command Center mode
+
+The Command Center will embed this exact page with `?preview=1`. That mode must
+exercise the one-to-four and five-star states without sending feedback or
+navigating the embedded frame away. Default `/rate` behavior remains unchanged:
+five stars immediately hands off to Google and request-bound sub-five feedback
+uses the production response route. Preview-only copy must state that no note is
+sent and that the live route goes directly to Nehemiah.
+
 
 ## 2026-06-23 - Human-Approval Production Gate
 

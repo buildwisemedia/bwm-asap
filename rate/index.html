@@ -172,6 +172,18 @@
       content: "";
     }
 
+    .preview-notice {
+      margin: -6px auto 20px;
+      padding: 10px 14px;
+      border: 1px solid rgba(232, 122, 46, 0.55);
+      border-radius: 999px;
+      background: var(--soft-orange);
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
     h1,
     h2 {
       margin: 0;
@@ -520,6 +532,7 @@
 
   <main>
     <section class="rating-card" aria-labelledby="page-title">
+      <p id="preview-notice" class="preview-notice" hidden>Review demo · nothing is sent from this page.</p>
       <h1 id="page-title">How did we do?</h1>
       <p class="intro">Tap a star to rate your visit.</p>
 
@@ -544,6 +557,7 @@
       <div id="five-star-panel" class="response-panel" hidden>
         <h2 tabindex="-1">Thank you!</h2>
         <p class="thank-you">Taking you to Google now…</p>
+        <a id="preview-google-button" class="button" href="https://search.google.com/local/writereview?placeid=ChIJV-ndmxkd9YgRcgzlBLBNemc" target="_blank" rel="noopener" hidden>Open Google review composer</a>
       </div>
 
       <div id="follow-up-panel" class="response-panel" hidden>
@@ -595,8 +609,9 @@
       var score = Number(params.get("score"));
       var requestId = params.get("request_id") || params.get("r") || "";
       var sourceLabel = params.get("label") || "";
+      var previewMode = params.get("preview") === "1";
 
-      if (score >= 5 && params.get("go") === "1") {
+      if (!previewMode && score >= 5 && params.get("go") === "1") {
         window.location.replace(reviewUrl);
         return;
       }
@@ -608,6 +623,13 @@
       var feedbackForm = followUpPanel.querySelector("form");
       var doneMessage = followUpPanel.querySelector(".w-form-done");
       var failMessage = followUpPanel.querySelector(".w-form-fail");
+      var previewNotice = document.getElementById("preview-notice");
+      var previewGoogleButton = document.getElementById("preview-google-button");
+
+      if (previewMode) {
+        previewNotice.hidden = false;
+        previewGoogleButton.hidden = false;
+      }
 
       function browserSubmissionId() {
         var key = "asap-review-submission-id";
@@ -675,6 +697,10 @@
           var rating = Number(button.getAttribute("data-rating"));
           selectRating(rating, true);
           if (rating === 5) {
+            if (previewMode) {
+              fiveStarPanel.querySelector(".thank-you").textContent = "The live page takes the customer straight to your Google review composer.";
+              return;
+            }
             recordGoogleHandoff();
             window.location.assign(reviewUrl);
           }
@@ -685,6 +711,15 @@
         event.preventDefault();
         doneMessage.style.display = "none";
         failMessage.style.display = "none";
+
+        if (previewMode) {
+          if (!feedbackForm.reportValidity()) return;
+          feedbackForm.style.display = "none";
+          doneMessage.textContent = "Preview only. On the live flow, this note goes directly to Nehemiah.";
+          doneMessage.style.display = "block";
+          doneMessage.focus();
+          return;
+        }
 
         if (!feedbackForm.reportValidity() || !requestId) {
           if (!requestId) failMessage.style.display = "block";
