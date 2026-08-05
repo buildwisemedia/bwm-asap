@@ -127,7 +127,7 @@ const pages = [
     eyebrow: 'Metro Atlanta rodent control',
     h1: 'Rat &amp; Mouse Removal in Atlanta, GA',
     lede: 'Rodent activity is rarely solved by treating the one place you happened to see it. ASAP Pest & Wildlife Removal traces signs through attics, crawlspaces, kitchens, storage areas, and exterior openings to build a plan around the whole property.',
-    image: '/assets/images/animals/rat-navy-optimized.webp',
+    image: '/assets/images/wildlife-grid/mouse-rat-optimized.webp',
     imageAlt: 'Rat illustration for ASAP rodent removal services',
     signsIntro: 'Mice and rats can travel behind walls and through small openings. The pattern of evidence helps identify where to inspect and what must be corrected.',
     signs: [

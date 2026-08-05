@@ -9,6 +9,10 @@
   var isPreview = /\.pages\.dev$/.test(host) || host === 'localhost' || host === '127.0.0.1';
   if (!isPreview) return;
 
+  // The review engine owns a richer preview-only response flow and independently
+  // forces safe mode on these same hosts.
+  if (window.location.pathname.replace(/\/+$/, '') === '/rate') return;
+
   function showNotice() {
     var notice = document.getElementById('bwm-dev-preview-notice');
     if (!notice) {

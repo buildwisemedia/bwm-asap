@@ -2,6 +2,7 @@
 """Behavioral smoke test for the client-safe review-engine preview."""
 
 import os
+from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
@@ -9,6 +10,7 @@ from playwright.sync_api import sync_playwright
 BASE_URL = os.environ.get("NEHEMIAH_PREVIEW_URL", "http://localhost:8788")
 PRIVATE_QUESTION = "How could we have made your experience five stars?"
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def handler_requests(page):
@@ -76,12 +78,24 @@ with sync_playwright() as playwright:
 
     preview_requests = []
     page.on("request", lambda request: preview_requests.append(request.url))
-    page.goto(f"{BASE_URL}/wildlife-removal-canton/")
-    page.locator("form").first.evaluate(
-        "form => form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }))"
-    )
-    assert page.get_by_role("status").filter(has_text="no lead was sent").is_visible()
-    assert not any("asap-form-handler" in url or "/submit" in url for url in preview_requests)
+    form_pages = [
+        path
+        for path in ROOT.rglob("index.html")
+        if "<form" in path.read_text() and path != ROOT / "rate/index.html"
+    ]
+    for path in form_pages:
+        route = path.relative_to(ROOT).parent.as_posix()
+        route = "/" if route == "." else f"/{route}/"
+        preview_requests.clear()
+        page.goto(f"{BASE_URL}{route}")
+        page.locator("form").first.evaluate(
+            "form => form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }))"
+        )
+        assert page.get_by_role("status").filter(has_text="no lead was sent").is_visible(), route
+        assert not any(
+            "bwm-form-handler" in url or "/submit" in url
+            for url in preview_requests
+        ), (route, preview_requests)
 
     browser.close()
 

@@ -133,6 +133,12 @@ assert sum(line.strip() == "/*" for line in headers.splitlines()) == 1
 guard = (ROOT / "assets/js/dev-preview-guard.js").read_text()
 assert "event.preventDefault()" in guard and "event.stopImmediatePropagation()" in guard
 
+for path in ROOT.rglob("*.html"):
+    if "_verification" in path.parts:
+        continue
+    html = path.read_text()
+    assert html.count(PREVIEW_GUARD) == 1, f"sitewide preview guard missing or duplicated: {path}"
+
 bats = (ROOT / "wildlife/bats/index.html").read_text()
 assert "April 1" in bats and "July 31" in bats and "Georgia DNR" in bats
 
