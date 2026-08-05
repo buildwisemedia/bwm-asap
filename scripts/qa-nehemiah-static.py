@@ -117,7 +117,9 @@ assert rate_page.h1s == ["How did we do?"]
 assert "How could we have made your experience five stars?" in rate_html
 assert 'data-rating="1"' in rate_html and 'data-rating="5"' in rate_html
 assert 'name="robots" content="noindex,nofollow"' in rate_html
-assert "/rate/" not in (ROOT / "sitemap.xml").read_text()
+sitemap = (ROOT / "sitemap.xml").read_text()
+assert "/rate/" not in sitemap
+assert all(str(path.relative_to(ROOT).parent) not in sitemap for path in CITY_PAGES.values())
 
 hub_html, hub_page = parse_page(ROOT / "client-preview/nehemiah/index.html")
 assert hub_page.h1s == ["ASAP’s next growth layer, ready to review."]
@@ -132,6 +134,8 @@ assert sum(line.strip() == "/*" for line in headers.splitlines()) == 1
 
 guard = (ROOT / "assets/js/dev-preview-guard.js").read_text()
 assert "event.preventDefault()" in guard and "event.stopImmediatePropagation()" in guard
+assert "window.__bwmAnalyticsLoaded = true" in guard
+assert "Object.defineProperty(window, '__bwmLoadAnalytics'" in guard
 
 for path in ROOT.rglob("*.html"):
     if "_verification" in path.parts:

@@ -9,6 +9,21 @@
   var isPreview = /\.pages\.dev$/.test(host) || host === 'localhost' || host === '127.0.0.1';
   if (!isPreview) return;
 
+  // Client-review traffic must not enter GA4, GTM, Clarity, Meta, or Reddit.
+  // The shared analytics loader and the city-page fallback both honor these
+  // flags before their deferred startup paths can create network requests.
+  window['ga-disable-G-GQZJKG5JCK'] = true;
+  window.__bwmAnalyticsLoaded = true;
+  try {
+    Object.defineProperty(window, '__bwmLoadAnalytics', {
+      value: function () {},
+      writable: false,
+      configurable: true
+    });
+  } catch (_) {
+    window.__bwmLoadAnalytics = function () {};
+  }
+
   // The review engine owns a richer preview-only response flow and independently
   // forces safe mode on these same hosts.
   if (window.location.pathname.replace(/\/+$/, '') === '/rate') return;

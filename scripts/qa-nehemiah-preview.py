@@ -87,7 +87,7 @@ with sync_playwright() as playwright:
         route = path.relative_to(ROOT).parent.as_posix()
         route = "/" if route == "." else f"/{route}/"
         preview_requests.clear()
-        page.goto(f"{BASE_URL}{route}")
+        page.goto(f"{BASE_URL}{route}", wait_until="domcontentloaded")
         page.locator("form").first.evaluate(
             "form => form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }))"
         )
@@ -97,6 +97,26 @@ with sync_playwright() as playwright:
             for url in preview_requests
         ), (route, preview_requests)
 
+    analytics_requests = []
+    page.on("request", lambda request: analytics_requests.append(request.url))
+    page.goto(f"{BASE_URL}/wildlife-removal-canton/", wait_until="domcontentloaded")
+    page.dispatch_event("body", "pointerdown")
+    page.evaluate("window.__bwmLoadAnalytics && window.__bwmLoadAnalytics()")
+    page.wait_for_timeout(750)
+    blocked_analytics_hosts = (
+        "googletagmanager.com",
+        "google-analytics.com",
+        "clarity.ms",
+        "facebook.net",
+        "facebook.com/tr",
+        "redditstatic.com",
+    )
+    assert not any(
+        blocked in url
+        for url in analytics_requests
+        for blocked in blocked_analytics_hosts
+    ), analytics_requests
+
     browser.close()
 
-print("PASS: review demo and dev forms send nothing; all five rating paths behave correctly")
+print("PASS: review demo and dev forms send nothing; all five rating paths behave correctly; preview analytics stay off")
