@@ -59,6 +59,15 @@ with sync_playwright() as playwright:
     assert "Preview only" in page.get_by_role("status").inner_text()
     assert not requests
 
+    preview_requests = []
+    page.on("request", lambda request: preview_requests.append(request.url))
+    page.goto(f"{BASE_URL}/wildlife-removal-canton/")
+    page.locator("form").first.evaluate(
+        "form => form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }))"
+    )
+    assert page.get_by_role("status").filter(has_text="no lead was sent").is_visible()
+    assert not any("asap-form-handler" in url or "/submit" in url for url in preview_requests)
+
     browser.close()
 
-print("PASS: ratings 1-4 use private feedback; rating 5 uses Google; preview sends nothing")
+print("PASS: review demo and dev forms send nothing; all five rating paths behave correctly")

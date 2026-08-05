@@ -268,6 +268,9 @@ for (const page of pages) {
   })}</script>`);
   html = html.replaceAll('7706913636', phoneHref).replaceAll('770-691-3636', '770-450-1744').replaceAll('770 - 691 - 3636', '770 - 450 - 1744').replaceAll('(770) 691-3636', phoneLabel);
   html = addFormLabels(html);
+  if (!html.includes('/assets/js/dev-preview-guard.js')) {
+    html = html.replace('</body>', '<script defer src="/assets/js/dev-preview-guard.js"></script></body>');
+  }
   const insertionPoint = html.indexOf('<section class="section-2">');
   if (insertionPoint < 0) throw new Error(`No animal-page insertion point in ${page.file}`);
   html = `${html.slice(0, insertionPoint)}${renderPage(page)}${html.slice(insertionPoint)}`;

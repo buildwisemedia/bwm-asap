@@ -12,6 +12,8 @@ CURRENT_PHONE = "7704501744"
 OLD_PHONE = "7706913636"
 CURRENT_GA4 = "G-GQZJKG5JCK"
 OLD_GA4 = "G-8M705Z89TE"
+OBSOLETE_EMAIL = "info@wildliferemovalasap.com"
+PREVIEW_GUARD = "/assets/js/dev-preview-guard.js"
 
 CITY_PAGES = {
     "Acworth": ROOT / "wildlife-removal-acworth/index.html",
@@ -90,6 +92,8 @@ for city, path in CITY_PAGES.items():
     assert parsed.h1s == [f"Wildlife Removal in {city}, GA"], (path, parsed.h1s)
     assert CURRENT_PHONE in html and CURRENT_GA4 in html
     assert OLD_PHONE not in html and OLD_GA4 not in html and "intellimize" not in html.lower()
+    assert OBSOLETE_EMAIL not in html
+    assert html.count(PREVIEW_GUARD) == 1
     assert "/ aria-label=" not in html
     city_shingles[city] = shingles(" ".join(parsed.visible_parts))
 
@@ -104,6 +108,8 @@ for h1, path in ANIMAL_PAGES.items():
     assert parsed.h1s == [h1], (path, parsed.h1s)
     assert CURRENT_PHONE in html and CURRENT_GA4 in html
     assert OLD_PHONE not in html and OLD_GA4 not in html
+    assert OBSOLETE_EMAIL not in html
+    assert html.count(PREVIEW_GUARD) == 1
     assert "/ aria-label=" not in html
 
 rate_html, rate_page = parse_page(ROOT / "rate/index.html")
@@ -122,6 +128,10 @@ assert all(str(path.relative_to(ROOT).parent) in hub_html for path in ANIMAL_PAG
 headers = (ROOT / "_headers").read_text()
 assert "X-Robots-Tag: noindex, nofollow" in headers
 assert "Strict-Transport-Security" in headers
+assert sum(line.strip() == "/*" for line in headers.splitlines()) == 1
+
+guard = (ROOT / "assets/js/dev-preview-guard.js").read_text()
+assert "event.preventDefault()" in guard and "event.stopImmediatePropagation()" in guard
 
 bats = (ROOT / "wildlife/bats/index.html").read_text()
 assert "April 1" in bats and "July 31" in bats and "Georgia DNR" in bats

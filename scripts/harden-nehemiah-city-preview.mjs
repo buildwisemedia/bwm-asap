@@ -52,6 +52,7 @@ for (const city of pages) {
     .replaceAll('https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d90636b70812fdd9c9a4d4_raccoon.png', '/assets/images/wildlife-grid/raccoon.webp')
     .replaceAll('https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9dea30bdf291ad27ebe4a_bat-new.png', '/assets/images/wildlife-grid/bat.webp')
     .replaceAll('https://cdn.prod.website-files.com/61a6f04dba9e11e400c344e8/61d9069b16eeed73079abd49_mouse.png', '/assets/images/wildlife-grid/mouse-rat.png')
+    .replaceAll('info@wildliferemovalasap.com', 'info@removeasap.com')
     .replace('We use humane removal or trapping for the animal we confirm. We do not use poisons.', 'We choose a removal approach for the animal, access conditions, and evidence we confirm.')
     .replace('We use humane traps and methods that fit the animal and the space.', 'We choose a removal approach that fits the animal, the space, and applicable requirements.')
     .replace('We choose humane removal or trapping and never use poison for the job.', 'We choose the removal approach after confirming the animal, location, and property conditions.')
@@ -64,6 +65,10 @@ for (const city of pages) {
 
   if (!html.includes('/assets/css/nehemiah-city-preview.css')) {
     html = html.replace('</head>', '<link href="/assets/css/nehemiah-city-preview.css" rel="stylesheet"/></head>');
+  }
+
+  if (!html.includes('/assets/js/dev-preview-guard.js')) {
+    html = html.replace('</body>', '<script defer src="/assets/js/dev-preview-guard.js"></script></body>');
   }
 
   html = html.replace(/<script src="(https:\/\/[^\"]+(?:jquery|webflow)[^\"]+)"/g, '<script defer src="$1"');
