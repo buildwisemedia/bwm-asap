@@ -1,5 +1,37 @@
 # Implementation Notes
 
+## 2026-08-05 - Nehemiah development review set
+
+- Built a single private, no-index review hub at `/client-preview/nehemiah/`
+  for the August 6 client call.
+- Kept the five city candidates (`Canton`, `Woodstock`, `Acworth`, `Kennesaw`,
+  and `Cartersville`) and four service candidates (`bats`, `rat and mouse`,
+  `raccoon`, and `squirrel`) on the development branch only. Their canonical
+  production URLs are reserved, but no production promotion is authorized
+  without Nehemiah's approval.
+- Upgraded the animal pages from thin fact openings to inspection-led service
+  pages with signs, process, preparation guidance, FAQs, structured data, and a
+  clear call/contact path. Bat content preserves Georgia DNR's April 1–July 31
+  maternity-season restriction and does not promise immediate exclusion.
+- Hardened the city exports by removing the retired personalization experiment,
+  duplicate legacy analytics, remote first-render dependencies, and unverified
+  licensing or method promises. Added local assets, current GA4, current phone,
+  accessibility labels, and performance-safe script loading.
+- The `/rate/?preview=1` demo now exercises ratings 1–4 as private feedback and
+  rating 5 as the Google handoff without sending data or navigating away.
+- QA evidence: static acceptance checks pass all nine pages and both review
+  paths; behavioral browser tests pass; every review route returns 200; the
+  production QA gate passes. Second-round Lighthouse scores are 97/100/100
+  (accessibility/best practices/SEO) for representative city and animal pages,
+  and 100/100 for the hub and review demo. Their crawlability failure is the
+  intentional development `noindex` boundary.
+- Independent review round 1 found three blockers: stale production ancestry,
+  downstream GA4 reconciliation, and private-recipient provenance. The unified
+  branch starts from current production, the Brain config now records Nehemiah's
+  verified address, and the analytics audit records the current stream plus the
+  tagless published GTM container. Final independent review remains required
+  after the release and preview URLs exist.
+
 ## 2026-08-05 - GA4 Stream Identity Correction
 
 - A read-only GA4 Admin API audit confirmed property `305355475` has two web streams.

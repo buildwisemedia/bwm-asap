@@ -1,0 +1,86 @@
+/* Responsive correction layer for the five client-review city candidates. */
+main > .section-2 .hero-h1 {
+  text-wrap: balance;
+}
+
+main > .section-2 .image-5 {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+}
+
+main > .section-2 .long-button {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.long-button {
+  background-color: #8d3718 !important;
+  color: #fff !important;
+}
+
+.tap-for-more {
+  color: #4f575d !important;
+}
+
+.background---navy .text-color---burnt-orange {
+  color: #ffb88f !important;
+}
+
+.background---navy .text-field,
+.background---navy .select-field-2 {
+  background: #fff !important;
+  color: #0c2340 !important;
+}
+
+@media (min-width: 992px) {
+  main > .section-2 {
+    padding-top: 26px;
+  }
+
+  main > .section-2 .padding---medium {
+    padding-top: 90px;
+    padding-bottom: 88px;
+  }
+
+  main > .section-2 ._2-up-grid {
+    grid-template-columns: minmax(0, 1.18fr) minmax(320px, .82fr);
+    gap: clamp(42px, 6vw, 84px);
+    align-items: center;
+  }
+
+  main > .section-2 .hero-h1 {
+    max-width: 760px;
+    font-size: clamp(70px, 5.2vw, 82px) !important;
+    line-height: .94 !important;
+    letter-spacing: -.025em;
+  }
+
+  main > .section-2 .subheading {
+    max-width: 760px;
+    font-size: clamp(18px, 1.6vw, 23px);
+    line-height: 1.4;
+  }
+
+  main > .section-2 .paragraph-2 {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.58;
+  }
+}
+
+@media (max-width: 991px) {
+  main > .section-2 .hero-h1 {
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+}
