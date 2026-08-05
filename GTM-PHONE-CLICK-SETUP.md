@@ -18,7 +18,7 @@ Both events are sent to:
 ```javascript
 {
   event: 'phone_click',
-  phone_number_redacted: '3636',        // Last 4 digits only (privacy protection)
+  phone_number_redacted: '1744',        // Last 4 digits only (privacy protection)
   page_path: '/path/to/page',          // The page where click occurred
   page_referrer: 'https://...'         // Referrer URL
 }
