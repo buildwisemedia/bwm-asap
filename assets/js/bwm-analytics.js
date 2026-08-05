@@ -2,7 +2,7 @@
  * One loader for every page. Starts after visitor intent or an 8-second fallback
  * so measurement never competes with the first useful screen.
  * - GTM: GTM-K953HZ9R
- * - GA4: G-8M705Z89TE
+ * - GA4: G-GQZJKG5JCK
  * - Clarity: whpri6g1yi
  * - Meta Pixel: 26350078141329630
  * The inline bwm-ga-gate script runs before this loader and suppresses GA4 on
@@ -22,7 +22,7 @@
       return entry && entry.event === 'gtm.js';
     });
     var hasGaConfig = window.dataLayer.some(function (entry) {
-      return Array.isArray(entry) && entry[0] === 'config' && entry[1] === 'G-8M705Z89TE';
+      return Array.isArray(entry) && entry[0] === 'config' && entry[1] === 'G-GQZJKG5JCK';
     });
 
     // Google Tag Manager
@@ -43,10 +43,10 @@
     if (!hasGaConfig) {
       var ga = document.createElement('script');
       ga.async = true;
-      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-8M705Z89TE';
+      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-GQZJKG5JCK';
       document.head.appendChild(ga);
       window.gtag('js', new Date());
-      window.gtag('config', 'G-8M705Z89TE');
+      window.gtag('config', 'G-GQZJKG5JCK');
     }
 
     // Microsoft Clarity

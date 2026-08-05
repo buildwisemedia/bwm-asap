@@ -1,5 +1,44 @@
 # Implementation Notes
 
+## 2026-08-05 - GA4 Stream Identity Correction
+
+- A read-only GA4 Admin API audit confirmed property `305355475` has two web streams.
+- The retired-domain stream is `G-8M705Z89TE` with default URI `https://www.wildliferemovalasap.com`.
+- The current-domain stream is `G-GQZJKG5JCK` with default URI `https://www.removeasap.com`.
+- All production page gates and the shared analytics loader now target the current-domain stream.
+- `phone_click`, `email_click`, and `form_submit` already exist as property-level key events; the site continues to emit the phone and email events without changing their payload contract.
+- This remains a production candidate until the branch is deployed and the new stream is live-canary verified.
+
+## 2026-08-04 - ASAP Review Engine Phase 1 Resume
+
+Robert confirmed the two remaining Phase 1 inputs: sub-five feedback must ask
+exactly, "How could we have made your experience five stars?", and the private
+response must route directly to Nehemiah. This session resumes the approved
+`/rate` direction from `feat/review-engine-rate` plus the Robert-approved visual
+elevation at `design/rate-page-2026-07-17`.
+
+- Primary module: `website_landing`; secondary module: `campaign_email_social`.
+- Tier: `locked-direction-implementation`; the behavior and visual direction
+  are already approved, so this pass does not reopen the design system.
+- Identity: ASAP Pest & Wildlife, client + single composition. BWM, HRE, and
+  cross-client visual inheritance remain forbidden.
+- Current evidence boundary: the `/rate` page and both rating-path previews
+  exist. Production `/rate`, job-completion automation, SMS delivery, private
+  feedback delivery, and labeled end-to-end smoke are not yet claimed live.
+- Preflight finding: the repo still carries a legacy plain-text marker from
+  2026-05-12. It must be replaced with a valid hash-bound v4 marker before any
+  HTML/CSS/JS authoring.
+
+### 2026-08-05 review-safe Command Center mode
+
+The Command Center will embed this exact page with `?preview=1`. That mode must
+exercise the one-to-four and five-star states without sending feedback or
+navigating the embedded frame away. Default `/rate` behavior remains unchanged:
+five stars immediately hands off to Google and request-bound sub-five feedback
+uses the production response route. Preview-only copy must state that no note is
+sent and that the live route goes directly to Nehemiah.
+
+
 ## 2026-06-23 - Human-Approval Production Gate
 
 Added release infrastructure so approved live client content is promoted deliberately instead of auto-published from `main`.
