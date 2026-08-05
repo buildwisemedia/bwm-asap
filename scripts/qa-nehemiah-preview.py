@@ -59,6 +59,21 @@ with sync_playwright() as playwright:
     assert "Preview only" in page.get_by_role("status").inner_text()
     assert not requests
 
+    requests = handler_requests(page)
+    page.goto(f"{BASE_URL}/rate/?request_id=qa-preview-host")
+    assert page.locator("#preview-notice").is_visible()
+    page.get_by_role("button", name="5 stars", exact=True).click()
+    assert page.get_by_role("heading", name="Thank you!").is_visible()
+    assert "search.google.com" not in page.url
+    assert not requests
+
+    page.get_by_role("button", name="2 stars", exact=True).click()
+    page.get_by_label("Best number to call you back").fill("770-555-0100")
+    page.get_by_label(PRIVATE_QUESTION).fill("Preview host safety check.")
+    page.get_by_role("button", name="Send my note").click()
+    assert "Preview only" in page.get_by_role("status").inner_text()
+    assert not requests
+
     preview_requests = []
     page.on("request", lambda request: preview_requests.append(request.url))
     page.goto(f"{BASE_URL}/wildlife-removal-canton/")
