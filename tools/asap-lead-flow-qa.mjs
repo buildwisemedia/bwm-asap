@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const root = process.cwd();
 const publicFormSkip = new Set(['lead-flow/index.html']);
-const canonicalPhone = '7706913636';
+const canonicalPhone = '7704501744';
 
 function walk(dir) {
   const out = [];

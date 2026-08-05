@@ -1,0 +1,757 @@
+<!doctype html>
+<!-- @r020-exempt: functional rating form page, no marketing imagery -->
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex,nofollow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How Did We Do? | ASAP Pest &amp; Wildlife Removal</title>
+  <style>
+    :root {
+      --navy: #1B2A4A;
+      --cream: #F2EDDC;
+      --orange: #E87A2E;
+      --charcoal: #1B1B1B;
+      --muted: rgba(27, 27, 27, 0.68);
+      --line: rgba(27, 42, 74, 0.14);
+      --soft-navy: rgba(27, 42, 74, 0.055);
+      --soft-orange: rgba(232, 122, 46, 0.1);
+      --shadow: 0 24px 70px rgba(27, 42, 74, 0.14), 0 3px 10px rgba(27, 27, 27, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--cream);
+      color-scheme: light;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .site-header {
+      background: var(--navy);
+      color: var(--cream);
+      border-bottom: 1px solid rgba(242, 237, 220, 0.12);
+      box-shadow: 0 4px 22px rgba(27, 42, 74, 0.12);
+    }
+
+    .header-inner {
+      width: min(100% - 24px, 760px);
+      min-height: 84px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      min-width: 48px;
+      min-height: 48px;
+      border-radius: 10px;
+    }
+
+    .logo {
+      display: block;
+      width: 104px;
+      height: auto;
+    }
+
+    .header-phone {
+      min-height: 48px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(232, 122, 46, 0.6);
+      border-radius: 999px;
+      background: rgba(232, 122, 46, 0.08);
+      color: var(--orange);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .header-phone:hover {
+      border-color: var(--orange);
+      background: rgba(232, 122, 46, 0.16);
+    }
+
+    .header-phone:active {
+      transform: scale(0.98);
+    }
+
+    main {
+      position: relative;
+      isolation: isolate;
+      width: 100%;
+      flex: 1;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 34px 10px 42px;
+    }
+
+    main::before,
+    main::after {
+      position: absolute;
+      z-index: -1;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+      filter: blur(2px);
+    }
+
+    main::before {
+      top: -170px;
+      right: -150px;
+      background: radial-gradient(circle, rgba(232, 122, 46, 0.14), rgba(232, 122, 46, 0) 68%);
+    }
+
+    main::after {
+      bottom: -190px;
+      left: -150px;
+      background: radial-gradient(circle, rgba(27, 42, 74, 0.11), rgba(27, 42, 74, 0) 68%);
+    }
+
+    .rating-card {
+      position: relative;
+      width: min(100%, 650px);
+      overflow: hidden;
+      padding: 34px 14px 18px;
+      background: var(--cream);
+      border: 1px solid rgba(27, 42, 74, 0.12);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .rating-card::before {
+      position: absolute;
+      inset: 0 0 auto;
+      height: 5px;
+      background: var(--orange);
+      content: "";
+    }
+
+    .preview-notice {
+      margin: -6px auto 20px;
+      padding: 10px 14px;
+      border: 1px solid rgba(232, 122, 46, 0.55);
+      border-radius: 999px;
+      background: var(--soft-orange);
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      color: var(--navy);
+      font-family: ui-rounded, "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+
+    h1 {
+      font-size: clamp(36px, 10vw, 50px);
+    }
+
+    h2 {
+      font-size: clamp(27px, 7.5vw, 35px);
+    }
+
+    .intro {
+      max-width: 30ch;
+      margin: 10px auto 24px;
+      color: var(--muted);
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+
+    .stars {
+      width: min(100%, 420px);
+      margin: 0 auto;
+      padding: 4px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 3px;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: var(--soft-navy);
+    }
+
+    .star-button {
+      min-width: 48px;
+      min-height: 58px;
+      padding: 8px 2px;
+      display: grid;
+      place-items: center;
+      border: 2px solid transparent;
+      border-radius: 14px;
+      background: transparent;
+      color: rgba(27, 42, 74, 0.55);
+      cursor: pointer;
+      transition: color 160ms ease, background-color 160ms ease, transform 160ms ease, filter 160ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .star-button svg {
+      width: min(100%, 40px);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 2px 1px rgba(27, 27, 27, 0.08));
+    }
+
+    .star-button:hover,
+    .star-button.is-active {
+      color: var(--orange);
+    }
+
+    .star-button:hover path,
+    .star-button.is-active path {
+      stroke: var(--navy);
+      stroke-width: 0.55;
+      stroke-linejoin: round;
+      paint-order: stroke fill;
+    }
+
+    .star-button:hover {
+      background: var(--soft-orange);
+      transform: translateY(-2px);
+    }
+
+    .star-button:active {
+      transform: scale(0.93);
+    }
+
+    .star-button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    .button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--navy);
+      outline-offset: 3px;
+    }
+
+    .site-header a:focus-visible,
+    .site-footer a:focus-visible {
+      outline-color: var(--cream);
+    }
+
+    .response-panel {
+      margin-top: 24px;
+      padding: 24px 16px;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: var(--soft-navy);
+      animation: panel-in 240ms ease-out both;
+    }
+
+    @keyframes panel-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .thank-you {
+      max-width: 38ch;
+      margin: 10px auto 20px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .button {
+      width: 100%;
+      min-height: 56px;
+      padding: 14px 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--orange);
+      border-radius: 14px;
+      background: var(--orange);
+      color: var(--charcoal);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(232, 122, 46, 0.24);
+      transition: filter 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .button:hover {
+      filter: brightness(0.94);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 26px rgba(232, 122, 46, 0.29);
+    }
+
+    .button:active {
+      transform: translateY(1px) scale(0.99);
+      box-shadow: 0 6px 14px rgba(232, 122, 46, 0.22);
+    }
+
+    form {
+      margin-top: 24px;
+      text-align: left;
+    }
+
+    .field {
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.005em;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      min-height: 52px;
+      padding: 12px 14px;
+      border: 1px solid rgba(27, 42, 74, 0.55);
+      border-radius: 12px;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 17px;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    textarea {
+      min-height: 124px;
+      resize: vertical;
+    }
+
+    input:hover,
+    textarea:hover {
+      border-color: rgba(27, 42, 74, 0.75);
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 4px rgba(232, 122, 46, 0.12);
+    }
+
+    .w-form-done,
+    .w-form-fail {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: left;
+    }
+
+    .w-form-done {
+      background: var(--navy);
+      color: var(--cream);
+    }
+
+    .w-form-fail {
+      border: 2px solid var(--orange);
+      background: var(--soft-orange);
+      color: var(--charcoal);
+    }
+
+    .w-form-fail a {
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .public-review-link {
+      max-width: 42ch;
+      margin: 20px auto 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .public-review-link a {
+      color: var(--navy);
+      font-weight: 700;
+      text-underline-offset: 3px;
+    }
+
+    .site-footer {
+      padding: 16px;
+      background: var(--charcoal);
+      color: var(--cream);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .site-footer p {
+      margin: 0;
+    }
+
+    .site-footer a {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      color: var(--orange);
+      font-weight: 800;
+      text-underline-offset: 3px;
+    }
+
+    @media (min-width: 560px) {
+      .header-inner {
+        min-height: 92px;
+      }
+
+      .logo {
+        width: 116px;
+      }
+
+      main {
+        padding: 48px 24px 56px;
+      }
+
+      .rating-card {
+        padding: 48px 48px 28px;
+        border-radius: 30px;
+      }
+
+      h1 {
+        font-size: 52px;
+      }
+
+      .intro {
+        margin-bottom: 28px;
+        font-size: 18px;
+      }
+
+      .stars {
+        padding: 6px;
+        gap: 5px;
+      }
+
+      .star-button {
+        min-height: 66px;
+      }
+
+      .star-button svg {
+        width: 44px;
+      }
+
+      .response-panel {
+        margin-top: 30px;
+        padding: 30px;
+      }
+
+      .button {
+        width: auto;
+        min-width: 260px;
+      }
+    }
+
+    @media (max-height: 700px) and (min-width: 560px) {
+      main {
+        padding-top: 28px;
+        padding-bottom: 34px;
+      }
+
+      .rating-card {
+        padding-top: 38px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+<link href="/assets/css/bwm-interaction-floor.css?v=1" rel="stylesheet"/></head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo-link" href="/" aria-label="ASAP Pest and Wildlife Removal home">
+        <img class="logo" src="/assets/images/logos/logo-orange-tagline.png" alt="ASAP Pest &amp; Wildlife Removal">
+      </a>
+      <a class="header-phone" href="tel:7704501744">(770) 450-1744</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="rating-card" aria-labelledby="page-title">
+      <p id="preview-notice" class="preview-notice" hidden>Review demo · nothing is sent from this page.</p>
+      <h1 id="page-title">How did we do?</h1>
+      <p class="intro">Tap a star to rate your visit.</p>
+
+      <div class="stars" role="group" aria-label="Choose a rating from 1 to 5 stars">
+        <button class="star-button" type="button" data-rating="1" aria-label="1 star" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m12 1.9 3.1 6.28 6.93 1.01-5.01 4.88 1.18 6.9L12 17.71l-6.2 3.26 1.18-6.9-5.01-4.88L8.9 8.18 12 1.9Z"/></svg>
+        </button>
+        <button class="star-button" type="button" data-rating="2" aria-label="2 stars" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m12 1.9 3.1 6.28 6.93 1.01-5.01 4.88 1.18 6.9L12 17.71l-6.2 3.26 1.18-6.9-5.01-4.88L8.9 8.18 12 1.9Z"/></svg>
+        </button>
+        <button class="star-button" type="button" data-rating="3" aria-label="3 stars" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m12 1.9 3.1 6.28 6.93 1.01-5.01 4.88 1.18 6.9L12 17.71l-6.2 3.26 1.18-6.9-5.01-4.88L8.9 8.18 12 1.9Z"/></svg>
+        </button>
+        <button class="star-button" type="button" data-rating="4" aria-label="4 stars" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m12 1.9 3.1 6.28 6.93 1.01-5.01 4.88 1.18 6.9L12 17.71l-6.2 3.26 1.18-6.9-5.01-4.88L8.9 8.18 12 1.9Z"/></svg>
+        </button>
+        <button class="star-button" type="button" data-rating="5" aria-label="5 stars" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m12 1.9 3.1 6.28 6.93 1.01-5.01 4.88 1.18 6.9L12 17.71l-6.2 3.26 1.18-6.9-5.01-4.88L8.9 8.18 12 1.9Z"/></svg>
+        </button>
+      </div>
+
+      <div id="five-star-panel" class="response-panel" hidden>
+        <h2 tabindex="-1">Thank you!</h2>
+        <p class="thank-you">Taking you to Google now…</p>
+        <a id="preview-google-button" class="button" href="https://search.google.com/local/writereview?placeid=ChIJV-ndmxkd9YgRcgzlBLBNemc" target="_blank" rel="noopener" hidden>Open Google review composer</a>
+      </div>
+
+      <div id="follow-up-panel" class="response-panel" hidden>
+        <h2 tabindex="-1">We want to make it right</h2>
+        <p class="thank-you">Your note goes directly to Nehemiah so he can follow up with you.</p>
+
+        <div class="w-form">
+          <form data-no-bwm-lead-flow data-bwm-source-form-type="rating-followup" novalidate>
+            <div class="field">
+              <label for="rating-name">Name</label>
+              <input id="rating-name" type="text" name="name" autocomplete="name">
+            </div>
+
+            <div class="field">
+              <label for="rating-phone">Best number to call you back</label>
+              <input id="rating-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" required>
+            </div>
+
+            <div class="field">
+              <label for="rating-message">How could we have made your experience five stars?</label>
+              <textarea id="rating-message" name="feedback" required></textarea>
+            </div>
+
+            <input id="rating-value" type="hidden" name="rating" value="">
+            <input type="text" name="website" value="" autocomplete="off" tabindex="-1" aria-hidden="true" style="display:none">
+            <button class="button" type="submit">Send my note</button>
+          </form>
+
+          <div class="w-form-done" role="status" aria-live="polite" tabindex="-1" style="display:none">Thank you. Your note was sent directly to Nehemiah. He will follow up with you.</div>
+          <div class="w-form-fail" role="alert" aria-live="assertive" style="display:none">We could not send your note. Please use the link from your text or email, or call <a href="tel:7704501744">(770) 450-1744</a>.</div>
+        </div>
+
+        <p class="public-review-link">You can also <a href="https://search.google.com/local/writereview?placeid=ChIJV-ndmxkd9YgRcgzlBLBNemc">share your experience publicly on Google</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Need help? Call <a href="tel:7704501744">(770) 450-1744</a>.</p>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var reviewUrl = "https://search.google.com/local/writereview?placeid=ChIJV-ndmxkd9YgRcgzlBLBNemc";
+      var responseEndpoint = "https://bwm-form-handler.robert-ba0.workers.dev/asap/review-response";
+      var params = new URLSearchParams(window.location.search);
+      var score = Number(params.get("score"));
+      var requestId = params.get("request_id") || params.get("r") || "";
+      var sourceLabel = params.get("label") || "";
+      var previewMode = params.get("preview") === "1";
+
+      if (!previewMode && score >= 5 && params.get("go") === "1") {
+        window.location.replace(reviewUrl);
+        return;
+      }
+
+      var buttons = Array.prototype.slice.call(document.querySelectorAll(".star-button"));
+      var fiveStarPanel = document.getElementById("five-star-panel");
+      var followUpPanel = document.getElementById("follow-up-panel");
+      var ratingInput = document.getElementById("rating-value");
+      var feedbackForm = followUpPanel.querySelector("form");
+      var doneMessage = followUpPanel.querySelector(".w-form-done");
+      var failMessage = followUpPanel.querySelector(".w-form-fail");
+      var previewNotice = document.getElementById("preview-notice");
+      var previewGoogleButton = document.getElementById("preview-google-button");
+
+      if (previewMode) {
+        previewNotice.hidden = false;
+        previewGoogleButton.hidden = false;
+      }
+
+      function browserSubmissionId() {
+        var key = "asap-review-submission-id";
+        try {
+          var existing = window.sessionStorage.getItem(key);
+          if (existing) return existing;
+          var next = window.crypto && typeof window.crypto.randomUUID === "function"
+            ? window.crypto.randomUUID()
+            : "review-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+          window.sessionStorage.setItem(key, next);
+          return next;
+        } catch (_) {
+          return "review-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+        }
+      }
+
+      function responsePayload(rating, action, feedback) {
+        return {
+          request_id: requestId,
+          rating: rating,
+          action: action,
+          feedback: feedback || "",
+          name: feedbackForm.elements.name.value,
+          phone: feedbackForm.elements.phone.value,
+          website: feedbackForm.elements.website.value,
+          label: sourceLabel,
+          page_url: window.location.origin + window.location.pathname,
+          submission_id: browserSubmissionId()
+        };
+      }
+
+      function recordGoogleHandoff() {
+        if (!requestId) return;
+        try {
+          fetch(responseEndpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(responsePayload(5, "google_redirect", "")),
+            keepalive: true
+          }).catch(function () {});
+        } catch (_) {}
+      }
+
+      function selectRating(rating, moveFocus) {
+        buttons.forEach(function (button) {
+          var buttonRating = Number(button.getAttribute("data-rating"));
+          var selected = buttonRating <= rating;
+          button.classList.toggle("is-active", selected);
+          button.setAttribute("aria-pressed", buttonRating === rating ? "true" : "false");
+        });
+
+        ratingInput.value = String(rating);
+        fiveStarPanel.hidden = rating !== 5;
+        followUpPanel.hidden = rating === 5;
+
+        if (moveFocus) {
+          var heading = rating === 5 ? fiveStarPanel.querySelector("h2") : followUpPanel.querySelector("h2");
+          heading.focus({ preventScroll: true });
+          heading.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          var rating = Number(button.getAttribute("data-rating"));
+          selectRating(rating, true);
+          if (rating === 5) {
+            if (previewMode) {
+              fiveStarPanel.querySelector(".thank-you").textContent = "The live page takes the customer straight to your Google review composer.";
+              return;
+            }
+            recordGoogleHandoff();
+            window.location.assign(reviewUrl);
+          }
+        });
+      });
+
+      feedbackForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        doneMessage.style.display = "none";
+        failMessage.style.display = "none";
+
+        if (previewMode) {
+          if (!feedbackForm.reportValidity()) return;
+          feedbackForm.style.display = "none";
+          doneMessage.textContent = "Preview only. On the live flow, this note goes directly to Nehemiah.";
+          doneMessage.style.display = "block";
+          doneMessage.focus();
+          return;
+        }
+
+        if (!feedbackForm.reportValidity() || !requestId) {
+          if (!requestId) failMessage.style.display = "block";
+          return;
+        }
+
+        var submitButton = feedbackForm.querySelector('[type="submit"]');
+        submitButton.disabled = true;
+
+        try {
+          var response = await fetch(responseEndpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(responsePayload(Number(ratingInput.value), "private_feedback", feedbackForm.elements.feedback.value))
+          });
+          var result = {};
+          try { result = await response.json(); } catch (_) {}
+          if (!response.ok || !result.ok) throw new Error("Review response failed");
+          feedbackForm.style.display = "none";
+          doneMessage.style.display = "block";
+          doneMessage.focus();
+        } catch (_) {
+          failMessage.style.display = "block";
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+
+      if (Number.isFinite(score) && score >= 1) {
+        selectRating(Math.min(5, Math.floor(score)), false);
+      }
+    })();
+  </script>
+</body>
+</html>

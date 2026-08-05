@@ -1,113 +1,93 @@
 /**
- * Phone Click & Email Click Tracking Tests
- * Verifies that phone_click and email_click events fire correctly to dataLayer and gtag
+ * Node smoke tests for the delegated phone_click + email_click tracker.
+ * Loads the production script into a minimal browser-like harness so the
+ * assertions exercise the shipped implementation, not a duplicate fixture.
  */
+const fs = require('node:fs');
+const vm = require('node:vm');
 
-// Mock setup
-const mockDataLayer = [];
-const mockGtagCalls = [];
+const listeners = {};
+global.window = global;
+global.location = {
+  href: 'https://www.removeasap.com/services/',
+  hostname: 'www.removeasap.com',
+  pathname: '/services/',
+  protocol: 'https:',
+  search: ''
+};
+global.document = {
+  cookie: '',
+  referrer: 'https://www.google.com/',
+  querySelectorAll: () => [],
+  getElementById: () => null,
+  addEventListener: (name, listener) => { listeners[name] = listener; }
+};
+global.__BWM_CAPI_V2 = { enabled: false };
 
-function setupMocks() {
-  window.dataLayer = mockDataLayer;
-  window.gtag = function() {
-    mockGtagCalls.push(Array.from(arguments));
-  };
-  window.__bwmLoadAnalytics = function() {};
-}
+vm.runInThisContext(fs.readFileSync(require.resolve('./attribution.js'), 'utf8'), {
+  filename: 'attribution.js'
+});
 
-function cleanupMocks() {
-  mockDataLayer.length = 0;
-  mockGtagCalls.length = 0;
-  delete window.dataLayer;
-  delete window.gtag;
-  delete window.__bwmLoadAnalytics;
-}
+let passed = 0;
+let failed = 0;
 
 function test(name, fn) {
   try {
     fn();
     console.log('✓ ' + name);
-    return true;
-  } catch (e) {
+    passed += 1;
+  } catch (error) {
     console.error('✗ ' + name);
-    console.error('  ' + e.message);
-    return false;
+    console.error('  ' + error.message);
+    failed += 1;
   }
 }
 
 function assert(condition, message) {
-  if (!condition) {
-    throw new Error(message || 'Assertion failed');
-  }
+  if (!condition) throw new Error(message || 'Assertion failed');
 }
 
-// Test: phone_click event includes required fields
-test('phone_click event includes required fields', function() {
-  setupMocks();
+function click(href) {
+  const anchor = {
+    getAttribute: (name) => name === 'href' ? href : null,
+    closest: (selector) => selector === 'a[href]' ? anchor : null
+  };
+  listeners.click({ target: anchor });
+}
 
-  const link = document.createElement('a');
-  link.href = 'tel:7706913636';
-  document.body.appendChild(link);
+function reset() {
+  window.dataLayer = [];
+  window.gtagCalls = [];
+  window.gtag = function () { window.gtagCalls.push(Array.from(arguments)); };
+}
 
-  const event = new MouseEvent('click', { bubbles: true, cancelable: true });
-  link.dispatchEvent(event);
-
-  const phoneClickEvent = mockDataLayer.find(e => e && e.event === 'phone_click');
-  assert(phoneClickEvent, 'phone_click event should be in dataLayer');
-  assert(phoneClickEvent.phone_number_redacted === '3636', 'phone_number_redacted should be last 4 digits');
-  assert(phoneClickEvent.page_path !== undefined, 'page_path should be present');
-  assert(phoneClickEvent.page_referrer !== undefined, 'page_referrer should be present');
-
-  document.body.removeChild(link);
-  cleanupMocks();
+test('phone_click event includes privacy-safe required fields', function () {
+  reset();
+  click('tel:7704501744');
+  const event = window.dataLayer.find((entry) => entry.event === 'phone_click');
+  assert(event, 'phone_click event should be in dataLayer');
+  assert(event.phone_number_redacted === '1744', 'only the last four digits should be stored');
+  assert(event.page_path === '/services/', 'page_path should be present');
+  assert(event.page_referrer === 'https://www.google.com/', 'page_referrer should be present');
+  assert(window.gtagCalls[0][0] === 'event' && window.gtagCalls[0][1] === 'phone_click');
 });
 
-// Test: email_click event structure
-test('email_click event includes required fields', function() {
-  setupMocks();
-
-  const link = document.createElement('a');
-  link.href = 'mailto:info@removeasap.com';
-  document.body.appendChild(link);
-
-  const event = new MouseEvent('click', { bubbles: true, cancelable: true });
-  link.dispatchEvent(event);
-
-  const emailClickEvent = mockDataLayer.find(e => e && e.event === 'email_click');
-  assert(emailClickEvent, 'email_click event should be in dataLayer');
-  assert(emailClickEvent.email_domain === 'removeasap.com', 'email_domain should extract domain');
-  assert(emailClickEvent.page_path !== undefined, 'page_path should be present');
-
-  document.body.removeChild(link);
-  cleanupMocks();
+test('email_click event includes domain and required fields', function () {
+  reset();
+  click('mailto:info@removeasap.com?subject=Question');
+  const event = window.dataLayer.find((entry) => entry.event === 'email_click');
+  assert(event, 'email_click event should be in dataLayer');
+  assert(event.email_domain === 'removeasap.com', 'email domain should be extracted');
+  assert(event.page_path === '/services/', 'page_path should be present');
+  assert(window.gtagCalls[0][0] === 'event' && window.gtagCalls[0][1] === 'email_click');
 });
 
-// Test: phone number redaction
-test('phone number is properly redacted', function() {
-  const testCases = [
-    { input: 'tel:7706913636', expected: '3636' },
-    { input: 'tel:+1-770-691-3636', expected: '3636' }
-  ];
-
-  testCases.forEach(function(testCase) {
-    const digits = String(testCase.input).replace(/\D/g, '');
-    const redacted = digits.length >= 4 ? digits.slice(-4) : '';
-    assert(redacted === testCase.expected, 'Redaction failed for ' + testCase.input);
-  });
+test('unrelated links do not create conversion events', function () {
+  reset();
+  click('/contact/');
+  assert(window.dataLayer.length === 0, 'ordinary links should not emit phone or email events');
+  assert(window.gtagCalls.length === 0, 'ordinary links should not call gtag');
 });
 
-// Test: email domain extraction
-test('email domain is properly extracted', function() {
-  const testCases = [
-    { input: 'mailto:info@removeasap.com', expected: 'removeasap.com' }
-  ];
-
-  testCases.forEach(function(testCase) {
-    const addr = String(testCase.input).replace(/^mailto:/i, '').split(/[?#]/)[0];
-    const at = addr.indexOf('@');
-    const domain = at >= 0 ? addr.slice(at + 1).toLowerCase() : '';
-    assert(domain === testCase.expected, 'Domain extraction failed');
-  });
-});
-
-console.log('=== Phone Click & Email Click Tracking Tests ===');
+console.log(`=== Attribution tracking: ${passed} passed, ${failed} failed ===`);
+if (failed) process.exitCode = 1;
