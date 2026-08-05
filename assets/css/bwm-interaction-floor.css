@@ -1,0 +1,9 @@
+/* Sitewide mobile interaction floor for legacy Webflow text links. */
+@media (max-width: 767px) {
+  a[href^="tel:"],
+  a[href^="mailto:"] {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+  }
+}
