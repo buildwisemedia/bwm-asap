@@ -89,7 +89,7 @@ const pages = [
     eyebrow: 'Gray and flying squirrel control',
     h1: 'Squirrel Removal in Atlanta, GA',
     lede: 'Scratching and fast movement above the ceiling often begin with a small roofline opening. ASAP Pest & Wildlife Removal helps Metro Atlanta property owners identify squirrel activity, choose the right removal approach, and address the access points behind the problem.',
-    image: '/assets/images/animals/squirrel-optimized.webp',
+    image: '/assets/images/wildlife-grid/gray-squirrel-optimized.webp',
     imageAlt: 'Squirrel illustration for ASAP squirrel removal services',
     signsIntro: 'Gray squirrels are usually active by day; flying squirrels are more often heard at night. An inspection separates squirrel evidence from rat, mouse, bird, and raccoon activity.',
     signs: [
