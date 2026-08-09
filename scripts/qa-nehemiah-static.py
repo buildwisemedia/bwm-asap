@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CURRENT_PHONE = "7706913636"
-OLD_PHONE = "7706913636"
+OLD_PHONE = "7704501744"
 CURRENT_GA4 = "G-GQZJKG5JCK"
 OLD_GA4 = "G-8M705Z89TE"
 OBSOLETE_EMAIL = "info@wildliferemovalasap.com"
