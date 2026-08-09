@@ -35,6 +35,14 @@
 
 - Reconciled the site against the Brain source of truth: the current number is
   `(770) 450-1744`; `(770) 691-3636` was retired on 2026-01-22.
+  **RETRACTED 2026-08-08 — this was wrong.** `(770) 691-3636` is ASAP's real,
+  in-service number, confirmed by Robert after Nehemiah flagged it. `(770)
+  450-1744` was never client-confirmed: it entered `site-config.json` on
+  2026-04-05 from a third-party directory scrape (Facebook / HomeAdvisor /
+  Yelp / Georgia Business Journal) and the unverified `phone_changed:
+  2026-01-22` field was then treated as canonical. The client's own live
+  Webflow site carried `691-3636` throughout, which should have been the
+  tiebreaker.
 - Updated every public phone link, visible phone string, structured-data phone,
   static inventory reference, and page-generation helper in the release branch.
 - Ported the mobile hero tap-target fix onto the current production baseline,
@@ -139,3 +147,20 @@ Verified locally (iframe harness, fetch/XHR instrumented): every page class = ex
 - Migrated the affected client asset locks to those approved WebP derivatives and retained original-asset provenance in the markup; all 1,086 perceptual locks pass.
 - Removed the stale same-origin tracking request that produced repeated 404s. Canonical BWM analytics and attribution remain in place.
 - Scope is isolated in `codex/asap-performance-2026-07-15` for full-page verification before release.
+
+## 2026-08-08 - Phone correction to (770) 691-3636
+
+- Nehemiah reported the wrong phone number on the site. Robert confirmed the
+  correct number is **(770) 691-3636**.
+- Reverted the 2026-08-05 `d5cddf6` sitewide phone change. Replaced every
+  `450-1744` variant with `691-3636` across 50 files: all public pages, `tel:`
+  links, JSON-LD `telephone`, meta descriptions, `SITE-INVENTORY.md`, the
+  attribution test fixture, and the page-generation helpers
+  (`scripts/build-nehemiah-animal-preview.mjs`, `scripts/qa-nehemiah-static.py`,
+  `tools/asap-lead-flow-qa.mjs`, `tools/vendor-performance-assets.mjs`) so a
+  regenerate cannot restore the wrong number.
+- Also corrected the upstream records that caused the regression:
+  `bwm-connector-audit/clients.yaml` `canonical_phone` and Brain
+  `clients/asap-pest-wildlife/site-config.json` `businessInfo.phone`.
+- Provenance of the original error and the self-approved promote that shipped
+  it are recorded in the Brain client folder.

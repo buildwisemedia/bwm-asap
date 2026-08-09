@@ -26,7 +26,7 @@ const metaPixelFallback =
   'src="https://www.facebook.com/tr?id=26350078141329630&ev=PageView&noscript=1"/></noscript>';
 const legalLinks =
   '<div data-bwm-legal-links class="background---navy small-text text-color---cream text-align---center" ' +
-  'style="padding:12px"><a href="tel:7704501744" class="text-color---cream">Call (770) 450-1744</a> ' +
+  'style="padding:12px"><a href="tel:7706913636" class="text-color---cream">Call (770) 691-3636</a> ' +
   '<span aria-hidden="true">·</span> <a href="/privacy-policy/" class="text-color---cream">Privacy Policy</a> ' +
   '<span aria-hidden="true">·</span> <a href="/terms-of-service/" class="text-color---cream">' +
   'Terms of Service</a></div>';

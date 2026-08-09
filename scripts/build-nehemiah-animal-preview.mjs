@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const phoneHref = '7704501744';
-const phoneLabel = '(770) 450-1744';
+const phoneHref = '7706913636';
+const phoneLabel = '(770) 691-3636';
 
 const pages = [
   {
@@ -266,7 +266,7 @@ for (const page of pages) {
     '@type': 'FAQPage',
     mainEntity: page.faqs.map(([question, answer]) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })),
   })}</script>`);
-  html = html.replaceAll('7706913636', phoneHref).replaceAll('770-691-3636', '770-450-1744').replaceAll('770 - 691 - 3636', '770 - 450 - 1744').replaceAll('(770) 691-3636', phoneLabel);
+  html = html.replaceAll('7706913636', phoneHref).replaceAll('770-691-3636', '770-691-3636').replaceAll('770 - 691 - 3636', '770 - 691 - 3636').replaceAll('(770) 691-3636', phoneLabel);
   html = addFormLabels(html);
   if (!html.includes('/assets/js/dev-preview-guard.js')) {
     html = html.replace('</body>', '<script defer src="/assets/js/dev-preview-guard.js"></script></body>');

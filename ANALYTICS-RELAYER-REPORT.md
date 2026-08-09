@@ -2,7 +2,7 @@
 
 > Superseded configuration note — 2026-08-05: the current-domain GA4 stream is
 > `G-GQZJKG5JCK`, the BWM-owned Clarity project is `whpri6g1yi`, and the
-> canonical public phone is `(770) 450-1744`. The older identifiers below
+> canonical public phone is `(770) 691-3636`. The older identifiers below
 > describe the original relayer branch and are not the release configuration.
 
 Branch: `analytics-relayer`

@@ -63,7 +63,7 @@ function reset() {
 
 test('phone_click event includes privacy-safe required fields', function () {
   reset();
-  click('tel:7704501744');
+  click('tel:7706913636');
   const event = window.dataLayer.find((entry) => entry.event === 'phone_click');
   assert(event, 'phone_click event should be in dataLayer');
   assert(event.phone_number_redacted === '1744', 'only the last four digits should be stored');
