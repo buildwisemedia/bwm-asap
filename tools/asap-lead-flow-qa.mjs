@@ -77,7 +77,9 @@ const report = {
 for (const file of htmlFiles) {
   const fileRel = rel(file);
   const text = fs.readFileSync(file, 'utf8');
-  const isPublicFormPage = text.includes('<form') && !publicFormSkip.has(fileRel);
+  const formTags = [...text.matchAll(/<form\b[^>]*>/gi)].map((match) => match[0]);
+  const includedFormTags = formTags.filter((tag) => !/\bdata-no-bwm-lead-flow(?:\s|=|>)/i.test(tag));
+  const isPublicFormPage = includedFormTags.length > 0 && !publicFormSkip.has(fileRel);
 
   if (isPublicFormPage) {
     const formTypes = new Set();
@@ -87,7 +89,7 @@ for (const file of htmlFiles) {
     const formTypeList = [...formTypes].sort();
     report.forms.push({
       file: fileRel,
-      form_count: (text.match(/<form\b/g) || []).length,
+      form_count: includedFormTags.length,
       form_types: formTypeList,
       has_lead_flow_script: text.includes('/assets/js/asap-lead-flow.js'),
       has_attribution: text.includes('/attribution.js'),

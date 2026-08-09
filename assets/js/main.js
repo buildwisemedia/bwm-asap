@@ -36,6 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // ============================================
   const form = document.getElementById('contact-form');
   if (form) {
+    // This legacy form id is not present on the current Webflow pages, but if
+    // reintroduced it remains a single submission producer and routes all GA4
+    // acceptance through the shared source_submission_id dedup helper.
+    form.__bwmBound = true;
+    form.setAttribute('data-bwm-source-form-type', 'contact');
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       const successEl = document.getElementById('form-success');
@@ -68,20 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var result = {};
         try { result = await response.json(); } catch (_) {}
 
-        if (response.ok) {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ event: 'lead_form_submit', client_slug: 'asap-pest-wildlife', formType: 'contact' });
-          if (typeof window.gtag === 'function') {
-            try { window.gtag('event', 'generate_lead', { event_category: 'lead', event_label: 'contact_form' }); } catch (_) {}
-          }
-          if (typeof window.__bwmLoadAnalytics === 'function') {
-            try { window.__bwmLoadAnalytics(); } catch (_) {}
-          }
-          if (typeof window.fbq === 'function') {
-            try {
-              var pixelOptions = result.capi_event_id ? { eventID: result.capi_event_id } : undefined;
-              window.fbq('track', 'Lead', { content_name: 'contact_form', client_slug: 'asap-pest-wildlife' }, pixelOptions);
-            } catch (_) {}
+        if (response.ok && result.ok === true && result.filtered !== true) {
+          if (typeof window.__asapGa4LeadAccepted === 'function') {
+            window.__asapGa4LeadAccepted(form, result, 'contact');
           }
           successEl.classList.remove('hidden');
           form.reset();

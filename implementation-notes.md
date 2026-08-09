@@ -108,3 +108,11 @@ Verified locally (iframe harness, fetch/XHR instrumented): every page class = ex
 - Migrated the affected client asset locks to those approved WebP derivatives and retained original-asset provenance in the markup; all 1,086 perceptual locks pass.
 - Removed the stale same-origin tracking request that produced repeated 404s. Canonical BWM analytics and attribution remain in place.
 - Scope is isolated in `codex/asap-performance-2026-07-15` for full-page verification before release.
+
+## 2026-08-09 — ASAP GA4 hardening Phase 2 candidate
+
+- Worktree base: `16fdc9083edd7158567eeab04b14c17ca9d82a92`; branch `codex/asap-ga4-phase2-site-20260809`; local build only, not deployed.
+- A new hash-bound preflight-v4 packet for `website:ga4-hardening` passed before tracked source edits; marker SHA-256 `22934bdb5b6cd039b3c2e97482245c149db50c5df1610df1f30094fb012544f3`.
+- Added trusted-only `form_start`, accepted-response `generate_lead`, strict source-ID deduplication, privacy-safe common fields, labeled browser canaries, and a single direct GA4 producer. Existing Meta Lead dedup remains active through the same accepted-response helper.
+- Routed 30 inline form handlers and the dormant `main.js` form path through the helper; corrected the stale phone test; excluded `/rate` from lead QA by its existing marker without changing `rate/index.html` (SHA-256 `b55988dc441205f591f5b7b8b7e090ae9a571fadcf39676491dea4e1140a067b`).
+- Local QA: GA4 form events 7/7; attribution 3/3; lead-flow 33 included form pages, 0 handler/attribution/type/phone/link defects.

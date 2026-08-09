@@ -266,8 +266,8 @@
  * Listens for clicks on tel: and mailto: anchors anywhere in the document
  * via a single delegated handler on document (capture phase). Fires GA4
  * events `phone_click` / `email_click` with privacy-redacted payloads:
- *   phone_click → { phone_number_redacted: "<last 4 digits>", page_path, page_referrer }
- *   email_click → { email_domain: "<provider>", page_path, page_referrer }
+ *   phone_click → canonical ASAP GA4 fields + last-four phone digits
+ *   email_click → origin/path context + email domain (existing non-lead event)
  *
  * Additive: does NOT preventDefault, so the browser's native tel:/mailto:
  * handler still runs and any pre-existing generic `click` listeners
@@ -278,6 +278,27 @@
  */
 (function () {
   'use strict';
+
+  var EVENT_SCHEMA_VERSION = 'asap_ga4_1';
+  var CANARY_ID_RE = /^ASAP-GA4-CANARY-\d{8}T\d{6}[+-]\d{4}-[A-Z0-9]{4}$/;
+
+  function randomId() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+      return window.crypto.randomUUID();
+    }
+    return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+  }
+
+  function canaryId() {
+    var value = '';
+    try { value = new URLSearchParams(location.search).get('bwm_ga4_canary') || ''; } catch (_) {}
+    return CANARY_ID_RE.test(value) ? value : '';
+  }
+
+  function referrerOrigin() {
+    if (!document.referrer) return '';
+    try { return new URL(document.referrer).origin; } catch (_) { return ''; }
+  }
 
   function redactPhone(href) {
     var digits = String(href || '').replace(/\D/g, '');
@@ -291,10 +312,16 @@
   }
 
   function fireClickEvent(eventName, params) {
+    var canary = canaryId();
     var payload = {
+      event_schema_version: EVENT_SCHEMA_VERSION,
+      event_id: randomId(),
+      traffic_class: canary ? 'bwm_canary' : 'production',
+      source_surface: 'website',
       page_path: location.pathname,
-      page_referrer: document.referrer || ''
+      page_referrer_origin: referrerOrigin()
     };
+    if (canary) payload.bwm_canary_id = canary;
     Object.keys(params || {}).forEach(function (k) { payload[k] = params[k]; });
 
     window.dataLayer = window.dataLayer || [];
