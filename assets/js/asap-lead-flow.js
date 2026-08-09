@@ -13,8 +13,33 @@
   var CLIENT_SLUG = 'asap-pest-wildlife';
   var EVENT_SCHEMA_VERSION = 'asap_ga4_1';
   var CANARY_ID_RE = /^ASAP-GA4-CANARY-\d{8}T\d{6}[+-]\d{4}-[A-Z0-9]{4}$/;
+  var UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+  var REFERRER_ORIGIN_RE = /^https?:\/\/[A-Za-z0-9.-]+(?::[0-9]{1,5})?$/;
+  var BRIDGE_STORAGE_KEY = 'bwm_asap_ga4_canary_bridge';
+  var BRIDGE_ENDPOINT = 'https://bwm-form-handler.robert-ba0.workers.dev/asap/ga4-canary/bridge';
+  var SAFE_PAGE_PATHS = {
+    '/': 1, '/about/': 1, '/blog/': 1, '/commercial-services/': 1,
+    '/contact/': 1, '/peace-of-mind-from/beavers/': 1,
+    '/peace-of-mind-from/bees-wasps-and-hornets/': 1,
+    '/peace-of-mind-from/rodents/': 1, '/pest-control-services/': 1,
+    '/privacy-policy/': 1, '/services/': 1, '/terms-of-service/': 1,
+    '/unknown': 1, '/warranty-assurance/': 1, '/wildlife/': 1,
+    '/wildlife/armadillo/': 1, '/wildlife/bats/': 1, '/wildlife/beaver/': 1,
+    '/wildlife/bees-wasp-hornets/': 1, '/wildlife/bird/': 1,
+    '/wildlife/coyote/': 1, '/wildlife/flying-squirrel/': 1,
+    '/wildlife/fox/': 1, '/wildlife/geese/': 1, '/wildlife/gopher/': 1,
+    '/wildlife/gray-squirrel/': 1, '/wildlife/mole/': 1,
+    '/wildlife/mouse-rat/': 1, '/wildlife/opossum/': 1,
+    '/wildlife/otters/': 1, '/wildlife/rabbit/': 1,
+    '/wildlife/raccoon/': 1, '/wildlife/snake/': 1,
+    '/wildlife/turtle/': 1, '/wildlife/vole/': 1,
+    '/wildlife/wild-hogs/': 1
+  };
   var formStates = typeof WeakMap === 'function' ? new WeakMap() : null;
   var acceptedSubmissionIds = {};
+  var validatedBridgeToken = '';
+  var bridgeIntent = false;
+  var bridgeCompleted = false;
 
   function randomId() {
     if (window.crypto && typeof window.crypto.randomUUID === 'function') {
@@ -23,16 +48,71 @@
     return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
   }
 
-  function canaryIdentity() {
-    var value = '';
-    try { value = new URLSearchParams(location.search).get('bwm_ga4_canary') || ''; } catch (_) {}
-    return CANARY_ID_RE.test(value) ? value : '';
+  function safePagePath(value) {
+    var path = String(value || '');
+    return SAFE_PAGE_PATHS[path] ? path : '/unknown';
+  }
+
+  function activeCanaryContext() {
+    var context = window.__asapGa4CanaryContext;
+    if (!context || context.traffic_class !== 'bwm_canary') return null;
+    if (!CANARY_ID_RE.test(String(context.bwm_canary_id || ''))) return null;
+    if (!UUID_RE.test(String(context.source_submission_id || ''))) return null;
+    return context;
   }
 
   function referrerOrigin() {
     if (!document.referrer) return '';
-    try { return new URL(document.referrer).origin; } catch (_) { return ''; }
+    try {
+      var origin = new URL(document.referrer).origin;
+      return REFERRER_ORIGIN_RE.test(origin) ? origin : '';
+    } catch (_) { return ''; }
   }
+
+  function initializeCanaryBridge() {
+    var token = '';
+    try { token = window.sessionStorage && window.sessionStorage.getItem(BRIDGE_STORAGE_KEY) || ''; } catch (_) {}
+    bridgeIntent = !!token;
+    window.__asapGa4CanaryIntent = bridgeIntent;
+    window.__asapGa4CanaryPending = !!token;
+    if (!token) {
+      window.__asapGa4CanaryReady = Promise.resolve(null);
+      return;
+    }
+    window.__asapGa4CanaryReady = fetch(BRIDGE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({ token: token })
+    }).then(function (response) {
+      if (!response.ok) throw new Error('invalid canary bridge');
+      return response.json();
+    }).then(function (result) {
+      if (!result || result.ok !== true || result.synthetic_canary !== true ||
+          result.traffic_class !== 'bwm_canary' ||
+          !CANARY_ID_RE.test(String(result.bwm_canary_id || '')) ||
+          !UUID_RE.test(String(result.source_submission_id || ''))) {
+        throw new Error('invalid canary bridge');
+      }
+      validatedBridgeToken = token;
+      window.__asapGa4CanaryContext = {
+        traffic_class: 'bwm_canary',
+        bwm_canary_id: result.bwm_canary_id,
+        source_submission_id: result.source_submission_id
+      };
+      return window.__asapGa4CanaryContext;
+    }).catch(function () {
+      validatedBridgeToken = '';
+      window.__asapGa4CanaryContext = null;
+      return null;
+    }).finally(function () {
+      try { window.sessionStorage.removeItem(BRIDGE_STORAGE_KEY); } catch (_) {}
+      window.__asapGa4CanaryPending = false;
+    });
+  }
+
+  initializeCanaryBridge();
 
   function normalizedFormKey(value) {
     var key = String(value || '').toLowerCase().replace(/[^a-z0-9_-]+/g, '_').slice(0, 64);
@@ -63,16 +143,19 @@
   }
 
   function commonEventFields() {
-    var canaryId = canaryIdentity();
+    var canary = activeCanaryContext();
     var common = {
       event_schema_version: EVENT_SCHEMA_VERSION,
-      event_id: randomId(),
-      traffic_class: canaryId ? 'bwm_canary' : 'production',
+      event_id: canary ? canary.source_submission_id : randomId(),
+      traffic_class: canary ? 'bwm_canary' : 'production',
       source_surface: 'website',
-      page_path: location.pathname || '/',
+      page_path: safePagePath(location.pathname),
       page_referrer_origin: referrerOrigin()
     };
-    if (canaryId) common.bwm_canary_id = canaryId;
+    if (canary) {
+      common.bwm_canary_id = canary.bwm_canary_id;
+      common.source_submission_id = canary.source_submission_id;
+    }
     return common;
   }
 
@@ -97,6 +180,11 @@
 
     function onFirstUserInteraction(event) {
       if (!event || event.isTrusted !== true) return;
+      if (bridgeIntent && window.__asapGa4CanaryPending) {
+        window.__asapGa4CanaryReady.then(function () { onFirstUserInteraction(event); });
+        return;
+      }
+      if (bridgeIntent && !activeCanaryContext()) return;
       var state = formState(form);
       if (state.started) return;
       state.started = true;
@@ -108,6 +196,24 @@
 
     form.addEventListener('input', onFirstUserInteraction);
     form.addEventListener('change', onFirstUserInteraction);
+
+    // A canary-intent page can never fall through to Webflow or an ordinary
+    // lead handler. The dedicated request below carries no customer fields.
+    form.addEventListener('submit', function (event) {
+      if (!bridgeIntent) return;
+      event.preventDefault();
+      if (typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+      if (bridgeCompleted || form.__asapGa4CanarySubmitPending) return;
+      if (window.__asapGa4CanaryPending) {
+        window.__asapGa4CanaryReady.then(function () {
+          if (activeCanaryContext()) form.__asapGa4CanarySubmitTask = submitCanaryForm(form);
+          else setVisible(closestFormWrap(form) && closestFormWrap(form).querySelector('.w-form-fail'), true);
+        });
+        return;
+      }
+      if (activeCanaryContext()) form.__asapGa4CanarySubmitTask = submitCanaryForm(form);
+      else setVisible(closestFormWrap(form) && closestFormWrap(form).querySelector('.w-form-fail'), true);
+    }, true);
 
     function ensureHidden(name, value) {
       var existing = form.querySelector('input[name="' + name + '"]');
@@ -122,10 +228,8 @@
       form.appendChild(input);
     }
 
-    ensureHidden('landing_page', location.pathname || '/');
+    ensureHidden('landing_page', safePagePath(location.pathname));
     ensureHidden('page_referrer_origin', referrerOrigin());
-    var canaryId = canaryIdentity();
-    if (canaryId) ensureHidden('bwm_ga4_canary_id', canaryId);
   }
 
   function serialize(form) {
@@ -147,12 +251,54 @@
     el.style.display = visible ? 'block' : 'none';
   }
 
+  async function submitCanaryForm(form) {
+    if (!validatedBridgeToken || !activeCanaryContext() || form.__asapGa4CanarySubmitPending || bridgeCompleted) return false;
+    form.__asapGa4CanarySubmitPending = true;
+    var wrap = closestFormWrap(form);
+    var done = wrap && wrap.querySelector('.w-form-done');
+    var fail = wrap && wrap.querySelector('.w-form-fail');
+    setVisible(done, false);
+    setVisible(fail, false);
+    try {
+      var response = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'omit',
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify({
+          client_slug: CLIENT_SLUG,
+          formType: 'contact',
+          asap_ga4_canary_bridge_token: validatedBridgeToken
+        })
+      });
+      var result = {};
+      try { result = await response.json(); } catch (_) {}
+      if (!response.ok || result.ok !== true || result.synthetic_canary !== true ||
+          !fireLeadEvents(form, result, form.getAttribute('data-bwm-source-form-type') || 'contact')) {
+        throw new Error('canary submit failed');
+      }
+      bridgeCompleted = true;
+      validatedBridgeToken = '';
+      window.__asapGa4CanaryContext = null;
+      setVisible(done, true);
+      return true;
+    } catch (_) {
+      setVisible(fail, true);
+      return false;
+    } finally {
+      form.__asapGa4CanarySubmitPending = false;
+    }
+  }
+
   function fireLeadEvents(form, result, sourceFormType) {
     var sourceSubmissionId = result && typeof result.source_submission_id === 'string'
       ? result.source_submission_id : '';
     var capiEventId = result && typeof result.capi_event_id === 'string'
       ? result.capi_event_id : '';
     if (!sourceSubmissionId || sourceSubmissionId !== capiEventId || acceptedSubmissionIds[sourceSubmissionId]) return false;
+    var canary = activeCanaryContext();
+    if (canary && (result.synthetic_canary !== true || sourceSubmissionId !== canary.source_submission_id)) return false;
+    if (!canary && result.synthetic_canary === true) return false;
     acceptedSubmissionIds[sourceSubmissionId] = true;
 
     var state = formState(form);
@@ -162,7 +308,7 @@
     fields.form_key = normalizedFormKey(sourceFormType || 'contact');
     directGa4Event('generate_lead', fields);
 
-    if (typeof window.fbq === 'function') {
+    if (result.synthetic_canary !== true && typeof window.fbq === 'function') {
       try {
         var options = result && result.capi_event_id ? { eventID: result.capi_event_id } : undefined;
         window.fbq('track', 'Lead', {

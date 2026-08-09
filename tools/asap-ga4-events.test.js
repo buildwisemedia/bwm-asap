@@ -9,32 +9,98 @@ function assert(condition, message) {
 function makeForm({ excluded = false } = {}) {
   const attrs = { 'data-bwm-source-form-type': 'contact-webflow-reference' };
   const listeners = {};
+  const listenerEntries = {};
   const hidden = {};
-  return {
+  const done = { style: {} };
+  const fail = { style: {} };
+  const form = {
     __bwmBound: true,
     elements: [],
     listeners,
+    listenerEntries,
     hidden,
+    parentElement: {
+      querySelector(selector) {
+        if (selector === '.w-form-done') return done;
+        if (selector === '.w-form-fail') return fail;
+        return null;
+      },
+    },
+    done,
+    fail,
     hasAttribute(name) { return name === 'data-no-bwm-lead-flow' ? excluded : Object.hasOwn(attrs, name); },
     getAttribute(name) { return attrs[name] || null; },
     setAttribute(name, value) { attrs[name] = value; },
-    addEventListener(name, listener) { listeners[name] = listener; },
+    addEventListener(name, listener, options) {
+      if (!listeners[name]) listeners[name] = listener;
+      if (!listenerEntries[name]) listenerEntries[name] = [];
+      listenerEntries[name].push({ listener, capture: options === true || !!(options && options.capture) });
+    },
+    dispatch(name, event = {}) {
+      let stopped = false;
+      event.preventDefault = event.preventDefault || function () { event.defaultPrevented = true; };
+      event.stopImmediatePropagation = event.stopImmediatePropagation || function () { stopped = true; };
+      const ordered = (listenerEntries[name] || []).slice().sort((a, b) => Number(b.capture) - Number(a.capture));
+      for (const entry of ordered) {
+        entry.listener(event);
+        if (stopped) break;
+      }
+      return event;
+    },
     querySelector(selector) {
       const hiddenMatch = selector.match(/^input\[name="([^"]+)"\]$/);
       if (hiddenMatch) return hidden[hiddenMatch[1]] || null;
       return null;
     },
     appendChild(input) { hidden[input.name] = input; },
+    closest(selector) { return selector === '.w-form' ? form.parentElement : null; },
   };
+  return form;
 }
 
-function harness({ excluded = false, search = '' } = {}) {
+function harness({ excluded = false, search = '', pathname = '/contact/', bridgeToken = '', bridgeValid = true } = {}) {
   const form = makeForm({ excluded });
+  const fetchCalls = [];
+  const sourceId = '6e0f9394-607e-4273-b70b-07158b47c3ca';
+  const canaryId = 'ASAP-GA4-CANARY-20260809T170000-0400-A1B2';
   global.window = global;
   global.location = {
-    pathname: '/contact/',
+    pathname,
     search,
-    href: `https://removeasap.com/contact/${search}`,
+    href: `https://removeasap.com${pathname}${search}`,
+  };
+  const storage = new Map(bridgeToken ? [['bwm_asap_ga4_canary_bridge', bridgeToken]] : []);
+  global.sessionStorage = {
+    getItem: (key) => storage.get(key) || null,
+    removeItem: (key) => storage.delete(key),
+  };
+  global.__asapGa4CanaryContext = null;
+  global.__asapGa4CanaryIntent = false;
+  global.fetch = async (input, init = {}) => {
+    const url = String(input);
+    fetchCalls.push({ url, init, body: String(init.body || '') });
+    if (url.includes('/asap/ga4-canary/bridge')) {
+      if (!bridgeValid) return Response.json({ ok: false }, { status: 401 });
+      return Response.json({
+        ok: true,
+        synthetic_canary: true,
+        traffic_class: 'bwm_canary',
+        source_submission_id: sourceId,
+        bwm_canary_id: canaryId,
+      });
+    }
+    if (url.endsWith('/submit')) {
+      return Response.json({
+        ok: true,
+        test_mode: true,
+        synthetic_canary: true,
+        traffic_class: 'bwm_canary',
+        capi_event_id: sourceId,
+        source_submission_id: sourceId,
+        bwm_canary_id: canaryId,
+      });
+    }
+    throw new Error(`unexpected fetch ${url}`);
   };
   global.document = {
     readyState: 'complete',
@@ -52,22 +118,15 @@ function harness({ excluded = false, search = '' } = {}) {
   vm.runInThisContext(fs.readFileSync(require.resolve('../assets/js/asap-lead-flow.js'), 'utf8'), {
     filename: 'assets/js/asap-lead-flow.js',
   });
-  return { form };
+  return { form, fetchCalls, storage, sourceId, canaryId, ready: global.__asapGa4CanaryReady };
 }
 
 let passed = 0;
 let failed = 0;
 function test(name, fn) {
-  try {
-    fn();
-    console.log(`✓ ${name}`);
-    passed += 1;
-  } catch (error) {
-    console.error(`✗ ${name}`);
-    console.error(`  ${error.message}`);
-    failed += 1;
-  }
+  tests.push({ name, fn });
 }
+const tests = [];
 
 test('form_start requires the first trusted interaction and fires once per form instance', () => {
   const { form } = harness();
@@ -130,16 +189,73 @@ test('a successful submission rotates the ephemeral form instance for the next u
   assert(starts[1].form_instance_id !== first, 'form instance id must rotate after success');
 });
 
-test('validated canary identity is labeled and injected for the handler; ordinary IDs are ignored', () => {
+test('public query canary forgery is ignored and never becomes a hidden handler field', () => {
   const canary = 'ASAP-GA4-CANARY-20260809T170000-0400-A1B2';
   const { form } = harness({ search: `?bwm_ga4_canary=${canary}` });
   form.listeners.input({ isTrusted: true });
   const start = dataLayer.find((entry) => entry.event === 'form_start');
-  assert(start.traffic_class === 'bwm_canary');
-  assert(start.bwm_canary_id === canary);
-  assert(form.hidden.bwm_ga4_canary_id.value === canary, 'handler should receive the same label');
+  assert(start.traffic_class === 'production');
+  assert(!('bwm_canary_id' in start));
+  assert(!form.hidden.bwm_ga4_canary_id, 'public canary data must not create a hidden field');
   assert(form.hidden.landing_page.value === '/contact/', 'only pathname should be posted as landing page');
   assert(form.hidden.page_referrer_origin.value === 'https://www.google.com', 'only referrer origin should be posted');
+});
+
+test('validated bridge drives one isolated browser submit and a shared synthetic chain', async () => {
+  const token = 'server-signed-bridge-token';
+  const { form, fetchCalls, storage, sourceId, canaryId, ready } = harness({ bridgeToken: token });
+  await ready;
+  assert(!storage.has('bwm_asap_ga4_canary_bridge'), 'session token must be removed after validation');
+  form.listeners.input({ isTrusted: true });
+  const start = dataLayer.find((entry) => entry.event === 'form_start');
+  assert(start.event_id === sourceId && start.source_submission_id === sourceId, 'form_start must use server source id');
+  assert(start.bwm_canary_id === canaryId);
+
+  let legacyRuns = 0;
+  form.addEventListener('submit', () => { legacyRuns += 1; });
+  const event = form.dispatch('submit', { isTrusted: true });
+  await form.__asapGa4CanarySubmitTask;
+  assert(event.defaultPrevented === true, 'canary submit must prevent the native/Webflow path');
+  assert(legacyRuns === 0, 'legacy business submit handler must never run');
+  assert(fetchCalls.length === 2, 'one validation and one isolated submit are required');
+  const submit = fetchCalls.find((call) => call.url.endsWith('/submit'));
+  const posted = JSON.parse(submit.body);
+  assert(Object.keys(posted).sort().join(',') === 'asap_ga4_canary_bridge_token,client_slug,formType', 'isolated submit must contain only routing plus token');
+  assert(posted.asap_ga4_canary_bridge_token === token);
+  assert(submit.init.referrerPolicy === 'no-referrer' && submit.init.credentials === 'omit');
+  assert(!form.hidden.asap_ga4_canary_bridge_token, 'token must never become a hidden field');
+
+  const lead = dataLayer.find((entry) => entry.event === 'generate_lead');
+  assert(lead.event_id === sourceId && lead.source_submission_id === sourceId, 'generate_lead must reuse server source id');
+  assert(lead.form_instance_id === start.form_instance_id, 'browser form events must share form instance');
+  assert(!JSON.stringify(dataLayer).includes(token), 'token must not reach dataLayer');
+  assert(!JSON.stringify(gtagCalls).includes(token), 'token must not reach GA4');
+  assert(fbqCalls.length === 0, 'synthetic canary must not emit a Meta Lead');
+  assert(global.__asapGa4CanaryContext === null, 'validated identity must clear after accepted generate_lead');
+  assert(form.done.style.display === 'block', 'isolated canary success should be visible');
+});
+
+test('invalid bridge intent blocks the ordinary business path without a submit request', async () => {
+  const { form, fetchCalls, ready } = harness({ bridgeToken: 'invalid-token', bridgeValid: false });
+  await ready;
+  let legacyRuns = 0;
+  form.addEventListener('submit', () => { legacyRuns += 1; });
+  const event = form.dispatch('submit', { isTrusted: true });
+  await Promise.resolve();
+  assert(event.defaultPrevented === true, 'invalid canary intent must remain blocked');
+  assert(legacyRuns === 0, 'invalid canary must not fall through to legacy business submit');
+  assert(fetchCalls.length === 1 && fetchCalls[0].url.includes('/asap/ga4-canary/bridge'), 'only validation may be attempted');
+  assert(!dataLayer.some((entry) => entry.event === 'generate_lead'), 'invalid token must not emit a lead event');
+  assert(form.fail.style.display === 'block', 'invalid bridge should show failure');
+});
+
+test('unknown and PII-like browser paths collapse to the safe fallback', () => {
+  const { form } = harness({ pathname: '/jane@example.com' });
+  form.listeners.input({ isTrusted: true });
+  const start = dataLayer.find((entry) => entry.event === 'form_start');
+  assert(start.page_path === '/unknown');
+  assert(form.hidden.landing_page.value === '/unknown');
+  assert(!JSON.stringify(start).includes('jane@example.com'));
 });
 
 test('data-no-bwm-lead-flow excludes the private review surface', () => {
@@ -188,5 +304,18 @@ test('inline pages and main.js route accepted responses through the sole generat
   assert(directProducerCount === 1, 'shared lead flow must contain exactly one direct generate_lead producer');
 });
 
-console.log(`=== ASAP GA4 form events: ${passed} passed, ${failed} failed ===`);
-if (failed) process.exitCode = 1;
+(async function run() {
+  for (const { name, fn } of tests) {
+    try {
+      await fn();
+      console.log(`✓ ${name}`);
+      passed += 1;
+    } catch (error) {
+      console.error(`✗ ${name}`);
+      console.error(`  ${error.message}`);
+      failed += 1;
+    }
+  }
+  console.log(`=== ASAP GA4 form events: ${passed} passed, ${failed} failed ===`);
+  if (failed) process.exitCode = 1;
+})();

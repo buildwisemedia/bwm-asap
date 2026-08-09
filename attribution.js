@@ -281,6 +281,26 @@
 
   var EVENT_SCHEMA_VERSION = 'asap_ga4_1';
   var CANARY_ID_RE = /^ASAP-GA4-CANARY-\d{8}T\d{6}[+-]\d{4}-[A-Z0-9]{4}$/;
+  var UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+  var REFERRER_ORIGIN_RE = /^https?:\/\/[A-Za-z0-9.-]+(?::[0-9]{1,5})?$/;
+  var SAFE_PAGE_PATHS = {
+    '/': 1, '/about/': 1, '/blog/': 1, '/commercial-services/': 1,
+    '/contact/': 1, '/peace-of-mind-from/beavers/': 1,
+    '/peace-of-mind-from/bees-wasps-and-hornets/': 1,
+    '/peace-of-mind-from/rodents/': 1, '/pest-control-services/': 1,
+    '/privacy-policy/': 1, '/services/': 1, '/terms-of-service/': 1,
+    '/unknown': 1, '/warranty-assurance/': 1, '/wildlife/': 1,
+    '/wildlife/armadillo/': 1, '/wildlife/bats/': 1, '/wildlife/beaver/': 1,
+    '/wildlife/bees-wasp-hornets/': 1, '/wildlife/bird/': 1,
+    '/wildlife/coyote/': 1, '/wildlife/flying-squirrel/': 1,
+    '/wildlife/fox/': 1, '/wildlife/geese/': 1, '/wildlife/gopher/': 1,
+    '/wildlife/gray-squirrel/': 1, '/wildlife/mole/': 1,
+    '/wildlife/mouse-rat/': 1, '/wildlife/opossum/': 1,
+    '/wildlife/otters/': 1, '/wildlife/rabbit/': 1,
+    '/wildlife/raccoon/': 1, '/wildlife/snake/': 1,
+    '/wildlife/turtle/': 1, '/wildlife/vole/': 1,
+    '/wildlife/wild-hogs/': 1
+  };
 
   function randomId() {
     if (window.crypto && typeof window.crypto.randomUUID === 'function') {
@@ -289,15 +309,25 @@
     return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
   }
 
-  function canaryId() {
-    var value = '';
-    try { value = new URLSearchParams(location.search).get('bwm_ga4_canary') || ''; } catch (_) {}
-    return CANARY_ID_RE.test(value) ? value : '';
+  function safePagePath(value) {
+    var path = String(value || '');
+    return SAFE_PAGE_PATHS[path] ? path : '/unknown';
+  }
+
+  function activeCanaryContext() {
+    var context = window.__asapGa4CanaryContext;
+    if (!context || context.traffic_class !== 'bwm_canary') return null;
+    if (!CANARY_ID_RE.test(String(context.bwm_canary_id || ''))) return null;
+    if (!UUID_RE.test(String(context.source_submission_id || ''))) return null;
+    return context;
   }
 
   function referrerOrigin() {
     if (!document.referrer) return '';
-    try { return new URL(document.referrer).origin; } catch (_) { return ''; }
+    try {
+      var origin = new URL(document.referrer).origin;
+      return REFERRER_ORIGIN_RE.test(origin) ? origin : '';
+    } catch (_) { return ''; }
   }
 
   function redactPhone(href) {
@@ -312,16 +342,21 @@
   }
 
   function fireClickEvent(eventName, params) {
-    var canary = canaryId();
+    // email_click predates the frozen ASAP four-event chain. Preserve its
+    // ordinary payload while only phone_click joins an authenticated canary.
+    var canary = eventName === 'phone_click' ? activeCanaryContext() : null;
     var payload = {
       event_schema_version: EVENT_SCHEMA_VERSION,
-      event_id: randomId(),
+      event_id: canary ? canary.source_submission_id : randomId(),
       traffic_class: canary ? 'bwm_canary' : 'production',
       source_surface: 'website',
-      page_path: location.pathname,
+      page_path: safePagePath(location.pathname),
       page_referrer_origin: referrerOrigin()
     };
-    if (canary) payload.bwm_canary_id = canary;
+    if (canary) {
+      payload.bwm_canary_id = canary.bwm_canary_id;
+      payload.source_submission_id = canary.source_submission_id;
+    }
     Object.keys(params || {}).forEach(function (k) { payload[k] = params[k]; });
 
     window.dataLayer = window.dataLayer || [];
@@ -337,11 +372,23 @@
   }
 
   document.addEventListener('click', function (e) {
+    if (!e || e.isTrusted !== true) return;
     if (!e.target || typeof e.target.closest !== 'function') return;
     var a = e.target.closest('a[href]');
     if (!a) return;
     var href = a.getAttribute('href') || '';
+    if (window.__asapGa4CanaryIntent && /^mailto:/i.test(href)) return;
     if (/^tel:/i.test(href)) {
+      if (window.__asapGa4CanaryIntent) {
+        if (window.__asapGa4CanaryPending && window.__asapGa4CanaryReady) {
+          window.__asapGa4CanaryReady.then(function (context) {
+            if (context) fireClickEvent('phone_click', { phone_number_redacted: redactPhone(href) });
+          });
+        } else if (activeCanaryContext()) {
+          fireClickEvent('phone_click', { phone_number_redacted: redactPhone(href) });
+        }
+        return;
+      }
       fireClickEvent('phone_click', { phone_number_redacted: redactPhone(href) });
     } else if (/^mailto:/i.test(href)) {
       fireClickEvent('email_click', { email_domain: emailDomain(href) });
