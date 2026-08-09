@@ -19,7 +19,7 @@
 
 - A read-only GA4 Admin API audit confirmed property `305355475` has two web streams.
 - The retired-domain stream is `G-8M705Z89TE` with default URI `https://www.wildliferemovalasap.com`.
-- The current-domain stream is `G-GQZJKG5JCK` with default URI `https://www.removeasap.com`.
+- The current-domain stream is `G-96KWM2S4G8` with default URI `https://www.removeasap.com`.
 - All production page gates and the shared analytics loader now target the current-domain stream.
 - `phone_click`, `email_click`, and `form_submit` already exist as property-level key events; the site continues to emit the phone and email events without changing their payload contract.
 - This remains a production candidate until the branch is deployed and the new stream is live-canary verified.

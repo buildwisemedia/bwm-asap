@@ -1,7 +1,7 @@
 # Analytics Relayer Report
 
 > Superseded configuration note — 2026-08-05: the current-domain GA4 stream is
-> `G-GQZJKG5JCK`, the BWM-owned Clarity project is `whpri6g1yi`, and the
+> `G-96KWM2S4G8`, the BWM-owned Clarity project is `whpri6g1yi`, and the
 > canonical public phone is `(770) 691-3636`. The older identifiers below
 > describe the original relayer branch and are not the release configuration.
 
@@ -16,7 +16,7 @@ Scope: data/tracking only. No visible hero, nav, animal grid, CTA, page-set, or 
 - The original branch added `assets/js/bwm-analytics.js` as a delayed loader;
   the current release configuration now uses:
   - GTM `GTM-K953HZ9R`
-  - GA4 `G-GQZJKG5JCK`
+  - GA4 `G-96KWM2S4G8`
   - Clarity `whpri6g1yi`
   - Meta Pixel `26350078141329630`
 - Kept existing inline analytics stacks as fallbacks, but made the canonical loader idempotent and non-overwritable so it wins when present.
@@ -107,7 +107,7 @@ Gate coverage:
 
 404/legal analytics coverage:
 
-- `404.html`, `privacy-policy/index.html`, and `terms-of-service/index.html` each contain: `bwm-ga-gate`, `bwm-analytics.js`, `attribution.js`, `GTM-K953HZ9R`, `G-GQZJKG5JCK`, `26350078141329630`, and Meta noscript.
+- `404.html`, `privacy-policy/index.html`, and `terms-of-service/index.html` each contain: `bwm-ga-gate`, `bwm-analytics.js`, `attribution.js`, `GTM-K953HZ9R`, `G-96KWM2S4G8`, `26350078141329630`, and Meta noscript.
 
 No `/book` regression:
 
