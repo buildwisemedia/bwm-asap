@@ -302,6 +302,8 @@ test('inline pages and main.js route accepted responses through the sole generat
   const leadFlow = fs.readFileSync(require.resolve('../assets/js/asap-lead-flow.js'), 'utf8');
   const directProducerCount = (leadFlow.match(/directGa4Event\('generate_lead'/g) || []).length;
   assert(directProducerCount === 1, 'shared lead flow must contain exactly one direct generate_lead producer');
+  assert(!leadFlow.includes("addEventListener('formdata'"), 'bridge token must never be injected into FormData');
+  assert(!leadFlow.includes("ensureHidden('asap_ga4_canary_bridge_token'"), 'bridge token must never be persisted as a hidden input');
 });
 
 (async function run() {
