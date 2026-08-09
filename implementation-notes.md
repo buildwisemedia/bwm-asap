@@ -3,7 +3,7 @@
 ## 2026-08-05 - Canonical phone and release reconciliation
 
 - Reconciled the site against the Brain source of truth: the current number is
-  `(770) 450-1744`; `(770) 691-3636` was retired on 2026-01-22.
+  `(770) 691-3636`; `(770) 691-3636` was retired on 2026-01-22.
 - Updated every public phone link, visible phone string, structured-data phone,
   static inventory reference, and page-generation helper in the release branch.
 - Ported the mobile hero tap-target fix onto the current production baseline,
