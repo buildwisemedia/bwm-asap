@@ -118,3 +118,9 @@ Verified locally (iframe harness, fetch/XHR instrumented): every page class = ex
 - `phone_click`, `form_start`, and `generate_lead` reuse the authenticated synthetic `source_submission_id`; the server outbox event uses that same identity. Arbitrary/PII-bearing paths collapse to `/unknown`, IPv6/nonmatching referrers collapse to empty, and `/rate/` remains excluded. Ordinary `email_click` payload behavior is regression-pinned and is suppressed rather than relabeled on canary-intent pages.
 - Routed 30 inline form handlers and the dormant `main.js` form path through the helper; corrected the stale phone test; excluded `/rate` from lead QA by its existing marker without changing `rate/index.html` (SHA-256 `b55988dc441205f591f5b7b8b7e090ae9a571fadcf39676491dea4e1140a067b`).
 - Local focused QA: GA4 form events 10/10; attribution 8/8; lead-flow 33 included form pages, 0 handler/attribution/type/phone/link defects. Final repeated site-gate totals are recorded in the v2 receipt.
+
+## 2026-08-10 — ASAP GA4 protected-review stale-bridge repair
+
+- Failed or expired session bridge validation now clears the in-memory bridge intent as well as session storage. The pending invalid canary attempt remains blocked, but a later genuine submit on the same page can use the ordinary lead path instead of being suppressed for the page lifetime.
+- The browser contract test now proves both halves: no fallthrough while invalid validation is pending, then normal-handler recovery after the stale bridge is cleared.
+- This is a local follow-up to the protected Fable v3 HOLD. Nothing was deployed, configured, or sent.

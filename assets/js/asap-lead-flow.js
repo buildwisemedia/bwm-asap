@@ -104,6 +104,8 @@
       return window.__asapGa4CanaryContext;
     }).catch(function () {
       validatedBridgeToken = '';
+      bridgeIntent = false;
+      window.__asapGa4CanaryIntent = false;
       window.__asapGa4CanaryContext = null;
       return null;
     }).finally(function () {

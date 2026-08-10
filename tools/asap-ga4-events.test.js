@@ -235,18 +235,22 @@ test('validated bridge drives one isolated browser submit and a shared synthetic
   assert(form.done.style.display === 'block', 'isolated canary success should be visible');
 });
 
-test('invalid bridge intent blocks the ordinary business path without a submit request', async () => {
+test('invalid bridge blocks its pending attempt then permits the next real submit', async () => {
   const { form, fetchCalls, ready } = harness({ bridgeToken: 'invalid-token', bridgeValid: false });
-  await ready;
   let legacyRuns = 0;
   form.addEventListener('submit', () => { legacyRuns += 1; });
-  const event = form.dispatch('submit', { isTrusted: true });
+  const blockedEvent = form.dispatch('submit', { isTrusted: true });
+  await ready;
   await Promise.resolve();
-  assert(event.defaultPrevented === true, 'invalid canary intent must remain blocked');
-  assert(legacyRuns === 0, 'invalid canary must not fall through to legacy business submit');
+  assert(blockedEvent.defaultPrevented === true, 'the pending invalid canary attempt must remain blocked');
+  assert(legacyRuns === 0, 'the pending invalid canary attempt must not reach the business handler');
   assert(fetchCalls.length === 1 && fetchCalls[0].url.includes('/asap/ga4-canary/bridge'), 'only validation may be attempted');
   assert(!dataLayer.some((entry) => entry.event === 'generate_lead'), 'invalid token must not emit a lead event');
   assert(form.fail.style.display === 'block', 'invalid bridge should show failure');
+
+  const realEvent = form.dispatch('submit', { isTrusted: true });
+  assert(realEvent.defaultPrevented !== true, 'cleared stale bridge state must not block the next real submit');
+  assert(legacyRuns === 1, 'the next real submit must reach the ordinary business handler');
 });
 
 test('unknown and PII-like browser paths collapse to the safe fallback', () => {
