@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const root = process.cwd();
 const publicFormSkip = new Set(['lead-flow/index.html']);
-const canonicalPhone = '7704501744';
+const canonicalPhone = '7706913636';
 
 function walk(dir) {
   const out = [];
@@ -77,7 +77,12 @@ const report = {
 for (const file of htmlFiles) {
   const fileRel = rel(file);
   const text = fs.readFileSync(file, 'utf8');
-  const isPublicFormPage = text.includes('<form') && !publicFormSkip.has(fileRel);
+  const isPublicFormPage = text.includes('<form') &&
+    !text.includes('data-no-bwm-lead-flow') &&
+    !publicFormSkip.has(fileRel);
+  const isLocalReviewFixture = text.includes('data-build-state="local-review"') &&
+    text.includes('data-integration-state="fixture-only"') &&
+    text.includes('/assets/js/asap-close.js');
 
   if (isPublicFormPage) {
     const formTypes = new Set();
@@ -91,15 +96,16 @@ for (const file of htmlFiles) {
       form_types: formTypeList,
       has_lead_flow_script: text.includes('/assets/js/asap-lead-flow.js'),
       has_attribution: text.includes('/attribution.js'),
-      has_bwm_endpoint: text.includes('bwm-form-handler.robert-ba0.workers.dev/submit')
+      has_bwm_endpoint: text.includes('bwm-form-handler.robert-ba0.workers.dev/submit'),
+      is_local_review_fixture: isLocalReviewFixture
     });
     for (const formType of formTypeList) {
       if (formType !== 'contact') report.unsupported_form_types.push({ file: fileRel, formType });
     }
-    if (!text.includes('/assets/js/asap-lead-flow.js') && !text.includes('bwm-form-handler.robert-ba0.workers.dev/submit')) {
+    if (!isLocalReviewFixture && !text.includes('/assets/js/asap-lead-flow.js') && !text.includes('bwm-form-handler.robert-ba0.workers.dev/submit')) {
       report.missing_form_handler.push(fileRel);
     }
-    if (!text.includes('/attribution.js')) report.missing_attribution_on_form_pages.push(fileRel);
+    if (!isLocalReviewFixture && !text.includes('/attribution.js')) report.missing_attribution_on_form_pages.push(fileRel);
   }
 
   for (const match of text.matchAll(/<a\b[^>]*>/g)) {
@@ -111,7 +117,8 @@ for (const file of htmlFiles) {
       const digits = href.replace(/\D/g, '');
       const entry = { file: fileRel, href, digits };
       report.phone_links.push(entry);
-      if (digits !== canonicalPhone) report.bad_phone_links.push(entry);
+      const nationalDigits = digits.length === 11 && digits.startsWith('1') ? digits.slice(1) : digits;
+      if (nationalDigits !== canonicalPhone) report.bad_phone_links.push(entry);
       continue;
     }
     if (href === '#') {
@@ -136,6 +143,7 @@ if (base) {
 
 report.summary = {
   public_form_pages: report.forms.length,
+  local_review_fixture_pages: report.forms.filter((entry) => entry.is_local_review_fixture).length,
   unsupported_form_type_count: report.unsupported_form_types.length,
   missing_form_handler_count: report.missing_form_handler.length,
   missing_attribution_on_form_pages_count: report.missing_attribution_on_form_pages.length,
