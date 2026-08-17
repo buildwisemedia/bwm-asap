@@ -1,7 +1,7 @@
 {
   "schema_version": "asap-animal-lineup/1.0.0",
   "captured_at": "2026-08-17",
-  "state": "local-review-set-hardening",
+  "state": "local-review-independent-set-pass",
   "scope": "Approved named ASAP animal-page set from the August 11 correction record",
   "lineup_source": {
     "primary_locator": "/Users/robertechevarria/Documents/Codex/2026-08-13/i-m-going-to-bed-but-2/work/asap-evidence/email/Nehemiah-ASAP-command-center-notes-2026-08-11.txt",
@@ -49,7 +49,7 @@
       "page_sha256": "a157b17f9f4edc671e4f0095d3a2b8d0e8647f3a79095333319d247ab08fde5e",
       "logo_path": "assets/images/page-logos/rat-mouse.png",
       "logo_sha256": "804aebdd4cd4831e47dc784a1ad037e6ecfe65724947b8a8e641ab7b916805da",
-      "review_state": "pattern-applied-awaiting-set-review",
+      "review_state": "independent-pass-exact-set",
       "required_proof": ["species-aware plan", "recurring bait stations", "exclusion separated from control", "disease FAQ remains exposure-qualified"]
     },
     {
@@ -62,7 +62,7 @@
       "page_sha256": "38456cdad5735727ac4d127ab798cf1386861b3d4bb06a9a93ba73dd676bef1e",
       "logo_path": "assets/images/page-logos/squirrel.png",
       "logo_sha256": "e6319411069f8c8af25d1e9f881c9793c78fbd2704802cd664ad44ce9df76b26",
-      "review_state": "pattern-applied-awaiting-set-review",
+      "review_state": "independent-pass-exact-set",
       "required_proof": ["gray and flying squirrel distinction", "dependent-young timing", "gray squirrel illustration continuity", "repair follows active-animal plan"]
     },
     {
@@ -75,7 +75,7 @@
       "page_sha256": "71bc59c5701565d04f32eb024df02bf3d3643938234edb1050eb926b2a347438",
       "logo_path": "assets/images/page-logos/raccoon.png",
       "logo_sha256": "8449716bbcdebc59bfeeb23c0a55affb382c173495afb9fd4ba722973d202cda",
-      "review_state": "pattern-applied-awaiting-set-review",
+      "review_state": "independent-pass-exact-set",
       "required_proof": ["possible dependent young", "no immediate-seal promise", "inspection-led repair", "cleanup scope remains evidence-based"]
     },
     {
@@ -88,16 +88,29 @@
       "page_sha256": "27d7edb7b31ff52f9493be3a5a46a471d95d7c08ed4cfe55670cbaad7d67f9b6",
       "logo_path": "assets/images/page-logos/bat.png",
       "logo_sha256": "f9cd235e7805f676b588082c678c6346e89a5f1b50934767317a7b60fbb4a94e",
-      "review_state": "pattern-applied-awaiting-set-review",
+      "review_state": "independent-pass-exact-set",
       "required_proof": ["April 1 through July 31 maternity boundary", "inspection and emergency work are not blanket-blocked", "guano and insulation scope", "DSV products remain label- and site-qualified"]
     }
   ],
   "set_review": {
-    "status": "pending-independent-exact-set-review",
+    "status": "pass",
+    "route": "peer-3 protected Fable subscription",
+    "spilled": false,
+    "reviewed_commit": "f6fbc519c62d3d396991111948340b256eb7e80d",
+    "exact_manifest_files_verified": "17/17",
+    "deterministic_qa": "399/399",
+    "receipt": "animal-lineup-fable-exact-set-review.md",
+    "receipt_sha256": "c983df44e41cb24c835fa89d86d1a374e4029581e77b26bc839a99210d2370cc",
     "representative_artifact_receipt": "rodent-fable-exact-review-font-restored.md",
     "representative_machine_outcome": "premium-candidate",
     "representative_promotion_eligible": true
   },
+  "non_blocking_review_findings": [
+    "Align the CSS cache-buster across the five pages before promotion",
+    "Retain the mobile/tablet navigation choice as a human decision before release",
+    "Confirm privacy coverage for delayed Adobe kit telemetry before cutover",
+    "Resolve curated Squirrel versus legacy flying-squirrel intent adjacency in production planning"
+  ],
   "human_and_release_gates": [
     "Robert has not authorized preview exposure or delivery",
     "James and client have not accepted the composed set",
