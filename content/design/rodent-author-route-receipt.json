@@ -6,7 +6,7 @@
   "artifact_state": "local-review",
   "repository": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site",
   "branch": "codex/asap-close-local-review-20260813",
-  "implementation_commit": "eb12e6a29365405c1d1c44accefcf5c09fb127c4",
-  "page_sha256": "25c823dd9adedb1188d44894cd029f6cfb3a77555cfcadc0e8933a96283b4c67",
+  "implementation_commit": "8dc79a0829c92588e406f51fa4bfecad6d8d6764",
+  "page_sha256": "7b1b67910b637f7360075f8517e76d8190f709d2a1332ce4854aa0c8a07318ff",
   "production_claim": false
 }
