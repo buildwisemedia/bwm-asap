@@ -204,7 +204,7 @@ function renderPage(page) {
           <a class="bwm-animal-button secondary" href="/contact/">Request an inspection</a>
         </div>
       </div>
-      <div class="bwm-animal-visual"><img src="${page.image}" alt="${page.imageAlt}" width="520" height="420" fetchpriority="high"></div>
+      <div class="bwm-animal-visual"><!-- @r020:orientation animal illustration identifies the specific removal service for the visitor --><img src="${page.image}" alt="${page.imageAlt}" width="520" height="420" fetchpriority="high"></div>
     </div>
   </section>
   <div class="bwm-trust-strip"><div class="bwm-animal-shell bwm-trust-grid"><p>Metro Atlanta service area</p><p>Inspection-led recommendations</p><p>Removal + entry-point planning</p></div></div>
@@ -261,6 +261,9 @@ for (const page of pages) {
   html = html.replace(/<meta content="[^"]*" name="viewport"\/><link rel="preload"/, `<meta content="width=device-width, initial-scale=1" name="viewport"/><link rel="stylesheet" href="/assets/css/nehemiah-animal-preview.css"/><link rel="preload"`);
   html = html.replace(/<meta name="description" content="[^"]*"\/>/, `<meta name="description" content="${escapeHtml(page.description)}"/>`);
   html = html.replace(/<meta property="og:description" content="[^"]*"\/>/, `<meta property="og:description" content="${escapeHtml(page.description)}"/>`);
+  if (!/<meta property="og:title"/.test(html)) {
+    html = html.replace(/<meta property="og:description"/, `<meta property="og:title" content="${escapeHtml(page.title)}"/><meta property="og:description"`);
+  }
   html = html.replace(/<script type="application\/ld\+json">\{"@context": "https:\/\/schema.org", "@type": "FAQPage"[\s\S]*?<\/script>/, `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
