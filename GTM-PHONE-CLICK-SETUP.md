@@ -18,7 +18,7 @@ Both events are sent to:
 ```javascript
 {
   event: 'phone_click',
-  phone_number_redacted: '3636',        // Last 4 digits only (privacy protection)
+  phone_number_redacted: '1744',        // Last 4 digits only (privacy protection)
   page_path: '/path/to/page',          // The page where click occurred
   page_referrer: 'https://...'         // Referrer URL
 }
@@ -54,7 +54,7 @@ Both events are sent to:
 3. Configure as follows:
    - **Tag Name**: `GA4 - Phone Click`
    - **Tag Type**: `Google Analytics: GA4 Event`
-   - **Measurement ID**: `G-8M705Z89TE`
+   - **Measurement ID**: `G-GQZJKG5JCK`
    - **Event name**: `phone_click`
    - **Event parameters**: Click **Add Row** for each parameter:
      - **Parameter name**: `phone_number_redacted` | **Value**: `{{phone_number_redacted}}`
@@ -81,7 +81,7 @@ Both events are sent to:
 3. Configure as follows:
    - **Tag Name**: `GA4 - Email Click`
    - **Tag Type**: `Google Analytics: GA4 Event`
-   - **Measurement ID**: `G-8M705Z89TE`
+   - **Measurement ID**: `G-GQZJKG5JCK`
    - **Event name**: `email_click`
    - **Event parameters**: Click **Add Row** for each parameter:
      - **Parameter name**: `email_domain` | **Value**: `{{email_domain}}`

@@ -1,5 +1,98 @@
 # Implementation Notes
 
+## 2026-08-05 - Nehemiah development review set
+
+- Built a single private, no-index review hub at `/client-preview/nehemiah/`
+  for the August 6 client call.
+- Kept the five city candidates (`Canton`, `Woodstock`, `Acworth`, `Kennesaw`,
+  and `Cartersville`) and four service candidates (`bats`, `rat and mouse`,
+  `raccoon`, and `squirrel`) on the development branch only. Their canonical
+  production URLs are reserved, but no production promotion is authorized
+  without Nehemiah's approval.
+- Upgraded the animal pages from thin fact openings to inspection-led service
+  pages with signs, process, preparation guidance, FAQs, structured data, and a
+  clear call/contact path. Bat content preserves Georgia DNR's April 1–July 31
+  maternity-season restriction and does not promise immediate exclusion.
+- Hardened the city exports by removing the retired personalization experiment,
+  duplicate legacy analytics, remote first-render dependencies, and unverified
+  licensing or method promises. Added local assets, current GA4, current phone,
+  accessibility labels, and performance-safe script loading.
+- The `/rate/?preview=1` demo now exercises ratings 1–4 as private feedback and
+  rating 5 as the Google handoff without sending data or navigating away.
+- QA evidence: static acceptance checks pass all nine pages and both review
+  paths; behavioral browser tests pass; every review route returns 200; the
+  production QA gate passes. Second-round Lighthouse scores are 97/100/100
+  (accessibility/best practices/SEO) for representative city and animal pages,
+  and 100/100 for the hub and review demo. Their crawlability failure is the
+  intentional development `noindex` boundary.
+- Independent review round 1 found three blockers: stale production ancestry,
+  downstream GA4 reconciliation, and private-recipient provenance. The unified
+  branch starts from current production, the Brain config now records Nehemiah's
+  verified address, and the analytics audit records the current stream plus the
+  tagless published GTM container. Final independent review remains required
+  after the release and preview URLs exist.
+## 2026-08-05 - Canonical phone and release reconciliation
+
+- Reconciled the site against the Brain source of truth: the current number is
+  `(770) 450-1744`; `(770) 691-3636` was retired on 2026-01-22.
+  **RETRACTED 2026-08-08 — this was wrong.** `(770) 691-3636` is ASAP's real,
+  in-service number, confirmed by Robert after Nehemiah flagged it. `(770)
+  450-1744` was never client-confirmed: it entered `site-config.json` on
+  2026-04-05 from a third-party directory scrape (Facebook / HomeAdvisor /
+  Yelp / Georgia Business Journal) and the unverified `phone_changed:
+  2026-01-22` field was then treated as canonical. The client's own live
+  Webflow site carried `691-3636` throughout, which should have been the
+  tiebreaker.
+- Updated every public phone link, visible phone string, structured-data phone,
+  static inventory reference, and page-generation helper in the release branch.
+- Ported the mobile hero tap-target fix onto the current production baseline,
+  then applied the canonical phone so the accessibility repair cannot restore
+  the retired number.
+- Replaced the non-executing attribution fixture with a Node browser harness
+  that loads the shipped tracker. `phone_click`, `email_click`, privacy-safe
+  parameters, and the unrelated-link negative case all pass.
+- The review page and GA4 stream correction are release candidates until the
+  exact SHA is promoted and verified on `removeasap.com`.
+
+## 2026-08-05 - GA4 Stream Identity Correction
+
+- A read-only GA4 Admin API audit confirmed property `305355475` has two web streams.
+- The retired-domain stream is `G-8M705Z89TE` with default URI `https://www.wildliferemovalasap.com`.
+- The current-domain stream is `G-GQZJKG5JCK` with default URI `https://www.removeasap.com`.
+- All production page gates and the shared analytics loader now target the current-domain stream.
+- `phone_click`, `email_click`, and `form_submit` already exist as property-level key events; the site continues to emit the phone and email events without changing their payload contract.
+- This remains a production candidate until the branch is deployed and the new stream is live-canary verified.
+
+## 2026-08-04 - ASAP Review Engine Phase 1 Resume
+
+Robert confirmed the two remaining Phase 1 inputs: sub-five feedback must ask
+exactly, "How could we have made your experience five stars?", and the private
+response must route directly to Nehemiah. This session resumes the approved
+`/rate` direction from `feat/review-engine-rate` plus the Robert-approved visual
+elevation at `design/rate-page-2026-07-17`.
+
+- Primary module: `website_landing`; secondary module: `campaign_email_social`.
+- Tier: `locked-direction-implementation`; the behavior and visual direction
+  are already approved, so this pass does not reopen the design system.
+- Identity: ASAP Pest & Wildlife, client + single composition. BWM, HRE, and
+  cross-client visual inheritance remain forbidden.
+- Current evidence boundary: the `/rate` page and both rating-path previews
+  exist. Production `/rate`, job-completion automation, SMS delivery, private
+  feedback delivery, and labeled end-to-end smoke are not yet claimed live.
+- Preflight finding: the repo still carries a legacy plain-text marker from
+  2026-05-12. It must be replaced with a valid hash-bound v4 marker before any
+  HTML/CSS/JS authoring.
+
+### 2026-08-05 review-safe Command Center mode
+
+The Command Center will embed this exact page with `?preview=1`. That mode must
+exercise the one-to-four and five-star states without sending feedback or
+navigating the embedded frame away. Default `/rate` behavior remains unchanged:
+five stars immediately hands off to Google and request-bound sub-five feedback
+uses the production response route. Preview-only copy must state that no note is
+sent and that the live route goes directly to Nehemiah.
+
+
 ## 2026-06-23 - Human-Approval Production Gate
 
 Added release infrastructure so approved live client content is promoted deliberately instead of auto-published from `main`.
@@ -54,3 +147,20 @@ Verified locally (iframe harness, fetch/XHR instrumented): every page class = ex
 - Migrated the affected client asset locks to those approved WebP derivatives and retained original-asset provenance in the markup; all 1,086 perceptual locks pass.
 - Removed the stale same-origin tracking request that produced repeated 404s. Canonical BWM analytics and attribution remain in place.
 - Scope is isolated in `codex/asap-performance-2026-07-15` for full-page verification before release.
+
+## 2026-08-08 - Phone correction to (770) 691-3636
+
+- Nehemiah reported the wrong phone number on the site. Robert confirmed the
+  correct number is **(770) 691-3636**.
+- Reverted the 2026-08-05 `d5cddf6` sitewide phone change. Replaced every
+  `450-1744` variant with `691-3636` across 50 files: all public pages, `tel:`
+  links, JSON-LD `telephone`, meta descriptions, `SITE-INVENTORY.md`, the
+  attribution test fixture, and the page-generation helpers
+  (`scripts/build-nehemiah-animal-preview.mjs`, `scripts/qa-nehemiah-static.py`,
+  `tools/asap-lead-flow-qa.mjs`, `tools/vendor-performance-assets.mjs`) so a
+  regenerate cannot restore the wrong number.
+- Also corrected the upstream records that caused the regression:
+  `bwm-connector-audit/clients.yaml` `canonical_phone` and Brain
+  `clients/asap-pest-wildlife/site-config.json` `businessInfo.phone`.
+- Provenance of the original error and the self-approved promote that shipped
+  it are recorded in the Brain client folder.

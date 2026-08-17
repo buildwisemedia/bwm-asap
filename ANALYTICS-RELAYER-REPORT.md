@@ -1,5 +1,10 @@
 # Analytics Relayer Report
 
+> Superseded configuration note — 2026-08-05: the current-domain GA4 stream is
+> `G-GQZJKG5JCK`, the BWM-owned Clarity project is `whpri6g1yi`, and the
+> canonical public phone is `(770) 691-3636`. The older identifiers below
+> describe the original relayer branch and are not the release configuration.
+
 Branch: `analytics-relayer`
 Base: `a0fe4ba177439fa0b39d9f9e6d1e278f07f1d286`
 Scope: data/tracking only. No visible hero, nav, animal grid, CTA, page-set, or `/book` content was intentionally changed.
@@ -8,13 +13,15 @@ Scope: data/tracking only. No visible hero, nav, animal grid, CTA, page-set, or 
 
 - Added the exact neutral `bwm-ga-gate` script as the first item inside `<head>` on all 37 current HTML files.
 - Added `/assets/js/bwm-analytics.js` to all 37 current HTML files.
-- Added `assets/js/bwm-analytics.js` as the canonical delayed loader for:
+- The original branch added `assets/js/bwm-analytics.js` as a delayed loader;
+  the current release configuration now uses:
   - GTM `GTM-K953HZ9R`
-  - GA4 `G-8M705Z89TE`
-  - Clarity `w91h0ljsbn`
+  - GA4 `G-GQZJKG5JCK`
+  - Clarity `whpri6g1yi`
   - Meta Pixel `26350078141329630`
 - Kept existing inline analytics stacks as fallbacks, but made the canonical loader idempotent and non-overwritable so it wins when present.
-- Updated old inline Clarity literal URLs from `whpri6g1yi` to `w91h0ljsbn` where those URLs existed in tracking snippets.
+- Restored the BWM-owned Clarity project `whpri6g1yi`; the prior `w91h0ljsbn`
+  retag was later found to be the inaccessible client-era project.
 - Added analytics coverage to `404.html`, `privacy-policy/index.html`, and `terms-of-service/index.html` through the gate, canonical loader, attribution script, GTM noscript, and Meta noscript blocks.
 - Added the local static-server `/api/capi` skip in `attribution.js`.
 - Added `GTM-PHONE-CLICK-SETUP.md` and `attribution.test.js` from `bda944f`.
@@ -100,7 +107,7 @@ Gate coverage:
 
 404/legal analytics coverage:
 
-- `404.html`, `privacy-policy/index.html`, and `terms-of-service/index.html` each contain: `bwm-ga-gate`, `bwm-analytics.js`, `attribution.js`, `GTM-K953HZ9R`, `G-8M705Z89TE`, `26350078141329630`, and Meta noscript.
+- `404.html`, `privacy-policy/index.html`, and `terms-of-service/index.html` each contain: `bwm-ga-gate`, `bwm-analytics.js`, `attribution.js`, `GTM-K953HZ9R`, `G-GQZJKG5JCK`, `26350078141329630`, and Meta noscript.
 
 No `/book` regression:
 

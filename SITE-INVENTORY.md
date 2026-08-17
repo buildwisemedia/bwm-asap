@@ -240,7 +240,7 @@ SECTION: Contact/Estimate (dark navy background #212936)
 
 #### Section 2: CTA Banner
 - Text: "For services and immediate attention call now"
-- Link: "(770)691-3636" -> tel:7706913636
+- Link: "(770) 691-3636" -> tel:7706913636
 
 #### Section 3: "We Remove & Exclude" Grid
 - Subheading: "We Remove & Exclude"
@@ -385,7 +385,7 @@ SECTION: Contact/Estimate (dark navy background #212936)
 #### Section 1: Hero
 - Background SVG: `61ae8dadc0cdb02f8adb6077_contact-herobg.svg`
 - H1: "Wildlife"
-- CTA: "For services and immediate attention call now" / "(770)691-3636"
+- CTA: "For services and immediate attention call now" / "(770) 691-3636"
 - Body: "Wildlife will make their presence known. Strange noises, odious odors and uncomfortable feelings can impact your peace. These are usually the first signs of wildlife. Unfortunately, the damage caused by these critters generally go unseen because it happens between the walls, in the attic, or in your crawl space."
 
 #### Section 2: Photo Gallery (Lightbox)
@@ -447,7 +447,7 @@ SECTION: Contact/Estimate (dark navy background #212936)
 
 #### Section 1: Hero
 - H1: "Pest Control"
-- CTA: "For services and immediate attention call now" / "(770)691-3636"
+- CTA: "For services and immediate attention call now" / "(770) 691-3636"
 - Body: "We're the masters of 'pest-imonials' -- our customers are buzzing about our exceptional pest control services!"
 
 #### Section 2: Services List
@@ -617,7 +617,7 @@ SECTION: Contact/Estimate (dark navy background #212936)
 #### Section 1: Hero
 - H1: "Get in touch"
 - H1 (line 2, outlined cream): "With our peace makers"
-- CTA banner: "(770)691-3636"
+- CTA banner: "(770) 691-3636"
 - Body: "ASAP Pest & Wildlife Removal is a nuisance control service with a fresh approach, redesigned for the 21st century. We provide peace of mind through a comprehensive range of holistic solutions. Our fully qualified team handles all varieties of residential and commercial work with sensitivity and dedication. Our goal is to provide, you guessed it -- Peace Of Mind. We do this through inspecting, trapping and excluding unwanted pests & wildlife, with minimum disruption to your home or business. We currently cover all areas of Metro Atlanta & Outside the Perimeter. Call today to find out more."
 
 #### Section 2: Help Intro
@@ -664,7 +664,7 @@ SECTION: Contact/Estimate (dark navy background #212936)
 #### Section 1: Hero
 - H1 (outlined): "Rats - Mice - Squirrels - Beavers - Nutria - Moles - Voles - Groundhog - and More"
 - H1: "Rodents"
-- CTA banner: "(770)691-3636"
+- CTA banner: "(770) 691-3636"
 - Body: "Rodents will make their presence known. Strange noises, odious odors and uncomfortable feelings can impact your peace. Meaning -- we know exactly how stressful these problems can be, so we have established a discrete, professional and forward-thinking solution to resolve any rodent problems you might have!"
 
 #### Section 2: Peace Control
@@ -692,7 +692,7 @@ SECTION: Contact/Estimate (dark navy background #212936)
 #### Section 1: Hero
 - H1: "Bees, wasps,"
 - H1 (outlined orange): "& Hornets"
-- CTA banner: "(770)691-3636"
+- CTA banner: "(770) 691-3636"
 - Body: "Food for thought -- 1 out of every 3 mouthfuls of our food depends on pollinators. While we love these insects; the thought of being stung isn't easy to digest. We currently cover all areas of Metro Atlanta & outside the perimeter. Call today to find out more."
 
 #### Section 2: Peace Control

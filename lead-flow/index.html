@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>/* bwm-ga-gate: suppress GA4 on preview/staging + local dev hosts; production tracks normally */(function(){var h=location.hostname,p=h.split('.');if((/\.pages\.dev$/.test(h)&&p.length>3)||h==='localhost'||h==='127.0.0.1'||h==='0.0.0.0'||h===''){window['ga-disable-G-8M705Z89TE']=true;}})();</script>
+  <script>/* bwm-ga-gate: suppress GA4 on preview/staging + local dev hosts; production tracks normally */(function(){var h=location.hostname,p=h.split('.');if((/\.pages\.dev$/.test(h)&&p.length>3)||h==='localhost'||h==='127.0.0.1'||h==='0.0.0.0'||h===''){window['ga-disable-G-GQZJKG5JCK']=true;}})();</script>
   <script defer src="/assets/js/bwm-analytics.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -127,15 +127,17 @@
     section { padding: 52px 0; }
   }
 </style>
-</head>
-<body class="locked">
+<script defer src="/assets/js/lazy-images.js"></script>
+<meta property="og:image" content="https://removeasap.com/assets/images/logos/logo-orange.png"/><meta name="twitter:image" content="https://removeasap.com/assets/images/logos/logo-orange.png"/>
+<script defer src="/assets/js/dev-preview-guard.js"></script></head>
+<body class="locked"><noscript data-bwm-meta-pixel><img height="1" width="1" style="display:none" alt="" aria-hidden="true" src="https://www.facebook.com/tr?id=26350078141329630&ev=PageView&noscript=1"/></noscript>
 <div class="gate" id="gate">
   <form class="gate-panel" id="gate-form" data-no-bwm-lead-flow>
-    <img src="/assets/images/logos/logo-orange-canonical.png" alt="ASAP Pest and Wildlife">
+    <img src="/assets/images/logos/logo-orange-canonical.png" alt="ASAP Pest and Wildlife" width="2550" height="1754">
     <h1>Lead Flow QA</h1>
     <p>Private BWM review surface for ASAP connector, CRM, and usability proof. No real lead PII is included.</p>
     <div class="gate-row">
-      <input id="passcode" type="password" autocomplete="current-password" placeholder="Passcode" aria-label="Passcode">
+      <input id="passcode" type="password" autocomplete="current-password" aria-label="Passcode">
       <button type="submit">Open</button>
     </div>
     <div class="gate-error" id="gate-error" aria-live="polite"></div>
@@ -145,10 +147,10 @@
 <header>
   <div class="hero-inner">
     <div class="brand-row">
-      <img src="/assets/images/logos/logo-orange-canonical.png" alt="ASAP Pest and Wildlife">
+      <img src="/assets/images/logos/logo-orange-canonical.png" alt="ASAP Pest and Wildlife" width="2550" height="1754">
       <div class="status-chip">Private QA - .dev only</div>
     </div>
-    <h1>Lead Flow<br>Proof</h1>
+    <div>Lead Flow<br>Proof</div>
     <p class="hero-copy">A single review page for the post-parity work: forms, CRM intake, click usability, attribution, Meta/CAPI, and the open Pixel-ID question from John's latest Slack thread.</p>
   </div>
 </header>
@@ -224,7 +226,7 @@
         <thead><tr><th>Area</th><th>Status</th><th>Evidence / Action</th></tr></thead>
         <tbody>
           <tr><td>Cal.com booking</td><td><span class="pill ok">Green</span></td><td><code>/book</code> uses the ASAP consultation embed.</td></tr>
-          <tr><td>GA4 + GTM</td><td><span class="pill ok">Green</span></td><td>GTM <code>GTM-K953HZ9R</code> and GA4 <code>G-8M705Z89TE</code> are present.</td></tr>
+          <tr><td>GA4 + GTM</td><td><span class="pill ok">Green</span></td><td>GTM <code>GTM-K953HZ9R</code> and GA4 <code>G-GQZJKG5JCK</code> are present.</td></tr>
           <tr><td>Meta Pixel</td><td><span class="pill watch">Needs owner proof</span></td><td>Pixel loader is present, but John's ad-account ID does not confirm Pixel ownership.</td></tr>
           <tr><td>Lead form route</td><td><span class="pill ok">Normalized</span></td><td>ASAP forms use the supported <code>contact</code> form route; page-specific source is metadata only.</td></tr>
           <tr><td>BWM CRM intake</td><td><span class="pill ok">Synthetic proof</span></td><td>Prior audit row <code>b3b11606-24ee-4a5e-b9e1-f884adf7ad2c</code> proved handler to <code>contacts</code>.</td></tr>
@@ -314,5 +316,6 @@
   });
 })();
 </script>
+<div data-bwm-legal-links class="background---navy small-text text-color---cream text-align---center" style="padding:12px"><a href="tel:7706913636" class="text-color---cream">Call (770) 691-3636</a> <span aria-hidden="true">·</span> <a href="/privacy-policy/" class="text-color---cream">Privacy Policy</a> <span aria-hidden="true">·</span> <a href="/terms-of-service/" class="text-color---cream">Terms of Service</a></div>
 </body>
 </html>

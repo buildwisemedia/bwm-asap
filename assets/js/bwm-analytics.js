@@ -1,10 +1,10 @@
 /* BWM canonical analytics loader - ASAP Pest & Wildlife
- * One loader for every page. Delayed after load so tags do not block first paint.
+ * One loader for every page. Starts after visitor intent or an 8-second fallback
+ * so measurement never competes with the first useful screen.
  * - GTM: GTM-K953HZ9R
- * - GA4: G-8M705Z89TE
+ * - GA4: G-GQZJKG5JCK
  * - Clarity: whpri6g1yi
  * - Meta Pixel: 26350078141329630
- * Reddit pixel stays inline on pages where the approved base already has it.
  * The inline bwm-ga-gate script runs before this loader and suppresses GA4 on
  * preview/staging + local dev hosts while production tracks normally.
  */
@@ -22,7 +22,7 @@
       return entry && entry.event === 'gtm.js';
     });
     var hasGaConfig = window.dataLayer.some(function (entry) {
-      return Array.isArray(entry) && entry[0] === 'config' && entry[1] === 'G-8M705Z89TE';
+      return Array.isArray(entry) && entry[0] === 'config' && entry[1] === 'G-GQZJKG5JCK';
     });
 
     // Google Tag Manager
@@ -43,10 +43,10 @@
     if (!hasGaConfig) {
       var ga = document.createElement('script');
       ga.async = true;
-      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-8M705Z89TE';
+      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-GQZJKG5JCK';
       document.head.appendChild(ga);
       window.gtag('js', new Date());
-      window.gtag('config', 'G-8M705Z89TE');
+      window.gtag('config', 'G-GQZJKG5JCK');
     }
 
     // Microsoft Clarity
@@ -78,6 +78,21 @@
     window.fbq('track', 'PageView', {}, {
       eventID: 'pv_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8)
     });
+
+    // Reddit Pixel
+    !function (w, d) {
+      if (w.rdt) return;
+      var queue = w.rdt = function () {
+        queue.sendEvent ? queue.sendEvent.apply(queue, arguments) : queue.callQueue.push(arguments);
+      };
+      queue.callQueue = [];
+      var script = d.createElement('script');
+      script.async = true;
+      script.src = 'https://www.redditstatic.com/ads/pixel.js';
+      d.head.appendChild(script);
+    }(window, document);
+    window.rdt('init', 'a2_hwd8t7snlbdg');
+    window.rdt('track', 'PageVisit');
   }
 
   try {
@@ -90,7 +105,11 @@
     window.__bwmLoadAnalytics = loadAnalytics;
   }
 
-  var start = function () { setTimeout(loadAnalytics, 7000); };
-  if (document.readyState === 'complete') start();
-  else window.addEventListener('load', start, { once: true });
+  ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (eventName) {
+    window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
+  });
+
+  var startFallback = function () { setTimeout(loadAnalytics, 8000); };
+  if (document.readyState === 'complete') startFallback();
+  else window.addEventListener('load', startFallback, { once: true });
 })();
