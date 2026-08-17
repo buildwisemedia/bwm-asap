@@ -1,0 +1,116 @@
+{
+  "schema_version": "bwm-design-run/1.1.0",
+  "task_id": "PROJ-ASAP-ANIMAL-SALES-PAGES-PHASE-2",
+  "artifact_id": "asap-rodent-umbrella-3d1eedce4865",
+  "surface_module": "website_landing",
+  "process_tier": "locked-direction-implementation",
+  "identity": {
+    "class": "client",
+    "resolver_version": "ndb-2.0",
+    "record_hash": "e10f1fcc487847faff6d90aed84e4eb99c457777f88453e6efef97a333349c99",
+    "source_hashes": [
+      "16bcd08a3d9f034c9a9ea220abc3b342f0a8b1148f2660b024b16b32a6bdc3e6",
+      "12b53ce84e9917a224f66c7a225429b86b99f084bfce883ea88dc56462695be8"
+    ],
+    "prohibited_inheritance": [
+      "cross-client trade dress",
+      "AI-generated or stock animal imagery",
+      "the rejected disconnected development direction"
+    ]
+  },
+  "truth_packet": {
+    "frozen": true,
+    "content_hash": "3d1eedce4865bb0a82bdb60ad0edb835736346db5a5bc744643c4e9a0ab8fff8",
+    "scope_hash": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a",
+    "asset_manifest_hash": "4d369afdb8736a1376316e38fc518c9b46465b5e2ee4064ddb29788600893c18",
+    "proof_manifest_hash": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a",
+    "anchor_manifest_path": "rodent-design-anchor-manifest.json",
+    "anchor_manifest_sha256": "448a805841cadeb50f97de55ae1f632fff11d3bc851745d019b770d75b721be0"
+  },
+  "provenance": {
+    "author_family": "sol",
+    "author_model": "gpt-5.6-sol",
+    "author_effort": "high",
+    "author_harness": "codex",
+    "contract_version": "bwm-design-run/1.1.0",
+    "brain_contract_path": "specs/Spec-Art-Direction-and-Information-Design.md",
+    "brain_contract_sha": "0ff1960705acde36d2ac25336e3f17db7de94ff7",
+    "source_skill_path": "/Users/robertechevarria/.bwm-agents/skills/bwm-design-department/SKILL.md",
+    "source_skill_sha256": "91837a8b99cb04085e8512be290a77f5dbe5fd1a668c89c524c41f737a804213",
+    "installed_skill_path": "/Users/robertechevarria/Documents/Codex/2026-08-11/d2s-approvals-redesign/work/design2sell/_verification/installed-bwm-design-department-SKILL.md",
+    "installed_skill_sha256": "91837a8b99cb04085e8512be290a77f5dbe5fd1a668c89c524c41f737a804213",
+    "brain_read_receipt_path": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site/content/design/rodent-brain-read-receipt.json",
+    "brain_read_receipt_sha256": "8ca39bceb39646957e4df6145ce3cc30f449c359e9479e683d5fd693420b26e9",
+    "author_route_receipt_path": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site/content/design/rodent-author-route-receipt.json",
+    "author_route_receipt_sha256": "2025bca775ace324ab3d5f1e180c68f2ec7447064ebf1c8b82249ff01b3404f4",
+    "iteration_count": 2
+  },
+  "inherited_direction": {
+    "record_path": "rodent-accepted-direction.json",
+    "record_sha256": "4bdd2662d48fb14f4d151009cd33345cbb6747354ec3ead62fb74e272fa1a97e"
+  },
+  "evidence": {
+    "items": [
+      {"class": "A", "type": "desktop", "locator": "rodent-desktop-evidence.md", "sha256": "0e1a58cd7c3e332acbf7450445a9880141f4b2d6cca1f778e667961c6778cabd"},
+      {"class": "A", "type": "mobile", "locator": "rodent-mobile-evidence.md", "sha256": "83076b25acada5126155f84d870dbc8cff7081b2bcc30cef8168eaff8dda063e"},
+      {"class": "I", "type": "focus", "locator": "rodent-focus-evidence.md", "sha256": "806ecae6abb3982a1216c3e7007ba4482f08c39d7fde79c1937cc13e45c35e6d"},
+      {"class": "I", "type": "primary-action", "locator": "rodent-primary-action-evidence.md", "sha256": "78886a842461b1e89100b809daa031906f27ca16022a2aa52d84f9e59c8b8990"},
+      {"class": "S", "type": "source-proof", "locator": "rodent-source-proof.md", "sha256": "0c7e76a924e6d4d271a61c4eca28c9e563ef7f6a5848009ce624763b0c8f8d44"},
+      {"class": "S", "type": "copy-evidence-packet", "locator": "rodent-copy-evidence.pending.json", "sha256": "fb710ab90cba806e937104495dff682dafc7ac39f4c74007f0c7864c3129599b"},
+      {"class": "J", "type": "performance-budget", "locator": "rodent-performance-budget.md", "sha256": "b04b515880cf5ad64bf6360bad8cdcab2654ac4a3d693f955facb4373d5c2e21"},
+      {"class": "J", "type": "seo-technical", "locator": "rodent-seo-technical-evidence.md", "sha256": "94680d14ef183fc8ed5f625042aaec16c78439cf2aed2f95ae99b6e108d7661d"},
+      {"class": "S", "type": "aeo-answer-surface", "locator": "rodent-aeo-answer-evidence.md", "sha256": "17d57c640e9190055bda6735f7a2322384a5f8ad2ce3eedd6d40133f04397e3e"},
+      {"class": "I", "type": "conversion-path", "locator": "rodent-conversion-path-evidence.md", "sha256": "abfdbfbd2730eaf14f708fea592c7095de3f9009725d3576e3ffee6e8eac1028"},
+      {"class": "J", "type": "analytics-instrumentation", "locator": "rodent-analytics-evidence.md", "sha256": "cc7a8e4b93f45b6f30295e363822424d723474df6cc0ef2f4f757b8faa3393fa"}
+    ],
+    "measured": {
+      "accessibility": true,
+      "responsive": true,
+      "performance": true
+    }
+  },
+  "evaluation": {
+    "status": "pending-independent-fable",
+    "scorer": {
+      "family": "fable",
+      "independent": true,
+      "fresh_context": true,
+      "route_mode": "subscription",
+      "spilled": false,
+      "receipt_path": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site/_verification/asap-rodent-phase2/fable-exact-review-receipt.md",
+      "receipt_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "unlisted_defect_review": {
+      "completed": false,
+      "independent": true,
+      "reviewer_family": "fable",
+      "route_mode": "subscription",
+      "spilled": false,
+      "receipt_path": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site/_verification/asap-rodent-phase2/fable-exact-review-receipt.md",
+      "receipt_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "findings": [],
+      "reclassifications": []
+    },
+    "hard_blockers": ["Independent Fable review lane unavailable; no binding score or defect verdict exists."],
+    "dimension_scores": [
+      {"id": "identity_source_fidelity", "score": null, "evidence_locators": ["rodent-source-proof.md"]},
+      {"id": "information_architecture", "score": null, "evidence_locators": ["rodent-desktop-evidence.md"]},
+      {"id": "typography_hierarchy", "score": null, "evidence_locators": ["rodent-desktop-evidence.md"]},
+      {"id": "composition_spatial_rhythm", "score": null, "evidence_locators": ["rodent-mobile-evidence.md"]},
+      {"id": "imagery_art_direction", "score": null, "evidence_locators": ["rodent-source-proof.md"]},
+      {"id": "storytelling_information_design", "score": null, "evidence_locators": ["rodent-aeo-answer-evidence.md"]},
+      {"id": "copy_proof_action", "score": null, "evidence_locators": ["rodent-copy-evidence.pending.json"]},
+      {"id": "motion_interaction_restraint", "score": null, "evidence_locators": ["rodent-focus-evidence.md"]},
+      {"id": "accessibility_responsive_performance", "score": null, "evidence_locators": ["rodent-performance-budget.md"]},
+      {"id": "ownership_portability_continuity", "score": null, "evidence_locators": ["rodent-analytics-evidence.md"]}
+    ],
+    "composite_score": null,
+    "outcome": "pending"
+  },
+  "state": {
+    "artifact_state": "local",
+    "production_claim": false,
+    "quality_label": "unscored",
+    "hil": {"required": true, "status": "pending"}
+  }
+}

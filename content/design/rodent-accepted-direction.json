@@ -1,0 +1,42 @@
+{
+  "schema_version": "bwm-accepted-direction/1.0.0",
+  "status": "accepted",
+  "direction_id": "asap-current-site-close-2026-08-12",
+  "surface_module": "website_landing",
+  "identity_record_hash": "e10f1fcc487847faff6d90aed84e4eb99c457777f88453e6efef97a333349c99",
+  "truth_scope_hash": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a",
+  "base_artifact_sha256": "254ef0b39b65a3c5f8eb44315a1723af548c2b63a1931e8c7818a5763d7fc78c",
+  "accepted_by": "Nehemiah Ray",
+  "accepted_at": "2026-08-12T13:35:02Z",
+  "component_relationships": [
+    {
+      "dimension_id": "imagery_art_direction",
+      "decision": "Use the existing ASAP illustration system and client-supplied page logos; do not introduce AI or stock imagery.",
+      "rationale": "The accepted direction stays visibly connected to the current site and preserves the recorded asset-rights boundary."
+    },
+    {
+      "dimension_id": "typography_hierarchy",
+      "decision": "Use URW DIN heavy uppercase display type with Arial body copy and the outlined hero treatment.",
+      "rationale": "These are the computed current-site roles supplied by Nehemiah and distinguish ASAP from the rejected dev direction."
+    },
+    {
+      "dimension_id": "composition_spatial_rhythm",
+      "decision": "Retain the centered current-site rhythm, cream texture, dark proof band, asymmetric buttons, and orange heading rule while allowing responsive stacking.",
+      "rationale": "The relationship keeps the page recognizable while correcting hierarchy and mobile behavior."
+    },
+    {
+      "dimension_id": "motion_interaction_restraint",
+      "decision": "Keep the page still by default, with no scroll-reveal dependency and reduced-motion parity.",
+      "rationale": "The prior candidate showed delayed-logo and empty-band failures; stillness protects comprehension and reliability."
+    },
+    {
+      "dimension_id": "storytelling_information_design",
+      "decision": "Sequence the page from immediate category and action to answer-first guidance, intent routing, property-specific scope, proof, FAQ, and contact.",
+      "rationale": "The sequence supports a worried homeowner's decision without collapsing distinct animal-service intents or overstating diagnosis."
+    }
+  ],
+  "coherence_pass": {
+    "status": "pass",
+    "finding": "The accepted relationships form one current-site-derived ASAP system: the illustration, display hierarchy, cream/orange/navy rhythm, still interaction model, and answer-to-action sequence reinforce the same calm-protector job without cross-client inheritance."
+  }
+}

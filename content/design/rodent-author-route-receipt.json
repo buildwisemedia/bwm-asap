@@ -1,0 +1,12 @@
+{
+  "author_family": "sol",
+  "author_model": "gpt-5.6-sol",
+  "author_harness": "codex",
+  "route_mode": "local-worktree",
+  "artifact_state": "local-review",
+  "repository": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site",
+  "branch": "codex/asap-close-local-review-20260813",
+  "implementation_commit": "cc1bfd0b4c25bd7c055e70d8e54af5d85a401427",
+  "page_sha256": "3d1eedce4865bb0a82bdb60ad0edb835736346db5a5bc744643c4e9a0ab8fff8",
+  "production_claim": false
+}

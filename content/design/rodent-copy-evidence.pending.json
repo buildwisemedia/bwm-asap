@@ -1,0 +1,207 @@
+{
+  "schema_version": "bwm-copy-evidence/1.0.0",
+  "profile": "conversion",
+  "artifact_mode": "client-visible-conversion",
+  "source_status": "full",
+  "material_claims_allowed": true,
+  "conversion_readiness_claimed": false,
+  "conversion_outcome_claimed": false,
+  "readiness_basis": {
+    "status": "not-claimed",
+    "rationale": "Local deterministic and browser QA establish review evidence only; protected source review, human approval, deployment, live handler tests, and observed outcomes remain absent."
+  },
+  "evidence_units": [
+    {
+      "id": "client-corrections",
+      "source_type": "approved_business_source",
+      "source_locator": "Gmail from Nehemiah Ray, ASAP command center notes and updates, 2026-08-11",
+      "captured_at": "2026-08-11T15:55:43Z",
+      "finding": "The current-site computed palette, URW DIN hierarchy, asymmetric buttons, correct phone, review-card treatment, FAQ style, contact form, five-page animal lineup, and Rodent umbrella role are explicit client corrections.",
+      "source_artifact": "copy-sources/client-corrections.md",
+      "source_fingerprint": "6073e0f5d693cca3c5428826f7ee1aa5baebe86a09f0f6f89680650ecffb5698",
+      "classification": "evidence"
+    },
+    {
+      "id": "client-working-session",
+      "source_type": "customer_interview",
+      "source_locator": "ASAP working session transcript, 2026-08-12",
+      "captured_at": "2026-08-12T13:35:02Z",
+      "finding": "The session preserves the Rodent umbrella beside specific animal pages and records the decision to stay closer to the current site.",
+      "source_artifact": "copy-sources/client-working-session.md",
+      "source_fingerprint": "e1604360dc7f599062774df1d98d29a85edd4a3d4d226acbad1c63871a8f3fec",
+      "classification": "evidence"
+    },
+    {
+      "id": "official-guidance",
+      "source_type": "approved_business_source",
+      "source_locator": "UGA, CDC, and Georgia DNR primary guidance verified 2026-08-17",
+      "captured_at": "2026-08-17T08:25:00-04:00",
+      "finding": "Attic symptoms are clues rather than diagnosis, dry rodent waste should not be swept or vacuumed, and bat exclusion has separate Georgia timing constraints.",
+      "source_artifact": "copy-sources/official-guidance.md",
+      "source_fingerprint": "61eca98a348142169061659eb03ee55a65dedcee14f39bc904dcc82a3006d07e",
+      "classification": "evidence"
+    },
+    {
+      "id": "customer-reviews",
+      "source_type": "customer_review",
+      "source_locator": "ASAP current-site inventory review excerpts with Google Maps destination",
+      "captured_at": "2026-08-13T18:46:00-04:00",
+      "finding": "The current site records attributable review excerpts from Mark Carroll, Kelsey Monaghan, and Fred Perry; the local pattern preserves short excerpts with a direct Google review destination.",
+      "source_artifact": "copy-sources/customer-reviews.md",
+      "source_fingerprint": "7f7a2c48383eaf8bf61fa5114c9520cb976c77c0ad8d0ddd479b2f8b057fc8cf",
+      "classification": "evidence"
+    },
+    {
+      "id": "article-inventory",
+      "source_type": "product_evidence",
+      "source_locator": "ASAP article inventory compiled for the five core animal pages",
+      "captured_at": "2026-08-13T18:46:00-04:00",
+      "finding": "Existing article links and editorial gaps are explicitly separated, so the page does not present missing content as published proof.",
+      "source_artifact": "copy-sources/article-inventory.md",
+      "source_fingerprint": "817644772625bc495ac4a6f426561ca7d069815c78ac7b9c1dd99d1d9028c102",
+      "classification": "evidence"
+    }
+  ],
+  "source_identity_review": {
+    "independent": true,
+    "status": "pending",
+    "reviewer_family": "fable",
+    "receipt_path": "../../_verification/asap-rodent-phase2/fable-exact-review-receipt.md",
+    "receipt_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "route_mode": "subscription",
+    "spilled": false,
+    "checked_unit_ids": [
+      "client-corrections",
+      "client-working-session",
+      "official-guidance",
+      "customer-reviews",
+      "article-inventory"
+    ]
+  },
+  "best_buyer_research": {
+    "audience": "Metro Atlanta homeowners and property decision-makers who hear, see, or find possible rodent or wildlife activity and need the correct service path.",
+    "status": "evidence-backed client and service synthesis; no fabricated voice-of-customer",
+    "buying_triggers": [
+      "unexplained attic or wall noise",
+      "droppings, gnawing, contamination, or visible entry damage",
+      "need to understand removal, repair, cleanup, or monitoring options"
+    ],
+    "objections": [
+      "uncertainty about which animal is present",
+      "concern that trapping alone will not prevent recurrence",
+      "uncertainty about safety, seasonality, scope, and warranty"
+    ],
+    "desired_outcomes": [
+      "choose the correct service page",
+      "understand what an inspection can determine",
+      "request a property-specific next step without an exaggerated promise"
+    ],
+    "evidence_refs": [
+      "client-corrections",
+      "client-working-session",
+      "official-guidance",
+      "customer-reviews",
+      "article-inventory"
+    ]
+  },
+  "claim_proof_ledger": [
+    {
+      "claim_id": "capability-rodent-plan",
+      "claim": "A property-specific Rodent plan may address inspection, animal-specific control, entry-point repair, cleanup options, and monitoring after the findings are known.",
+      "proof_locator": "content/rodent-intent-evidence.json and Nehemiah's 2026-08-11 corrections",
+      "status": "verified",
+      "claim_kind": "capability",
+      "evidence_refs": ["client-corrections", "official-guidance"]
+    },
+    {
+      "claim_id": "testimonial-mark-carroll",
+      "claim": "Mark Carroll's recorded review praises on-time service and a detailed overview of the problem and repair options.",
+      "proof_locator": "SITE-INVENTORY.md review table and linked Google review destination",
+      "status": "verified",
+      "claim_kind": "testimonial",
+      "evidence_refs": ["customer-reviews"]
+    },
+    {
+      "claim_id": "testimonial-kelsey-monaghan",
+      "claim": "Kelsey Monaghan's recorded review describes the work as quick, thorough, professional, and easy to work with.",
+      "proof_locator": "SITE-INVENTORY.md review table and linked Google review destination",
+      "status": "verified",
+      "claim_kind": "testimonial",
+      "evidence_refs": ["customer-reviews"]
+    },
+    {
+      "claim_id": "testimonial-fred-perry",
+      "claim": "Fred Perry's recorded review recommends ASAP's skilled and professional technicians.",
+      "proof_locator": "SITE-INVENTORY.md review table and linked Google review destination",
+      "status": "verified",
+      "claim_kind": "testimonial",
+      "evidence_refs": ["customer-reviews"]
+    }
+  ],
+  "message_story_map": {
+    "primary_job": "Help a visitor distinguish broad Rodent intent from specific animal-service intent and take a phone or inspection-request action.",
+    "audience_state": "Concerned and uncertain, with one or more clues but no verified species diagnosis or property scope.",
+    "sequence": [
+      "name the broad category and immediate actions",
+      "explain what a complete plan may include",
+      "route four distinct specific-service intents",
+      "show the property-specific inspection pattern",
+      "separate service scope, education, attributable proof, FAQ, and contact"
+    ],
+    "proof_map": [
+      "client-supplied identity and phone",
+      "primary-source UGA, CDC, and Georgia DNR guidance",
+      "attributable current-site review excerpts",
+      "explicit local-review and scope boundaries"
+    ],
+    "objections": [
+      "I do not know which animal is present",
+      "I do not know whether trapping, repair, cleanup, or monitoring applies",
+      "I do not want a webpage to overstate health, warranty, timing, or availability"
+    ],
+    "action": "Call 770-691-3636 or validate the local inspection-request fixture; live delivery remains a separate gate."
+  },
+  "surface_brief": {
+    "surface": "ASAP Rodent umbrella website landing page, local/review state",
+    "voice_constraints": "Warm, humane, calm, action-clear, evidence-qualified, and close to the current ASAP site; no clinical alarmism or unsupported certainty.",
+    "accessibility_constraints": "One H1, semantic headings, keyboard-operable FAQ and form, visible focus and status, 44px-plus actions, responsive recomposition, reduced-motion parity, descriptive alternative text."
+  },
+  "seven_sweeps": [
+    {"id": "clarity", "status": "pass", "finding": "Broad Rodent intent and each specific owner are named separately."},
+    {"id": "voice_tone", "status": "pass", "finding": "The page stays calm, warm, direct, and avoids panic language."},
+    {"id": "so_what", "status": "pass", "finding": "Each section moves the reader toward identification, scope understanding, or the correct action."},
+    {"id": "prove_it", "status": "pass", "finding": "Material guidance and testimonials have visible source or destination links."},
+    {"id": "specificity", "status": "pass", "finding": "Routes, service components, phone, area, and form context are explicit."},
+    {"id": "heightened_emotion", "status": "pass", "finding": "Relief and agency are increased without increasing factual certainty or fear."},
+    {"id": "zero_risk", "status": "pass", "finding": "Diagnosis, warranty, rights, form delivery, client acceptance, and production limits remain explicit."}
+  ],
+  "ethical_persuasion": [
+    {
+      "lever": "authority",
+      "truth_basis": "The page links UGA, CDC, and Georgia DNR primary guidance for the exact bounded statements used.",
+      "reader_agency": "Sources are visible and inspection remains the decision point; the page does not claim a diagnosis.",
+      "proof_locator": "content/rodent-intent-evidence.json",
+      "honorable_fulfillment": true
+    },
+    {
+      "lever": "social_proof",
+      "truth_basis": "Three attributable excerpts are preserved from the current-site inventory and link to the Google review destination.",
+      "reader_agency": "The visitor can inspect the destination; no review count, recency, or outcome is inferred.",
+      "proof_locator": "SITE-INVENTORY.md",
+      "honorable_fulfillment": true
+    },
+    {
+      "lever": "risk_reversal",
+      "truth_basis": "The page says service availability, final scope, and any warranty are confirmed after inspection and in writing.",
+      "reader_agency": "No guarantee or blanket availability promise is offered.",
+      "proof_locator": "peace-of-mind-from/rodents/index.html",
+      "honorable_fulfillment": true
+    }
+  ],
+  "experiment": {
+    "status": "planned",
+    "metric": "Qualified calls and form submissions attributed to the Rodent umbrella, plus route clicks to each specific animal owner",
+    "window": "First 30 days after separately authorized production deployment and verified analytics/lead-handler cutover",
+    "hypothesis": "The explicit umbrella router will preserve specific intent ownership while helping uncertain visitors choose an appropriate next step."
+  }
+}

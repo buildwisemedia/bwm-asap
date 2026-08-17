@@ -1,0 +1,38 @@
+{
+  "schema_version": "bwm-design-anchor-manifest/1.0.0",
+  "identity_record_hash": "e10f1fcc487847faff6d90aed84e4eb99c457777f88453e6efef97a333349c99",
+  "content_hash": "3d1eedce4865bb0a82bdb60ad0edb835736346db5a5bc744643c4e9a0ab8fff8",
+  "scope_hash": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a",
+  "anchors": [
+    {
+      "id": "asap-identity",
+      "kind": "identity",
+      "source_locator": "../../_verification/asap-close-preflight/identity_record.json",
+      "source_sha256": "e10f1fcc487847faff6d90aed84e4eb99c457777f88453e6efef97a333349c99"
+    },
+    {
+      "id": "asap-ndb",
+      "kind": "brief",
+      "source_locator": "../../_verification/asap-close-preflight/ndb.json",
+      "source_sha256": "16bcd08a3d9f034c9a9ea220abc3b342f0a8b1148f2660b024b16b32a6bdc3e6"
+    },
+    {
+      "id": "rodent-scope",
+      "kind": "truth",
+      "source_locator": "../rodent-intent-evidence.json",
+      "source_sha256": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a"
+    },
+    {
+      "id": "nehemiah-email",
+      "kind": "research",
+      "source_locator": "/Users/robertechevarria/Documents/Codex/2026-08-13/i-m-going-to-bed-but-2/work/asap-evidence/email/Nehemiah-ASAP-command-center-notes-2026-08-11.txt",
+      "source_sha256": "46ccc2c87cc2c7d8316440befc95facc1434c2b54c9df32d17f05620b7193f18"
+    },
+    {
+      "id": "working-session",
+      "kind": "research",
+      "source_locator": "/Users/robertechevarria/Documents/Codex/2026-08-13/i-m-going-to-bed-but-2/work/asap-evidence/drive/ASAP-WORKING-SESSION-2026-08-12-transcript.md",
+      "source_sha256": "2b040ba11efc4672b49cd90d1f9911a4793a63cb3cdf9ba10a0872582050c118"
+    }
+  ]
+}

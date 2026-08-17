@@ -1,0 +1,35 @@
+{
+  "schema_version": "asap-rodent-review-packet/1.0.0",
+  "state": "local-review-pending-independent-score",
+  "page_sha256": "3d1eedce4865bb0a82bdb60ad0edb835736346db5a5bc744643c4e9a0ab8fff8",
+  "implementation_commit": "cc1bfd0b4c25bd7c055e70d8e54af5d85a401427",
+  "files": [
+    {"path": "rodent-accepted-direction.json", "sha256": "4bdd2662d48fb14f4d151009cd33345cbb6747354ec3ead62fb74e272fa1a97e"},
+    {"path": "rodent-design-anchor-manifest.json", "sha256": "448a805841cadeb50f97de55ae1f632fff11d3bc851745d019b770d75b721be0"},
+    {"path": "rodent-copy-evidence.pending.json", "sha256": "fb710ab90cba806e937104495dff682dafc7ac39f4c74007f0c7864c3129599b"},
+    {"path": "copy-sources/client-corrections.md", "sha256": "6073e0f5d693cca3c5428826f7ee1aa5baebe86a09f0f6f89680650ecffb5698"},
+    {"path": "copy-sources/client-working-session.md", "sha256": "e1604360dc7f599062774df1d98d29a85edd4a3d4d226acbad1c63871a8f3fec"},
+    {"path": "copy-sources/official-guidance.md", "sha256": "61eca98a348142169061659eb03ee55a65dedcee14f39bc904dcc82a3006d07e"},
+    {"path": "copy-sources/customer-reviews.md", "sha256": "7f7a2c48383eaf8bf61fa5114c9520cb976c77c0ad8d0ddd479b2f8b057fc8cf"},
+    {"path": "copy-sources/article-inventory.md", "sha256": "817644772625bc495ac4a6f426561ca7d069815c78ac7b9c1dd99d1d9028c102"},
+    {"path": "rodent-source-proof.md", "sha256": "0c7e76a924e6d4d271a61c4eca28c9e563ef7f6a5848009ce624763b0c8f8d44"},
+    {"path": "rodent-desktop-evidence.md", "sha256": "0e1a58cd7c3e332acbf7450445a9880141f4b2d6cca1f778e667961c6778cabd"},
+    {"path": "rodent-mobile-evidence.md", "sha256": "83076b25acada5126155f84d870dbc8cff7081b2bcc30cef8168eaff8dda063e"},
+    {"path": "rodent-focus-evidence.md", "sha256": "806ecae6abb3982a1216c3e7007ba4482f08c39d7fde79c1937cc13e45c35e6d"},
+    {"path": "rodent-primary-action-evidence.md", "sha256": "78886a842461b1e89100b809daa031906f27ca16022a2aa52d84f9e59c8b8990"},
+    {"path": "rodent-performance-budget.md", "sha256": "b04b515880cf5ad64bf6360bad8cdcab2654ac4a3d693f955facb4373d5c2e21"},
+    {"path": "rodent-seo-technical-evidence.md", "sha256": "94680d14ef183fc8ed5f625042aaec16c78439cf2aed2f95ae99b6e108d7661d"},
+    {"path": "rodent-aeo-answer-evidence.md", "sha256": "17d57c640e9190055bda6735f7a2322384a5f8ad2ce3eedd6d40133f04397e3e"},
+    {"path": "rodent-conversion-path-evidence.md", "sha256": "abfdbfbd2730eaf14f708fea592c7095de3f9009725d3576e3ffee6e8eac1028"},
+    {"path": "rodent-analytics-evidence.md", "sha256": "cc7a8e4b93f45b6f30295e363822424d723474df6cc0ef2f4f757b8faa3393fa"},
+    {"path": "rodent-brain-read-receipt.json", "sha256": "8ca39bceb39646957e4df6145ce3cc30f449c359e9479e683d5fd693420b26e9"},
+    {"path": "rodent-author-route-receipt.json", "sha256": "2025bca775ace324ab3d5f1e180c68f2ec7447064ebf1c8b82249ff01b3404f4"},
+    {"path": "rodent-design-gate-pending.md", "sha256": "2aca2bec7df7ca03f81f98f25897a8acd22db19d07eb608ff6ebe7ed3f2ef80a"}
+  ],
+  "unresolved": [
+    "Fable source-identity review receipt",
+    "Fable binding dimension scores",
+    "Fable open-ended unlisted-defect review",
+    "Human approval, send authorization, deployment, and live QA"
+  ]
+}
