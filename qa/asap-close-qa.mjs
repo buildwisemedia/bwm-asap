@@ -17,6 +17,14 @@ function check(ok, label, detail = "") {
 }
 function count(html, pattern) { return [...html.matchAll(pattern)].length; }
 function strip(url) { return url.replace("https://removeasap.com/", ""); }
+function sha256(value) { return createHash("sha256").update(value).digest("hex"); }
+function plainText(value) {
+  return value
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 for (const route of routes) {
   const file = join(root, route, "index.html");
@@ -93,6 +101,52 @@ const articleInventory = JSON.parse(readFileSync(join(root, "content/asap-articl
 check(articleInventory.pages.length === 5, "Article inventory: five core pages");
 check(articleInventory.pages.every((page) => page.slots.length === 3), "Article inventory: exactly three slots per core page");
 check(articleInventory.pages.some((page) => page.slots.some((slot) => slot.status === "Editorial gap")), "Article inventory: gaps explicit");
+
+const lineup = JSON.parse(readFileSync(join(root, "content/design/animal-lineup-manifest.json"), "utf8"));
+const namedPaths = [
+  "peace-of-mind-from/rodents/index.html",
+  "wildlife/mouse-rat/index.html",
+  "wildlife/gray-squirrel/index.html",
+  "wildlife/raccoon/index.html",
+  "wildlife/bats/index.html"
+];
+check(lineup.schema_version === "asap-animal-lineup/1.0.0", "Animal lineup: schema version is explicit");
+check(lineup.lineup_source?.named_pages === 5 && lineup.pages?.length === 5, "Animal lineup: five explicit named pages, not an invented sixth");
+check(lineup.lineup_source?.ambiguity_boundary?.includes("says 'six pages'") && lineup.lineup_source?.ambiguity_boundary?.includes("does not invent"), "Animal lineup: six-versus-five source ambiguity is preserved");
+check(namedPaths.every((path) => lineup.pages.some((page) => page.path === path)), "Animal lineup: all five approved named paths are bound");
+check(new Set(lineup.pages.map((page) => page.path)).size === 5, "Animal lineup: page paths are unique");
+check(new Set(lineup.pages.map((page) => page.owner_phrase)).size === 5, "Animal lineup: owner phrases are unique");
+
+for (const page of lineup.pages) {
+  const htmlBuffer = readFileSync(join(root, page.path));
+  const html = htmlBuffer.toString("utf8");
+  const title = plainText(html.match(/<title>([\s\S]*?)<\/title>/i)?.[1] || "");
+  const h1 = plainText(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || "");
+  const logoBuffer = readFileSync(join(root, page.logo_path));
+  check(sha256(htmlBuffer) === page.page_sha256, `Animal lineup: ${page.path} exact artifact hash`);
+  check(sha256(logoBuffer) === page.logo_sha256, `Animal lineup: ${page.path} logo rights hash`);
+  check(title === page.title, `Animal lineup: ${page.path} exact title`, title);
+  check(h1 === page.h1, `Animal lineup: ${page.path} exact visible H1`, h1);
+  check(html.includes(`src="/${page.logo_path}"`), `Animal lineup: ${page.path} uses its bound page logo`);
+  check(html.includes(`data-source-page="${page.url_path}"`), `Animal lineup: ${page.path} source attribution is page-specific`);
+  check(html.includes('data-integration-state="fixture-only"') && html.includes('name="source_page"'), `Animal lineup: ${page.path} stays fixture-only with source field`);
+  check(!html.includes("AggregateRating") && !html.includes("ratingValue"), `Animal lineup: ${page.path} does not publish an aggregate-rating claim`);
+  check(count(html, /class="article-card(?:\s|\")/g) === 3, `Animal lineup: ${page.path} has exactly three article slots`);
+}
+
+const ratLineup = lineup.pages.find((page) => page.url_path === "/wildlife/mouse-rat/");
+check(ratLineup && rat.includes("species-aware") && rat.includes("Recurring bait stations") && rat.includes("scoped separately from trapping or baiting") && rat.includes("Risk varies by species, exposure, and site conditions"), "Animal lineup: rat/mouse proof stays species-, control-, exclusion-, and exposure-qualified");
+const squirrel = readFileSync(join(root, "wildlife/gray-squirrel/index.html"), "utf8");
+check(squirrel.includes("Gray and Flying Squirrel Control") && squirrel.includes("Dependent young can change") && squirrel.includes("only after the active-animal plan is clear"), "Animal lineup: squirrel proof preserves species and dependent-young timing");
+const raccoon = readFileSync(join(root, "wildlife/raccoon/index.html"), "utf8");
+check(raccoon.includes("possible young") && raccoon.includes("Not until the active-animal and possible-young situation is understood") && raccoon.includes("Evaluate droppings, nesting material, odor, and insulation before specifying cleanup"), "Animal lineup: raccoon proof blocks premature sealing and invented cleanup scope");
+check(bat.includes("April 1 through July 31") && bat.includes("does not mean every bat-related service stops") && bat.includes("Guano and insulation") && bat.includes("DSV-labeled"), "Animal lineup: bat proof preserves season, service, cleanup, and label boundaries");
+check(rodentIntentTargets.every(([target, href]) => rodent.includes(`data-intent-target="${target}"`) && rodent.includes(`href="${href}"`)), "Animal lineup: umbrella routes to all four protected owners");
+check(lineup.pages.every((page) => {
+  const inventoryPage = articleInventory.pages.find((item) => item.page === page.url_path || item.page_path === page.url_path || item.path === page.url_path || item.url === page.url_path);
+  return inventoryPage ? inventoryPage.slots.length === 3 : false;
+}), "Animal lineup: every named page has a three-slot inventory record");
+check(lineup.shared_contract?.missing_articles_must_remain_explicit_gaps === true && lineup.human_and_release_gates?.some((gate) => gate.includes("not published articles")), "Animal lineup: editorial gaps stay explicit and unpublished");
 
 const sitemap = readFileSync(join(root, "sitemap.xml"), "utf8");
 for (const route of routes) check(sitemap.includes(`https://removeasap.com/${route}/`), `${route}: included in sitemap`);
