@@ -1,8 +1,8 @@
 {
   "schema_version": "asap-rodent-review-packet/1.0.0",
-  "state": "local-review-independent-pass-machine-revise",
-  "page_sha256": "25c823dd9adedb1188d44894cd029f6cfb3a77555cfcadc0e8933a96283b4c67",
-  "implementation_commit": "eb12e6a29365405c1d1c44accefcf5c09fb127c4",
+  "state": "local-review-reverification-pending",
+  "page_sha256": "7b1b67910b637f7360075f8517e76d8190f709d2a1332ce4854aa0c8a07318ff",
+  "implementation_commit": "8dc79a0829c92588e406f51fa4bfecad6d8d6764",
   "files": [
     {"path": "rodent-accepted-direction.json", "sha256": "4bdd2662d48fb14f4d151009cd33345cbb6747354ec3ead62fb74e272fa1a97e"},
     {"path": "rodent-design-anchor-manifest.json", "sha256": "104cc961db4e06d786f5f241664e3b099e04a371c793a36636ce623b4b4f037e"},
@@ -12,9 +12,10 @@
     {"path": "copy-sources/official-guidance.md", "sha256": "61eca98a348142169061659eb03ee55a65dedcee14f39bc904dcc82a3006d07e"},
     {"path": "copy-sources/customer-reviews.md", "sha256": "7f7a2c48383eaf8bf61fa5114c9520cb976c77c0ad8d0ddd479b2f8b057fc8cf"},
     {"path": "copy-sources/article-inventory.md", "sha256": "817644772625bc495ac4a6f426561ca7d069815c78ac7b9c1dd99d1d9028c102"},
-    {"path": "rodent-source-proof.md", "sha256": "0c7e76a924e6d4d271a61c4eca28c9e563ef7f6a5848009ce624763b0c8f8d44"},
-    {"path": "rodent-desktop-evidence.md", "sha256": "92f3cd1f35e45dc6b5382c7a77b7f8f52f406bd3c840f683880e858be24c840f"},
-    {"path": "rodent-mobile-evidence.md", "sha256": "f55e6fd4d75902c08c19a931185eb7ff7cc910258eb58f7859f2bc893a516b28"},
+    {"path": "rodent-source-proof.md", "sha256": "8a76225e65408a17da811e294cbf41f0f62b66db5fb3e7cb1b58ef5e083457e8"},
+    {"path": "rodent-provider-verification.md", "sha256": "dec9b569ca9c635c67629fd504b269825c83afd8599b44d564d4efd831ae6d26"},
+    {"path": "rodent-desktop-evidence.md", "sha256": "d81839a22ad385b18799853e1a5e3b401c284cf9b3cdaa601857e99c50de2840"},
+    {"path": "rodent-mobile-evidence.md", "sha256": "2c3bb9548dea4a000550c81262db9f0ff00fa54d5ce34f8ddffd5980959d23dd"},
     {"path": "rodent-focus-evidence.md", "sha256": "806ecae6abb3982a1216c3e7007ba4482f08c39d7fde79c1937cc13e45c35e6d"},
     {"path": "rodent-primary-action-evidence.md", "sha256": "78886a842461b1e89100b809daa031906f27ca16022a2aa52d84f9e59c8b8990"},
     {"path": "rodent-performance-budget.md", "sha256": "169b263d2f4d370fc874142fefab0697d161ee0dde0f1d2a4d9f61b97ad531fb"},
@@ -28,8 +29,8 @@
     {"path": "rodent-design-gate.md", "sha256": "ff2b72045d8c980db916f6cde781a853bd051d869e83970c3bc8de272ff9fd46"}
   ],
   "unresolved": [
-    "Licensed URW DIN webfont kit and permission to use it",
-    "Human confirmation of the three named Google rating values and a human-browser CDC link check",
-    "Human approval, supplied-logo production-rights re-confirmation, send authorization, deployment, and live QA"
+    "Human approval of the composed Rodent page and representative protected pattern",
+    "Robert's exact preview-delivery and send authorization",
+    "Deployment authorization, production cutover, and live QA"
   ]
 }

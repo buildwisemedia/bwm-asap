@@ -8,5 +8,6 @@ State: frozen local/review evidence.
 - Asset manifest: `_verification/asap-close-preflight/asset_manifest.json`, SHA-256 `4d369afdb8736a1376316e38fc518c9b46465b5e2ee4064ddb29788600893c18`.
 - Rodent intent/proof packet: `content/rodent-intent-evidence.json`, SHA-256 `cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a`.
 - Client-supplied Rodent page logo: `assets/images/page-logos/rodent.png`, SHA-256 `c159022ecec17adfa01f45b266be5ac20b1515355a7163785bda589ed7f06358`.
+- Current typography/provider/source verification: `content/design/rodent-provider-verification.md`.
 
-The manifest records client-supplied/logo use as local-review pending client production approval. The implementation adds no generated, stock, or cross-client visual. This is a provenance and local-use receipt; it is not production-rights approval.
+Nehemiah supplied the five exact page-logo attachments and directed their use for the named ASAP website pages, including the white-tagline version on dark backgrounds. The implementation adds no generated, stock, or cross-client visual. This proves client supply and intended website-page use of the exact asset; it is not approval of the composed page, preview-delivery authorization, deployment authorization, or a broader ownership claim.
