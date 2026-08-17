@@ -1,6 +1,6 @@
 {
   "schema_version": "asap-rodent-review-packet/1.0.0",
-  "state": "local-review-reverification-pending",
+  "state": "local-review-protected-rereview-unavailable",
   "page_sha256": "7b1b67910b637f7360075f8517e76d8190f709d2a1332ce4854aa0c8a07318ff",
   "implementation_commit": "8dc79a0829c92588e406f51fa4bfecad6d8d6764",
   "files": [
@@ -14,6 +14,7 @@
     {"path": "copy-sources/article-inventory.md", "sha256": "817644772625bc495ac4a6f426561ca7d069815c78ac7b9c1dd99d1d9028c102"},
     {"path": "rodent-source-proof.md", "sha256": "8a76225e65408a17da811e294cbf41f0f62b66db5fb3e7cb1b58ef5e083457e8"},
     {"path": "rodent-provider-verification.md", "sha256": "dec9b569ca9c635c67629fd504b269825c83afd8599b44d564d4efd831ae6d26"},
+    {"path": "rodent-fable-route-receipt.md", "sha256": "0bcfc73db87ba7d6930b1c4f4bd08c276095d7c7aae355e32e69a22e1f7bee01"},
     {"path": "rodent-desktop-evidence.md", "sha256": "d81839a22ad385b18799853e1a5e3b401c284cf9b3cdaa601857e99c50de2840"},
     {"path": "rodent-mobile-evidence.md", "sha256": "2c3bb9548dea4a000550c81262db9f0ff00fa54d5ce34f8ddffd5980959d23dd"},
     {"path": "rodent-focus-evidence.md", "sha256": "806ecae6abb3982a1216c3e7007ba4482f08c39d7fde79c1937cc13e45c35e6d"},
