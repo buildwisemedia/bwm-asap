@@ -13,13 +13,15 @@
     {"path": "assets/images/page-logos/raccoon.png", "sha256": "8449716bbcdebc59bfeeb23c0a55affb382c173495afb9fd4ba722973d202cda", "source": "Nehemiah Ray email attachment 2026-08-11", "intended_use": "Raccoon website page, white tagline on dark background", "local_review_rights": "pass"},
     {"path": "assets/images/page-logos/bat.png", "sha256": "f9cd235e7805f676b588082c678c6346e89a5f1b50934767317a7b60fbb4a94e", "source": "Nehemiah Ray email attachment 2026-08-11", "intended_use": "Bat and Guano website page, white tagline on dark background", "local_review_rights": "pass"}
   ],
+  "tagline_color_reconciliation": "The attachment filenames use CreamTagline; the client correction calls the same light-on-dark variant the white-tagline logo. This is source wording for the same five hash-bound files, not a second asset set.",
   "existing_client_site_assets": [
     {"path": "assets/images/animals/rat-navy-optimized.webp", "sha256": "c083700e3a18b6895902db5507ba8a477e89a41b14e27c1d8d045c1881cf1a4f", "base_commit_blob": "d44d893058fb455452003b139bf74897d0a99a42", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"},
     {"path": "assets/images/logos/logo-orange-tagline.png", "sha256": "7237000e753272049985fb270a8747f0d679acd9a4c0d443901000920026c3cb", "base_commit_blob": "a07872051bcacd6ed4348b65dcb4483a6474e499", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"},
     {"path": "assets/images/wildlife-grid/mouse-rat.png", "sha256": "dd1fc1064f12789c5075ecc633eb1f42a9d200e11d8d2e985aba0538f92c3006", "base_commit_blob": "ceb967868845d63a616d9422921a7246ddd07d7d", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"},
     {"path": "assets/images/wildlife-grid/gray-squirrel.png", "sha256": "b8ce484c3607c5a98af77abdec198fa24579c1c16fab5a3fad2725ee0bd18986", "base_commit_blob": "1dcef96fc00139d034be3cc79a8a3bb9ee0be3d0", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"},
     {"path": "assets/images/animals/raccoon-optimized.webp", "sha256": "d254e000b11537ec9b95f61488f288ab89634a679b95eddff0b70dc82dbce786", "base_commit_blob": "2fadccb9ec6c7f232bb90059c52c2a6d3584738b", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"},
-    {"path": "assets/images/wildlife-grid/bat.webp", "sha256": "42ad4a4eeabd6d56bfd75f00e34ad72b3e4f540e9605d0be6bb317d22fce0eda", "base_commit_blob": "13f7430fc8220ee2abe82f1cb5ed76deddc61607", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"}
+    {"path": "assets/images/wildlife-grid/bat.webp", "sha256": "42ad4a4eeabd6d56bfd75f00e34ad72b3e4f540e9605d0be6bb317d22fce0eda", "base_commit_blob": "13f7430fc8220ee2abe82f1cb5ed76deddc61607", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"},
+    {"path": "assets/images/logos/favicon.png", "sha256": "b11bfa22e34619cb4f105ba08aa9e1dacd00b3f4cff240931bfc455e4ea114a5", "base_commit_blob": "776e7b67e9b146a829d94df8ae89a9e5000ec097", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"}
   ],
   "visual_asset_boundary": {
     "ai_generated_assets": 0,
@@ -44,6 +46,7 @@
     "body_content_copied_into_site": false,
     "authorship_observation": "All nine exact links resolve directly or by redirect to Nehemiah Ray / @ASAPwildlife.",
     "production_attachment_status": "held-editorial-remediation",
+    "hold_semantics": "The links are present in the exact local/review pages. Hold means they must not be promoted to production as-is; it does not mean the links are absent from the artifact.",
     "items": [
       {"id": "d51cb888c843", "title": "Rodent Winter Roommates — Why Rodents move in when it’s cold", "status": "hold", "finding": "Blanket 100% results and warranty language, outdated destination language, and factual claims need source review."},
       {"id": "ef190a50c3c6", "title": "Rats & Sqrls are BFF’s: 13 Crazy Common Traits", "status": "hold", "finding": "Broad behavior claims and third-party media references need editorial/source review before attachment."},
