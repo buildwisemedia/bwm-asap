@@ -36,8 +36,12 @@ for (const route of routes) {
   for (const field of ["lead_id", "source_page", "utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"]) {
     check(html.includes(`name="${field}"`), `${route}: attribution field ${field}`);
   }
-  check(html.includes("Local/review fixture") && html.includes("sends nothing") || html.includes("no external delivery"), `${route}: no-send state disclosed`);
+  check((html.includes("Local/review fixture") && html.includes("sends nothing")) || html.includes("no external delivery"), `${route}: no-send state disclosed`);
   check(html.includes("skip-link") && html.includes('aria-live="polite"'), `${route}: skip link and live form state`);
+  if (html.includes('aria-labelledby="reviews-title"')) {
+    check(html.includes('id="reviews-title"'), `${route}: reviews section has an accessible name`);
+    check(!html.includes("5 out of 5 stars") && html.includes('<div class="stars" aria-hidden="true">'), `${route}: review motif does not assert an unverified rating`);
+  }
   check(!/<img(?![^>]*\balt=)[^>]*>/i.test(html), `${route}: every image has alt attribute`);
 }
 

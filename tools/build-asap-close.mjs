@@ -302,8 +302,9 @@ function hero(page) {
 <div class="proof-strip"><ul class="proof-list"><li><strong>Correct phone</strong><span>${phone}</span></li><li><strong>Calm, clear help</strong><span>Urgency without panic</span></li><li><strong>Full plan</strong><span>Inspect · control · repair · cleanup</span></li><li><strong>Metro Atlanta</strong><span>Address confirmed before service</span></li></ul></div>`;
 }
 
-function heading(kicker, title) {
-  return `<div class="section-heading"><p class="kicker">${esc(kicker)}</p><h2>${esc(title)}</h2><div class="heading-rule" aria-hidden="true"></div></div>`;
+function heading(kicker, title, id = "") {
+  const idAttribute = id ? ` id="${esc(id)}"` : "";
+  return `<div class="section-heading"><p class="kicker">${esc(kicker)}</p><h2${idAttribute}>${esc(title)}</h2><div class="heading-rule" aria-hidden="true"></div></div>`;
 }
 
 function flashlight() {
@@ -326,12 +327,12 @@ function intentRouter(page) {
 
 function reviews() {
   const cards = [
-    ["The service was excellent. Arrived on time and gave me a detailed overview of the problem and repair options.", "Mark Carroll"],
-    ["The work was completed quickly and thoroughly. Chaz was professional and wonderful to work with.", "Kelsey Monaghan"],
-    ["Highly skilled and professional technicians. I’d recommend ASAP.", "Fred Perry"]
+    ["The service was excellent! Arrived on time. Gave me a detailed overview of the problem and rodents that invaded the house. Gave me 3 different price options for repair and installed the first phase immediately.", "Mark Carroll"],
+    ["If you have ANY concerns with unwanted animals in/around your home, do yourself a favor and call Chaz! He has taken care of two separate issues at my house and both jobs were completed quickly & thoroughly. Chaz is very professional and is wonderful to work with!", "Kelsey Monaghan"],
+    ["ASAP is an excellent service provider with a team of highly skilled and professional technicians. I’d highly recommend.", "Fred Perry"]
   ];
-  return `<section class="section texture" aria-labelledby="reviews-title"><div class="container">${heading("What homeowners say", "Real review excerpts")}
-  <div class="three-col">${cards.map(([quote, name]) => `<article class="review-card"><a href="${reviewUrl}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>“${esc(quote)}”</p><cite>${esc(name)}</cite></a></article>`).join("")}</div>
+  return `<section class="section texture" aria-labelledby="reviews-title"><div class="container">${heading("What homeowners say", "Real review excerpts", "reviews-title")}
+  <div class="three-col">${cards.map(([quote, name]) => `<article class="review-card"><a href="${reviewUrl}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-hidden="true">★★★★★</div><p>“${esc(quote)}”</p><cite>${esc(name)}</cite></a></article>`).join("")}</div>
   <div class="actions"><a class="button" href="${reviewUrl}" target="_blank" rel="noopener noreferrer">Read Google reviews</a></div></div></section>`;
 }
 
