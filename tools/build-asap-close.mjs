@@ -279,6 +279,8 @@ function head(page, faqs) {
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/assets/images/logos/favicon.png">
   <link rel="stylesheet" href="/assets/css/asap-close.css?v=${cssVersion}">
+  <script>/* Existing ASAP Adobe Fonts kit; delay the network request while fallback text remains visible. */
+(function(){var done=false;function load(){if(done)return;done=true;var s=document.createElement('script');s.async=true;s.src='https://use.typekit.net/dmg8gvn.js';s.onload=function(){try{Typekit.load({async:true});}catch(e){}};document.head.appendChild(s);}['pointerdown','keydown','touchstart','scroll'].forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});window.addEventListener('load',function(){setTimeout(load,15000);},{once:true});})();</script>
   <script type="application/ld+json">${json(baseSchema(page, faqs))}</script>
 </head>`;
 }

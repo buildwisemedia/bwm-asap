@@ -32,6 +32,7 @@ for (const route of routes) {
   check(html.includes("770-691-3636") && html.includes("+17706913636"), `${route}: correct phone display and tel`);
   check(!badTokens.some((token) => html.toLowerCase().includes(token.toLowerCase())), `${route}: no rejected token or phone`);
   check(html.includes("/assets/css/asap-close.css") && html.includes("/assets/js/asap-close.js"), `${route}: shared pattern assets`);
+  check(html.includes("https://use.typekit.net/dmg8gvn.js") && html.includes("Typekit.load({async:true})"), `${route}: established ASAP URW DIN kit loader`);
   check(html.includes("data-asap-lead-form") && html.includes('data-integration-state="fixture-only"'), `${route}: form fixture state`);
   for (const field of ["lead_id", "source_page", "utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"]) {
     check(html.includes(`name="${field}"`), `${route}: attribution field ${field}`);
