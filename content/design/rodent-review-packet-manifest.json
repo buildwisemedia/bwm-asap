@@ -1,6 +1,6 @@
 {
   "schema_version": "asap-rodent-review-packet/1.0.0",
-  "state": "local-review-pending-independent-score",
+  "state": "local-review-independent-pass-machine-revise",
   "page_sha256": "25c823dd9adedb1188d44894cd029f6cfb3a77555cfcadc0e8933a96283b4c67",
   "implementation_commit": "eb12e6a29365405c1d1c44accefcf5c09fb127c4",
   "files": [
@@ -24,11 +24,12 @@
     {"path": "rodent-analytics-evidence.md", "sha256": "cc7a8e4b93f45b6f30295e363822424d723474df6cc0ef2f4f757b8faa3393fa"},
     {"path": "rodent-brain-read-receipt.json", "sha256": "8ca39bceb39646957e4df6145ce3cc30f449c359e9479e683d5fd693420b26e9"},
     {"path": "rodent-author-route-receipt.json", "sha256": "03859c9fe311a537f474c2fc30dfa0cebbd99df0fe37518bdfc0ab225994203c"},
-    {"path": "rodent-design-gate-pending.md", "sha256": "b5acd3a69cdf7255ec55a288ca09c538c43efa0905815891dfa865b6c32872ed"}
+    {"path": "rodent-design-run.json", "sha256": "4b3f34c58578225c5ce2a3d6d015f500cee381972e43881ba0ac72ab1eb3668e"},
+    {"path": "rodent-design-gate.md", "sha256": "ff2b72045d8c980db916f6cde781a853bd051d869e83970c3bc8de272ff9fd46"}
   ],
   "unresolved": [
-    "Post-fix Fable binding dimension scores",
-    "Post-fix Fable open-ended unlisted-defect review",
-    "Human approval, send authorization, deployment, and live QA"
+    "Licensed URW DIN webfont kit and permission to use it",
+    "Human confirmation of the three named Google rating values and a human-browser CDC link check",
+    "Human approval, supplied-logo production-rights re-confirmation, send authorization, deployment, and live QA"
   ]
 }

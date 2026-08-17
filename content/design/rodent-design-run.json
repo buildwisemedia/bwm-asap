@@ -1,0 +1,180 @@
+{
+  "schema_version": "bwm-design-run/1.1.0",
+  "task_id": "PROJ-ASAP-ANIMAL-SALES-PAGES-PHASE-2",
+  "artifact_id": "asap-rodent-umbrella-25c823dd9ade",
+  "surface_module": "website_landing",
+  "process_tier": "locked-direction-implementation",
+  "identity": {
+    "class": "client",
+    "resolver_version": "ndb-2.0",
+    "record_hash": "e10f1fcc487847faff6d90aed84e4eb99c457777f88453e6efef97a333349c99",
+    "source_hashes": [
+      "16bcd08a3d9f034c9a9ea220abc3b342f0a8b1148f2660b024b16b32a6bdc3e6",
+      "12b53ce84e9917a224f66c7a225429b86b99f084bfce883ea88dc56462695be8"
+    ],
+    "prohibited_inheritance": [
+      "cross-client trade dress",
+      "AI-generated or stock animal imagery",
+      "the rejected disconnected development direction"
+    ]
+  },
+  "truth_packet": {
+    "frozen": true,
+    "content_hash": "25c823dd9adedb1188d44894cd029f6cfb3a77555cfcadc0e8933a96283b4c67",
+    "scope_hash": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a",
+    "asset_manifest_hash": "4d369afdb8736a1376316e38fc518c9b46465b5e2ee4064ddb29788600893c18",
+    "proof_manifest_hash": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a",
+    "anchor_manifest_path": "rodent-design-anchor-manifest.json",
+    "anchor_manifest_sha256": "104cc961db4e06d786f5f241664e3b099e04a371c793a36636ce623b4b4f037e"
+  },
+  "provenance": {
+    "author_family": "sol",
+    "author_model": "gpt-5.6-sol",
+    "author_effort": "high",
+    "author_harness": "codex",
+    "contract_version": "bwm-design-run/1.1.0",
+    "brain_contract_path": "specs/Spec-Art-Direction-and-Information-Design.md",
+    "brain_contract_sha": "0ff1960705acde36d2ac25336e3f17db7de94ff7",
+    "source_skill_path": "/Users/robertechevarria/.bwm-agents/skills/bwm-design-department/SKILL.md",
+    "source_skill_sha256": "91837a8b99cb04085e8512be290a77f5dbe5fd1a668c89c524c41f737a804213",
+    "installed_skill_path": "/Users/robertechevarria/Documents/Codex/2026-08-11/d2s-approvals-redesign/work/design2sell/_verification/installed-bwm-design-department-SKILL.md",
+    "installed_skill_sha256": "91837a8b99cb04085e8512be290a77f5dbe5fd1a668c89c524c41f737a804213",
+    "brain_read_receipt_path": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site/content/design/rodent-brain-read-receipt.json",
+    "brain_read_receipt_sha256": "8ca39bceb39646957e4df6145ce3cc30f449c359e9479e683d5fd693420b26e9",
+    "author_route_receipt_path": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site/content/design/rodent-author-route-receipt.json",
+    "author_route_receipt_sha256": "03859c9fe311a537f474c2fc30dfa0cebbd99df0fe37518bdfc0ab225994203c",
+    "iteration_count": 2
+  },
+  "inherited_direction": {
+    "record_path": "rodent-accepted-direction.json",
+    "record_sha256": "4bdd2662d48fb14f4d151009cd33345cbb6747354ec3ead62fb74e272fa1a97e"
+  },
+  "evidence": {
+    "items": [
+      {"class": "A", "type": "desktop", "locator": "rodent-desktop-evidence.md", "sha256": "92f3cd1f35e45dc6b5382c7a77b7f8f52f406bd3c840f683880e858be24c840f"},
+      {"class": "A", "type": "mobile", "locator": "rodent-mobile-evidence.md", "sha256": "f55e6fd4d75902c08c19a931185eb7ff7cc910258eb58f7859f2bc893a516b28"},
+      {"class": "I", "type": "focus", "locator": "rodent-focus-evidence.md", "sha256": "806ecae6abb3982a1216c3e7007ba4482f08c39d7fde79c1937cc13e45c35e6d"},
+      {"class": "I", "type": "primary-action", "locator": "rodent-primary-action-evidence.md", "sha256": "78886a842461b1e89100b809daa031906f27ca16022a2aa52d84f9e59c8b8990"},
+      {"class": "S", "type": "source-proof", "locator": "rodent-source-proof.md", "sha256": "0c7e76a924e6d4d271a61c4eca28c9e563ef7f6a5848009ce624763b0c8f8d44"},
+      {"class": "S", "type": "copy-evidence-packet", "locator": "rodent-copy-evidence.json", "sha256": "55a8339ac94048f64fcd073240ab8101250c633caa0ad1bc8995d5c7165f79d0"},
+      {"class": "J", "type": "performance-budget", "locator": "rodent-performance-budget.md", "sha256": "169b263d2f4d370fc874142fefab0697d161ee0dde0f1d2a4d9f61b97ad531fb"},
+      {"class": "J", "type": "seo-technical", "locator": "rodent-seo-technical-evidence.md", "sha256": "94680d14ef183fc8ed5f625042aaec16c78439cf2aed2f95ae99b6e108d7661d"},
+      {"class": "S", "type": "aeo-answer-surface", "locator": "rodent-aeo-answer-evidence.md", "sha256": "17d57c640e9190055bda6735f7a2322384a5f8ad2ce3eedd6d40133f04397e3e"},
+      {"class": "I", "type": "conversion-path", "locator": "rodent-conversion-path-evidence.md", "sha256": "abfdbfbd2730eaf14f708fea592c7095de3f9009725d3576e3ffee6e8eac1028"},
+      {"class": "J", "type": "analytics-instrumentation", "locator": "rodent-analytics-evidence.md", "sha256": "cc7a8e4b93f45b6f30295e363822424d723474df6cc0ef2f4f757b8faa3393fa"}
+    ],
+    "measured": {
+      "accessibility": true,
+      "responsive": true,
+      "performance": true
+    }
+  },
+  "evaluation": {
+    "status": "complete-independent-fable-pass",
+    "scorer": {
+      "family": "fable",
+      "independent": true,
+      "fresh_context": true,
+      "route_mode": "subscription",
+      "spilled": false,
+      "receipt_path": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site/_verification/asap-rodent-phase2/fable-exact-review-post-fix-receipt.md",
+      "receipt_sha256": "9ebb0cf9e65cd9d27e0f32a6d5a7adf43944a9586ee44932647775464f259135"
+    },
+    "unlisted_defect_review": {
+      "completed": true,
+      "independent": true,
+      "reviewer_family": "fable",
+      "route_mode": "subscription",
+      "spilled": false,
+      "receipt_path": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site/_verification/asap-rodent-phase2/fable-exact-review-post-fix-receipt.md",
+      "receipt_sha256": "9ebb0cf9e65cd9d27e0f32a6d5a7adf43944a9586ee44932647775464f259135",
+      "findings": [],
+      "reclassifications": []
+    },
+    "hard_blockers": [],
+    "dimension_scores": [
+      {"id": "identity_source_fidelity", "score": 93, "evidence_locators": ["rodent-source-proof.md"]},
+      {"id": "information_architecture", "score": 95, "evidence_locators": ["rodent-desktop-evidence.md", "rodent-conversion-path-evidence.md"]},
+      {
+        "id": "typography_hierarchy",
+        "score": 88,
+        "evidence_locators": ["rodent-desktop-evidence.md", "rodent-mobile-evidence.md"],
+        "accounting": {
+          "intent": "Preserve the accepted current-site outlined display hierarchy and highly legible body/action roles.",
+          "reference_relationship": "The hierarchy follows the client-supplied current-site computation and does not import another client's type system.",
+          "surface_specific_anchor": "The hero, section headings, router labels, proof band, FAQ, and action hierarchy remain inspectable at both recorded viewports.",
+          "inspection_note": "Fable scored the hierarchy 88 because the licensed URW DIN kit is absent and the local artifact truthfully renders its fallback.",
+          "earned_by": ["nehemiah-email", "asap-identity"],
+          "must_not_obscure": ["value_mechanism"]
+        }
+      },
+      {
+        "id": "composition_spatial_rhythm",
+        "score": 90,
+        "evidence_locators": ["rodent-desktop-evidence.md", "rodent-mobile-evidence.md"],
+        "accounting": {
+          "intent": "Use the accepted cream, navy, orange, asymmetric-card, and centered-current-site rhythm while allowing mobile recomposition.",
+          "reference_relationship": "Composition relationships come from the approved ASAP direction, not a borrowed page sequence.",
+          "surface_specific_anchor": "Four desktop router columns become 370 px mobile cards without page overflow; exact testimonial excerpts remain readable in unequal mobile heights.",
+          "inspection_note": "Desktop and mobile browser evidence showed zero horizontal overflow and preserved the answer-to-action sequence.",
+          "earned_by": ["nehemiah-email", "working-session"],
+          "must_not_obscure": ["responsive_recomposition"]
+        }
+      },
+      {
+        "id": "imagery_art_direction",
+        "score": 92,
+        "evidence_locators": ["rodent-source-proof.md", "rodent-desktop-evidence.md"],
+        "accounting": {
+          "intent": "Use only the existing ASAP illustration system and the client-supplied Rodent logo.",
+          "reference_relationship": "The rat illustration and page lockup preserve the current-site visual register with no AI, stock, or cross-client media.",
+          "surface_specific_anchor": "The rendered hero and contact lockup resolve to assets whose local provenance and rights state are hash-bound.",
+          "inspection_note": "Fable verified the Rodent logo hash against the client-supplied rights record and found no broken image or foreign identity.",
+          "earned_by": ["asap-identity", "asap-ndb"],
+          "must_not_obscure": ["audience_category"]
+        }
+      },
+      {
+        "id": "storytelling_information_design",
+        "score": 93,
+        "evidence_locators": ["rodent-aeo-answer-evidence.md", "rodent-conversion-path-evidence.md"],
+        "accounting": {
+          "intent": "Move an uncertain visitor from broad clues to bounded guidance, distinct service owners, property-specific scope, proof, FAQ, and action.",
+          "reference_relationship": "The sequence extends the accepted ASAP direction while protecting the five recorded intent owners.",
+          "surface_specific_anchor": "The answer-first module, four-way router, official-source note, scope cards, and explicit editorial gap expose both meaning and uncertainty.",
+          "inspection_note": "Fable verified that Raccoon and Bat are marked not rodents and that the umbrella does not repeat the four protected owner phrases.",
+          "earned_by": ["rodent-scope", "working-session"],
+          "must_not_obscure": ["proof_boundary"]
+        }
+      },
+      {"id": "copy_proof_action", "score": 94, "evidence_locators": ["rodent-copy-evidence.json", "rodent-primary-action-evidence.md"]},
+      {
+        "id": "motion_interaction_restraint",
+        "score": 96,
+        "evidence_locators": ["rodent-focus-evidence.md", "rodent-primary-action-evidence.md"],
+        "accounting": {
+          "intent": "Keep required meaning visible without animation and reserve interaction for FAQ, focus, form validation, and direct actions.",
+          "reference_relationship": "Stillness is the accepted corrective relationship after delayed-logo and empty-band failures in the rejected direction.",
+          "surface_specific_anchor": "FAQ disclosure, error focus, fixture success, and reduced-motion parity remain available without scroll-reveal or autoplay behavior.",
+          "inspection_note": "Fable found no motion dependency, no hidden content, and no external form send path.",
+          "earned_by": ["nehemiah-email", "working-session"],
+          "must_not_obscure": ["primary_action"],
+          "motion_choice": {
+            "mode": "still",
+            "rationale": "The visitor's identification and action decisions do not require causal animation; stillness improves reliability and comprehension."
+          }
+        }
+      },
+      {"id": "accessibility_responsive_performance", "score": 89, "evidence_locators": ["rodent-focus-evidence.md", "rodent-mobile-evidence.md", "rodent-performance-budget.md"]},
+      {"id": "ownership_portability_continuity", "score": 95, "evidence_locators": ["rodent-source-proof.md", "rodent-analytics-evidence.md"]}
+    ],
+    "composite_score": 92.4,
+    "outcome": "revise"
+  },
+  "state": {
+    "artifact_state": "review",
+    "production_claim": false,
+    "quality_label": "revise",
+    "hil": {"required": true, "status": "pending"}
+  }
+}
