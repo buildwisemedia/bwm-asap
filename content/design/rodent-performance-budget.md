@@ -4,7 +4,7 @@ State: local/review static budget, not Lighthouse or field-performance proof.
 
 | Resource | Measured bytes | Budget | Result |
 |---|---:|---:|---|
-| Rodent HTML | 20,412 | 200,000 | PASS |
+| Rodent HTML | 20,725 | 200,000 | PASS |
 | Shared close CSS | 17,146 | 50,000 | PASS |
 | Shared close JavaScript | 3,882 | 20,000 | PASS |
 | Hero animal WebP (`assets/images/animals/rat-navy-optimized.webp`) | 124,920 | 200,000 | PASS |

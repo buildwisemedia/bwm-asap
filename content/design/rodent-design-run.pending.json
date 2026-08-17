@@ -1,7 +1,7 @@
 {
   "schema_version": "bwm-design-run/1.1.0",
   "task_id": "PROJ-ASAP-ANIMAL-SALES-PAGES-PHASE-2",
-  "artifact_id": "asap-rodent-umbrella-3d1eedce4865",
+  "artifact_id": "asap-rodent-umbrella-25c823dd9ade",
   "surface_module": "website_landing",
   "process_tier": "locked-direction-implementation",
   "identity": {
@@ -20,12 +20,12 @@
   },
   "truth_packet": {
     "frozen": true,
-    "content_hash": "3d1eedce4865bb0a82bdb60ad0edb835736346db5a5bc744643c4e9a0ab8fff8",
+    "content_hash": "25c823dd9adedb1188d44894cd029f6cfb3a77555cfcadc0e8933a96283b4c67",
     "scope_hash": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a",
     "asset_manifest_hash": "4d369afdb8736a1376316e38fc518c9b46465b5e2ee4064ddb29788600893c18",
     "proof_manifest_hash": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a",
     "anchor_manifest_path": "rodent-design-anchor-manifest.json",
-    "anchor_manifest_sha256": "448a805841cadeb50f97de55ae1f632fff11d3bc851745d019b770d75b721be0"
+    "anchor_manifest_sha256": "104cc961db4e06d786f5f241664e3b099e04a371c793a36636ce623b4b4f037e"
   },
   "provenance": {
     "author_family": "sol",
@@ -42,7 +42,7 @@
     "brain_read_receipt_path": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site/content/design/rodent-brain-read-receipt.json",
     "brain_read_receipt_sha256": "8ca39bceb39646957e4df6145ce3cc30f449c359e9479e683d5fd693420b26e9",
     "author_route_receipt_path": "/Users/robertechevarria/Documents/Codex/2026-08-13/asap-website-page-build/work/asap-site/content/design/rodent-author-route-receipt.json",
-    "author_route_receipt_sha256": "2025bca775ace324ab3d5f1e180c68f2ec7447064ebf1c8b82249ff01b3404f4",
+    "author_route_receipt_sha256": "03859c9fe311a537f474c2fc30dfa0cebbd99df0fe37518bdfc0ab225994203c",
     "iteration_count": 2
   },
   "inherited_direction": {
@@ -51,13 +51,13 @@
   },
   "evidence": {
     "items": [
-      {"class": "A", "type": "desktop", "locator": "rodent-desktop-evidence.md", "sha256": "0e1a58cd7c3e332acbf7450445a9880141f4b2d6cca1f778e667961c6778cabd"},
-      {"class": "A", "type": "mobile", "locator": "rodent-mobile-evidence.md", "sha256": "83076b25acada5126155f84d870dbc8cff7081b2bcc30cef8168eaff8dda063e"},
+      {"class": "A", "type": "desktop", "locator": "rodent-desktop-evidence.md", "sha256": "92f3cd1f35e45dc6b5382c7a77b7f8f52f406bd3c840f683880e858be24c840f"},
+      {"class": "A", "type": "mobile", "locator": "rodent-mobile-evidence.md", "sha256": "f55e6fd4d75902c08c19a931185eb7ff7cc910258eb58f7859f2bc893a516b28"},
       {"class": "I", "type": "focus", "locator": "rodent-focus-evidence.md", "sha256": "806ecae6abb3982a1216c3e7007ba4482f08c39d7fde79c1937cc13e45c35e6d"},
       {"class": "I", "type": "primary-action", "locator": "rodent-primary-action-evidence.md", "sha256": "78886a842461b1e89100b809daa031906f27ca16022a2aa52d84f9e59c8b8990"},
       {"class": "S", "type": "source-proof", "locator": "rodent-source-proof.md", "sha256": "0c7e76a924e6d4d271a61c4eca28c9e563ef7f6a5848009ce624763b0c8f8d44"},
-      {"class": "S", "type": "copy-evidence-packet", "locator": "rodent-copy-evidence.pending.json", "sha256": "fb710ab90cba806e937104495dff682dafc7ac39f4c74007f0c7864c3129599b"},
-      {"class": "J", "type": "performance-budget", "locator": "rodent-performance-budget.md", "sha256": "b04b515880cf5ad64bf6360bad8cdcab2654ac4a3d693f955facb4373d5c2e21"},
+      {"class": "S", "type": "copy-evidence-packet", "locator": "rodent-copy-evidence.json", "sha256": "55a8339ac94048f64fcd073240ab8101250c633caa0ad1bc8995d5c7165f79d0"},
+      {"class": "J", "type": "performance-budget", "locator": "rodent-performance-budget.md", "sha256": "169b263d2f4d370fc874142fefab0697d161ee0dde0f1d2a4d9f61b97ad531fb"},
       {"class": "J", "type": "seo-technical", "locator": "rodent-seo-technical-evidence.md", "sha256": "94680d14ef183fc8ed5f625042aaec16c78439cf2aed2f95ae99b6e108d7661d"},
       {"class": "S", "type": "aeo-answer-surface", "locator": "rodent-aeo-answer-evidence.md", "sha256": "17d57c640e9190055bda6735f7a2322384a5f8ad2ce3eedd6d40133f04397e3e"},
       {"class": "I", "type": "conversion-path", "locator": "rodent-conversion-path-evidence.md", "sha256": "abfdbfbd2730eaf14f708fea592c7095de3f9009725d3576e3ffee6e8eac1028"},
@@ -70,7 +70,7 @@
     }
   },
   "evaluation": {
-    "status": "pending-independent-fable",
+    "status": "pending-post-fix-independent-fable",
     "scorer": {
       "family": "fable",
       "independent": true,
@@ -99,7 +99,7 @@
       {"id": "composition_spatial_rhythm", "score": null, "evidence_locators": ["rodent-mobile-evidence.md"]},
       {"id": "imagery_art_direction", "score": null, "evidence_locators": ["rodent-source-proof.md"]},
       {"id": "storytelling_information_design", "score": null, "evidence_locators": ["rodent-aeo-answer-evidence.md"]},
-      {"id": "copy_proof_action", "score": null, "evidence_locators": ["rodent-copy-evidence.pending.json"]},
+      {"id": "copy_proof_action", "score": null, "evidence_locators": ["rodent-copy-evidence.json"]},
       {"id": "motion_interaction_restraint", "score": null, "evidence_locators": ["rodent-focus-evidence.md"]},
       {"id": "accessibility_responsive_performance", "score": null, "evidence_locators": ["rodent-performance-budget.md"]},
       {"id": "ownership_portability_continuity", "score": null, "evidence_locators": ["rodent-analytics-evidence.md"]}

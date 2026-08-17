@@ -64,10 +64,10 @@
   ],
   "source_identity_review": {
     "independent": true,
-    "status": "pending",
+    "status": "pass",
     "reviewer_family": "fable",
     "receipt_path": "../../_verification/asap-rodent-phase2/fable-exact-review-receipt.md",
-    "receipt_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "receipt_sha256": "0eafc6e524998f50bdb24809c5c7bd8b270bbabba1da6d51f9a04ac2bdbe0baf",
     "route_mode": "subscription",
     "spilled": false,
     "checked_unit_ids": [

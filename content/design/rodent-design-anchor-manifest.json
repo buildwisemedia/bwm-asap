@@ -1,7 +1,7 @@
 {
   "schema_version": "bwm-design-anchor-manifest/1.0.0",
   "identity_record_hash": "e10f1fcc487847faff6d90aed84e4eb99c457777f88453e6efef97a333349c99",
-  "content_hash": "3d1eedce4865bb0a82bdb60ad0edb835736346db5a5bc744643c4e9a0ab8fff8",
+  "content_hash": "25c823dd9adedb1188d44894cd029f6cfb3a77555cfcadc0e8933a96283b4c67",
   "scope_hash": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a",
   "anchors": [
     {
