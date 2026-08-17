@@ -1,0 +1,91 @@
+{
+  "schema_version": "asap-animal-asset-rights/1.0.0",
+  "captured_at": "2026-08-17",
+  "phase": 3,
+  "state": "evidence-complete-production-clearance-open",
+  "production_clear": false,
+  "local_review_clear": true,
+  "source_boundary": "The client correction says six pages but names and supplies logo assets for five. Only the five explicit named pages are in scope; no sixth asset or page is invented.",
+  "client_supplied_page_logos": [
+    {"path": "assets/images/page-logos/rodent.png", "sha256": "c159022ecec17adfa01f45b266be5ac20b1515355a7163785bda589ed7f06358", "source": "Nehemiah Ray email attachment 2026-08-11", "intended_use": "Rodent website page, white tagline on dark background", "local_review_rights": "pass"},
+    {"path": "assets/images/page-logos/rat-mouse.png", "sha256": "804aebdd4cd4831e47dc784a1ad037e6ecfe65724947b8a8e641ab7b916805da", "source": "Nehemiah Ray email attachment 2026-08-11", "intended_use": "Rat and Mouse website page, white tagline on dark background", "local_review_rights": "pass"},
+    {"path": "assets/images/page-logos/squirrel.png", "sha256": "e6319411069f8c8af25d1e9f881c9793c78fbd2704802cd664ad44ce9df76b26", "source": "Nehemiah Ray email attachment 2026-08-11", "intended_use": "Squirrel website page, white tagline on dark background", "local_review_rights": "pass"},
+    {"path": "assets/images/page-logos/raccoon.png", "sha256": "8449716bbcdebc59bfeeb23c0a55affb382c173495afb9fd4ba722973d202cda", "source": "Nehemiah Ray email attachment 2026-08-11", "intended_use": "Raccoon website page, white tagline on dark background", "local_review_rights": "pass"},
+    {"path": "assets/images/page-logos/bat.png", "sha256": "f9cd235e7805f676b588082c678c6346e89a5f1b50934767317a7b60fbb4a94e", "source": "Nehemiah Ray email attachment 2026-08-11", "intended_use": "Bat and Guano website page, white tagline on dark background", "local_review_rights": "pass"}
+  ],
+  "existing_client_site_assets": [
+    {"path": "assets/images/animals/rat-navy-optimized.webp", "sha256": "c083700e3a18b6895902db5507ba8a477e89a41b14e27c1d8d045c1881cf1a4f", "base_commit_blob": "d44d893058fb455452003b139bf74897d0a99a42", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"},
+    {"path": "assets/images/logos/logo-orange-tagline.png", "sha256": "7237000e753272049985fb270a8747f0d679acd9a4c0d443901000920026c3cb", "base_commit_blob": "a07872051bcacd6ed4348b65dcb4483a6474e499", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"},
+    {"path": "assets/images/wildlife-grid/mouse-rat.png", "sha256": "dd1fc1064f12789c5075ecc633eb1f42a9d200e11d8d2e985aba0538f92c3006", "base_commit_blob": "ceb967868845d63a616d9422921a7246ddd07d7d", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"},
+    {"path": "assets/images/wildlife-grid/gray-squirrel.png", "sha256": "b8ce484c3607c5a98af77abdec198fa24579c1c16fab5a3fad2725ee0bd18986", "base_commit_blob": "1dcef96fc00139d034be3cc79a8a3bb9ee0be3d0", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"},
+    {"path": "assets/images/animals/raccoon-optimized.webp", "sha256": "d254e000b11537ec9b95f61488f288ab89634a679b95eddff0b70dc82dbce786", "base_commit_blob": "2fadccb9ec6c7f232bb90059c52c2a6d3584738b", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"},
+    {"path": "assets/images/wildlife-grid/bat.webp", "sha256": "42ad4a4eeabd6d56bfd75f00e34ad72b3e4f540e9605d0be6bb317d22fce0eda", "base_commit_blob": "13f7430fc8220ee2abe82f1cb5ed76deddc61607", "continuity": "byte-identical to b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"}
+  ],
+  "visual_asset_boundary": {
+    "ai_generated_assets": 0,
+    "new_stock_assets": 0,
+    "cross_client_assets": 0,
+    "broader_ownership_claim": false,
+    "production_release_requires_human_approval": true
+  },
+  "adobe_fonts": {
+    "kit": "dmg8gvn",
+    "family": "urw-din",
+    "technical_continuity": "same kit already loaded by current removeasap.com; ten license records observed; no copied or self-hosted font files",
+    "official_web_license_reference": "https://helpx.adobe.com/fonts/using/webfont-licensing.html",
+    "official_privacy_reference": "https://www.adobe.com/privacy/policies/adobe-fonts.html",
+    "privacy_observation": "Adobe says the website service sets no font-serving cookies, but may collect fonts served, web project and account identifiers, embed type, hostname, and a transient IP address for delivery.",
+    "account_or_subscription_owner_verified": false,
+    "production_clear": false,
+    "required_provider_response": "Identify the client-owned Creative Cloud subscription or authorized web-project owner for kit dmg8gvn and confirm the project covers the production hostname. Refresh the site privacy disclosure for the observed Adobe data flow before cutover."
+  },
+  "medium_articles": {
+    "distinct_existing_links": 9,
+    "body_content_copied_into_site": false,
+    "authorship_observation": "All nine exact links resolve directly or by redirect to Nehemiah Ray / @ASAPwildlife.",
+    "production_attachment_status": "held-editorial-remediation",
+    "items": [
+      {"id": "d51cb888c843", "title": "Rodent Winter Roommates — Why Rodents move in when it’s cold", "status": "hold", "finding": "Blanket 100% results and warranty language, outdated destination language, and factual claims need source review."},
+      {"id": "ef190a50c3c6", "title": "Rats & Sqrls are BFF’s: 13 Crazy Common Traits", "status": "hold", "finding": "Broad behavior claims and third-party media references need editorial/source review before attachment."},
+      {"id": "11c3bf8a4e03", "title": "Understanding the Reasons Behind Rat Tunneling", "status": "hold", "finding": "Blanket 100% results and warranty language is not approved page proof."},
+      {"id": "a4732378a520", "title": "Why Squirrels Can’t Resist Your Attic. You Won’t Believe It!", "status": "hold", "finding": "Immediate-action/sealing language and blanket 100% results/warranty copy need editorial review."},
+      {"id": "e4f1c44f0edd", "title": "The #1 Reason Squirrels Hate you", "status": "hold", "finding": "Unqualified disease/safety framing and third-party imagery references need editorial/source review."},
+      {"id": "b53f3a95cab6", "title": "Squirrels ❤️ to TWERK", "status": "hold", "finding": "Blanket 100% results and warranty language is not approved page proof."},
+      {"id": "d2efaa51319a", "title": "Raccoons & How They Use Their Hands", "status": "hold", "finding": "Raccoon article contains an incorrect squirrel-service paragraph plus blanket 100% results/warranty copy."},
+      {"id": "7acef4dda5f0", "title": "Flying Guests: Here’s Why BATS Might Visit and Why You Can’t Evict Them", "status": "hold", "finding": "Maternity/removal framing, licensed-expert claim, and blanket 100% results/warranty copy require current legal/editorial validation."},
+      {"id": "22d54b59d6be", "title": "Bat Poop Dangers", "status": "hold", "finding": "Medical-risk framing and blanket 100% results/warranty copy require current source/editorial validation."}
+    ],
+    "required_decision": "Choose one production-safe path: remediate and approve each article, or withhold the article links and keep the affected slots as explicit editorial holds."
+  },
+  "page_proof": {
+    "named_google_review_excerpts": 3,
+    "provider_observation": "Exact Mark Carroll, Kelsey Monaghan, and Fred Perry excerpts and five-star entries were verified read-only; the pages make no aggregate rating or count claim.",
+    "structured_claim_boundary": "No AggregateRating schema; star motifs are aria-hidden and excerpts link to the provider listing.",
+    "production_clear": false,
+    "required_human_decision": "Client/design approval must accept the cross-page excerpt selection; Bat currently uses general or rodent-oriented rather than bat-specific proof."
+  },
+  "intent_adjacency": {
+    "curated_page": "/wildlife/gray-squirrel/",
+    "curated_owner_phrase": "squirrel removal Metro ATL",
+    "legacy_page": "/wildlife/flying-squirrel/",
+    "legacy_owner_phrase": "flying squirrel removal atlanta",
+    "five_page_set_cannibalization": false,
+    "production_clear": false,
+    "required_decision": "Either keep the curated title/H1 general and explicitly preserve the legacy owner, or consolidate flying-squirrel intent into the curated page with an approved redirect/canonical/internal-link plan."
+  },
+  "promotion_hygiene": {
+    "css_cache_buster_aligned": false,
+    "finding": "Rodent loads asap-close.css?v=4; the four specific pages load v=3. The local file is identical, but versions must align before promotion.",
+    "artifact_change_warning": "Changing the cache-buster changes the exact reviewed page hashes and requires renewed exact-artifact verification."
+  },
+  "open_gates": [
+    "Adobe kit account or subscription ownership and production-host coverage",
+    "Adobe Fonts data-flow disclosure review",
+    "Nine Medium article editorial dispositions",
+    "Client acceptance of cross-page review excerpts",
+    "Curated versus legacy flying-squirrel intent decision",
+    "CSS cache-buster alignment followed by exact-artifact re-verification",
+    "Robert authorization before preview exposure or send",
+    "James and client approval before any release"
+  ]
+}

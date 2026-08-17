@@ -148,6 +148,31 @@ check(lineup.pages.every((page) => {
 }), "Animal lineup: every named page has a three-slot inventory record");
 check(lineup.shared_contract?.missing_articles_must_remain_explicit_gaps === true && lineup.human_and_release_gates?.some((gate) => gate.includes("not published articles")), "Animal lineup: editorial gaps stay explicit and unpublished");
 
+const rightsLedger = JSON.parse(readFileSync(join(root, "content/design/animal-asset-rights-ledger.json"), "utf8"));
+const rightsAssets = [...rightsLedger.client_supplied_page_logos, ...rightsLedger.existing_client_site_assets];
+check(rightsLedger.schema_version === "asap-animal-asset-rights/1.0.0", "Asset rights: schema version is explicit");
+check(rightsLedger.phase === 3 && rightsLedger.local_review_clear === true && rightsLedger.production_clear === false, "Asset rights: local-review clearance stays distinct from production clearance");
+check(rightsLedger.client_supplied_page_logos.length === 5, "Asset rights: five client-supplied page logos are bound");
+check(rightsLedger.existing_client_site_assets.length === 6, "Asset rights: six existing ASAP visual assets are bound");
+for (const asset of rightsAssets) {
+  const assetBuffer = readFileSync(join(root, asset.path));
+  check(sha256(assetBuffer) === asset.sha256, `Asset rights: ${asset.path} SHA-256 matches ledger`);
+}
+for (const page of lineup.pages) {
+  const html = readFileSync(join(root, page.path), "utf8");
+  const imagePaths = [...html.matchAll(/<img[^>]+src="\/([^"?#]+)[^"]*"/gi)].map((match) => match[1]);
+  check(imagePaths.every((path) => rightsAssets.some((asset) => asset.path === path)), `Asset rights: ${page.path} uses only bound visual assets`, imagePaths.join(", "));
+}
+check(rightsLedger.visual_asset_boundary?.ai_generated_assets === 0 && rightsLedger.visual_asset_boundary?.new_stock_assets === 0 && rightsLedger.visual_asset_boundary?.cross_client_assets === 0, "Asset rights: no generated, new-stock, or cross-client visual is introduced");
+check(rightsLedger.adobe_fonts?.account_or_subscription_owner_verified === false && rightsLedger.adobe_fonts?.production_clear === false, "Asset rights: Adobe account/hostname production gate remains open");
+check(rightsLedger.medium_articles?.distinct_existing_links === 9 && rightsLedger.medium_articles?.items?.length === 9, "Asset rights: nine distinct existing Medium links are inventoried");
+check(rightsLedger.medium_articles?.items?.every((item) => item.status === "hold"), "Asset rights: every Medium link remains on editorial hold");
+check(rightsLedger.medium_articles?.body_content_copied_into_site === false, "Asset rights: no Medium body content is copied into the site");
+check(rightsLedger.page_proof?.production_clear === false && rightsLedger.page_proof?.named_google_review_excerpts === 3, "Asset rights: three verified review excerpts remain human-approval gated");
+check(rightsLedger.intent_adjacency?.five_page_set_cannibalization === false && rightsLedger.intent_adjacency?.production_clear === false, "Asset rights: five-page intent passes while legacy adjacency remains open");
+check(rightsLedger.promotion_hygiene?.css_cache_buster_aligned === false && rightsLedger.promotion_hygiene?.artifact_change_warning?.includes("exact reviewed page hashes"), "Asset rights: cache-buster fix is held behind renewed exact verification");
+check(rightsLedger.open_gates?.length === 8, "Asset rights: all eight production gates are explicit");
+
 const sitemap = readFileSync(join(root, "sitemap.xml"), "utf8");
 for (const route of routes) check(sitemap.includes(`https://removeasap.com/${route}/`), `${route}: included in sitemap`);
 const intent = JSON.parse(readFileSync(join(root, "seo-intent-ownership.json"), "utf8"));
