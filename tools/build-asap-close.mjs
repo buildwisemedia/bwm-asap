@@ -35,6 +35,40 @@ const animals = [
       ["Property-specific", "The right plan depends on the animal, the location of activity, the entry route, and the condition of the structure."],
       ["Recurring monitoring", "Exterior bait-station programs may be considered for ongoing mouse and rat pressure after inspection; they do not replace structural repair where repair is needed."]
     ],
+    intentRoutes: [
+      {
+        label: "Specific rodent service",
+        title: "Small droppings, gnawing, or movement in walls",
+        description: "Mice and rats need a species-aware control, exclusion, cleanup, and monitoring plan.",
+        href: "/wildlife/mouse-rat/",
+        cta: "Open the Rat + Mouse page",
+        target: "rat-mouse"
+      },
+      {
+        label: "Separate squirrel service",
+        title: "Daytime roofline or attic scratching",
+        description: "Gray and flying squirrels have their own humane timing, removal, repair, and cleanup path.",
+        href: "/wildlife/gray-squirrel/",
+        cta: "Open the Squirrel page",
+        target: "squirrel"
+      },
+      {
+        label: "Not a rodent",
+        title: "Heavy nighttime movement or visible roof damage",
+        description: "Raccoons require a separate wildlife plan that accounts for adults, possible young, repair, and contamination.",
+        href: "/wildlife/raccoon/",
+        cta: "Open the Raccoon page",
+        target: "raccoon"
+      },
+      {
+        label: "Not a rodent",
+        title: "Fluttering, chirping, or a bat indoors",
+        description: "Bat work has a separate season-aware exclusion and guano-cleanup path under current Georgia guidance.",
+        href: "/wildlife/bats/",
+        cta: "Open the Bat page",
+        target: "bat"
+      }
+    ],
     features: [
       ["Mice and rats", "Inspect activity, likely travel paths, food and water pressure, and openings that may be supporting repeat entry."],
       ["Tree squirrels", "Identify attic or roofline activity and plan humane removal with careful timing and repair."],
@@ -47,7 +81,8 @@ const animals = [
       ["How do I know which rodent is in my home?", "Noises, droppings, tracks, nesting material, timing, and the location of damage can narrow the answer. An inspection should confirm the animal before the work is scoped."],
       ["Is trapping enough?", "Trapping can address animals that are present, but the inspection may also identify openings or conditions that need repair. The plan should explain control and exclusion as separate parts of the solution."],
       ["Do you offer recurring rodent bait stations?", "Recurring exterior bait-station service can be discussed for ongoing mouse and rat pressure. Placement, product choice, visit frequency, and safety controls require a property-specific service plan."],
-      ["Does rodent activity create health concerns?", "Rodents can contaminate areas with droppings, urine, nesting material, and parasites. The level of risk and the right cleanup method depend on the affected area and should not be guessed from a webpage."]
+      ["Does rodent activity create health concerns?", "Rodents can contaminate areas with droppings, urine, nesting material, and parasites. The level of risk and the right cleanup method depend on the affected area and should not be guessed from a webpage."],
+      ["Should I sweep or vacuum droppings before the inspection?", "No. CDC guidance says not to sweep or vacuum dry rodent urine, droppings, or nests because that can put contaminated particles into the air. Avoid disturbing the area and follow current safe-cleanup guidance for the site conditions."]
     ],
     articles: [articles.winterRodents, articles.rodentTraits, gap("How to compare trapping, exclusion, and recurring monitoring")]
   },
@@ -231,6 +266,7 @@ function baseSchema(page, faqs) {
 
 function head(page, faqs) {
   const canonical = `https://removeasap.com/${page.slug}/`;
+  const cssVersion = page.key === "rodent" ? 4 : 3;
   return `<!doctype html>
 <html lang="en" data-build-state="local-review">
 <head>
@@ -242,7 +278,7 @@ function head(page, faqs) {
   <meta property="og:type" content="website"><meta property="og:title" content="${esc(page.title)}"><meta property="og:description" content="${esc(page.description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="https://removeasap.com/assets/images/logos/logo-orange-tagline.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/assets/images/logos/favicon.png">
-  <link rel="stylesheet" href="/assets/css/asap-close.css?v=3">
+  <link rel="stylesheet" href="/assets/css/asap-close.css?v=${cssVersion}">
   <script type="application/ld+json">${json(baseSchema(page, faqs))}</script>
 </head>`;
 }
@@ -276,6 +312,16 @@ function flashlight() {
 
 function articleCards(items) {
   return `<div class="three-col">${items.map(([title, status, url]) => `<article class="article-card${url ? "" : " article-card--gap"}"><span class="status">${esc(status)}</span><h3>${esc(title)}</h3><p>${url ? "Educational reading from ASAP’s existing article inventory." : "A source-backed brief is scaffolded in the editorial gap inventory. This is not silently treated as published."}</p>${url ? `<a href="${url}" rel="noopener noreferrer">Read the existing article <span aria-hidden="true">→</span></a>` : `<span>Editorial source review required before publication</span>`}</article>`).join("")}</div>`;
+}
+
+function intentRouter(page) {
+  if (!page.intentRoutes?.length) return "";
+  return `<section class="section section--white intent-router" aria-labelledby="intent-router-title" data-intent-role="umbrella-support"><div class="container">
+  ${heading("Choose the right service page", "What are you hearing or finding?")}
+  <p class="lead narrow" id="intent-router-title">The broad Rodent page helps you sort the first clues. It does not replace the specific Rat + Mouse, Squirrel, Raccoon, or Bat service pages.</p>
+  <div class="intent-grid">${page.intentRoutes.map((route) => `<article class="intent-card" data-intent-target="${esc(route.target)}"><span class="intent-label">${esc(route.label)}</span><h3>${esc(route.title)}</h3><p>${esc(route.description)}</p><a href="${route.href}">${esc(route.cta)} <span aria-hidden="true">→</span></a></article>`).join("")}</div>
+  <aside class="source-note" aria-label="Identification, cleanup, and bat-guidance source note"><strong>Clues are not a diagnosis.</strong> UGA Extension notes that attic noise can come from mice, bats, squirrels, raccoons, and other wildlife, and that time of day is only one clue. CDC says not to sweep or vacuum dry rodent waste. Inspection and current guidance determine the service path. <a href="https://extension.uga.edu/publications/detail.html?number=B1248&amp;title=resolving-human-nuisance-wildlife-conflicts" rel="noopener noreferrer">UGA identification guidance</a> · <a href="https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html" rel="noopener noreferrer">CDC cleanup guidance</a> · <a href="https://georgiawildlife.com/index.php/ExcludingBatsFromYourHouse" rel="noopener noreferrer">Georgia DNR bat guidance</a></aside>
+  </div></section>`;
 }
 
 function reviews() {
@@ -317,7 +363,7 @@ function footer() {
 
 function renderAnimal(page) {
   return `${head(page, page.faqs)}${header()}${hero(page)}
-  <section class="section texture"><div class="container two-col"><div>${heading("Answer first", page.answerTitle)}<p class="lead">${esc(page.answer)}</p></div><dl class="fact-list">${page.facts.map(([term, desc]) => `<div><dt>${esc(term)}</dt><dd>${esc(desc)}</dd></div>`).join("")}</dl></div></section>
+  <section class="section texture"><div class="container two-col"><div>${heading("Answer first", page.answerTitle)}<p class="lead">${esc(page.answer)}</p></div><dl class="fact-list">${page.facts.map(([term, desc]) => `<div><dt>${esc(term)}</dt><dd>${esc(desc)}</dd></div>`).join("")}</dl></div></section>${intentRouter(page)}
   <section class="section section--white"><div class="container">${heading("Inspection pattern", "See the route, then choose the work")}${flashlight()}</div></section>
   <section class="section section--navy"><div class="container">${heading("A complete service conversation", "What the plan can cover")}<div class="feature-grid">${page.features.map(([title, desc]) => `<article class="feature-card"><h3>${esc(title)}</h3><p>${esc(desc)}</p></article>`).join("")}</div></div></section>
   <section class="section texture"><div class="container">${heading("Learn before you decide", "Three useful next reads")}${articleCards(page.articles)}</div></section>

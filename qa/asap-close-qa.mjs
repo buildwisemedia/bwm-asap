@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
+import { createHash } from "node:crypto";
 
 const root = process.cwd();
 const routes = [
@@ -60,6 +61,25 @@ check(bat.includes("guano") && bat.includes("DSV-labeled") && bat.includes("insu
 const rat = readFileSync(join(root, "wildlife/mouse-rat/index.html"), "utf8");
 check(rat.includes("Recurring bait stations") && rat.includes("Do mice and rats cause any diseases?"), "Rat/mouse: recurring stations and disease FAQ");
 
+const rodent = readFileSync(join(root, "peace-of-mind-from/rodents/index.html"), "utf8");
+const rodentIntentTargets = [
+  ["rat-mouse", "/wildlife/mouse-rat/"],
+  ["squirrel", "/wildlife/gray-squirrel/"],
+  ["raccoon", "/wildlife/raccoon/"],
+  ["bat", "/wildlife/bats/"]
+];
+check(rodent.includes('data-intent-role="umbrella-support"'), "Rodent: explicit umbrella-support role");
+for (const [target, href] of rodentIntentTargets) {
+  check(rodent.includes(`data-intent-target="${target}"`) && rodent.includes(`href="${href}"`), `Rodent: routes ${target} to distinct owner`);
+}
+check((rodent.match(/Not a rodent/g) || []).length === 2, "Rodent: raccoon and bat are labeled non-rodent lookalikes");
+check(rodent.includes("CDC says not to sweep or vacuum dry rodent waste") && rodent.includes("www.cdc.gov/healthy-pets/rodent-control/clean-up.html"), "Rodent: safe-cleanup language cites CDC");
+check(rodent.includes("UGA Extension notes that attic noise can come from mice, bats, squirrels, raccoons") && rodent.includes("extension.uga.edu/publications/detail.html?number=B1248"), "Rodent: symptom routing cites UGA");
+check(rodent.includes("Georgia DNR bat guidance") && rodent.includes("georgiawildlife.com/index.php/ExcludingBatsFromYourHouse"), "Rodent: bat routing cites current Georgia DNR guidance");
+
+const rodentLogo = readFileSync(join(root, "assets/images/page-logos/rodent.png"));
+check(createHash("sha256").update(rodentLogo).digest("hex") === "c159022ecec17adfa01f45b266be5ac20b1515355a7163785bda589ed7f06358", "Rodent: client-supplied logo hash matches rights manifest");
+
 const home = readFileSync(join(root, "index.html"), "utf8");
 check(home.includes("/assets/images/wildlife-grid/gray-squirrel.png"), "Homepage: gray squirrel image matches page pattern");
 check(home.includes("770-691-3636") && !home.includes("770-450-1744") && !home.includes("7704501744"), "Homepage: correct phone present and wrong phone removed");
@@ -78,6 +98,14 @@ check(new Set(intent.pages.map((page) => page.owner_phrase)).size === intent.pag
 for (const route of routes) {
   const url = `https://removeasap.com/${route}/`;
   check(intent.pages.some((page) => page.url === url && page.owner_type === "curated-exact"), `${route}: curated intent owner`);
+}
+const rodentDecision = intent.pages.find((page) => page.url === "https://removeasap.com/peace-of-mind-from/rodents/");
+check(rodentDecision?.intent_role === "umbrella-router", "SEO intent: rodent page is an umbrella router");
+check(rodentDecision?.routes_to_distinct_owners?.length === 4, "SEO intent: rodent router names four distinct owners");
+check(rodentDecision?.protected_from_title_h1?.length === 4, "SEO intent: four specific phrases protected from rodent title/H1");
+const rodentTitleH1 = `${rodent.match(/<title>(.*?)<\/title>/i)?.[1] || ""} ${rodent.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || ""}`.replace(/<[^>]+>/g, " ").toLowerCase();
+for (const protectedPhrase of rodentDecision?.protected_from_title_h1 || []) {
+  check(!rodentTitleH1.includes(protectedPhrase.toLowerCase()), `SEO intent: rodent title/H1 does not claim ${protectedPhrase}`);
 }
 
 const css = readFileSync(join(root, "assets/css/asap-close.css"), "utf8");

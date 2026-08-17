@@ -10,6 +10,7 @@
       "local_file": "index.html",
       "owner_phrase": "pest and wildlife removal Metro Atlanta",
       "owner_type": "curated-exact",
+      "intent_role": "site-category-owner",
       "canonical_required": "https://removeasap.com/",
       "h1_required": 1,
       "state": "active-local-review-scope"
@@ -19,6 +20,7 @@
       "local_file": "about/index.html",
       "owner_phrase": "about",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/about/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -28,6 +30,7 @@
       "local_file": "privacy-policy/index.html",
       "owner_phrase": "privacy policy",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/privacy-policy/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -37,6 +40,7 @@
       "local_file": "terms-of-service/index.html",
       "owner_phrase": "terms of service",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/terms-of-service/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -46,6 +50,7 @@
       "local_file": "contact/index.html",
       "owner_phrase": "contact",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/contact/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -55,6 +60,7 @@
       "local_file": "services/index.html",
       "owner_phrase": "pest & wildlife services in metro atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/services/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -64,6 +70,7 @@
       "local_file": "commercial-services/index.html",
       "owner_phrase": "commercial pest control in metro atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/commercial-services/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -73,6 +80,7 @@
       "local_file": "warranty-assurance/index.html",
       "owner_phrase": "warranty assurance",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/warranty-assurance/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -82,6 +90,7 @@
       "local_file": "pest-control-services/index.html",
       "owner_phrase": "pest control services Metro Atlanta",
       "owner_type": "curated-exact",
+      "intent_role": "site-category-owner",
       "canonical_required": "https://removeasap.com/pest-control-services/",
       "h1_required": 1,
       "state": "active-local-review-scope"
@@ -91,6 +100,7 @@
       "local_file": "wildlife/index.html",
       "owner_phrase": "wildlife removal in metro atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -100,6 +110,7 @@
       "local_file": "blog/index.html",
       "owner_phrase": "blog",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/blog/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -109,6 +120,7 @@
       "local_file": "wildlife/armadillo/index.html",
       "owner_phrase": "armadillo removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/armadillo/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -118,6 +130,7 @@
       "local_file": "wildlife/bats/index.html",
       "owner_phrase": "bat removal Metro ATL",
       "owner_type": "curated-exact",
+      "intent_role": "specific-service-owner",
       "canonical_required": "https://removeasap.com/wildlife/bats/",
       "h1_required": 1,
       "state": "active-local-review-scope"
@@ -127,6 +140,7 @@
       "local_file": "wildlife/beaver/index.html",
       "owner_phrase": "beaver removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/beaver/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -136,6 +150,7 @@
       "local_file": "wildlife/bees-wasp-hornets/index.html",
       "owner_phrase": "bees, wasp, & hornets removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/bees-wasp-hornets/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -145,6 +160,7 @@
       "local_file": "wildlife/bird/index.html",
       "owner_phrase": "bird removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/bird/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -154,6 +170,7 @@
       "local_file": "wildlife/coyote/index.html",
       "owner_phrase": "coyote removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/coyote/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -163,6 +180,7 @@
       "local_file": "wildlife/flying-squirrel/index.html",
       "owner_phrase": "flying squirrel removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/flying-squirrel/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -172,6 +190,7 @@
       "local_file": "wildlife/fox/index.html",
       "owner_phrase": "fox removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/fox/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -181,6 +200,7 @@
       "local_file": "wildlife/geese/index.html",
       "owner_phrase": "geese removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/geese/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -190,6 +210,7 @@
       "local_file": "wildlife/gopher/index.html",
       "owner_phrase": "gopher removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/gopher/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -199,6 +220,7 @@
       "local_file": "wildlife/gray-squirrel/index.html",
       "owner_phrase": "squirrel removal Metro ATL",
       "owner_type": "curated-exact",
+      "intent_role": "specific-service-owner",
       "canonical_required": "https://removeasap.com/wildlife/gray-squirrel/",
       "h1_required": 1,
       "state": "active-local-review-scope"
@@ -208,6 +230,7 @@
       "local_file": "wildlife/mole/index.html",
       "owner_phrase": "mole removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/mole/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -217,6 +240,7 @@
       "local_file": "wildlife/mouse-rat/index.html",
       "owner_phrase": "rat and mouse removal Metro ATL",
       "owner_type": "curated-exact",
+      "intent_role": "specific-service-owner",
       "canonical_required": "https://removeasap.com/wildlife/mouse-rat/",
       "h1_required": 1,
       "state": "active-local-review-scope"
@@ -226,6 +250,7 @@
       "local_file": "wildlife/opossum/index.html",
       "owner_phrase": "opossum removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/opossum/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -235,6 +260,7 @@
       "local_file": "wildlife/otters/index.html",
       "owner_phrase": "otters removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/otters/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -244,6 +270,7 @@
       "local_file": "wildlife/rabbit/index.html",
       "owner_phrase": "rabbit removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/rabbit/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -253,6 +280,7 @@
       "local_file": "wildlife/raccoon/index.html",
       "owner_phrase": "raccoon removal Metro ATL",
       "owner_type": "curated-exact",
+      "intent_role": "specific-service-owner",
       "canonical_required": "https://removeasap.com/wildlife/raccoon/",
       "h1_required": 1,
       "state": "active-local-review-scope"
@@ -262,6 +290,7 @@
       "local_file": "wildlife/snake/index.html",
       "owner_phrase": "snake removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/snake/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -271,6 +300,7 @@
       "local_file": "wildlife/turtle/index.html",
       "owner_phrase": "turtle removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/turtle/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -280,6 +310,7 @@
       "local_file": "wildlife/vole/index.html",
       "owner_phrase": "vole removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/vole/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -289,6 +320,7 @@
       "local_file": "wildlife/wild-hogs/index.html",
       "owner_phrase": "wild hogs removal atlanta",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/wildlife/wild-hogs/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -298,6 +330,19 @@
       "local_file": "peace-of-mind-from/rodents/index.html",
       "owner_phrase": "rodent removal Metro ATL",
       "owner_type": "curated-exact",
+      "intent_role": "umbrella-router",
+      "routes_to_distinct_owners": [
+        "/wildlife/mouse-rat/",
+        "/wildlife/gray-squirrel/",
+        "/wildlife/raccoon/",
+        "/wildlife/bats/"
+      ],
+      "protected_from_title_h1": [
+        "rat and mouse removal Metro ATL",
+        "squirrel removal Metro ATL",
+        "raccoon removal Metro ATL",
+        "bat removal Metro ATL"
+      ],
       "canonical_required": "https://removeasap.com/peace-of-mind-from/rodents/",
       "h1_required": 1,
       "state": "active-local-review-scope"
@@ -307,6 +352,7 @@
       "local_file": "peace-of-mind-from/bees-wasps-and-hornets/index.html",
       "owner_phrase": "bees, wasps, and hornets",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/peace-of-mind-from/bees-wasps-and-hornets/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -316,6 +362,7 @@
       "local_file": "peace-of-mind-from/beavers/index.html",
       "owner_phrase": "beavers",
       "owner_type": "legacy-title-derived",
+      "intent_role": "legacy-page-owner",
       "canonical_required": "https://removeasap.com/peace-of-mind-from/beavers/",
       "h1_required": 1,
       "state": "legacy-inventory"
@@ -325,6 +372,7 @@
       "local_file": "wildlife-removal-canton/index.html",
       "owner_phrase": "pest and wildlife removal Canton Georgia",
       "owner_type": "curated-exact",
+      "intent_role": "mixed-service-city-owner",
       "canonical_required": "https://removeasap.com/wildlife-removal-canton/",
       "h1_required": 1,
       "state": "active-local-review-scope"
@@ -334,6 +382,7 @@
       "local_file": "wildlife-removal-woodstock/index.html",
       "owner_phrase": "pest and wildlife removal Woodstock Georgia",
       "owner_type": "curated-exact",
+      "intent_role": "mixed-service-city-owner",
       "canonical_required": "https://removeasap.com/wildlife-removal-woodstock/",
       "h1_required": 1,
       "state": "active-local-review-scope"
@@ -343,6 +392,7 @@
       "local_file": "wildlife-removal-acworth/index.html",
       "owner_phrase": "pest and wildlife removal Acworth Georgia",
       "owner_type": "curated-exact",
+      "intent_role": "mixed-service-city-owner",
       "canonical_required": "https://removeasap.com/wildlife-removal-acworth/",
       "h1_required": 1,
       "state": "active-local-review-scope"
@@ -352,6 +402,7 @@
       "local_file": "wildlife-removal-kennesaw/index.html",
       "owner_phrase": "pest and wildlife removal Kennesaw Georgia",
       "owner_type": "curated-exact",
+      "intent_role": "mixed-service-city-owner",
       "canonical_required": "https://removeasap.com/wildlife-removal-kennesaw/",
       "h1_required": 1,
       "state": "active-local-review-scope"
@@ -361,6 +412,7 @@
       "local_file": "wildlife-removal-cartersville/index.html",
       "owner_phrase": "pest and wildlife removal Cartersville Georgia",
       "owner_type": "curated-exact",
+      "intent_role": "mixed-service-city-owner",
       "canonical_required": "https://removeasap.com/wildlife-removal-cartersville/",
       "h1_required": 1,
       "state": "active-local-review-scope"

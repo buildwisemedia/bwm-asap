@@ -1,0 +1,43 @@
+{
+  "schema_version": "asap-rodent-intent-evidence/1.0.0",
+  "verified_at": "2026-08-17",
+  "state": "local-review",
+  "page_job": "Own broad Metro Atlanta rodent-removal intent and route species or symptom-specific visitors to the correct service owner without duplicating those owners in the title or H1.",
+  "intent_owners": [
+    {"path": "/peace-of-mind-from/rodents/", "role": "umbrella-router", "phrase": "rodent removal Metro ATL"},
+    {"path": "/wildlife/mouse-rat/", "role": "specific-service-owner", "phrase": "rat and mouse removal Metro ATL"},
+    {"path": "/wildlife/gray-squirrel/", "role": "specific-service-owner", "phrase": "squirrel removal Metro ATL"},
+    {"path": "/wildlife/raccoon/", "role": "specific-service-owner", "phrase": "raccoon removal Metro ATL"},
+    {"path": "/wildlife/bats/", "role": "specific-service-owner", "phrase": "bat removal Metro ATL"}
+  ],
+  "evidence": [
+    {
+      "source": "UGA Cooperative Extension",
+      "url": "https://extension.uga.edu/publications/detail.html?number=B1248&title=resolving-human-nuisance-wildlife-conflicts",
+      "supports": "Attic noise can come from mice, bats, squirrels, raccoons, or other wildlife; time of day is a clue, not a diagnosis."
+    },
+    {
+      "source": "CDC Healthy Pets, Healthy People",
+      "url": "https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html",
+      "supports": "Do not sweep or vacuum dry rodent urine, droppings, or nests; cleanup method and PPE depend on conditions."
+    },
+    {
+      "source": "Georgia DNR Wildlife Resources Division",
+      "url": "https://georgiawildlife.com/index.php/ExcludingBatsFromYourHouse",
+      "supports": "Bat exclusions should be avoided April 1 through July 31; maternity-season exclusion requires a licensed nuisance wildlife control operator."
+    }
+  ],
+  "asset_rights": {
+    "path": "assets/images/page-logos/rodent.png",
+    "sha256": "c159022ecec17adfa01f45b266be5ac20b1515355a7163785bda589ed7f06358",
+    "provenance": "Nehemiah Ray email attachment, 2026-08-11",
+    "allowed_state": "local review",
+    "production_rights": "must be re-confirmed with the exact artifact at the human approval gate"
+  },
+  "boundaries": [
+    "Symptoms are routing clues, not a species diagnosis.",
+    "Raccoon and bat are explicitly labeled as non-rodent lookalikes.",
+    "No ranking, lead, response-time, warranty, or health-outcome claim is made.",
+    "No page, form, provider, or production state is changed by this evidence packet."
+  ]
+}
