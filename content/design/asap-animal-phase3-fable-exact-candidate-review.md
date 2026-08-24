@@ -4,23 +4,23 @@
 
 ```text
 [fable-review] subscription-only · peer-1/peer-2/peer-3/peer-4 · no Robert spill
-[lane] peer-1@buildwisemedia.com · 5h 5% · weekly 51%
-[lane-route] {"lane":"peer1","email":"peer-1@buildwisemedia.com","spilled":false}
+[lane] peer-2@buildwisemedia.com
+[lane-route] {"lane":"peer2","email":"peer-2@buildwisemedia.com","spilled":false}
 ```
 
-- Reviewed commit: `7f59942851386c6992634c4ed4985c4d3c4d9c27`
-- Base receipt commit: `89736ea17c3a8ad8af2e227d2ad6d6aa385bb60c`
+- Reviewed HEAD: `894c85c3fecf4a28fc020ff3c921f420537281c1`
+- Branch: `codex/asap-close-local-review-20260813`
 - Exact manifest: `_verification/asap-animal-phase3-candidate-2026-08-24/exact-candidate-manifest.json`
+- Manifest SHA-256: `7f1c939d0a7eb647c6f026e5ceccb06fa28fca35a926c9f2a12a6e88969fac36`
+- Plain-English packet SHA-256: `59f95ba570d276bdcf3e4f8c51c6a0851c3426241522fda5706edb2b89857d26`
 - Verdict: **PASS**
 - Truthful state: `local-review-decision-ready-candidate`
-- Boundary: PASS verifies the 16 exact local/review files and decision packet only. It does not authorize preview exposure, sending, client contact, deployment, provider mutation, spend, production, or Phase 4.
 
 ## Exact entry results
 
 | Check | Result |
 |---|---|
-| HEAD | `7f59942851386c6992634c4ed4985c4d3c4d9c27` |
-| Branch | `codex/asap-close-local-review-20260813` |
+| HEAD / branch | Exact expected HEAD and branch |
 | Tracked state | Clean |
 | Manifest | 16/16 SHA-256 hashes match |
 | Deterministic QA | 436/436, 0 failures |
@@ -32,30 +32,18 @@
 
 No high or medium findings.
 
-1. **Low:** The four edited wildlife pages now have trailing newlines; the untouched Rodent page does not. Zero rendered effect. Leaving Rodent unchanged avoided an unnecessary fifth page-hash change.
-2. **Info:** Five city pages and `pest-control-services` remain on `asap-close.css?v=3`, outside this five-animal-page candidate. The animal-set claims are correctly scoped.
-3. **Info:** QA became stricter for the five animal routes by requiring `?v=4`; the ledger gate count changed from eight to seven only because cache alignment is now complete.
-
-## Exact candidate verdict
-
-- The four wildlife pages changed only at the stylesheet query (`v=3` to `v=4`) plus the disclosed trailing newline.
-- Rodent was already `v=4` and is byte-identical to the prior receipt.
-- Titles, H1s, canonicals, claims, nine article links, excerpts, forms, attribution, Adobe loader, intent ownership, and production boundaries remain otherwise unchanged.
-- Updated page hashes in the lineup manifest match the exact current files.
-- The rights ledger and audit accurately keep Adobe, articles, excerpts, flying-squirrel intent, preview/send, and release gates open.
-
-## Decision-packet verdict
-
-PASS. The packet exposes all four decisions, lists all nine article IDs, uses evidence-consistent recommendations, and grants only implementation of selected local/review changes followed by renewed exact verification. Preview exposure and every send/release action remain separate approvals.
+- The five HTML pages, shared assets, lineup manifest, rights ledger, audit, QA script, preflight marker, article inventory, provider verification, and intent-ownership record are byte-identical to the prior protected candidate receipt.
+- `production_clear:false` and `preview_authorized:false` remain in force.
+- The rewritten packet accurately explains the Adobe font, nine held articles, cross-page review proof, and two-squirrel-page question in ordinary language.
+- Its single YES/NO choice recommends a safe path without pretending Robert already selected it.
+- YES is limited to local/review implementation and renewed verification. It does not authorize preview exposure, sending, client contact, deployment, redirects, provider changes, spend, production, or Phase 4.
 
 ## Remaining external blockers
 
-1. Adobe kit `dmg8gvn` owner and `removeasap.com` coverage, then privacy-disclosure approval.
-2. Nine Medium article dispositions.
-3. Cross-page excerpt acceptance, especially Bat proof.
-4. Flying-squirrel preserve-versus-consolidate decision.
-5. Robert preview/send authorization, then James/client release approval.
+1. Robert's one-line YES/NO response.
+2. If YES, apply only the four named local/review changes and renew exact QA/review.
+3. Separate Robert authorization before preview exposure or sending.
+4. Separate James/client acceptance before release.
+5. Separate deployment, provider, redirect, attribution, and live-production gates.
 
-## Reviewer state recommendation
-
-`local-review-decision-ready-candidate`. The next verified step is Robert's single response to the Phase 3 decision packet.
+A PASS verifies this exact local/review candidate and packet only. It does not clear production.
