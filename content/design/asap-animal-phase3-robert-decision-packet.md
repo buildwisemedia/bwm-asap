@@ -9,9 +9,7 @@ The five-page website candidate passed current-byte QA before this choice was re
 - all 16 exact candidate files match their recorded SHA-256 hashes;
 - all 12 visual assets match their rights/provenance records;
 - deterministic QA passes 436/436;
-- all five pages render without broken images or horizontal overflow at 1440 x 900 and 390 x 844;
 - all five local form fixtures validate without sending an email, creating a CRM item, running Make.com, or contacting a customer;
-- Lighthouse scores are 92-99 Performance and 100 Accessibility, Best Practices, and SEO on every page;
 - all 25 unique local links/assets referenced by the five pages return successfully;
 - the protected Fable review passed the exact website candidate with no high or medium findings.
 
