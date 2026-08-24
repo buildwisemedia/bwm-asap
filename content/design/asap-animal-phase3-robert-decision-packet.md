@@ -1,51 +1,62 @@
-# ASAP Animal Sales Pages — one-response Phase 3 decision packet
+# ASAP Animal Sales Pages — plain-English Phase 3 choice
 
-State: local/review candidate only. This packet does **not** authorize preview exposure, sending, deployment, provider mutation, spend, or production.
+State: local/review only. Nothing here authorizes a preview, a client send, a deployment, a provider change, spending, or production.
 
-## Decision requested
+## QA result first
 
-Reply with `APPROVE RECOMMENDED PHASE 3 BUNDLE` plus the Adobe line below, or edit any numbered choice.
+The five-page website candidate passed current-byte QA before this choice was rewritten:
 
-### 1. Adobe Fonts owner and privacy path
+- all 16 exact candidate files match their recorded SHA-256 hashes;
+- all 12 visual assets match their rights/provenance records;
+- deterministic QA passes 436/436;
+- all five pages render without broken images or horizontal overflow at 1440 x 900 and 390 x 844;
+- all five local form fixtures validate without sending an email, creating a CRM item, running Make.com, or contacting a customer;
+- Lighthouse scores are 92-99 Performance and 100 Accessibility, Best Practices, and SEO on every page;
+- all 25 unique local links/assets referenced by the five pages return successfully;
+- the protected Fable review passed the exact website candidate with no high or medium findings.
 
-Kit `dmg8gvn` is already used by the current ASAP site and serves URW DIN. No font files are copied into this repository. Adobe says its web-font service may process the font/web-project/account identifiers, embed type, hostname, and a transient delivery IP. The authorized subscription/web-project owner and `removeasap.com` coverage are still unverified.
+The website pages are not being changed by this packet. The four items below are launch-risk choices, not code failures.
 
-- **A — Confirm owner (recommended if known):** `OWNER NAME/EMAIL: __________`; confirm this owner authorizes kit `dmg8gvn` for `removeasap.com`. BWM then drafts the accurate Adobe Fonts privacy disclosure for exact approval.
-- **B — Owner cannot be confirmed:** authorize a local/review fallback-type candidate that removes the Adobe loader. This changes typography and requires fresh rendered design review; it still does not authorize preview/send.
+## What the four items mean
 
-### 2. Nine Medium article dispositions
+### 1. The heading font
 
-- **A — Withhold all nine links (recommended):** replace linked cards with explicit editorial holds until each article is remediated and approved. Exact IDs: `d51cb888c843`, `ef190a50c3c6`, `11c3bf8a4e03`, `a4732378a520`, `e4f1c44f0edd`, `b53f3a95cab6`, `d2efaa51319a`, `7acef4dda5f0`, `22d54b59d6be`.
-- **B — Remediate all nine:** commission a source-backed editorial pass for every item before any link is restored.
-- **C — Mixed:** list the IDs to remediate; all others remain withheld.
+The pages use a font delivered from an Adobe account. We have not proved whose Adobe account it is or whether that account covers `removeasap.com`.
 
-Why A is recommended: the audit found blanket `100% results`/warranty language, one raccoon/squirrel copy error, and bat medical/licensing/maternity claims needing current validation. The pages copy none of the article bodies, so withholding is the narrowest reversible action.
+Safest choice if the owner is unknown: remove the Adobe connection from these five pages and use the built-in fallback font. The headings will look a little different, but the site will no longer depend on an unverified account or Adobe font delivery.
 
-### 3. Review excerpt use
+### 2. The nine article links
 
-- **A — Accept four-page use; hold Bat proof (recommended):** accept the provider-verified Mark Carroll, Kelsey Monaghan, and Fred Perry excerpts on Rodent, Rat + Mouse, Squirrel, and Raccoon. Replace the Bat page’s repeated set with an explicit proof gap until a bat-specific review is approved.
-- **B — Accept the same three excerpts on all five pages.**
-- **C — Replace:** provide the approved review names/excerpts and intended page mapping.
+Nine `Read more` links go to old Medium articles. The audit found overpromising warranty language, one raccoon/squirrel copy error, and bat health/licensing/timing claims that need current sources.
 
-Why A is recommended: Mark Carroll is rodent-specific; Kelsey Monaghan is wildlife-general; Fred Perry is business-general. None is bat-specific. No page publishes `AggregateRating`, `ratingValue`, or a review-count claim.
+Safest choice: hide all nine links until the articles are corrected and approved. No article text was copied into these pages.
 
-### 4. Flying-squirrel search intent
+### 3. The customer reviews
 
-- **A — Preserve separate intent owners (recommended):** keep `/wildlife/gray-squirrel/` as `squirrel removal Metro ATL` and `/wildlife/flying-squirrel/` as `flying squirrel removal atlanta`; retain separate self-canonicals and do not redirect.
-- **B — Consolidate:** move flying-squirrel intent into the curated Squirrel page and authorize an exact 301/canonical/internal-link/sitemap plan for later release review.
+The same three real Google review excerpts are repeated across all five animal pages. They were verified on Google, but none is specifically about a bat job.
 
-Why A is recommended: current titles, H1s, canonicals, and ownership records are distinct, and the verified five-page set does not cannibalize itself. Preservation avoids an unnecessary redirect/ranking decision before production approval.
+Safest choice: keep the verified excerpts on Rodent, Rat + Mouse, Squirrel, and Raccoon, but show an honest proof gap on Bat until a bat-specific review is approved.
 
-## Copy-paste response
+### 4. The two squirrel pages
+
+The existing site has a flying-squirrel page. The new candidate also has a broader squirrel page that mentions gray and flying squirrels. Redirecting one page into the other could affect search traffic.
+
+Safest choice: leave both pages separate for now. Do not redirect or merge anything until production planning is separately approved.
+
+## The one decision requested
+
+Reply with one line:
 
 ```text
-APPROVE RECOMMENDED PHASE 3 BUNDLE
-Adobe: 1A / 1B
-Owner name/email if 1A: __________
-Kit dmg8gvn authorized for removeasap.com if 1A: YES / NO / NEED PROVIDER CONFIRMATION
-Articles: 2A
-Excerpts: 3A
-Flying-squirrel intent: 4A
+YES — apply the four safest local/review choices
 ```
 
-After this response, BWM may implement only the selected local/review changes and renew exact verification. Preview exposure and every send/release action remain separate approvals.
+or:
+
+```text
+NO — leave the five website pages unchanged
+```
+
+`YES` authorizes only these local/review changes: remove the Adobe loader from the five candidate pages, hide the nine Medium links, hold Bat-specific proof, and preserve both squirrel URLs. Afterward BWM must rerun deterministic QA, desktop/mobile rendering, performance checks, exact hashes, and protected independent review.
+
+It does not authorize preview exposure, sending anything to James or the client, deployment, redirects, provider/account changes, spending, or production.
