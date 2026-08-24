@@ -33,20 +33,22 @@
   "adobe_fonts": {
     "kit": "dmg8gvn",
     "family": "urw-din",
-    "technical_continuity": "same kit already loaded by current removeasap.com; ten license records observed; no copied or self-hosted font files",
+    "technical_continuity": "The kit remains documented as prior/current-site evidence, but its loader is removed from the five animal-page candidate files. Their existing CSS stack falls through to Arial Narrow or Arial.",
     "official_web_license_reference": "https://helpx.adobe.com/fonts/using/webfont-licensing.html",
     "official_privacy_reference": "https://www.adobe.com/privacy/policies/adobe-fonts.html",
     "privacy_observation": "Adobe says the website service sets no font-serving cookies, but may collect fonts served, web project and account identifiers, embed type, hostname, and a transient IP address for delivery.",
     "account_or_subscription_owner_verified": false,
-    "production_clear": false,
-    "required_provider_response": "Identify the client-owned Creative Cloud subscription or authorized web-project owner for kit dmg8gvn and confirm the project covers the production hostname. Refresh the site privacy disclosure for the observed Adobe data flow before cutover."
+    "loader_removed_from_candidate_pages": true,
+    "fallback_stack": "\"Arial Narrow\", Arial, sans-serif",
+    "production_clear": true,
+    "required_provider_response": "None for the five candidate pages while the Adobe loader remains absent. Re-verification is required if the kit is reintroduced."
   },
   "medium_articles": {
     "distinct_existing_links": 9,
     "body_content_copied_into_site": false,
     "authorship_observation": "All nine exact links resolve directly or by redirect to Nehemiah Ray / @ASAPwildlife.",
     "production_attachment_status": "held-editorial-remediation",
-    "hold_semantics": "The links are present in the exact local/review pages. Hold means they must not be promoted to production as-is; it does not mean the links are absent from the artifact.",
+    "hold_semantics": "The nine source URLs remain traceable in the internal inventory and ledger, but their links are withheld from all five local/review pages pending editorial approval.",
     "items": [
       {"id": "d51cb888c843", "title": "Rodent Winter Roommates — Why Rodents move in when it’s cold", "status": "hold", "finding": "Blanket 100% results and warranty language, outdated destination language, and factual claims need source review."},
       {"id": "ef190a50c3c6", "title": "Rats & Sqrls are BFF’s: 13 Crazy Common Traits", "status": "hold", "finding": "Broad behavior claims and third-party media references need editorial/source review before attachment."},
@@ -58,7 +60,7 @@
       {"id": "7acef4dda5f0", "title": "Flying Guests: Here’s Why BATS Might Visit and Why You Can’t Evict Them", "status": "hold", "finding": "Maternity/removal framing, licensed-expert claim, and blanket 100% results/warranty copy require current legal/editorial validation."},
       {"id": "22d54b59d6be", "title": "Bat Poop Dangers", "status": "hold", "finding": "Medical-risk framing and blanket 100% results/warranty copy require current source/editorial validation."}
     ],
-    "required_decision": "Choose one production-safe path: remediate and approve each article, or withhold the article links and keep the affected slots as explicit editorial holds."
+    "required_decision": "Resolved for this candidate: withhold all nine links until each article is remediated and approved."
   },
   "page_proof": {
     "named_google_review_excerpts": 3,
@@ -78,13 +80,10 @@
   },
   "promotion_hygiene": {
     "css_cache_buster_aligned": true,
-    "finding": "All five pages load the same shared asset URL: asap-close.css?v=4.",
-    "artifact_change_warning": "The 2026-08-24 alignment changed the four wildlife-page hashes. The successor candidate manifest and protected exact-artifact review must bind the new bytes before any preview decision."
+    "finding": "All five pages load the same shared asset URL: asap-close.css?v=5.",
+    "artifact_change_warning": "The 2026-08-24 authorized housekeeping changed all five candidate-page hashes and the shared CSS: the Adobe loader was removed, the fallback stack is explicit, the animal-page CSS cache key is aligned at v=5, and nine legacy article links were withheld. The successor candidate manifest and protected exact-artifact review must bind the new bytes before any preview decision."
   },
   "open_gates": [
-    "Adobe kit account or subscription ownership and production-host coverage",
-    "Adobe Fonts data-flow disclosure review",
-    "Nine Medium article editorial dispositions",
     "Client acceptance of cross-page review excerpts",
     "Curated versus legacy flying-squirrel intent decision",
     "Robert authorization before preview exposure or send",

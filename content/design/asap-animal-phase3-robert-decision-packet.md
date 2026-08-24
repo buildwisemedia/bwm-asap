@@ -1,60 +1,46 @@
-# ASAP Animal Sales Pages — plain-English Phase 3 choice
+# ASAP Animal Sales Pages — what we are actually doing
 
-State: local/review only. Nothing here authorizes a preview, a client send, a deployment, a provider change, spending, or production.
+State: local/review only. Nothing has been previewed, sent to the client, deployed, or published.
 
-## QA result first
+## The client request
 
-The five-page website candidate passed current-byte QA before this choice was rewritten:
+Nehemiah asked for strong animal-service landing pages on `removeasap.com` so ASAP can:
 
-- all 16 exact candidate files match their recorded SHA-256 hashes;
-- all 12 visual assets match their rights/provenance records;
-- deterministic QA passes 436/436;
-- all five local form fixtures validate without sending an email, creating a CRM item, running Make.com, or contacting a customer;
-- all 25 unique local links/assets referenced by the five pages return successfully;
-- the protected Fable review passed the exact website candidate with no high or medium findings.
+- rank and convert better for specific animal searches;
+- give homeowners a direct call and inspection-request path;
+- explain the full service rather than selling only trapping;
+- later use the same service pages as focused ad destinations.
 
-The website pages are not being changed by this packet. The four items below are launch-risk choices, not code failures.
+The first client-requested group is:
 
-## What the four items mean
+1. Raccoon removal from attics
+2. Bat exclusion and guano cleanup
+3. Squirrel and flying-squirrel attic removal
+4. Rat and mouse removal, seal-up, and sanitation
 
-### 1. The heading font
+A broader Rodent page was also retained as a routing page that helps visitors choose the correct animal service.
 
-The pages use a font delivered from an Adobe account. We have not proved whose Adobe account it is or whether that account covers `removeasap.com`.
+## Why this is still local
 
-Safest choice if the owner is unknown: remove the Adobe connection from these five pages and use the built-in fallback font. The headings will look a little different, but the site will no longer depend on an unverified account or Adobe font delivery.
+Robert told Nehemiah, \"I'll send it to you before we build anything.\" Nehemiah said, \"I already have some thoughts.\" The project record does not contain proof that the formal page plan was approved.
 
-### 2. The nine article links
+That means our job right now is to prepare and verify a strong candidate without pretending the client approved these exact pages. The client has not been contacted from this task.
 
-Nine `Read more` links go to old Medium articles. The audit found overpromising warranty language, one raccoon/squirrel copy error, and bat health/licensing/timing claims that need current sources.
+## What Robert approved in this task
 
-Safest choice: hide all nine links until the articles are corrected and approved. No article text was copied into these pages.
+- Remove the Adobe Fonts connection from the five candidate pages and use the existing Arial Narrow/Arial fallback.
+- Hide all nine old Medium article links until their copy and claims are reviewed.
 
-### 3. The customer reviews
+The old articles were not deleted. Their source URLs remain in the internal editorial inventory. They are hidden because linking to them from a new sales page would make the new page appear to endorse outdated warranty, factual, medical, licensing, or timing claims.
 
-The same three real Google review excerpts are repeated across all five animal pages. They were verified on Google, but none is specifically about a bat job.
+## What has not been decided
 
-Safest choice: keep the verified excerpts on Rodent, Rat + Mouse, Squirrel, and Raccoon, but show an honest proof gap on Bat until a bat-specific review is approved.
+- Whether to keep the same three Google review excerpts on every animal page.
+- Whether the broader Squirrel page should eventually replace the old flying-squirrel URL.
+- Whether Robert wants to expose a protected preview to James or the client.
+- Whether the client approves the exact pages.
+- Any deploy, redirect, provider, spend, or production action.
 
-### 4. The two squirrel pages
+## Next step after local QA
 
-The existing site has a flying-squirrel page. The new candidate also has a broader squirrel page that mentions gray and flying squirrels. Redirecting one page into the other could affect search traffic.
-
-Safest choice: leave both pages separate for now. Do not redirect or merge anything until production planning is separately approved.
-
-## The one decision requested
-
-Reply with one line:
-
-```text
-YES — apply the four safest local/review choices
-```
-
-or:
-
-```text
-NO — leave the five website pages unchanged
-```
-
-`YES` authorizes only these local/review changes: remove the Adobe loader from the five candidate pages, hide the nine Medium links, hold Bat-specific proof, and preserve both squirrel URLs. Afterward BWM must rerun deterministic QA, desktop/mobile rendering, performance checks, exact hashes, and protected independent review.
-
-It does not authorize preview exposure, sending anything to James or the client, deployment, redirects, provider/account changes, spending, or production.
+Explain the finished candidate to Robert in plain English. If Robert later authorizes a protected preview, show the actual pages to James/Nehemiah for feedback before any release.

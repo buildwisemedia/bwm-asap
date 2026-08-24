@@ -1,35 +1,34 @@
 # ASAP animal set — Phase 3 asset and rights audit
 
-State: exact decision-ready candidate for local review; **not production-cleared**. Re-verified 2026-08-24.
+State: local/review candidate; **not production-cleared**. Re-verified 2026-08-24.
+
+## What the client actually requested
+
+On the 2026-07-15 call, Nehemiah asked for landing-page-style pages for ASAP's top animals so the company could push specific searches organically and later use the pages for ads. The recorded Wave 1 is raccoon, bat and guano, squirrel and flying squirrel, and rats and mice, on `removeasap.com`.
+
+The same record preserves Robert's promise to send Nehemiah the plan before building and Nehemiah's statement that he had thoughts. No formal plan-approval receipt has been proven in this phase. These files therefore remain local and unsent.
 
 ## What is cleared locally
 
-- All five page-logo files match Nehemiah Ray’s exact 2026-08-11 email attachments and his named website-page use direction.
-- The seven other visual files used across the five pages—including the shared favicon—are byte-identical to the pre-existing ASAP base commit `b86b3bf4b5d8e911f80e2d860ec5106917abf3cc`.
+- Five page-logo files match Nehemiah Ray's 2026-08-11 email attachments.
+- Seven other visuals are byte-identical to the pre-existing ASAP base commit `b86b3bf4b5d8e911f80e2d860ec5106917abf3cc`.
 - No generated, new-stock, or cross-client image was introduced.
-- The composed five-page set passed protected exact review; this proves the reviewed artifact, not permission to expose or release it.
-- The attachment filenames say `CreamTagline`; the client correction calls the same light-on-dark files the white-tagline variant. The hashes establish one asset set, not two conflicting variants.
-- All five pages now load the same shared stylesheet cache key, `asap-close.css?v=4`. This is the only behavior-relevant page change in the 2026-08-24 candidate; the four edited HTML files also now carry a trailing newline. The exact new bytes are bound by a successor artifact manifest.
+- The source says six pages but explicitly names and supplies assets for five; no sixth page was invented.
+- The five pages use the same stylesheet key, `asap-close.css?v=5`.
+- The five-page forms remain local no-send fixtures.
 
-## What is not production-cleared
+## Robert-authorized local changes — 2026-08-24
 
-1. **Adobe Fonts ownership and privacy.** The existing `dmg8gvn` web project is technically continuous with the current site and serves URW DIN. Adobe’s current licensing guidance says a client website should load Adobe Fonts through its own Creative Cloud subscription. Adobe’s privacy notice says the website service sets no font-serving cookie, but may collect font, web-project/account, embed, hostname, and transient IP delivery data. The account/project owner and production-host coverage are not verified, and the generic privacy page has not been explicitly refreshed for this data flow.
-2. **Medium articles.** Nine exact links resolve directly or by redirect to Nehemiah Ray / `@ASAPwildlife`; the new site copies none of their body content. Publication is not the same as production-safe proof. Review found blanket `100% results`/warranty language in multiple posts, an incorrect squirrel paragraph in the raccoon article, overbroad or unverified bat maternity/licensing claims, and medical-risk or disease framing that needs current sources. All nine remain on editorial hold. Those links are present in the exact local/review pages; “hold” means the artifact must not be promoted with them as-is, not that they are absent.
-3. **Review excerpts.** The three named Google entries were provider-verified and are shown without an aggregate rating claim. Client/design approval must still accept using the same excerpts across pages; the Bat page’s excerpts are general or rodent-oriented rather than bat-specific.
-4. **Flying-squirrel adjacency.** The five-page set does not cannibalize itself, but the curated Squirrel page discusses gray and flying squirrels while the legacy `/wildlife/flying-squirrel/` page still owns `flying squirrel removal atlanta`. Production needs an explicit preserve-or-consolidate decision.
+1. **Adobe Fonts removed from the five candidate pages.** The `dmg8gvn` loader is absent, and the pages explicitly select the existing Arial Narrow/Arial fallback stack. The five pages no longer create the Adobe font-delivery data flow.
+2. **Nine old Medium links withheld.** The source URLs remain traceable in the internal inventory and ledger, but no Medium link is published on any of the five pages. Each affected card says that the link is held pending editorial approval.
 
-## Resolved without external input — 2026-08-24
+Why the old links were a problem: the articles are client-authored history, but several contain blanket `100% results` or warranty claims, the raccoon post includes an incorrect squirrel-service paragraph, and the bat posts include health, licensing, or timing claims that need current sources. Linking to those posts from a new sales page would make the new page endorse them. Hiding the links avoids that implication without deleting the client's articles.
 
-- CSS cache-busters are aligned at `v=4` across all five pages.
-- No copy, article, excerpt, intent, privacy, font-loader, form, provider, or production behavior was changed.
-- The four changed page hashes, updated ledgers, deterministic QA, decision packet, and exact-review prompt are bound in the successor candidate manifest. Protected independent review remains the acceptance check for those exact bytes.
+## Still open, but not silently decided
 
-## Exact decisions or provider evidence required
-
-- Identify the authorized Adobe web-project/subscription owner for kit `dmg8gvn`, confirm `removeasap.com` production coverage, and approve an accurate privacy disclosure.
-- Choose whether to remediate and approve each of the nine articles or withhold their links as explicit editorial holds.
-- Decide whether the curated Squirrel page preserves the separate legacy flying-squirrel owner or absorbs it through an approved redirect/canonical/internal-link plan.
-- Approve or replace the cross-page Google excerpts, especially the Bat proof selection.
-- After those decisions, apply only the approved privacy/article/intent/proof path, re-run exact QA/review for any changed bytes, and only then ask Robert whether the protected preview may be exposed or sent to James.
+1. **Review excerpts.** The three Google excerpts are real and provider-verified, but the same set repeats across the pages and Bat has no bat-specific proof.
+2. **Squirrel URL strategy.** The new Squirrel page discusses gray and flying squirrels while the legacy `/wildlife/flying-squirrel/` URL still exists. No redirect, canonical change, or merge is authorized.
+3. **Client plan approval.** The exact finished pages have not been shown or approved in this phase.
+4. **Release gates.** Preview exposure, sending, deployment, redirects, provider changes, spend, attribution tests, and production QA remain separately gated.
 
 No provider was mutated; no article, preview, or page was sent or published.

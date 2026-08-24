@@ -8,7 +8,9 @@
   --orange-dark: #8d572a;
   --max: 1180px;
   --shadow: 0 18px 45px rgba(33, 41, 54, 0.12);
+  --display-font: urw-din, "Arial Narrow", Arial, sans-serif;
 }
+html[data-font-source="fallback"] { --display-font: "Arial Narrow", Arial, sans-serif; }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--cream); }
@@ -46,7 +48,7 @@ button, input, select, textarea { font: inherit; }
 .nav-list { display: flex; justify-content: center; flex-wrap: wrap; gap: .35rem 1.25rem; margin: 0; padding: 0; list-style: none; }
 .nav-list a {
   color: var(--orange); text-decoration: none; text-transform: uppercase;
-  font-family: urw-din, "Arial Narrow", Arial, sans-serif; font-weight: 800;
+  font-family: var(--display-font); font-weight: 800;
   font-size: .88rem; letter-spacing: .07em;
 }
 .nav-list a:hover, .nav-list a:focus-visible { color: var(--navy); }
@@ -55,7 +57,7 @@ button, input, select, textarea { font: inherit; }
   display: inline-flex; min-height: 50px; align-items: center; justify-content: center;
   border: 2px solid var(--orange); border-radius: 5px 20px;
   padding: .85rem 1.5rem; background: var(--orange); color: var(--cream);
-  font-family: urw-din, "Arial Narrow", Arial, sans-serif; font-weight: 800;
+  font-family: var(--display-font); font-weight: 800;
   font-size: 1.2rem; line-height: 1; text-transform: uppercase; letter-spacing: .045em;
   text-decoration: none; transition: transform .18s ease, background .18s ease, color .18s ease;
 }
@@ -82,11 +84,11 @@ button, input, select, textarea { font: inherit; }
 }
 .eyebrow, .kicker {
   margin: 0 0 .75rem; color: var(--orange);
-  font-family: urw-din, "Arial Narrow", Arial, sans-serif; font-weight: 900;
+  font-family: var(--display-font); font-weight: 900;
   font-size: 1.2rem; letter-spacing: .14em; text-transform: uppercase;
 }
 h1, h2, h3 {
-  margin: 0; color: var(--navy); font-family: urw-din, "Arial Narrow", Arial, sans-serif;
+  margin: 0; color: var(--navy); font-family: var(--display-font);
   text-transform: uppercase; font-weight: 900; line-height: .9;
 }
 h1 { font-size: clamp(3.6rem, 8vw, 8.25rem); letter-spacing: -.035em; }
@@ -106,7 +108,7 @@ h3 { font-size: 1.3rem; line-height: 1.05; letter-spacing: .11em; }
 .proof-strip { background: var(--navy); color: var(--cream); }
 .proof-list { width: min(var(--max), calc(100% - 2rem)); margin: 0 auto; padding: 1.2rem 0; list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 .proof-list li { display: grid; gap: .15rem; padding: .35rem 1rem; border-left: 1px solid rgba(242,237,220,.3); }
-.proof-list strong { color: var(--white); font-family: urw-din, "Arial Narrow", Arial, sans-serif; text-transform: uppercase; letter-spacing: .08em; }
+.proof-list strong { color: var(--white); font-family: var(--display-font); text-transform: uppercase; letter-spacing: .08em; }
 .proof-list span { font-size: .85rem; }
 
 .section { padding: clamp(4.5rem, 8vw, 7.5rem) 0; }
@@ -127,7 +129,7 @@ h3 { font-size: 1.3rem; line-height: 1.05; letter-spacing: .11em; }
 .answer-card p:last-child { margin-bottom: 0; }
 .fact-list { display: grid; gap: 1rem; margin: 0; }
 .fact-list div { padding: 1.1rem 1.2rem; border-left: 6px solid var(--orange); background: rgba(255,255,255,.58); }
-.fact-list dt { color: var(--navy); font-family: urw-din, "Arial Narrow", Arial, sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+.fact-list dt { color: var(--navy); font-family: var(--display-font); font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
 .fact-list dd { margin: .25rem 0 0; }
 
 .flashlight { display: grid; grid-template-columns: 190px 1fr; gap: 1.8rem; align-items: center; padding: 2rem; background: var(--navy); color: var(--cream); border-radius: 10px 44px; box-shadow: var(--shadow); }
@@ -141,7 +143,7 @@ h3 { font-size: 1.3rem; line-height: 1.05; letter-spacing: .11em; }
 
 .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; counter-reset: process; }
 .process-card { counter-increment: process; padding: 1.5rem; border-top: 5px solid var(--orange); background: rgba(255,255,255,.06); }
-.process-card::before { content: counter(process, decimal-leading-zero); display: block; color: var(--orange); font-family: urw-din, "Arial Narrow", Arial, sans-serif; font-size: 2.4rem; font-weight: 900; }
+.process-card::before { content: counter(process, decimal-leading-zero); display: block; color: var(--orange); font-family: var(--display-font); font-size: 2.4rem; font-weight: 900; }
 .process-card p { margin-bottom: 0; }
 
 .feature-grid, .animal-grid, .pest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
@@ -183,7 +185,7 @@ h3 { font-size: 1.3rem; line-height: 1.05; letter-spacing: .11em; }
 
 .faq-list { display: grid; gap: .8rem; }
 .faq-list details { background: transparent; border-bottom: 2px solid var(--orange); }
-.faq-list summary { min-height: 58px; padding: 1rem 3.2rem 1rem .2rem; cursor: pointer; color: var(--navy); font-family: urw-din, "Arial Narrow", Arial, sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: .045em; list-style: none; position: relative; }
+.faq-list summary { min-height: 58px; padding: 1rem 3.2rem 1rem .2rem; cursor: pointer; color: var(--navy); font-family: var(--display-font); font-weight: 900; text-transform: uppercase; letter-spacing: .045em; list-style: none; position: relative; }
 .faq-list summary::-webkit-details-marker { display: none; }
 .faq-list summary::after { content: "+"; position: absolute; right: .5rem; top: .55rem; color: var(--orange); font-size: 2rem; }
 .faq-list details[open] summary::after { content: "−"; }
@@ -202,7 +204,7 @@ h3 { font-size: 1.3rem; line-height: 1.05; letter-spacing: .11em; }
 .lead-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 .field { display: flex; flex-direction: column-reverse; gap: .35rem; }
 .field--full, .consent, .form-status, .lead-form .button { grid-column: 1 / -1; }
-.field label { color: var(--cream); font-family: urw-din, "Arial Narrow", Arial, sans-serif; font-size: .9rem; font-weight: 900; text-transform: uppercase; letter-spacing: .09em; }
+.field label { color: var(--cream); font-family: var(--display-font); font-size: .9rem; font-weight: 900; text-transform: uppercase; letter-spacing: .09em; }
 .field input, .field select, .field textarea {
   width: 100%; min-height: 52px; padding: .75rem .15rem; color: var(--white);
   background: transparent; border: 0; border-bottom: 3px solid var(--orange); border-radius: 0; outline: none;

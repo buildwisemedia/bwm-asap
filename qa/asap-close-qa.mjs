@@ -42,8 +42,11 @@ for (const route of routes) {
   check(html.includes('"@type":"BreadcrumbList"'), `${route}: breadcrumb schema`);
   check(html.includes("770-691-3636") && html.includes("+17706913636"), `${route}: correct phone display and tel`);
   check(!badTokens.some((token) => html.toLowerCase().includes(token.toLowerCase())), `${route}: no rejected token or phone`);
-  check((alignedAnimalRoutes.has(route) ? html.includes("/assets/css/asap-close.css?v=4") : html.includes("/assets/css/asap-close.css")) && html.includes("/assets/js/asap-close.js"), `${route}: shared pattern assets and scoped cache alignment`);
-  check(html.includes("https://use.typekit.net/dmg8gvn.js") && html.includes("Typekit.load({async:true})"), `${route}: established ASAP URW DIN kit loader`);
+  check((alignedAnimalRoutes.has(route) ? html.includes("/assets/css/asap-close.css?v=5") && html.includes('data-font-source="fallback"') : html.includes("/assets/css/asap-close.css")) && html.includes("/assets/js/asap-close.js"), `${route}: shared pattern assets and scoped cache alignment`);
+  check(alignedAnimalRoutes.has(route)
+    ? !html.includes("use.typekit.net") && !html.includes("Typekit.load")
+    : html.includes("https://use.typekit.net/dmg8gvn.js") && html.includes("Typekit.load({async:true})"),
+  `${route}: font source matches approved local scope`);
   check(html.includes("data-asap-lead-form") && html.includes('data-integration-state="fixture-only"'), `${route}: form fixture state`);
   for (const field of ["lead_id", "source_page", "utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"]) {
     check(html.includes(`name="${field}"`), `${route}: attribution field ${field}`);
@@ -104,6 +107,9 @@ const articleInventory = JSON.parse(readFileSync(join(root, "content/asap-articl
 check(articleInventory.pages.length === 5, "Article inventory: five core pages");
 check(articleInventory.pages.every((page) => page.slots.length === 3), "Article inventory: exactly three slots per core page");
 check(articleInventory.pages.some((page) => page.slots.some((slot) => slot.status === "Editorial gap")), "Article inventory: gaps explicit");
+const heldArticleSlots = articleInventory.pages.flatMap((page) => page.slots).filter((slot) => slot.url);
+check(new Set(heldArticleSlots.map((slot) => slot.url)).size === 9, "Article inventory: nine distinct held Medium sources remain traceable internally");
+check(heldArticleSlots.every((slot) => slot.status === "Held for review"), "Article inventory: every existing Medium source is marked held for review");
 
 const lineup = JSON.parse(readFileSync(join(root, "content/design/animal-lineup-manifest.json"), "utf8"));
 const namedPaths = [
@@ -135,6 +141,7 @@ for (const page of lineup.pages) {
   check(html.includes('data-integration-state="fixture-only"') && html.includes('name="source_page"'), `Animal lineup: ${page.path} stays fixture-only with source field`);
   check(!html.includes("AggregateRating") && !html.includes("ratingValue"), `Animal lineup: ${page.path} does not publish an aggregate-rating claim`);
   check(count(html, /class="article-card(?:\s|\")/g) === 3, `Animal lineup: ${page.path} has exactly three article slots`);
+  check(!html.includes("medium.com/"), `Animal lineup: ${page.path} publishes no held Medium link`);
 }
 
 const ratLineup = lineup.pages.find((page) => page.url_path === "/wildlife/mouse-rat/");
@@ -169,16 +176,16 @@ for (const page of lineup.pages) {
   check(faviconPath && rightsAssets.some((asset) => asset.path === faviconPath), `Asset rights: ${page.path} favicon is bound`, faviconPath || "missing");
 }
 check(rightsLedger.visual_asset_boundary?.ai_generated_assets === 0 && rightsLedger.visual_asset_boundary?.new_stock_assets === 0 && rightsLedger.visual_asset_boundary?.cross_client_assets === 0, "Asset rights: no generated, new-stock, or cross-client visual is introduced");
-check(rightsLedger.adobe_fonts?.account_or_subscription_owner_verified === false && rightsLedger.adobe_fonts?.production_clear === false, "Asset rights: Adobe account/hostname production gate remains open");
+check(rightsLedger.adobe_fonts?.loader_removed_from_candidate_pages === true && rightsLedger.adobe_fonts?.production_clear === true, "Asset rights: five-page candidate no longer depends on Adobe Fonts");
 check(rightsLedger.medium_articles?.distinct_existing_links === 9 && rightsLedger.medium_articles?.items?.length === 9, "Asset rights: nine distinct existing Medium links are inventoried");
 check(rightsLedger.medium_articles?.items?.every((item) => item.status === "hold"), "Asset rights: every Medium link remains on editorial hold");
-check(rightsLedger.medium_articles?.hold_semantics?.includes("links are present") && rightsLedger.medium_articles?.hold_semantics?.includes("must not be promoted"), "Asset rights: Medium hold semantics match the exact artifact");
+check(rightsLedger.medium_articles?.hold_semantics?.includes("withheld from all five") && rightsLedger.medium_articles?.hold_semantics?.includes("traceable"), "Asset rights: Medium hold semantics match the exact artifact");
 check(rightsLedger.medium_articles?.body_content_copied_into_site === false, "Asset rights: no Medium body content is copied into the site");
 check(rightsLedger.page_proof?.production_clear === false && rightsLedger.page_proof?.named_google_review_excerpts === 3, "Asset rights: three verified review excerpts remain human-approval gated");
 check(rightsLedger.intent_adjacency?.five_page_set_cannibalization === false && rightsLedger.intent_adjacency?.production_clear === false, "Asset rights: five-page intent passes while legacy adjacency remains open");
 check(rightsLedger.promotion_hygiene?.css_cache_buster_aligned === true && rightsLedger.promotion_hygiene?.artifact_change_warning?.includes("successor candidate manifest"), "Asset rights: cache-buster is aligned and bound to successor verification");
 check(rightsLedger.tagline_color_reconciliation?.includes("CreamTagline") && rightsLedger.tagline_color_reconciliation?.includes("white-tagline"), "Asset rights: cream-versus-white tagline wording is reconciled");
-check(rightsLedger.open_gates?.length === 7, "Asset rights: all seven remaining production gates are explicit");
+check(rightsLedger.open_gates?.length === 4, "Asset rights: four remaining human/release gates are explicit");
 
 const sitemap = readFileSync(join(root, "sitemap.xml"), "utf8");
 for (const route of routes) check(sitemap.includes(`https://removeasap.com/${route}/`), `${route}: included in sitemap`);

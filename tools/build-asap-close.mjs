@@ -7,15 +7,15 @@ const tel = "+17706913636";
 const reviewUrl = "https://www.google.com/maps/place/ASAP+Wildlife+Removal/@33.734354,-84.242248,10z/data=!4m8!3m7!1s0x88f51d199bdde957:0x677a4db004e50c72!8m2!3d33.734354!4d-84.242248!9m1!1b1!16s%2Fg%2F11j3147h44?hl=en&entry=ttu";
 
 const articles = {
-  ratTunneling: ["Why rats tunnel — and what that can tell you", "Existing", "https://medium.com/@ASAPwildlife/understanding-the-reasons-behind-rat-tunneling-11c3bf8a4e03"],
-  winterRodents: ["Why rodents move inside when it gets cold", "Existing", "https://medium.com/@ASAPwildlife/rodent-winter-roommates-why-rodents-move-in-when-its-cold-d51cb888c843"],
-  rodentTraits: ["13 traits rats and squirrels share", "Existing", "https://medium.com/@ASAPwildlife/rats-sqrls-are-bffs-13-crazy-common-traits-ef190a50c3c6"],
-  squirrelAttic: ["Why squirrels keep choosing attics", "Existing", "https://medium.com/@ASAPwildlife/why-squirrels-cant-resist-your-attic-you-won-t-believe-it-a4732378a520"],
-  squirrelFacts: ["The #1 reason squirrels avoid people", "Existing", "https://medium.com/@info_43708/the-1-reason-squirrels-hate-you-e4f1c44f0edd"],
-  squirrelBehavior: ["A lighter look at squirrel behavior", "Existing", "https://medium.com/@info_43708/squirrels-%EF%B8%8F-to-twerk-b53f3a95cab6"],
-  raccoonHands: ["How raccoons use their hands", "Existing", "https://medium.com/@info_43708/raccoons-how-they-use-their-hands-d2efaa51319a"],
-  batsVisit: ["Why bats visit — and when removal timing matters", "Existing", "https://medium.com/@ASAPwildlife/flying-guests-heres-why-bats-might-visit-and-when-you-can-t-evict-them-7acef4dda5f0"],
-  batGuano: ["What bat guano can mean for an attic", "Existing", "https://medium.com/@info_43708/bat-poop-dangers-22d54b59d6be"]
+  ratTunneling: ["Why rats tunnel — and what that can tell you", "Held for review", "https://medium.com/@ASAPwildlife/understanding-the-reasons-behind-rat-tunneling-11c3bf8a4e03"],
+  winterRodents: ["Why rodents move inside when it gets cold", "Held for review", "https://medium.com/@ASAPwildlife/rodent-winter-roommates-why-rodents-move-in-when-its-cold-d51cb888c843"],
+  rodentTraits: ["13 traits rats and squirrels share", "Held for review", "https://medium.com/@ASAPwildlife/rats-sqrls-are-bffs-13-crazy-common-traits-ef190a50c3c6"],
+  squirrelAttic: ["Why squirrels keep choosing attics", "Held for review", "https://medium.com/@ASAPwildlife/why-squirrels-cant-resist-your-attic-you-won-t-believe-it-a4732378a520"],
+  squirrelFacts: ["The #1 reason squirrels avoid people", "Held for review", "https://medium.com/@info_43708/the-1-reason-squirrels-hate-you-e4f1c44f0edd"],
+  squirrelBehavior: ["A lighter look at squirrel behavior", "Held for review", "https://medium.com/@info_43708/squirrels-%EF%B8%8F-to-twerk-b53f3a95cab6"],
+  raccoonHands: ["How raccoons use their hands", "Held for review", "https://medium.com/@info_43708/raccoons-how-they-use-their-hands-d2efaa51319a"],
+  batsVisit: ["Why bats visit — and when removal timing matters", "Held for review", "https://medium.com/@ASAPwildlife/flying-guests-heres-why-bats-might-visit-and-when-you-can-t-evict-them-7acef4dda5f0"],
+  batGuano: ["What bat guano can mean for an attic", "Held for review", "https://medium.com/@info_43708/bat-poop-dangers-22d54b59d6be"]
 };
 
 const gap = (title) => [title, "Editorial gap", ""];
@@ -266,9 +266,13 @@ function baseSchema(page, faqs) {
 
 function head(page, faqs) {
   const canonical = `https://removeasap.com/${page.slug}/`;
-  const cssVersion = page.key === "rodent" ? 4 : 3;
+  const cssVersion = page.kind === "animal" ? 5 : 3;
+  const fontSource = page.kind === "animal" ? ' data-font-source="fallback"' : "";
+  const adobeLoader = page.kind === "animal" ? "" : `  <script>/* Existing ASAP Adobe Fonts kit; delay the network request while fallback text remains visible. */
+(function(){var done=false;function load(){if(done)return;done=true;var s=document.createElement('script');s.async=true;s.src='https://use.typekit.net/dmg8gvn.js';s.onload=function(){try{Typekit.load({async:true});}catch(e){}};document.head.appendChild(s);}['pointerdown','keydown','touchstart','scroll'].forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});window.addEventListener('load',function(){setTimeout(load,15000);},{once:true});})();</script>
+`;
   return `<!doctype html>
-<html lang="en" data-build-state="local-review">
+<html lang="en" data-build-state="local-review"${fontSource}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -279,9 +283,7 @@ function head(page, faqs) {
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/assets/images/logos/favicon.png">
   <link rel="stylesheet" href="/assets/css/asap-close.css?v=${cssVersion}">
-  <script>/* Existing ASAP Adobe Fonts kit; delay the network request while fallback text remains visible. */
-(function(){var done=false;function load(){if(done)return;done=true;var s=document.createElement('script');s.async=true;s.src='https://use.typekit.net/dmg8gvn.js';s.onload=function(){try{Typekit.load({async:true});}catch(e){}};document.head.appendChild(s);}['pointerdown','keydown','touchstart','scroll'].forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});window.addEventListener('load',function(){setTimeout(load,15000);},{once:true});})();</script>
-  <script type="application/ld+json">${json(baseSchema(page, faqs))}</script>
+${adobeLoader}  <script type="application/ld+json">${json(baseSchema(page, faqs))}</script>
 </head>`;
 }
 
@@ -314,7 +316,7 @@ function flashlight() {
 }
 
 function articleCards(items) {
-  return `<div class="three-col">${items.map(([title, status, url]) => `<article class="article-card${url ? "" : " article-card--gap"}"><span class="status">${esc(status)}</span><h3>${esc(title)}</h3><p>${url ? "Educational reading from ASAP’s existing article inventory." : "A source-backed brief is scaffolded in the editorial gap inventory. This is not silently treated as published."}</p>${url ? `<a href="${url}" rel="noopener noreferrer">Read the existing article <span aria-hidden="true">→</span></a>` : `<span>Editorial source review required before publication</span>`}</article>`).join("")}</div>`;
+  return `<div class="three-col">${items.map(([title, status, url]) => `<article class="article-card article-card--gap"><span class="status">${esc(status)}</span><h3>${esc(title)}</h3><p>${url ? "This older ASAP article is hidden while its claims and copy are reviewed." : "A source-backed brief is scaffolded in the editorial gap inventory. This is not silently treated as published."}</p><span>${url ? "Link withheld pending editorial approval" : "Editorial source review required before publication"}</span></article>`).join("")}</div>`;
 }
 
 function intentRouter(page) {
