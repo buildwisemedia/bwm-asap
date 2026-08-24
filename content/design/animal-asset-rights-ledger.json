@@ -1,8 +1,8 @@
 {
   "schema_version": "asap-animal-asset-rights/1.0.0",
-  "captured_at": "2026-08-17",
+  "captured_at": "2026-08-24",
   "phase": 3,
-  "state": "evidence-complete-production-clearance-open",
+  "state": "decision-ready-candidate-external-decisions-open",
   "production_clear": false,
   "local_review_clear": true,
   "source_boundary": "The client correction says six pages but names and supplies logo assets for five. Only the five explicit named pages are in scope; no sixth asset or page is invented.",
@@ -77,9 +77,9 @@
     "required_decision": "Either keep the curated title/H1 general and explicitly preserve the legacy owner, or consolidate flying-squirrel intent into the curated page with an approved redirect/canonical/internal-link plan."
   },
   "promotion_hygiene": {
-    "css_cache_buster_aligned": false,
-    "finding": "Rodent loads asap-close.css?v=4; the four specific pages load v=3. The local file is identical, but versions must align before promotion.",
-    "artifact_change_warning": "Changing the cache-buster changes the exact reviewed page hashes and requires renewed exact-artifact verification."
+    "css_cache_buster_aligned": true,
+    "finding": "All five pages load the same shared asset URL: asap-close.css?v=4.",
+    "artifact_change_warning": "The 2026-08-24 alignment changed the four wildlife-page hashes. The successor candidate manifest and protected exact-artifact review must bind the new bytes before any preview decision."
   },
   "open_gates": [
     "Adobe kit account or subscription ownership and production-host coverage",
@@ -87,7 +87,6 @@
     "Nine Medium article editorial dispositions",
     "Client acceptance of cross-page review excerpts",
     "Curated versus legacy flying-squirrel intent decision",
-    "CSS cache-buster alignment followed by exact-artifact re-verification",
     "Robert authorization before preview exposure or send",
     "James and client approval before any release"
   ]

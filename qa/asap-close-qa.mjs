@@ -8,6 +8,9 @@ const routes = [
   "wildlife-removal-canton", "wildlife-removal-woodstock", "wildlife-removal-acworth", "wildlife-removal-kennesaw", "wildlife-removal-cartersville",
   "pest-control-services"
 ];
+const alignedAnimalRoutes = new Set([
+  "peace-of-mind-from/rodents", "wildlife/mouse-rat", "wildlife/gray-squirrel", "wildlife/raccoon", "wildlife/bats"
+]);
 const cities = ["Canton", "Woodstock", "Acworth", "Kennesaw", "Cartersville"];
 const badTokens = ["#0c2340", "#a6411d", "#dc5b2a", "#8d3718", "#ffb38f", "770-450-1744", "7704501744"];
 const results = [];
@@ -39,7 +42,7 @@ for (const route of routes) {
   check(html.includes('"@type":"BreadcrumbList"'), `${route}: breadcrumb schema`);
   check(html.includes("770-691-3636") && html.includes("+17706913636"), `${route}: correct phone display and tel`);
   check(!badTokens.some((token) => html.toLowerCase().includes(token.toLowerCase())), `${route}: no rejected token or phone`);
-  check(html.includes("/assets/css/asap-close.css") && html.includes("/assets/js/asap-close.js"), `${route}: shared pattern assets`);
+  check((alignedAnimalRoutes.has(route) ? html.includes("/assets/css/asap-close.css?v=4") : html.includes("/assets/css/asap-close.css")) && html.includes("/assets/js/asap-close.js"), `${route}: shared pattern assets and scoped cache alignment`);
   check(html.includes("https://use.typekit.net/dmg8gvn.js") && html.includes("Typekit.load({async:true})"), `${route}: established ASAP URW DIN kit loader`);
   check(html.includes("data-asap-lead-form") && html.includes('data-integration-state="fixture-only"'), `${route}: form fixture state`);
   for (const field of ["lead_id", "source_page", "utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"]) {
@@ -173,9 +176,9 @@ check(rightsLedger.medium_articles?.hold_semantics?.includes("links are present"
 check(rightsLedger.medium_articles?.body_content_copied_into_site === false, "Asset rights: no Medium body content is copied into the site");
 check(rightsLedger.page_proof?.production_clear === false && rightsLedger.page_proof?.named_google_review_excerpts === 3, "Asset rights: three verified review excerpts remain human-approval gated");
 check(rightsLedger.intent_adjacency?.five_page_set_cannibalization === false && rightsLedger.intent_adjacency?.production_clear === false, "Asset rights: five-page intent passes while legacy adjacency remains open");
-check(rightsLedger.promotion_hygiene?.css_cache_buster_aligned === false && rightsLedger.promotion_hygiene?.artifact_change_warning?.includes("exact reviewed page hashes"), "Asset rights: cache-buster fix is held behind renewed exact verification");
+check(rightsLedger.promotion_hygiene?.css_cache_buster_aligned === true && rightsLedger.promotion_hygiene?.artifact_change_warning?.includes("successor candidate manifest"), "Asset rights: cache-buster is aligned and bound to successor verification");
 check(rightsLedger.tagline_color_reconciliation?.includes("CreamTagline") && rightsLedger.tagline_color_reconciliation?.includes("white-tagline"), "Asset rights: cream-versus-white tagline wording is reconciled");
-check(rightsLedger.open_gates?.length === 8, "Asset rights: all eight production gates are explicit");
+check(rightsLedger.open_gates?.length === 7, "Asset rights: all seven remaining production gates are explicit");
 
 const sitemap = readFileSync(join(root, "sitemap.xml"), "utf8");
 for (const route of routes) check(sitemap.includes(`https://removeasap.com/${route}/`), `${route}: included in sitemap`);
