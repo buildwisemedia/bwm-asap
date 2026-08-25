@@ -108,3 +108,15 @@ Verified locally (iframe harness, fetch/XHR instrumented): every page class = ex
 - Migrated the affected client asset locks to those approved WebP derivatives and retained original-asset provenance in the markup; all 1,086 perceptual locks pass.
 - Removed the stale same-origin tracking request that produced repeated 404s. Canonical BWM analytics and attribution remain in place.
 - Scope is isolated in `codex/asap-performance-2026-07-15` for full-page verification before release.
+# ASAP rating-page rollout — 2026-08-25
+
+- Reused and revalidated the existing client-specific preflight v4 bindings for `website:/rate review engine`; the direction remains the approved ASAP visual system.
+- Promoted the previously reviewed request-bound front-end hardening onto current `origin/main` in an isolated rollout branch. This removes browser authority over customer identity and adds privacy-safe GA4 events while retaining the public Google option.
+- The page remains `noindex,nofollow`; `/review` remains reserved; no customer send or production deploy occurred during this step.
+- The exact reviewed page is commit
+  `dcb906012698ca467d0478b68687b455f0d6de46`, path `rate/index.html`, SHA-256
+  `e612b127a7f807c80ff0df8509b8a250832eec3da452079aaecde7b3239a562f`.
+  The backend release receipt binds issued requests to those bytes.
+- Final site checks remain 11/11 plus `scripts/production-gate.sh qa-gate` PASS.
+  The page is not production yet; deployment waits on the protected review
+  closeout and coordinated backend/report release.
