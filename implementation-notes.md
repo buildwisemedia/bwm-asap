@@ -1,5 +1,13 @@
 # Implementation Notes
 
+## 2026-08-25 - Animal-page mobile interaction closeout
+
+- Renewed the exact five-page animal candidate after Robert authorized the build to proceed.
+- Preserved the existing indexed URLs, approved phone, fallback-font path, held article links, and fixture-only form boundary.
+- Increased secondary mobile link and consent-control tap areas to at least 44px without changing desktop composition.
+- Advanced the five animal pages to the shared `asap-close.css?v=6` cache key so the mobile fix cannot be masked by an older cached stylesheet.
+- The work remains local/review only. No preview exposure, send, deploy, redirect, provider mutation, ad change, spend, or production cutover is authorized by this pass.
+
 ## 2026-08-05 - Canonical phone and release reconciliation
 
 - Reconciled the site against the Brain source of truth: the current number is
@@ -108,3 +116,76 @@ Verified locally (iframe harness, fetch/XHR instrumented): every page class = ex
 - Migrated the affected client asset locks to those approved WebP derivatives and retained original-asset provenance in the markup; all 1,086 perceptual locks pass.
 - Removed the stale same-origin tracking request that produced repeated 404s. Canonical BWM analytics and attribution remain in place.
 - Scope is isolated in `codex/asap-performance-2026-07-15` for full-page verification before release.
+
+## 2026-08-13 - ASAP Close Local/Review Page Build
+
+This pass implements the accepted August 11 email and August 12 call direction
+as a local/review build only. It started from repository HEAD
+`b86b3bf4b5d8e911f80e2d860ec5106917abf3cc` in an isolated worktree and did
+not change the user's existing checkout.
+
+- Added five core animal sales pages: rodent umbrella, rat and mouse, squirrel,
+  raccoon, and bat/guano.
+- Added five mixed-service city pages for Canton, Woodstock, Acworth, Kennesaw,
+  and Cartersville. Acworth uses beavers in place of mice as directed.
+- Rebuilt the pest-control hub and added a shared pest-control section pattern
+  to every city page.
+- Used the exact review-build identity tokens: cream `#f2eddc`, navy `#212936`,
+  body `#333333`, orange `#b77537`, white, and phone `770-691-3636` with
+  `tel:+17706913636`.
+- Used the supplied page logos from the August 11 email asset packet. Article
+  gaps are explicitly labeled and are not represented as published.
+- Bat maternity-season copy states the April 1-July 31 guidance window while
+  making clear that inspection, emergency response, containment, cleanup
+  planning, and otherwise permitted work do not automatically stop. Current
+  guidance and property conditions control the actual plan.
+- Forms are local fixtures. They capture source page, service/city, lead ID,
+  UTM values, `gclid`, `fbclid`, consent, start, submit, and phone-click hooks,
+  but they cannot send email, create a Monday.com item, run Make.com, or contact
+  a customer.
+- Added self canonicals, one H1 per page, LocalBusiness/Service/FAQ/Breadcrumb
+  schema, sitemap coverage, an intent-ownership manifest, an article inventory,
+  and deterministic page generation/QA.
+- Corrected the retired phone number across the repository because the August
+  evidence names `770-691-3636` as authoritative. No endpoint, deployment,
+  DNS, provider, tenant, or production state changed.
+
+### Verification and held gates
+
+- Preflight v4: hash-backed and valid with four bindings.
+- Scope QA: 293/293 checks pass.
+- Lead/attribution QA: 606 internal links resolve, all 167 phone links use the
+  correct number, 11 fixture pages are recognized as non-live, and attribution
+  tracker tests pass 3/3.
+- Pixel QA: all 11 routes inspected at desktop, 390px mobile, and 320px narrow
+  widths; no horizontal overflow. Focus, validation error, no-send success,
+  FAQ-open, and reduced-motion states were checked.
+- Representative mobile Lighthouse: bat and Canton each score 99 performance,
+  100 accessibility, 100 best practices, and 100 SEO. FCP is 0.9s, LCP is 2.1s,
+  TBT is 0ms, and CLS is 0.007 or lower.
+- Repository-wide `bwm-preship-gate` remains blocked by legacy Webflow/source
+  findings outside the new page slice, including existing banned-token scans,
+  legacy duplicated assets, the already-committed root notes location, and an
+  internal lead-flow QA page. The scoped Kennesaw duplicate introduced during
+  this pass was fixed before closeout.
+- The canonical `bwm-design-gate run` cannot truthfully pass until the required
+  independent fresh-context opposite-family scorer and defect receipts exist.
+  Per coordination, Fable/Claude invocation is intentionally held during the
+  provider cooldown. No client/HIL acceptance is claimed.
+
+### Morning decisions and assumptions
+
+- The source says "six pages" but names five core animal pages. This build
+  implements the five named pages; armadillo, beaver, birds, bees/wasps/hornets,
+  coyote, flying squirrel, fox, geese, gopher, mole, opossum, otter, rabbit,
+  snake, turtle, vole, and wild hog remain a held business-priority backlog.
+- City maps are accessible schematic service-context graphics, not legal or
+  guaranteed service boundaries. County/boundary approval is held.
+- Supplied review evidence provides the Google listing destination, not stable
+  individual-review deep links. Review cards therefore link to the listing.
+- Missing article sources, production form destinations, attribution vendor
+  wiring, spam controls, GTM/Meta/Clarity production activation, and real
+  Monday/Make mappings remain external gates. Credentials or existing code do
+  not authorize those changes.
+- No merge, tag, deploy, DNS/sharing change, production mutation, email, Slack,
+  or client communication occurred.

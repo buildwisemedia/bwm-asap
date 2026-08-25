@@ -1,0 +1,43 @@
+{
+  "manifest_version": 1,
+  "client": "asap-pest-wildlife",
+  "surface": "local/review website closeout scope",
+  "process_tier": "locked-direction-implementation",
+  "primary_module": "website_landing",
+  "authoritative_sources": [
+    {"path": "email/Nehemiah-ASAP-command-center-notes-2026-08-11.txt", "sha256": "46ccc2c87cc2c7d8316440befc95facc1434c2b54c9df32d17f05620b7193f18", "role": "exact client corrections, page scope, tokens, phone, assets, and integrations boundary"},
+    {"path": "drive/ASAP-WORKING-SESSION-2026-08-12-transcript.md", "sha256": "2b040ba11efc4672b49cd90d1f9911a4793a63cb3cdf9ba10a0872582050c118", "role": "accepted closer design direction, animal list, city wave, and held approval gates"},
+    {"path": "brain/clients/asap-pest-wildlife/Brand-Voice-Card.md", "sha256": "4d9cd5d7d6e4bfed50ce9da45c6590603a63ca42553bf12161809604d413d6d6", "brain_sha": "dd5fe30d1f66f2ecee0856321379648060a6f1e4"},
+    {"path": "brain/clients/asap-pest-wildlife/Niche-Design-Brief.md", "sha256": "bf5634d21931b2e2eaddae3d905d54419ba51e5c90ec750afe76fc40a226f6bc", "brain_sha": "fb0738d2f094e6511b607ba30ff6f18900095f09"},
+    {"path": "brain/clients/asap-pest-wildlife/Approved-Design-Brief.md", "sha256": "ed60c79cb0133310fdf76002f90008d4f9fb5814199705376535025f70cb7483", "brain_sha": "3764d2d02d8c733efbf6d935956c18bbd53c7473"},
+    {"path": "brain/clients/asap-pest-wildlife/Content-Brief.md", "sha256": "3564d602354aea67799b724bd71d5d8789116e7a9a5158bc41ba604fb7e53fcd", "brain_sha": "91142f85b3c3fa1fc715020ae3fb829bc333caff"},
+    {"path": "brain/clients/asap-pest-wildlife/SEO-AEO-Content-Map.md", "sha256": "1c784fba868eae9666133f1c57ee2252f340efc9d8e17c5c4aa65f6c971e1789", "brain_sha": "056152d96ed7175ba2df05b98e0dacdf156b784f"},
+    {"path": "brain/clients/asap-pest-wildlife/Marketing-Strategy.md", "sha256": "9c7a149301c850d68eb7d5e6651b94fabcd1ebc549e073cde4fac3dfd97a99ae", "brain_sha": "a783e0e83504f334cccf1966d142e30d1b451965"},
+    {"path": "brain/clients/asap-pest-wildlife/Outcomes-Commitment-Card.md", "sha256": "81aab1787c6aa7c84dd6f9b04b54e06dd8d02ebbd22612e30974620e17a2f783", "brain_sha": "184f84b8d7f8725dc538cc390272aa4d7a336da2"},
+    {"path": "brain/projects/Project-ASAP-Animal-Sales-Pages.md", "sha256": "c820ca447ec04c71b70d405a738dd7ea06e2d3028081798cab844684ea0a53e1", "brain_sha": "d4e175b602901eee9a94a4978cf1f5259073b112"},
+    {"path": "brain/projects/Project-ASAP-Local-SEO-Expansion.md", "sha256": "eb800fb041e92614dd7c6f0a59024983fa8261b4a4f813b8c8f4ffc542fc829a", "brain_sha": "eb715f6b4b5f8ac557220e9668a5d39f6dce76b5"}
+  ],
+  "repo_base": {
+    "path": "/Users/robertechevarria/asap-pest-wildlife",
+    "branch_at_handoff": "feat/review-engine-rate",
+    "commit": "b86b3bf4b5d8e911f80e2d860ec5106917abf3cc"
+  },
+  "scope_truth": {
+    "state": "local/review only",
+    "phone": "770-691-3636",
+    "five_core_animal_pages": ["rodent", "rat-and-mouse", "squirrel", "raccoon", "bat"],
+    "city_pages": ["Canton", "Woodstock", "Acworth", "Kennesaw", "Cartersville"],
+    "additional_animal_inventory": ["armadillos", "beavers", "bees", "birds", "coyotes", "foxes", "opossums", "snakes", "wild hogs", "otters"],
+    "birds_geese_rollup": "open; do not silently merge",
+    "pest_control": "dedicated page/pattern and city-page section authorized for local review",
+    "external_integrations": "hooks and fixtures only; real monday.com and make.com tenants held"
+  },
+  "state_boundaries": {
+    "client_acceptance_of_rendered_build": "not_obtained",
+    "production_mutation": "not_authorized",
+    "deployment": "not_authorized",
+    "dns": "not_authorized",
+    "analytics_release": "separate_gate",
+    "real_form_delivery": "held_pending_authenticated_integration_test_and_approval"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "resolver_version": "1.0.0",
+  "identity_class": "client",
+  "composition_mode": "single",
+  "primary_identity_source": "Brain:clients/asap-pest-wildlife/Brand-Voice-Card.md@dd5fe30d1f66f2ecee0856321379648060a6f1e4",
+  "surface": "website local/review animal sales pages, five city pages, and pest-control pattern",
+  "audience": "Metro Atlanta homeowners and property decision-makers seeking pest or wildlife help",
+  "explicit_direction": {
+    "accepted_by": "Nehemiah Ray",
+    "accepted_at": "2026-08-12T13:35:02Z",
+    "decision": "Stay closer to the current ASAP site while fixing what gets in the way",
+    "base_artifacts": [
+      "current removeasap.com identity and shared components",
+      "reviewed animal-page candidates from Nehemiah's 2026-08-11 email"
+    ],
+    "surface_module": "website_landing",
+    "process_tier": "locked-direction-implementation"
+  },
+  "resolved_tokens": {
+    "cream": "#f2eddc",
+    "charcoal_navy": "#212936",
+    "body_gray": "#333333",
+    "brand_orange": "#b77537",
+    "white": "#ffffff",
+    "display_font": "urw-din",
+    "body_font": "Arial",
+    "phone_display": "770-691-3636",
+    "phone_tel": "+17706913636"
+  },
+  "conflict_resolution": [
+    "The 2026-08-11 client computed-style values supersede older March NDB palette and typography values for this scope.",
+    "The 2026-08-12 design choice rejects the stronger off-brand navy/rust candidate and preserves the current-site visual language."
+  ],
+  "forbidden_inheritance": [
+    "Buildwise Media visual identity",
+    "Robert Echevarria personal identity",
+    "other-client visual systems",
+    "model-default visual systems",
+    "off-brand navy #0c2340",
+    "off-brand oranges #a6411d #dc5b2a #8d3718",
+    "off-brand peach #ffb38f"
+  ],
+  "required_registers": [
+    "calm protector",
+    "warm",
+    "reassuring",
+    "action-clear",
+    "phone-first",
+    "evidence-qualified"
+  ],
+  "confidence": "high",
+  "resolution_status": "resolved",
+  "hil_required_before_authoring": false,
+  "hil_required_before_promotion": true
+}

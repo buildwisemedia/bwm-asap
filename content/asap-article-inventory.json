@@ -1,0 +1,132 @@
+{
+  "generated_at": "2026-08-13",
+  "state": "local-review",
+  "requirement": "Three related article slots per core animal page; gaps are explicit and not fabricated as published.",
+  "pages": [
+    {
+      "page": "/peace-of-mind-from/rodents/",
+      "service": "Rodent Removal",
+      "slots": [
+        {
+          "title": "Why rodents move inside when it gets cold",
+          "status": "Held for review",
+          "url": "https://medium.com/@ASAPwildlife/rodent-winter-roommates-why-rodents-move-in-when-its-cold-d51cb888c843"
+        },
+        {
+          "title": "13 traits rats and squirrels share",
+          "status": "Held for review",
+          "url": "https://medium.com/@ASAPwildlife/rats-sqrls-are-bffs-13-crazy-common-traits-ef190a50c3c6"
+        },
+        {
+          "title": "How to compare trapping, exclusion, and recurring monitoring",
+          "status": "Editorial gap",
+          "url": null
+        }
+      ]
+    },
+    {
+      "page": "/wildlife/mouse-rat/",
+      "service": "Rat and Mouse Removal",
+      "slots": [
+        {
+          "title": "Why rats tunnel — and what that can tell you",
+          "status": "Held for review",
+          "url": "https://medium.com/@ASAPwildlife/understanding-the-reasons-behind-rat-tunneling-11c3bf8a4e03"
+        },
+        {
+          "title": "Why rodents move inside when it gets cold",
+          "status": "Held for review",
+          "url": "https://medium.com/@ASAPwildlife/rodent-winter-roommates-why-rodents-move-in-when-its-cold-d51cb888c843"
+        },
+        {
+          "title": "13 traits rats and squirrels share",
+          "status": "Held for review",
+          "url": "https://medium.com/@ASAPwildlife/rats-sqrls-are-bffs-13-crazy-common-traits-ef190a50c3c6"
+        }
+      ]
+    },
+    {
+      "page": "/wildlife/gray-squirrel/",
+      "service": "Squirrel Removal",
+      "slots": [
+        {
+          "title": "Why squirrels keep choosing attics",
+          "status": "Held for review",
+          "url": "https://medium.com/@ASAPwildlife/why-squirrels-cant-resist-your-attic-you-won-t-believe-it-a4732378a520"
+        },
+        {
+          "title": "The #1 reason squirrels avoid people",
+          "status": "Held for review",
+          "url": "https://medium.com/@info_43708/the-1-reason-squirrels-hate-you-e4f1c44f0edd"
+        },
+        {
+          "title": "A lighter look at squirrel behavior",
+          "status": "Held for review",
+          "url": "https://medium.com/@info_43708/squirrels-%EF%B8%8F-to-twerk-b53f3a95cab6"
+        }
+      ]
+    },
+    {
+      "page": "/wildlife/raccoon/",
+      "service": "Raccoon Removal",
+      "slots": [
+        {
+          "title": "How raccoons use their hands",
+          "status": "Held for review",
+          "url": "https://medium.com/@info_43708/raccoons-how-they-use-their-hands-d2efaa51319a"
+        },
+        {
+          "title": "Raccoon families in attics: what humane timing means",
+          "status": "Editorial gap",
+          "url": null
+        },
+        {
+          "title": "Raccoon cleanup and entry-point repair guide",
+          "status": "Editorial gap",
+          "url": null
+        }
+      ]
+    },
+    {
+      "page": "/wildlife/bats/",
+      "service": "Bat and Guano Removal",
+      "slots": [
+        {
+          "title": "Why bats visit — and when removal timing matters",
+          "status": "Held for review",
+          "url": "https://medium.com/@ASAPwildlife/flying-guests-heres-why-bats-might-visit-and-when-you-can-t-evict-them-7acef4dda5f0"
+        },
+        {
+          "title": "What bat guano can mean for an attic",
+          "status": "Held for review",
+          "url": "https://medium.com/@info_43708/bat-poop-dangers-22d54b59d6be"
+        },
+        {
+          "title": "Why bats are protected — and why maternity timing matters",
+          "status": "Editorial gap",
+          "url": null
+        }
+      ]
+    }
+  ],
+  "bat_backlog": [
+    {
+      "title": "Bat maternity timeline, migration, protection, and why timing matters",
+      "status": "gap-needs-source-review"
+    },
+    {
+      "title": "Danger of guano",
+      "status": "existing-article-needs-editorial-validation",
+      "candidate": "https://medium.com/@info_43708/bat-poop-dangers-22d54b59d6be"
+    },
+    {
+      "title": "Why bats are protected",
+      "status": "gap-needs-source-review"
+    },
+    {
+      "title": "Cool facts about bats",
+      "status": "gap-needs-source-review"
+    }
+  ],
+  "held_gate": "No missing article is represented as written, approved, or published. Existing Medium content also needs editorial and claim review before production attachment."
+}

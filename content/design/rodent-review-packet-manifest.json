@@ -1,0 +1,39 @@
+{
+  "schema_version": "asap-rodent-review-packet/1.0.0",
+  "state": "local-review-independent-pass-premium-candidate",
+  "page_sha256": "7b1b67910b637f7360075f8517e76d8190f709d2a1332ce4854aa0c8a07318ff",
+  "implementation_commit": "8dc79a0829c92588e406f51fa4bfecad6d8d6764",
+  "files": [
+    {"path": "rodent-accepted-direction.json", "sha256": "4bdd2662d48fb14f4d151009cd33345cbb6747354ec3ead62fb74e272fa1a97e"},
+    {"path": "rodent-design-anchor-manifest.json", "sha256": "9eeee83fa51ad36c10d8b4108729baac6e814cf9ea4bbe6755db562f2d3914dd"},
+    {"path": "rodent-copy-evidence.json", "sha256": "55a8339ac94048f64fcd073240ab8101250c633caa0ad1bc8995d5c7165f79d0"},
+    {"path": "copy-sources/client-corrections.md", "sha256": "6073e0f5d693cca3c5428826f7ee1aa5baebe86a09f0f6f89680650ecffb5698"},
+    {"path": "copy-sources/client-working-session.md", "sha256": "e1604360dc7f599062774df1d98d29a85edd4a3d4d226acbad1c63871a8f3fec"},
+    {"path": "copy-sources/official-guidance.md", "sha256": "61eca98a348142169061659eb03ee55a65dedcee14f39bc904dcc82a3006d07e"},
+    {"path": "copy-sources/customer-reviews.md", "sha256": "7f7a2c48383eaf8bf61fa5114c9520cb976c77c0ad8d0ddd479b2f8b057fc8cf"},
+    {"path": "copy-sources/article-inventory.md", "sha256": "817644772625bc495ac4a6f426561ca7d069815c78ac7b9c1dd99d1d9028c102"},
+    {"path": "rodent-source-proof.md", "sha256": "8a76225e65408a17da811e294cbf41f0f62b66db5fb3e7cb1b58ef5e083457e8"},
+    {"path": "rodent-provider-verification.md", "sha256": "dec9b569ca9c635c67629fd504b269825c83afd8599b44d564d4efd831ae6d26"},
+    {"path": "rodent-fable-route-receipt.md", "sha256": "0bcfc73db87ba7d6930b1c4f4bd08c276095d7c7aae355e32e69a22e1f7bee01"},
+    {"path": "rodent-fable-exact-review-font-restored.md", "sha256": "0b5c57f897d62a00ed8f6ed0fc8edd294ba60616140d46d2cc0afe1739026c82"},
+    {"path": "rodent-desktop-evidence.md", "sha256": "d81839a22ad385b18799853e1a5e3b401c284cf9b3cdaa601857e99c50de2840"},
+    {"path": "rodent-mobile-evidence.md", "sha256": "2c3bb9548dea4a000550c81262db9f0ff00fa54d5ce34f8ddffd5980959d23dd"},
+    {"path": "rodent-focus-evidence.md", "sha256": "806ecae6abb3982a1216c3e7007ba4482f08c39d7fde79c1937cc13e45c35e6d"},
+    {"path": "rodent-primary-action-evidence.md", "sha256": "78886a842461b1e89100b809daa031906f27ca16022a2aa52d84f9e59c8b8990"},
+    {"path": "rodent-performance-budget.md", "sha256": "169b263d2f4d370fc874142fefab0697d161ee0dde0f1d2a4d9f61b97ad531fb"},
+    {"path": "rodent-seo-technical-evidence.md", "sha256": "94680d14ef183fc8ed5f625042aaec16c78439cf2aed2f95ae99b6e108d7661d"},
+    {"path": "rodent-aeo-answer-evidence.md", "sha256": "17d57c640e9190055bda6735f7a2322384a5f8ad2ce3eedd6d40133f04397e3e"},
+    {"path": "rodent-conversion-path-evidence.md", "sha256": "abfdbfbd2730eaf14f708fea592c7095de3f9009725d3576e3ffee6e8eac1028"},
+    {"path": "rodent-analytics-evidence.md", "sha256": "cc7a8e4b93f45b6f30295e363822424d723474df6cc0ef2f4f757b8faa3393fa"},
+    {"path": "rodent-brain-read-receipt.json", "sha256": "8ca39bceb39646957e4df6145ce3cc30f449c359e9479e683d5fd693420b26e9"},
+    {"path": "rodent-author-route-receipt.json", "sha256": "c015bb15c4ba38ffeeb0588e1071698a71fc00515f6c1131d77aea39876841f3"},
+    {"path": "rodent-design-run.json", "sha256": "42e70a33641416e29d6acf6592ec03cdc4999c7cce30c6adc584752e130e898e"},
+    {"path": "rodent-design-gate.md", "sha256": "184cb2667e4ebef091a6fc2e3fc4b2dda13b2a1c3dda75c510f96e6ff3003ae8"}
+  ],
+  "unresolved": [
+    "Human approval of the composed Rodent page and representative protected pattern, including the deliberate mobile-navigation choice",
+    "Robert's exact preview-delivery and send authorization",
+    "Pre-cutover confirmation that the privacy disclosure covers the existing Adobe kit telemetry",
+    "Deployment authorization, production cutover, and live QA"
+  ]
+}
