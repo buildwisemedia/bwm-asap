@@ -80,8 +80,8 @@
   },
   "promotion_hygiene": {
     "css_cache_buster_aligned": true,
-    "finding": "All five pages load the same shared asset URL: asap-close.css?v=5.",
-    "artifact_change_warning": "The 2026-08-24 authorized housekeeping changed all five candidate-page hashes and the shared CSS: the Adobe loader was removed, the fallback stack is explicit, the animal-page CSS cache key is aligned at v=5, and nine legacy article links were withheld. The successor candidate manifest and protected exact-artifact review must bind the new bytes before any preview decision."
+    "finding": "All five pages load the same shared asset URL: asap-close.css?v=6.",
+    "artifact_change_warning": "The 2026-08-25 mobile interaction pass changed all five candidate-page hashes and the shared CSS: secondary links and consent controls now provide 44px mobile tap areas, and the animal-page CSS cache key is aligned at v=6. The successor candidate manifest and protected exact-artifact review must bind the new bytes before any preview decision."
   },
   "open_gates": [
     "Client acceptance of cross-page review excerpts",

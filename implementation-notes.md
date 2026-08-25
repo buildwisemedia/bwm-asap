@@ -1,5 +1,13 @@
 # Implementation Notes
 
+## 2026-08-25 - Animal-page mobile interaction closeout
+
+- Renewed the exact five-page animal candidate after Robert authorized the build to proceed.
+- Preserved the existing indexed URLs, approved phone, fallback-font path, held article links, and fixture-only form boundary.
+- Increased secondary mobile link and consent-control tap areas to at least 44px without changing desktop composition.
+- Advanced the five animal pages to the shared `asap-close.css?v=6` cache key so the mobile fix cannot be masked by an older cached stylesheet.
+- The work remains local/review only. No preview exposure, send, deploy, redirect, provider mutation, ad change, spend, or production cutover is authorized by this pass.
+
 ## 2026-08-05 - Canonical phone and release reconciliation
 
 - Reconciled the site against the Brain source of truth: the current number is

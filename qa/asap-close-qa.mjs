@@ -42,7 +42,7 @@ for (const route of routes) {
   check(html.includes('"@type":"BreadcrumbList"'), `${route}: breadcrumb schema`);
   check(html.includes("770-691-3636") && html.includes("+17706913636"), `${route}: correct phone display and tel`);
   check(!badTokens.some((token) => html.toLowerCase().includes(token.toLowerCase())), `${route}: no rejected token or phone`);
-  check((alignedAnimalRoutes.has(route) ? html.includes("/assets/css/asap-close.css?v=5") && html.includes('data-font-source="fallback"') : html.includes("/assets/css/asap-close.css")) && html.includes("/assets/js/asap-close.js"), `${route}: shared pattern assets and scoped cache alignment`);
+  check((alignedAnimalRoutes.has(route) ? html.includes("/assets/css/asap-close.css?v=6") && html.includes('data-font-source="fallback"') : html.includes("/assets/css/asap-close.css")) && html.includes("/assets/js/asap-close.js"), `${route}: shared pattern assets and scoped cache alignment`);
   check(alignedAnimalRoutes.has(route)
     ? !html.includes("use.typekit.net") && !html.includes("Typekit.load")
     : html.includes("https://use.typekit.net/dmg8gvn.js") && html.includes("Typekit.load({async:true})"),

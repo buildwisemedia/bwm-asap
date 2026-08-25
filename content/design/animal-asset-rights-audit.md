@@ -14,7 +14,7 @@ The same record preserves Robert's promise to send Nehemiah the plan before buil
 - Seven other visuals are byte-identical to the pre-existing ASAP base commit `b86b3bf4b5d8e911f80e2d860ec5106917abf3cc`.
 - No generated, new-stock, or cross-client image was introduced.
 - The source says six pages but explicitly names and supplies assets for five; no sixth page was invented.
-- The five pages use the same stylesheet key, `asap-close.css?v=5`.
+- The five pages use the same stylesheet key, `asap-close.css?v=6`.
 - The five-page forms remain local no-send fixtures.
 
 ## Robert-authorized local changes — 2026-08-24

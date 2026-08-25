@@ -1,0 +1,22 @@
+{
+  "manifest_version": 1,
+  "client": "asap-pest-wildlife",
+  "surface": "local/review website closeout scope",
+  "supplied_assets": [
+    {"filename": "ASAP_Bat_and_Guano_Removal_Logo_CreamTagline.png", "sha256": "f9cd235e7805f676b588082c678c6346e89a5f1b50934767317a7b60fbb4a94e", "role": "bat page logo", "provenance": "Nehemiah Ray email attachment 2026-08-11"},
+    {"filename": "ASAP_Raccoon_Removal_Logo_CreamTagline.png", "sha256": "8449716bbcdebc59bfeeb23c0a55affb382c173495afb9fd4ba722973d202cda", "role": "raccoon page logo", "provenance": "Nehemiah Ray email attachment 2026-08-11"},
+    {"filename": "ASAP_Rat_and_Mice_Removal_Logo_CreamTagline.png", "sha256": "804aebdd4cd4831e47dc784a1ad037e6ecfe65724947b8a8e641ab7b916805da", "role": "rat and mouse page logo", "provenance": "Nehemiah Ray email attachment 2026-08-11"},
+    {"filename": "ASAP_Rodent_Removal_Logo_CreamTagline.png", "sha256": "c159022ecec17adfa01f45b266be5ac20b1515355a7163785bda589ed7f06358", "role": "rodent umbrella page logo", "provenance": "Nehemiah Ray email attachment 2026-08-11"},
+    {"filename": "ASAP_Squirrel_Removal_Logo_CreamTagline.png", "sha256": "e6319411069f8c8af25d1e9f881c9793c78fbd2704802cd664ad44ce9df76b26", "role": "squirrel page logo", "provenance": "Nehemiah Ray email attachment 2026-08-11"}
+  ],
+  "client_lock_manifest": {
+    "path": ".bwm-client-locks.json",
+    "sha256": "ab1838590bf652635254f763e68c4f726cc3c525fdb609666794d00504c5bd73"
+  },
+  "rights_status": "client-supplied email attachments and existing client-site assets authorized for local review use",
+  "restrictions": [
+    "no AI-generated imagery",
+    "no stock-image substitution without rights review",
+    "do not claim image rights beyond supplied/existing client assets"
+  ]
+}

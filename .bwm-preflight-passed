@@ -1,0 +1,36 @@
+{
+  "marker_version": 4,
+  "client": "asap-pest-wildlife",
+  "surface": "website:local-review closeout scope",
+  "resolver_version": "1.0.0",
+  "identity_record_hash": "e10f1fcc487847faff6d90aed84e4eb99c457777f88453e6efef97a333349c99",
+  "identity_class": "client",
+  "composition_mode": "single",
+  "ndb_schema": "ndb-2.0",
+  "artifact_mode": "site",
+  "bindings": [
+    {
+      "role": "identity_record",
+      "path": "_verification/asap-close-preflight/identity_record.json",
+      "sha256": "e10f1fcc487847faff6d90aed84e4eb99c457777f88453e6efef97a333349c99"
+    },
+    {
+      "role": "source_manifest",
+      "path": "_verification/asap-close-preflight/source_manifest.json",
+      "sha256": "12b53ce84e9917a224f66c7a225429b86b99f084bfce883ea88dc56462695be8"
+    },
+    {
+      "role": "asset_manifest",
+      "path": "_verification/asap-close-preflight/asset_manifest.json",
+      "sha256": "4d369afdb8736a1376316e38fc518c9b46465b5e2ee4064ddb29788600893c18"
+    },
+    {
+      "role": "ndb",
+      "path": "_verification/asap-close-preflight/ndb.json",
+      "sha256": "16bcd08a3d9f034c9a9ea220abc3b342f0a8b1148f2660b024b16b32a6bdc3e6"
+    }
+  ],
+  "design_contract_version": "bwm-design-run/1.1.0",
+  "created_by": "codex-sol",
+  "created_at": "2026-08-13T22:09:40Z"
+}

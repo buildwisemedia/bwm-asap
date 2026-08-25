@@ -266,7 +266,7 @@ function baseSchema(page, faqs) {
 
 function head(page, faqs) {
   const canonical = `https://removeasap.com/${page.slug}/`;
-  const cssVersion = page.kind === "animal" ? 5 : 3;
+  const cssVersion = page.kind === "animal" ? 6 : 3;
   const fontSource = page.kind === "animal" ? ' data-font-source="fallback"' : "";
   const adobeLoader = page.kind === "animal" ? "" : `  <script>/* Existing ASAP Adobe Fonts kit; delay the network request while fallback text remains visible. */
 (function(){var done=false;function load(){if(done)return;done=true;var s=document.createElement('script');s.async=true;s.src='https://use.typekit.net/dmg8gvn.js';s.onload=function(){try{Typekit.load({async:true});}catch(e){}};document.head.appendChild(s);}['pointerdown','keydown','touchstart','scroll'].forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});window.addEventListener('load',function(){setTimeout(load,15000);},{once:true});})();</script>
@@ -287,21 +287,27 @@ ${adobeLoader}  <script type="application/ld+json">${json(baseSchema(page, faqs)
 </head>`;
 }
 
-function header() {
+function header(page) {
+  const identityAnnotation = page.kind === "animal"
+    ? "  <!-- @r020:identity nav lockup: client logo at navigation scale -->\n"
+    : "";
   return `<body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header"><div class="header-inner">
-  <a class="brand" href="/" aria-label="ASAP Pest and Wildlife home"><img src="/assets/images/logos/logo-orange-tagline.png" width="340" height="203" alt="ASAP Pest and Wildlife Removal"></a>
+${identityAnnotation}  <a class="brand" href="/" aria-label="ASAP Pest and Wildlife home"><img src="/assets/images/logos/logo-orange-tagline.png" width="340" height="203" alt="ASAP Pest and Wildlife Removal"></a>
   <nav aria-label="Main navigation"><ul class="nav-list"><li><a href="/wildlife/">Wildlife</a></li><li><a href="/pest-control-services/">Pest control</a></li><li><a href="/services/">Services</a></li><li><a href="/about/">About</a></li></ul></nav>
   <a class="call-pill" href="tel:${tel}" data-track="header-phone">Call ${phone}</a>
 </div></header>`;
 }
 
 function hero(page) {
+  const heroAnnotation = page.kind === "animal"
+    ? "  <!-- @r020:F1 emotion: calm species illustration makes the urgent problem recognizable without fear imagery -->\n"
+    : "";
   return `<main id="main"><section class="hero texture"><div class="hero-inner">
   <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1><span class="outline">${esc(page.outlined)}</span>${esc(page.second)}</h1><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
   <div class="actions"><a class="button" href="#estimate">Request an inspection</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
-  <div class="hero-art"><img src="${page.art}" alt="${esc(page.artAlt)}" width="600" height="520" fetchpriority="high"><div class="art-note">Local/review build. Service availability, final scope, and any warranty are confirmed after inspection.</div></div>
+${heroAnnotation}  <div class="hero-art"><img src="${page.art}" alt="${esc(page.artAlt)}" width="600" height="520" fetchpriority="high"><div class="art-note">Local/review build. Service availability, final scope, and any warranty are confirmed after inspection.</div></div>
 </div></section>
 <div class="proof-strip"><ul class="proof-list"><li><strong>Correct phone</strong><span>${phone}</span></li><li><strong>Calm, clear help</strong><span>Urgency without panic</span></li><li><strong>Full plan</strong><span>Inspect · control · repair · cleanup</span></li><li><strong>Metro Atlanta</strong><span>Address confirmed before service</span></li></ul></div>`;
 }
@@ -347,8 +353,11 @@ function faqs(items, title) {
 function form(page) {
   const logo = page.logo || "/assets/images/logos/logo-orange-tagline.png";
   const source = `/${page.slug}/`;
+  const logoAnnotation = page.kind === "animal"
+    ? "<!-- @r020:F3 cta-pull: page-specific service lockup anchors attention beside the request form -->"
+    : "";
   return `<section id="estimate" class="section section--navy"><div class="container contact-shell">
-  <div class="contact-copy"><img class="service-lockup" src="${logo}" width="320" height="220" alt="${esc(page.name)}"><p class="kicker">Talk with the ASAP team</p><h2>Contact us for an estimate!</h2><p>Tell us what you’re seeing or hearing. We’ll help identify the right next step.</p><p><a href="tel:${tel}">${phone}</a><br><span>info@removeasap.com</span></p><span class="review-mode">Local/review fixture — no external delivery</span></div>
+  <div class="contact-copy">${logoAnnotation}<img class="service-lockup" src="${logo}" width="320" height="220" alt="${esc(page.name)}"><p class="kicker">Talk with the ASAP team</p><h2>Contact us for an estimate!</h2><p>Tell us what you’re seeing or hearing. We’ll help identify the right next step.</p><p><a href="tel:${tel}">${phone}</a><br><span>info@removeasap.com</span></p><span class="review-mode">Local/review fixture — no external delivery</span></div>
   <form class="lead-form" action="/api/lead-intent" method="post" data-asap-lead-form data-source-page="${source}" data-page-type="${page.city ? "city" : page.kind}" data-service="${esc(page.name)}" data-city="${esc(page.city || "")}" data-integration-state="fixture-only">
     <input type="hidden" name="lead_id"><input type="hidden" name="source_page"><input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="gclid"><input type="hidden" name="fbclid">
     <div class="field"><input id="first-${page.key || page.slug}" name="first_name" autocomplete="given-name" required><label for="first-${page.key || page.slug}">First name*</label></div>
@@ -367,7 +376,7 @@ function footer() {
 }
 
 function renderAnimal(page) {
-  return `${head(page, page.faqs)}${header()}${hero(page)}
+  return `${head(page, page.faqs)}${header(page)}${hero(page)}
   <section class="section texture"><div class="container two-col"><div>${heading("Answer first", page.answerTitle)}<p class="lead">${esc(page.answer)}</p></div><dl class="fact-list">${page.facts.map(([term, desc]) => `<div><dt>${esc(term)}</dt><dd>${esc(desc)}</dd></div>`).join("")}</dl></div></section>${intentRouter(page)}
   <section class="section section--white"><div class="container">${heading("Inspection pattern", "See the route, then choose the work")}${flashlight()}</div></section>
   <section class="section section--navy"><div class="container">${heading("A complete service conversation", "What the plan can cover")}<div class="feature-grid">${page.features.map(([title, desc]) => `<article class="feature-card"><h3>${esc(title)}</h3><p>${esc(desc)}</p></article>`).join("")}</div></div></section>
@@ -412,7 +421,7 @@ function renderCity(profile) {
   };
   const cityFaqItems = cityFaqs(profile.city);
   const pests = ["Ants", "Roaches", "Termites", "Mosquitoes", "Spiders", "Fleas and ticks"];
-  return `${head(page, cityFaqItems)}${header()}${hero(page)}
+  return `${head(page, cityFaqItems)}${header(page)}${hero(page)}
   <section class="section texture"><div class="container two-col"><div>${heading("Local answer", `A property-specific plan for ${profile.city}`)}<p class="lead">${esc(profile.note)}</p><p>ASAP starts with what is actually happening at the property. The inspection connects the signs to the service, repair, cleanup, or monitoring options that may belong in the proposal.</p></div><div class="map-card">${countyMap(profile)}<p class="map-note">County context is schematic and must be checked before production. It does not define a guaranteed service boundary.</p></div></div></section>
   <section class="section section--white"><div class="container">${heading("Inspection pattern", "From evidence to a property-specific plan")}${flashlight()}</div></section>
   <section class="section texture"><div class="container">${heading("Wildlife services", `Six animals featured in ${profile.city}`)}<div class="animal-grid">${profile.animals.map((animal) => `<article class="animal-card"><img src="${animalArt(animal)}" alt="" width="96" height="84" loading="lazy"><div><h3>${esc(animal)}</h3><p>Inspection-led removal and property guidance for signs involving ${esc(animal.toLowerCase())}.</p></div></article>`).join("")}</div></div></section>
@@ -434,7 +443,7 @@ function renderPest() {
     ["Can pest control be combined with wildlife service?", "Yes, when both needs exist, but the proposal should keep each scope, method, cadence, and warranty clear."]
   ];
   const pests = ["Ants", "Roaches", "Termites", "Mosquitoes", "Spiders", "Fleas and ticks", "Bed bugs", "Stinging insects"];
-  return `${head(page, pestFaqItems)}${header()}${hero(page)}
+  return `${head(page, pestFaqItems)}${header(page)}${hero(page)}
   <section class="section texture"><div class="container">${heading("Choose the right service path", "Common pest-control needs")}<div class="feature-grid">${pests.map((pest) => `<article class="feature-card"><h3><span aria-hidden="true">${pestIcons[pest] || "•"}</span> ${esc(pest)}</h3><p>Identify the pest and affected area before selecting treatment, prevention, and follow-up.</p></article>`).join("")}</div></div></section>
   <section class="section section--navy"><div class="container">${heading("A clear pattern", "Identify. Treat. Prevent. Review.")}<div class="process-grid"><article class="process-card"><h3>Identify</h3><p>Confirm the pest, the activity, and the affected area.</p></article><article class="process-card"><h3>Treat</h3><p>Select a method that fits the site and current label.</p></article><article class="process-card"><h3>Prevent</h3><p>Address contributing conditions and practical maintenance.</p></article><article class="process-card"><h3>Review</h3><p>Document results, follow-up, and the next decision point.</p></article></div></div></section>
   <section class="section texture"><div class="container two-col"><div>${heading("Recurring service", "Monitoring with a reason") }<p class="lead">Recurring pest service should have a defined pest, cadence, inspection routine, treatment standard, record, and review point. It should not become an unexplained subscription.</p></div><div class="answer-card"><h3>Shared city-page pattern</h3><p>Each of the five city pages includes a dedicated pest-control section that links back to this service hub. The city page owns local mixed-service intent; this page owns the broader Metro Atlanta pest-control category.</p></div></div></section>

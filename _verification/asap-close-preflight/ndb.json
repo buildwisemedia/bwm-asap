@@ -1,0 +1,54 @@
+{
+  "schema_version": "ndb-2.0",
+  "binding_kind": "locked-direction-normalization",
+  "canonical_source": {
+    "path": "Brain:clients/asap-pest-wildlife/Niche-Design-Brief.md",
+    "brain_sha": "fb0738d2f094e6511b607ba30ff6f18900095f09",
+    "status": "active legacy brief with newer client corrections bound below"
+  },
+  "identity": {
+    "class": "client",
+    "composition_mode": "single",
+    "palette": {
+      "navy": "#212936",
+      "orange": "#b77537",
+      "cream": "#f2eddc",
+      "body": "#333333",
+      "white": "#ffffff"
+    },
+    "typography": {
+      "display": "urw-din, weight 900, uppercase",
+      "body": "Arial, 14px/20px baseline with accessibility-responsive enlargement where needed"
+    },
+    "voice": ["warm", "personal", "reassuring", "action-clear", "humane"],
+    "signature_components": [
+      "asymmetric 5px 20px orange buttons with cream uppercase labels",
+      "cream botanical/splatter textures",
+      "navy quote glyph and five orange stars on review cards",
+      "orange underline bar with triangle on section headings",
+      "transparent contact inputs with orange underlines and orange-filled select",
+      "outlined uppercase hero display type"
+    ],
+    "forbidden_palette": ["#0c2340", "#a6411d", "#dc5b2a", "#8d3718", "#ffb38f", "#2D6A4F", "#E8A317"]
+  },
+  "surface_contract": {
+    "primary_module": "website_landing",
+    "tier": "locked-direction-implementation",
+    "accepted_base_artifact": "current removeasap.com component language plus August 11 reviewed animal-page structures",
+    "accepted_by": "Nehemiah Ray",
+    "accepted_at": "2026-08-12T13:35:02Z",
+    "primary_job": "help a Metro Atlanta visitor identify the right pest or wildlife service and call or request an inspection",
+    "highest_risk_slice": "hero category clarity plus phone-first primary action on desktop and mobile",
+    "responsive_priority": "recompose for phone with persistent direct call access and minimum 44px targets",
+    "motion": "still by default; no scroll-reveal dependency; reduced-motion parity",
+    "conversion_path": "service intent to call or quote form with page, city, service, and attribution context",
+    "analytics": "data-layer-ready phone, email, CTA, form-start, validation, and success hooks; no production mutation"
+  },
+  "truth_overrides": [
+    "August 11 exact computed-style brand tokens supersede conflicting March brief tokens.",
+    "Phone is 770-691-3636 everywhere.",
+    "Bat maternity-season claims must remain evidence-qualified and must not imply a universal no-work blackout."
+  ],
+  "copy_evidence_status": "source-limited for new animal/article copy; full claims restricted to supplied and canonical evidence",
+  "hil_owner": "ASAP design approver James, with Nehemiah/Aries visibility; Robert internal review before client review"
+}

@@ -70,6 +70,7 @@ button, input, select, textarea { font: inherit; }
 
 .texture {
   background-color: var(--cream);
+  /* @r020:F1 emotion: familiar ASAP texture keeps urgent service pages calm and recognizable without obscuring actions */
   background-image:
     radial-gradient(circle at 15% 20%, rgba(183,117,55,.09) 0 2px, transparent 3px),
     radial-gradient(circle at 86% 72%, rgba(33,41,54,.07) 0 3px, transparent 4px),
@@ -259,6 +260,22 @@ h3 { font-size: 1.3rem; line-height: 1.05; letter-spacing: .11em; }
   .hero-art .art-note { position: static; max-width: none; margin-top: 1rem; }
   .proof-list, .process-grid, .feature-grid, .animal-grid, .pest-grid, .three-col, .intent-grid, .lead-form { grid-template-columns: 1fr; }
   .intent-card { min-height: auto; }
+  .intent-card a,
+  .source-note a,
+  .contact-copy a,
+  .footer-inner a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+  }
+  .consent { grid-template-columns: 44px 1fr; }
+  .consent input { width: 44px; height: 44px; margin-top: 0; }
+  .consent a {
+    display: inline-block;
+    min-height: 44px;
+    margin-block: -.7rem;
+    padding-block: .7rem;
+  }
   .proof-list li { border-left: 0; border-top: 1px solid rgba(242,237,220,.3); }
   .section { padding: 4.5rem 0; }
   .container { width: min(100% - 1.25rem, var(--max)); }
