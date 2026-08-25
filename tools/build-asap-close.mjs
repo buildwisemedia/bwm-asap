@@ -269,7 +269,7 @@ function head(page, faqs) {
   const canonical = `https://removeasap.com/${page.slug}/`;
   const cssHref = page.kind === "animal" ? "/assets/css/asap-animal-v2.css?v=1" : "/assets/css/asap-close.css?v=3";
   const fontSource = page.kind === "animal" ? ' data-font-source="fallback"' : "";
-  const robotsMeta = page.kind === "animal" ? '  <meta name="robots" content="index,follow,max-image-preview:large">\n' : "";
+  const robotsMeta = page.kind === "animal" ? '  <meta name="robots" content="noindex,nofollow,noarchive">\n' : "";
   const heroPreload = page.kind === "animal" ? `  <link rel="preload" as="image" href="${page.art}"${page.artMobile ? ` imagesrcset="${artSrcset(page)}" imagesizes="(max-width: 640px) calc(100vw - 20px), min(43vw, 540px)"` : ""} fetchpriority="high">\n` : "";
   const adobeLoader = page.kind === "animal" ? "" : `  <script>/* Existing ASAP Adobe Fonts kit; delay the network request while fallback text remains visible. */
 (function(){var done=false;function load(){if(done)return;done=true;var s=document.createElement('script');s.async=true;s.src='https://use.typekit.net/dmg8gvn.js';s.onload=function(){try{Typekit.load({async:true});}catch(e){}};document.head.appendChild(s);}['pointerdown','keydown','touchstart','scroll'].forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});window.addEventListener('load',function(){setTimeout(load,15000);},{once:true});})();</script>

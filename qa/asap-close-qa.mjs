@@ -48,6 +48,7 @@ for (const route of routes) {
     : html.includes("https://use.typekit.net/dmg8gvn.js") && html.includes("Typekit.load({async:true})"),
   `${route}: font source matches approved local scope`);
   check(html.includes("data-asap-lead-form") && html.includes('data-integration-state="fixture-only"'), `${route}: form fixture state`);
+  if (alignedAnimalRoutes.has(route)) check(html.includes('<meta name="robots" content="noindex,nofollow,noarchive">'), `${route}: private review cannot be indexed`);
   for (const field of ["lead_id", "source_page", "utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"]) {
     check(html.includes(`name="${field}"`), `${route}: attribution field ${field}`);
   }
