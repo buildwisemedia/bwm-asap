@@ -306,7 +306,7 @@ function header(page) {
 <header class="site-header"><div class="header-inner">
 ${identityAnnotation}  <a class="brand" href="/" aria-label="ASAP Pest and Wildlife home"><img src="/assets/images/logos/logo-orange.webp" width="260" height="179" alt="ASAP Pest and Wildlife Removal"></a>
   <div class="header-contact">Call now: <a href="tel:${tel}" data-track="header-phone">${phone}</a> or <a href="/contact/">Email us</a> for quote</div>
-  <nav aria-label="Main navigation"><ul class="nav-list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/wildlife/">Wildlife</a></li><li><a href="/pest-control-services/">Pest control</a></li><li><a href="/commercial/">Commercial</a></li><li><a href="/services/">Services</a></li><li><a href="/blog/">Blog</a></li></ul></nav>
+  <nav aria-label="Main navigation"><ul class="nav-list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/wildlife/">Wildlife</a></li><li><a href="/pest-control-services/">Pest control</a></li><li><a href="/commercial-services/">Commercial</a></li><li><a href="/services/">Services</a></li><li><a href="/blog/">Blog</a></li></ul></nav>
 </div></header>`;
 }
 

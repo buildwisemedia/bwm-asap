@@ -2,7 +2,7 @@
 
 Date: 2026-08-25 (Eastern)
 
-State: local review only. No preview, send, integration, or production action was authorized or performed.
+State: private PR preview only. No client send, integration, merge, or production action was performed.
 
 ## Exact routes
 
@@ -27,12 +27,11 @@ The five routes were loaded from a local HTTP server in a fresh headless Google 
 - A local fixture form submission returned: `Review fixture passed. No email, Monday.com item, Make.com run, or customer message was created.`
 - 0 outbound requests were observed during the fixture test.
 
-The mobile tap-area fix was applied after the first sweep found sub-44px links and consent controls, then the full 10-render sweep was repeated.
+The mobile tap-area fix was applied after the first sweep found sub-44px links and consent controls, then the full 10-render sweep was repeated. A later exact link audit found that the five replacement-page navigation bars pointed to the nonexistent `/commercial/` route. Those links and their generator were corrected to `/commercial-services/`; the complete candidate and lead-flow checks were rerun afterward.
 
 ## Deterministic checks
 
-- Exact manifest hashes: 18/18 matched.
-- Candidate QA: 443/443 checks passed.
+- Candidate QA: 462/462 checks passed after the navigation-link correction.
 - Repository lead-flow audit: 38 public form pages, 11 local-review fixtures, and zero unsupported forms, missing handlers, missing attribution, bad phone links, placeholder emails, broken static links, or fetched-link failures.
 - Design gate: 93.2, `premium-candidate`.
 
