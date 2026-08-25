@@ -42,7 +42,7 @@ for (const route of routes) {
   check(html.includes('"@type":"BreadcrumbList"'), `${route}: breadcrumb schema`);
   check(html.includes("770-691-3636") && html.includes("+17706913636"), `${route}: correct phone display and tel`);
   check(!badTokens.some((token) => html.toLowerCase().includes(token.toLowerCase())), `${route}: no rejected token or phone`);
-  check((alignedAnimalRoutes.has(route) ? html.includes("/assets/css/asap-close.css?v=6") && html.includes('data-font-source="fallback"') : html.includes("/assets/css/asap-close.css")) && html.includes("/assets/js/asap-close.js"), `${route}: shared pattern assets and scoped cache alignment`);
+  check((alignedAnimalRoutes.has(route) ? html.includes("/assets/css/asap-animal-v2.css?v=1") && html.includes('data-font-source="fallback"') : html.includes("/assets/css/asap-close.css")) && html.includes("/assets/js/asap-close.js"), `${route}: shared pattern assets and scoped cache alignment`);
   check(alignedAnimalRoutes.has(route)
     ? !html.includes("use.typekit.net") && !html.includes("Typekit.load")
     : html.includes("https://use.typekit.net/dmg8gvn.js") && html.includes("Typekit.load({async:true})"),
@@ -163,7 +163,7 @@ const rightsAssets = [...rightsLedger.client_supplied_page_logos, ...rightsLedge
 check(rightsLedger.schema_version === "asap-animal-asset-rights/1.0.0", "Asset rights: schema version is explicit");
 check(rightsLedger.phase === 3 && rightsLedger.local_review_clear === true && rightsLedger.production_clear === false, "Asset rights: local-review clearance stays distinct from production clearance");
 check(rightsLedger.client_supplied_page_logos.length === 5, "Asset rights: five client-supplied page logos are bound");
-check(rightsLedger.existing_client_site_assets.length === 7, "Asset rights: seven existing ASAP visual assets, including favicon, are bound");
+check(rightsLedger.existing_client_site_assets.length === 21, "Asset rights: original, responsive, and optimized ASAP visual assets, including favicon, are bound");
 for (const asset of rightsAssets) {
   const assetBuffer = readFileSync(join(root, asset.path));
   check(sha256(assetBuffer) === asset.sha256, `Asset rights: ${asset.path} SHA-256 matches ledger`);
@@ -206,7 +206,7 @@ for (const protectedPhrase of rodentDecision?.protected_from_title_h1 || []) {
   check(!rodentTitleH1.includes(protectedPhrase.toLowerCase()), `SEO intent: rodent title/H1 does not claim ${protectedPhrase}`);
 }
 
-const css = readFileSync(join(root, "assets/css/asap-close.css"), "utf8");
+const css = `${readFileSync(join(root, "assets/css/asap-close.css"), "utf8")}\n${readFileSync(join(root, "assets/css/asap-animal-v2.css"), "utf8")}`;
 for (const token of ["#f2eddc", "#212936", "#333333", "#b77537", "#ffffff"]) check(css.includes(token), `CSS: required token ${token}`);
 check(css.includes("prefers-reduced-motion"), "CSS: reduced-motion parity");
 check(css.includes("min-height: 50px") && css.includes("min-height: 52px"), "CSS: touch/input targets exceed 44px");

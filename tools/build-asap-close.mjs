@@ -26,7 +26,7 @@ const animals = [
     name: "Rodent Removal", title: "Rodent Removal in Metro ATL", outlined: "Rodent", second: "Removal",
     eyebrow: "Mice · Rats · Squirrels · Flying Squirrels · Chipmunks",
     description: "Rodent removal for Metro Atlanta homes, with inspection, control, entry-point repair, cleanup options, and a plan shaped to the animal and property.",
-    logo: "/assets/images/page-logos/rodent.png", art: "/assets/images/animals/rat-navy-optimized.webp", artAlt: "ASAP illustrated rat mascot",
+    logo: "/assets/images/page-logos/rodent.png", art: "/assets/images/animals/hero-v2/rodent-hero.webp", artMobile: "/assets/images/animals/hero-v2/rodent-hero-mobile.webp", artMedium: "/assets/images/animals/hero-v2/rodent-hero-medium.webp", artAlt: "ASAP illustrated rat facing the rodent removal headline", artWidth: 1100, artHeight: 794,
     warmth: "You deserve to feel at ease in your home again. We explain what we find and what comes next.",
     answerTitle: "What does a complete rodent plan include?",
     answer: "A useful rodent plan identifies the species, traces activity and access points, selects the right control method, and addresses openings that can allow the problem to return. Cleanup, monitoring, and warranty options depend on the inspection and written scope.",
@@ -91,7 +91,7 @@ const animals = [
     name: "Rat and Mouse Removal", title: "Rat and Mouse Removal in Metro ATL", outlined: "Rat + Mouse", second: "Removal",
     eyebrow: "Inspection · Control · Exclusion · Monitoring",
     description: "Rat and mouse removal in Metro Atlanta with species-aware inspection, a clear control plan, entry-point repair options, and recurring bait-station programs where appropriate.",
-    logo: "/assets/images/page-logos/rat-mouse.png", art: "/assets/images/wildlife-grid/mouse-rat.png", artAlt: "ASAP illustrated mouse",
+    logo: "/assets/images/page-logos/rat-mouse.png", art: "/assets/images/animals/hero-v2/mouse-rat-hero.webp", artMobile: "/assets/images/animals/hero-v2/mouse-rat-hero-mobile.webp", artMedium: "/assets/images/animals/hero-v2/mouse-rat-hero-medium.webp", artAlt: "ASAP illustrated mouse facing the rat and mouse removal headline", artWidth: 908, artHeight: 654,
     warmth: "Hearing movement in a wall or attic can make a home feel unfamiliar. We help turn the noise into a clear plan.",
     answerTitle: "A plan should solve the source — not just today’s sighting",
     answer: "Mice, roof rats, and Norway rats behave differently. A good plan connects the evidence indoors with travel routes, food and water pressure, exterior activity, and the openings that may be allowing entry. That keeps control, repair, cleanup, and monitoring decisions understandable.",
@@ -121,7 +121,7 @@ const animals = [
     name: "Squirrel Removal", title: "Squirrel Removal in Metro ATL", outlined: "Squirrel", second: "Removal",
     eyebrow: "Gray and Flying Squirrel Control",
     description: "Humane gray and flying squirrel removal in Metro Atlanta, with attic inspection, route identification, repair planning, cleanup options, and clear next steps.",
-    logo: "/assets/images/page-logos/squirrel.png", art: "/assets/images/wildlife-grid/gray-squirrel.png", artAlt: "Gray squirrel illustration",
+    logo: "/assets/images/page-logos/squirrel.png", art: "/assets/images/animals/hero-v2/squirrel-hero.webp", artMobile: "/assets/images/animals/hero-v2/squirrel-hero-mobile.webp", artMedium: "/assets/images/animals/hero-v2/squirrel-hero-medium.webp", artAlt: "ASAP illustrated squirrel facing the squirrel removal headline", artWidth: 900, artHeight: 1021,
     warmth: "We know the scratching overhead can wear on your peace. We’ll show you what we found and walk through the plan.",
     answerTitle: "Why are squirrels getting into the attic?",
     answer: "Squirrels may use roofline gaps, vents, soffits, fascia, or other vulnerable areas. Gray and flying squirrels can create different patterns of activity. The inspection should identify the animal, the route in, and any timing considerations before removal or repair begins.",
@@ -151,7 +151,7 @@ const animals = [
     name: "Raccoon Removal", title: "Raccoon Removal in Metro ATL", outlined: "Raccoon", second: "Removal",
     eyebrow: "Humane Inspection · Removal · Repair",
     description: "Humane raccoon removal in Metro Atlanta, with attic and roofline inspection, a plan for adults or dependent young, entry-point repair, and cleanup options.",
-    logo: "/assets/images/page-logos/raccoon.png", art: "/assets/images/animals/raccoon-optimized.webp", artAlt: "ASAP illustrated raccoon",
+    logo: "/assets/images/page-logos/raccoon.png", art: "/assets/images/animals/hero-v2/raccoon-hero.webp", artMobile: "/assets/images/animals/hero-v2/raccoon-hero-mobile.webp", artAlt: "ASAP illustrated raccoon facing the raccoon removal headline", artWidth: 778, artHeight: 580,
     warmth: "A raccoon in the attic feels personal. We respond calmly, protect the home, and explain each decision.",
     answerTitle: "What should I do if I suspect a raccoon?",
     answer: "Avoid cornering or handling the animal. Note where and when you hear activity, keep people and pets away from the area, and arrange an inspection. The plan should account for access, possible young, contamination, repair, and applicable wildlife rules.",
@@ -181,7 +181,7 @@ const animals = [
     name: "Bat and Guano Removal", title: "Bat Removal in Metro ATL", outlined: "Bat", second: "Removal",
     eyebrow: "Season-Aware Inspection and Exclusion",
     description: "Bat inspection, season-aware exclusion planning, guano removal, sanitation, insulation cleanup, and repair options for Metro Atlanta properties.",
-    logo: "/assets/images/page-logos/bat.png", art: "/assets/images/wildlife-grid/bat.webp", artAlt: "ASAP illustrated bat",
+    logo: "/assets/images/page-logos/bat.png", art: "/assets/images/animals/hero-v2/bat-hero.svg", artAlt: "ASAP illustrated bat flying toward the bat removal headline", artWidth: 805, artHeight: 688,
     warmth: "Bats matter to Georgia’s ecosystem, and your home still needs to feel safe. The plan should respect both facts.",
     answerTitle: "Bat exclusions require a season-aware plan",
     answer: "Georgia wildlife guidance identifies April 1 through July 31 as a period when exclusions can risk trapping flightless young. That does not mean every bat-related service stops. Inspection, emergency response, interior containment, cleanup planning, and work allowed by current rules may still be appropriate. Site conditions and current guidance must be checked before exclusion.",
@@ -224,6 +224,7 @@ const pestIcons = {
 
 const esc = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
 const json = (value) => JSON.stringify(value).replace(/</g, "\\u003c");
+const artSrcset = (page) => [page.artMobile ? `${page.artMobile} 420w` : "", page.artMedium ? `${page.artMedium} 700w` : "", page.artWidth ? `${page.art} ${page.artWidth}w` : ""].filter(Boolean).join(", ");
 
 function baseSchema(page, faqs) {
   return {
@@ -266,8 +267,10 @@ function baseSchema(page, faqs) {
 
 function head(page, faqs) {
   const canonical = `https://removeasap.com/${page.slug}/`;
-  const cssVersion = page.kind === "animal" ? 6 : 3;
+  const cssHref = page.kind === "animal" ? "/assets/css/asap-animal-v2.css?v=1" : "/assets/css/asap-close.css?v=3";
   const fontSource = page.kind === "animal" ? ' data-font-source="fallback"' : "";
+  const robotsMeta = page.kind === "animal" ? '  <meta name="robots" content="index,follow,max-image-preview:large">\n' : "";
+  const heroPreload = page.kind === "animal" ? `  <link rel="preload" as="image" href="${page.art}"${page.artMobile ? ` imagesrcset="${artSrcset(page)}" imagesizes="(max-width: 640px) calc(100vw - 20px), min(43vw, 540px)"` : ""} fetchpriority="high">\n` : "";
   const adobeLoader = page.kind === "animal" ? "" : `  <script>/* Existing ASAP Adobe Fonts kit; delay the network request while fallback text remains visible. */
 (function(){var done=false;function load(){if(done)return;done=true;var s=document.createElement('script');s.async=true;s.src='https://use.typekit.net/dmg8gvn.js';s.onload=function(){try{Typekit.load({async:true});}catch(e){}};document.head.appendChild(s);}['pointerdown','keydown','touchstart','scroll'].forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});window.addEventListener('load',function(){setTimeout(load,15000);},{once:true});})();</script>
 `;
@@ -276,40 +279,53 @@ function head(page, faqs) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>${esc(page.title)} | ASAP Pest &amp; Wildlife</title>
+${robotsMeta}  <title>${esc(page.title)} | ASAP Pest &amp; Wildlife</title>
   <meta name="description" content="${esc(page.description)}">
   <link rel="canonical" href="${canonical}">
   <meta property="og:type" content="website"><meta property="og:title" content="${esc(page.title)}"><meta property="og:description" content="${esc(page.description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="https://removeasap.com/assets/images/logos/logo-orange-tagline.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/assets/images/logos/favicon.png">
-  <link rel="stylesheet" href="/assets/css/asap-close.css?v=${cssVersion}">
-${adobeLoader}  <script type="application/ld+json">${json(baseSchema(page, faqs))}</script>
+  <link rel="stylesheet" href="${cssHref}">
+${heroPreload}${adobeLoader}  <script type="application/ld+json">${json(baseSchema(page, faqs))}</script>
 </head>`;
 }
 
 function header(page) {
+  if (page.kind !== "animal") return `<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="/" aria-label="ASAP Pest and Wildlife home"><img src="/assets/images/logos/logo-orange-tagline.png" width="340" height="203" alt="ASAP Pest and Wildlife Removal"></a>
+  <nav aria-label="Main navigation"><ul class="nav-list"><li><a href="/wildlife/">Wildlife</a></li><li><a href="/pest-control-services/">Pest control</a></li><li><a href="/services/">Services</a></li><li><a href="/about/">About</a></li></ul></nav>
+  <a class="call-pill" href="tel:${tel}" data-track="header-phone">Call ${phone}</a>
+</div></header>`;
   const identityAnnotation = page.kind === "animal"
     ? "  <!-- @r020:identity nav lockup: client logo at navigation scale -->\n"
     : "";
-  return `<body>
+  return `<body class="animal-page">
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header"><div class="header-inner">
-${identityAnnotation}  <a class="brand" href="/" aria-label="ASAP Pest and Wildlife home"><img src="/assets/images/logos/logo-orange-tagline.png" width="340" height="203" alt="ASAP Pest and Wildlife Removal"></a>
-  <nav aria-label="Main navigation"><ul class="nav-list"><li><a href="/wildlife/">Wildlife</a></li><li><a href="/pest-control-services/">Pest control</a></li><li><a href="/services/">Services</a></li><li><a href="/about/">About</a></li></ul></nav>
-  <a class="call-pill" href="tel:${tel}" data-track="header-phone">Call ${phone}</a>
+${identityAnnotation}  <a class="brand" href="/" aria-label="ASAP Pest and Wildlife home"><img src="/assets/images/logos/logo-orange.webp" width="260" height="179" alt="ASAP Pest and Wildlife Removal"></a>
+  <div class="header-contact">Call now: <a href="tel:${tel}" data-track="header-phone">${phone}</a> or <a href="/contact/">Email us</a> for quote</div>
+  <nav aria-label="Main navigation"><ul class="nav-list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/wildlife/">Wildlife</a></li><li><a href="/pest-control-services/">Pest control</a></li><li><a href="/commercial/">Commercial</a></li><li><a href="/services/">Services</a></li><li><a href="/blog/">Blog</a></li></ul></nav>
 </div></header>`;
 }
 
 function hero(page) {
+  if (page.kind !== "animal") return `<main id="main"><section class="hero texture"><div class="hero-inner">
+  <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1><span class="outline">${esc(page.outlined)}</span>${esc(page.second)}</h1><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
+  <div class="actions"><a class="button" href="#estimate">Request an inspection</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
+  <div class="hero-art"><img src="${page.art}" alt="${esc(page.artAlt)}" width="600" height="520" fetchpriority="high"><div class="art-note">Local/review build. Service availability, final scope, and any warranty are confirmed after inspection.</div></div>
+</div></section>
+<div class="proof-strip"><ul class="proof-list"><li><strong>Correct phone</strong><span>${phone}</span></li><li><strong>Calm, clear help</strong><span>Urgency without panic</span></li><li><strong>Full plan</strong><span>Inspect · control · repair · cleanup</span></li><li><strong>Metro Atlanta</strong><span>Address confirmed before service</span></li></ul></div>`;
   const heroAnnotation = page.kind === "animal"
     ? "  <!-- @r020:F1 emotion: calm species illustration makes the urgent problem recognizable without fear imagery -->\n"
     : "";
   return `<main id="main"><section class="hero texture"><div class="hero-inner">
-  <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1><span class="outline">${esc(page.outlined)}</span>${esc(page.second)}</h1><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
-  <div class="actions"><a class="button" href="#estimate">Request an inspection</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
-${heroAnnotation}  <div class="hero-art"><img src="${page.art}" alt="${esc(page.artAlt)}" width="600" height="520" fetchpriority="high"><div class="art-note">Local/review build. Service availability, final scope, and any warranty are confirmed after inspection.</div></div>
+  <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1>${esc(page.name)}</h1><p class="hero-location">Metro Atlanta, Georgia</p><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
+  <div class="actions"><a class="button" href="#estimate">Get a free estimate</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div><p class="review-note">Private review build. Final scope, availability, and any warranty are confirmed after inspection.</p></div>
+${heroAnnotation}  <figure class="hero-art"><img src="${page.art}"${page.artMobile ? ` srcset="${artSrcset(page)}" sizes="(max-width: 640px) calc(100vw - 20px), min(43vw, 540px)"` : ""} alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async"></figure>
 </div></section>
-<div class="proof-strip"><ul class="proof-list"><li><strong>Correct phone</strong><span>${phone}</span></li><li><strong>Calm, clear help</strong><span>Urgency without panic</span></li><li><strong>Full plan</strong><span>Inspect · control · repair · cleanup</span></li><li><strong>Metro Atlanta</strong><span>Address confirmed before service</span></li></ul></div>`;
+<div class="proof-strip"><ul class="proof-list"><li><strong>Inspect</strong><span>Confirm the animal and route</span></li><li><strong>Remove</strong><span>Match the method to the site</span></li><li><strong>Repair</strong><span>Address documented openings</span></li><li><strong>Clean up</strong><span>Scope affected areas clearly</span></li></ul></div>`;
 }
 
 function heading(kicker, title, id = "") {
