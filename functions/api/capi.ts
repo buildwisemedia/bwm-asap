@@ -54,6 +54,26 @@ const ALLOWED_EVENTS = new Set([
 
 const UUID_RE = /^[0-9a-f-]{36}$/i;
 const DEFAULT_RELAY = 'https://bwm-capi-relay.robert-ba0.workers.dev';
+const AUTH_PROBE_PATH = '/events/invalid%2Fslug';
+
+export const onRequestGet: PagesFunction<Env> = async ({ env }) => {
+  if (!env.BWM_INTERNAL_KEY) {
+    return new Response(null, { status: 502 });
+  }
+
+  const relay = env.CAPI_RELAY_URL ?? DEFAULT_RELAY;
+  try {
+    const relayRes = await fetch(`${relay}${AUTH_PROBE_PATH}`, {
+      method: 'POST',
+      headers: {
+        'X-BWM-Internal-Key': env.BWM_INTERNAL_KEY,
+      },
+    });
+    return new Response(null, { status: relayRes.status === 400 ? 204 : 502 });
+  } catch {
+    return new Response(null, { status: 502 });
+  }
+};
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   // Shadow-mode gate: server-side kill switch takes priority over any
