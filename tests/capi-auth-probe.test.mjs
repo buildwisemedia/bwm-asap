@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { onRequestGet, onRequestPost } from '../functions/api/capi.ts';
+import { onRequestGet } from '../functions/api/capi-auth-probe.ts';
+import { onRequestPost } from '../functions/api/capi.ts';
 
 function stubFetch(t, implementation) {
   const originalFetch = globalThis.fetch;
@@ -11,7 +12,60 @@ function stubFetch(t, implementation) {
   });
 }
 
-test('auth probe sends the bound primary key and maps relay 400 to 204', async (t) => {
+function probeRequest(key) {
+  const headers = key === undefined ? undefined : { 'X-BWM-Internal-Key': key };
+  return new Request('https://site.test/api/capi-auth-probe', { headers });
+}
+
+test('auth probe rejects a missing caller key without fetching', async (t) => {
+  let fetchCalled = false;
+  stubFetch(t, async () => {
+    fetchCalled = true;
+    return new Response(null, { status: 400 });
+  });
+
+  const response = await onRequestGet({
+    request: probeRequest(),
+    env: { BWM_INTERNAL_KEY: 'bound-primary-key' },
+  });
+
+  assert.equal(response.status, 401);
+  assert.equal(fetchCalled, false);
+});
+
+test('auth probe rejects a wrong caller key without fetching', async (t) => {
+  let fetchCalled = false;
+  stubFetch(t, async () => {
+    fetchCalled = true;
+    return new Response(null, { status: 400 });
+  });
+
+  const response = await onRequestGet({
+    request: probeRequest('wrong-key'),
+    env: { BWM_INTERNAL_KEY: 'bound-primary-key' },
+  });
+
+  assert.equal(response.status, 401);
+  assert.equal(fetchCalled, false);
+});
+
+test('auth probe rejects an empty primary binding without fetching', async (t) => {
+  let fetchCalled = false;
+  stubFetch(t, async () => {
+    fetchCalled = true;
+    return new Response(null, { status: 400 });
+  });
+
+  const response = await onRequestGet({
+    request: probeRequest('caller-key'),
+    env: {},
+  });
+
+  assert.equal(response.status, 401);
+  assert.equal(fetchCalled, false);
+});
+
+test('auth probe accepts the correct caller key and maps relay 400 to 204', async (t) => {
   let captured;
   stubFetch(t, async (input, init) => {
     captured = { input, init };
@@ -19,6 +73,7 @@ test('auth probe sends the bound primary key and maps relay 400 to 204', async (
   });
 
   const response = await onRequestGet({
+    request: probeRequest('bound-primary-key'),
     env: {
       BWM_INTERNAL_KEY: 'bound-primary-key',
       CAPI_RELAY_URL: 'https://relay.test',
@@ -36,6 +91,7 @@ test('auth probe maps relay 401 to 502', async (t) => {
   stubFetch(t, async () => new Response(null, { status: 401 }));
 
   const response = await onRequestGet({
+    request: probeRequest('bound-primary-key'),
     env: {
       BWM_INTERNAL_KEY: 'bound-primary-key',
       CAPI_RELAY_URL: 'https://relay.test',
@@ -51,6 +107,7 @@ test('auth probe maps network failures to 502', async (t) => {
   });
 
   const response = await onRequestGet({
+    request: probeRequest('bound-primary-key'),
     env: {
       BWM_INTERNAL_KEY: 'bound-primary-key',
       CAPI_RELAY_URL: 'https://relay.test',
@@ -64,6 +121,7 @@ test('auth probe maps every other relay status to 502', async (t) => {
   stubFetch(t, async () => new Response(null, { status: 500 }));
 
   const response = await onRequestGet({
+    request: probeRequest('bound-primary-key'),
     env: {
       BWM_INTERNAL_KEY: 'bound-primary-key',
       CAPI_RELAY_URL: 'https://relay.test',
@@ -71,19 +129,6 @@ test('auth probe maps every other relay status to 502', async (t) => {
   });
 
   assert.equal(response.status, 502);
-});
-
-test('auth probe fails closed when the primary binding is missing', async (t) => {
-  let fetchCalled = false;
-  stubFetch(t, async () => {
-    fetchCalled = true;
-    return new Response(null, { status: 400 });
-  });
-
-  const response = await onRequestGet({ env: {} });
-
-  assert.equal(response.status, 502);
-  assert.equal(fetchCalled, false);
 });
 
 test('normal browser-event POST behavior is unchanged', async (t) => {
