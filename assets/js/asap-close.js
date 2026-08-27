@@ -33,14 +33,18 @@
       service: form.dataset.service || "",
       city: form.dataset.city || "",
       integration_state: form.dataset.integrationState,
-      test_label: "asap_close_local_review",
       consent_sms: Boolean(form.elements.namedItem("sms_consent").checked)
     };
   }
 
   document.querySelectorAll("[data-asap-lead-form]").forEach(function (form) {
     const submit = form.querySelector("[data-fixture-submit]");
-    if (reviewOnly && submit) submit.disabled = false;
+    const fixtureOnly = form.dataset.integrationState === "fixture-only";
+    if (!reviewOnly || !fixtureOnly) {
+      if (submit) submit.disabled = true;
+      return;
+    }
+    if (submit) submit.disabled = false;
     setField(form, "lead_id", uuid());
     setField(form, "source_page", form.dataset.sourcePage);
     setField(form, "utm_source", queryValue("utm_source"));

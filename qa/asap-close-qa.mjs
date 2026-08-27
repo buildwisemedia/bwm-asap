@@ -11,6 +11,9 @@ const routes = [
 const alignedAnimalRoutes = new Set([
   "rodent-removal", "wildlife/mouse-rat", "wildlife/gray-squirrel", "wildlife/raccoon", "wildlife/bats"
 ]);
+const privateReviewRoutes = new Set(["rodent-removal"]);
+const sitemapXml = readFileSync(join(root, "sitemap.xml"), "utf8");
+const sitemapRoutes = new Set([...sitemapXml.matchAll(/<loc>https:\/\/removeasap\.com\/([^<]+)<\/loc>/g)].map((match) => match[1].replace(/\/$/, "")));
 const cities = ["Canton", "Woodstock", "Acworth", "Kennesaw", "Cartersville"];
 const badTokens = ["#0c2340", "#a6411d", "#dc5b2a", "#8d3718", "#ffb38f", "770-450-1744", "7704501744"];
 const results = [];
@@ -47,13 +50,18 @@ for (const route of routes) {
     ? !html.includes("use.typekit.net") && !html.includes("Typekit.load")
     : html.includes("https://use.typekit.net/dmg8gvn.js") && html.includes("Typekit.load({async:true})"),
   `${route}: font source matches approved local scope`);
-  check(html.includes("data-asap-lead-form") && html.includes('data-integration-state="fixture-only"'), `${route}: form fixture state`);
-  if (alignedAnimalRoutes.has(route)) check(html.includes('<meta name="robots" content="noindex,nofollow,noarchive">'), `${route}: private review cannot be indexed`);
-  for (const field of ["lead_id", "source_page", "utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"]) {
-    check(html.includes(`name="${field}"`), `${route}: attribution field ${field}`);
+  const privateReview = privateReviewRoutes.has(route);
+  check(privateReview === html.includes('data-build-state="local-review"'), `${route}: declared build state matches route classification`);
+  check(privateReview === html.includes('<meta name="robots" content="noindex,nofollow,noarchive">'), `${route}: robots state matches route classification`);
+  check(privateReview === html.includes('data-integration-state="fixture-only"'), `${route}: fixture exists only on private review`);
+  check(html.includes("skip-link"), `${route}: skip link present`);
+  if (privateReview) {
+    for (const field of ["lead_id", "source_page", "utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"]) check(html.includes(`name="${field}"`), `${route}: attribution field ${field}`);
+    check(html.includes('aria-live="polite"'), `${route}: fixture live status present`);
   }
-  check(html.includes('data-integration-state="fixture-only"'), `${route}: no-send state is machine-enforced without visible review scaffolding`);
-  check(html.includes("skip-link") && html.includes('aria-live="polite"'), `${route}: skip link and live form state`);
+  if (sitemapRoutes.has(route)) {
+    check(!html.includes("noindex") && !html.includes('data-build-state="local-review"') && !html.includes('data-integration-state="fixture-only"') && !/review fixture|local\/review|private review/i.test(plainText(html)), `${route}: sitemap/indexable page has no review contradiction or fixture`);
+  }
   if (html.includes('aria-labelledby="reviews-title"')) {
     check(html.includes('id="reviews-title"'), `${route}: reviews section has an accessible name`);
     check(!html.includes("5 out of 5 stars") && html.includes('<div class="stars" aria-hidden="true">'), `${route}: review motif does not assert an unverified rating`);
@@ -67,7 +75,7 @@ for (const city of cities) {
   const slug = `wildlife-removal-${city.toLowerCase()}`;
   const html = readFileSync(join(root, slug, "index.html"), "utf8");
   check(html.includes(`Pest and Wildlife Removal in ${city}, Georgia`), `${city}: exact page title framing`);
-  check(html.includes("service-map") && html.includes("Schematic service context"), `${city}: accessible held-boundary map`);
+  check(html.includes("service-map") && html.includes("Schematic service-area context"), `${city}: accessible schematic map`);
   check(html.includes("Dedicated pest-control section"), `${city}: dedicated pest-control section`);
   check(html.includes("From evidence to a property-specific plan"), `${city}: flashlight inspection pattern`);
 }
@@ -105,7 +113,7 @@ check(closeJs.includes("No request was sent and no customer record was created."
 check(rodent.includes('action="#estimate"') && rodent.includes("disabled data-fixture-submit") && rodent.includes("<noscript><p class=\"form-status\">Online requests are turned off"), "Rodent: fixture has an inert no-JS fallback and no API action");
 check(!rodent.includes("/api/lead-intent"), "Rodent: fixture HTML has no nonexistent API endpoint");
 check(rodent.includes('class="mobile-nav"') && rodent.includes('aria-label="Mobile navigation"') && rodent.includes("<summary>Menu</summary>"), "Rodent: native keyboard-accessible mobile navigation is present");
-check(rodent.includes('href="/assets/images/animals/hero-v2/rodent-hero-mobile.webp" media="(max-width: 640px)"') && rodent.includes('href="/assets/images/animals/hero-v2/rodent-hero.webp" media="(min-width: 641px)"'), "Rodent: hero preloads match mobile and desktop resources");
+check(!rodent.includes('<link rel="preload" as="image"'), "Rodent: no conflicting hero preload duplicates picture selection");
 check(rodent.includes('<source media="(max-width: 640px)" srcset="/assets/images/animals/hero-v2/rodent-hero-mobile.webp 1x, /assets/images/animals/hero-v2/rodent-hero-medium.webp 2x">'), "Rodent: responsive hero preserves high-density mobile art");
 const rodentIntentTargets = [
   ["rat-mouse", "/wildlife/mouse-rat/"],
@@ -163,10 +171,10 @@ for (const page of lineup.pages) {
   check(title === page.title, `Animal lineup: ${page.path} exact title`, title);
   check(h1 === page.h1, `Animal lineup: ${page.path} exact visible H1`, h1);
   check(html.includes(`src="/${page.logo_path}"`), `Animal lineup: ${page.path} uses its bound page logo`);
-  check(html.includes(`data-source-page="${page.url_path}"`), `Animal lineup: ${page.path} source attribution is page-specific`);
-  check(html.includes('data-integration-state="fixture-only"') && html.includes('name="source_page"'), `Animal lineup: ${page.path} stays fixture-only with source field`);
+  const isReviewPage = page.url_path === "/rodent-removal/";
+  check(isReviewPage ? html.includes(`data-source-page="${page.url_path}"`) : !html.includes("data-asap-lead-form"), `Animal lineup: ${page.path} form state matches review/indexable classification`);
   check(!html.includes("AggregateRating") && !html.includes("ratingValue"), `Animal lineup: ${page.path} does not publish an aggregate-rating claim`);
-  check(count(html, /class="article-card(?:\s|\")/g) === (page.role === "umbrella-router" ? 2 : 3), `Animal lineup: ${page.path} has the authorized article count`);
+  check(count(html, /class="article-card(?:\s|\")/g) === (page.role === "umbrella-router" ? 2 : 0), `Animal lineup: ${page.path} exposes articles only on the private-review router`);
   check(page.role === "umbrella-router" ? count(html, /medium\.com\//g) === 2 : !html.includes("medium.com/"), `Animal lineup: ${page.path} publishes only authorized article links`);
 }
 

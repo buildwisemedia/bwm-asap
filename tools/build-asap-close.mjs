@@ -2,6 +2,13 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 const root = process.cwd();
+const requestedMode = process.argv.find((argument) => argument.startsWith("--mode="))?.slice(7);
+const modes = new Set(["animal", "legacy-review"]);
+if (!requestedMode || !modes.has(requestedMode)) {
+  throw new Error("Explicit build mode required: --mode=animal or --mode=legacy-review");
+}
+const buildMode = requestedMode;
+const isPrivateReview = (page) => page.kind === "animal" && page.key === "rodent";
 const phone = "770-691-3636";
 const tel = "+17706913636";
 const reviewUrl = "https://www.google.com/maps/place/ASAP+Wildlife+Removal/@33.734354,-84.242248,10z/data=!4m8!3m7!1s0x88f51d199bdde957:0x677a4db004e50c72!8m2!3d33.734354!4d-84.242248!9m1!1b1!16s%2Fg%2F11j3147h44?hl=en&entry=ttu";
@@ -275,15 +282,15 @@ function head(page, faqs) {
   const canonical = `https://removeasap.com/${page.slug}/`;
   const cssHref = page.kind === "animal" ? "/assets/css/asap-animal-v2.css?v=1" : "/assets/css/asap-close.css?v=3";
   const fontSource = page.kind === "animal" ? ' data-font-source="fallback"' : "";
-  const robotsMeta = page.kind === "animal" ? '  <meta name="robots" content="noindex,nofollow,noarchive">\n' : "";
-  const heroPreload = page.kind === "animal" ? (page.artMobile
-    ? `  <link rel="preload" as="image" href="${page.artMobile}" media="(max-width: 640px)" fetchpriority="high">\n  <link rel="preload" as="image" href="${page.art}" media="(min-width: 641px)" fetchpriority="high">\n`
-    : `  <link rel="preload" as="image" href="${page.art}" fetchpriority="high">\n`) : "";
+  const robotsMeta = isPrivateReview(page) ? '  <meta name="robots" content="noindex,nofollow,noarchive">\n' : "";
+  // The picture element alone owns responsive selection. A preload without an
+  // identical imagesrcset/imagesizes caused duplicate mobile hero downloads.
+  const heroPreload = "";
   const adobeLoader = page.kind === "animal" ? "" : `  <script>/* Existing ASAP Adobe Fonts kit; delay the network request while fallback text remains visible. */
 (function(){var done=false;function load(){if(done)return;done=true;var s=document.createElement('script');s.async=true;s.src='https://use.typekit.net/dmg8gvn.js';s.onload=function(){try{Typekit.load({async:true});}catch(e){}};document.head.appendChild(s);}['pointerdown','keydown','touchstart','scroll'].forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});window.addEventListener('load',function(){setTimeout(load,15000);},{once:true});})();</script>
 `;
   return `<!doctype html>
-<html lang="en" data-build-state="local-review"${fontSource}>
+<html lang="en" data-build-state="${isPrivateReview(page) ? "local-review" : "production"}"${fontSource}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -323,7 +330,7 @@ function hero(page) {
   if (page.kind !== "animal") return `<main id="main"><section class="hero texture"><div class="hero-inner">
   <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1><span class="outline">${esc(page.outlined)}</span>${esc(page.second)}</h1><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
   <div class="actions"><a class="button" href="#estimate">Request an inspection</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
-  <div class="hero-art"><img src="${page.art}" alt="${esc(page.artAlt)}" width="600" height="520" fetchpriority="high"><div class="art-note">Local/review build. Service availability, final scope, and any warranty are confirmed after inspection.</div></div>
+  <div class="hero-art"><img src="${page.art}" alt="${esc(page.artAlt)}" width="600" height="520" fetchpriority="high"></div>
 </div></section>
 <div class="proof-strip"><ul class="proof-list"><li><strong>Correct phone</strong><span>${phone}</span></li><li><strong>Calm, clear help</strong><span>Urgency without panic</span></li><li><strong>Full plan</strong><span>Inspect · control · repair · cleanup</span></li><li><strong>Metro Atlanta</strong><span>Address confirmed before service</span></li></ul></div>`;
   const heroAnnotation = page.kind === "animal"
@@ -331,7 +338,7 @@ function hero(page) {
     : "";
   if (page.key !== "rodent") return `<main id="main"><section class="hero texture"><div class="hero-inner">
   <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1>${esc(page.name)}</h1><p class="hero-location">Metro Atlanta, Georgia</p><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
-  <div class="actions"><a class="button" href="#estimate">Get a free estimate</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div><p class="review-note">Private review build. Final scope, availability, and any warranty are confirmed after inspection.</p></div>
+  <div class="actions"><a class="button" href="#estimate">Get a free estimate</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
 ${heroAnnotation}  <figure class="hero-art">${page.artMobile ? `<picture><source media="(max-width: 640px)" srcset="${page.artMobile} 1x, ${page.artMedium} 2x"><img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
 </div></section>
 <div class="proof-strip"><ul class="proof-list"><li><strong>Inspect</strong><span>Confirm the animal and route</span></li><li><strong>Remove</strong><span>Match the method to the site</span></li><li><strong>Repair</strong><span>Address documented openings</span></li><li><strong>Clean up</strong><span>Scope affected areas clearly</span></li></ul></div>`;
@@ -364,8 +371,8 @@ function baitStationSection(page) {
 function intentRouter(page) {
   if (!page.intentRoutes?.length) return "";
   return `<section class="section texture intent-router" aria-labelledby="intent-router-title" data-intent-role="umbrella-support"><div class="container">
-  ${heading("Choose the right service page", "What are you hearing or finding?")}
-  <p class="lead narrow" id="intent-router-title">Not sure what is in your home? Start with the sounds, droppings, or damage you notice. We’ll point you to the page that best matches those clues.</p>
+  ${heading("Choose the right service page", "What are you hearing or finding?", "intent-router-title")}
+  <p class="lead narrow">Not sure what is in your home? Start with the sounds, droppings, or damage you notice. We’ll point you to the page that best matches those clues.</p>
   <div class="intent-grid">${page.intentRoutes.map((route) => `<article class="intent-card" data-intent-target="${esc(route.target)}"><span class="intent-label">${esc(route.label)}</span><h3>${esc(route.title)}</h3><p>${esc(route.description)}</p><a href="${route.href}">${esc(route.cta)} <span aria-hidden="true">→</span></a></article>`).join("")}</div>
   <aside class="source-note" aria-label="Identification, cleanup, and bat-guidance source note"><strong>Clues are not a diagnosis.</strong> UGA Extension notes that attic noise can come from mice, bats, squirrels, raccoons, and other wildlife, and that time of day is only one clue. CDC says not to sweep or vacuum dry rodent waste. Inspection and current guidance determine the service path. <a href="https://extension.uga.edu/publications/detail.html?number=B1248&amp;title=resolving-human-nuisance-wildlife-conflicts" rel="noopener noreferrer">UGA identification guidance</a> · <a href="https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html" rel="noopener noreferrer">CDC cleanup guidance</a> · <a href="https://georgiawildlife.com/index.php/ExcludingBatsFromYourHouse" rel="noopener noreferrer">Georgia DNR bat guidance</a></aside>
   </div></section>`;
@@ -374,12 +381,12 @@ function intentRouter(page) {
 function reviews(page) {
   const destination = page?.key === "rodent" ? homepageReviewUrl : reviewUrl;
   const cards = [
-    ["The service was excellent! Arrived on time. Gave me a detailed overview of the problem and rodents that invaded the house. Gave me 3 different price options for repair and installed the first phase immediately.", "Mark Carroll", "/assets/images/reviews/mark.webp"],
+    ["The service was excellent! Arrived on time. Gave me a detailed overview of the problem and rodents that invaded the house. Gave me 3 different price options for repair and installed the first phase immediately.", "Mark Carroll", ""],
     ["If you have ANY concerns with unwanted animals in/around your home, do yourself a favor and call Chaz! He has taken care of two separate issues at my house and both jobs were completed quickly & thoroughly. Chaz is very professional and is wonderful to work with!", "Kelsey Monaghan", "/assets/images/reviews/kelsey.webp"],
     ["ASAP is an excellent service provider with a team of highly skilled and professional technicians. I’d highly recommend.", "Fred Perry", "/assets/images/reviews/fred.webp"]
   ];
   return `<section class="section texture" aria-labelledby="reviews-title"><div class="container">${heading("What homeowners say", "Real review excerpts", "reviews-title")}
-  <div class="three-col">${cards.map(([quote, name, image]) => `<article class="review-card"><a href="${destination}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-hidden="true">★★★★★</div><p>“${esc(quote)}”</p>${page?.key === "rodent" ? `<!-- @r020:F2 proof: exact homepage reviewer portrait connects the attributed excerpt to its approved proof instance --><img class="review-avatar" src="${image}" width="78" height="80" alt="${esc(name)}">` : ""}<cite>${esc(name)}</cite></a></article>`).join("")}</div>
+  <div class="three-col">${cards.map(([quote, name, image]) => `<article class="review-card"><a href="${destination}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-hidden="true">★★★★★</div><p>“${esc(quote)}”</p>${page?.key === "rodent" && image ? `<!-- @r020:F2 proof: exact homepage reviewer portrait connects the attributed excerpt to its approved proof instance --><img class="review-avatar" src="${image}" width="78" height="80" alt="${esc(name)}">` : ""}<cite>${esc(name)}</cite></a></article>`).join("")}</div>
   <div class="actions"><a class="button" href="${destination}" target="_blank" rel="noopener noreferrer">Read Google reviews</a></div></div></section>`;
 }
 
@@ -394,8 +401,9 @@ function form(page) {
   const logoAnnotation = page.kind === "animal"
     ? "<!-- @r020:F3 cta-pull: page-specific service lockup anchors attention beside the request form -->"
     : "";
+  if (!isPrivateReview(page)) return `<section id="estimate" class="section section--navy"><div class="container contact-shell"><div class="contact-copy">${logoAnnotation}<img class="service-lockup" src="${logo}" width="320" height="220" alt="${esc(page.name)}"><p class="kicker">Talk with the ASAP team</p><h2>Contact us for an estimate!</h2><p>Tell us what you’re seeing or hearing. We’ll help identify the right next step.</p><p><a href="tel:${tel}">${phone}</a><br><a href="mailto:info@removeasap.com">info@removeasap.com</a></p><div class="actions"><a class="button button--cream" href="/contact/">Request an estimate</a></div></div></div></section>`;
   return `<section id="estimate" class="section section--navy"><div class="container contact-shell">
-  <div class="contact-copy">${logoAnnotation}<img class="service-lockup" src="${logo}" width="320" height="220" alt="${esc(page.name)}"><p class="kicker">Talk with the ASAP team</p><h2>Contact us for an estimate!</h2><p>Tell us what you’re seeing or hearing. We’ll help identify the right next step.</p><p><a href="tel:${tel}">${phone}</a><br><span>info@removeasap.com</span></p>${page.key === "rodent" ? "" : '<span class="review-mode">Local/review fixture — no external delivery</span>'}</div>
+  <div class="contact-copy">${logoAnnotation}<img class="service-lockup" src="${logo}" width="320" height="220" alt="${esc(page.name)}"><p class="kicker">Talk with the ASAP team</p><h2>Contact us for an estimate!</h2><p>Tell us what you’re seeing or hearing. We’ll help identify the right next step.</p><p><a href="tel:${tel}">${phone}</a><br><a href="mailto:info@removeasap.com">info@removeasap.com</a></p></div>
   <form class="lead-form" action="#estimate" method="get" data-asap-lead-form data-source-page="${source}" data-page-type="${page.city ? "city" : page.kind}" data-service="${esc(page.name)}" data-city="${esc(page.city || "")}" data-integration-state="fixture-only">
     <input type="hidden" name="lead_id"><input type="hidden" name="source_page"><input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="gclid"><input type="hidden" name="fbclid">
     <div class="field"><input id="first-${page.key || page.slug}" name="first_name" autocomplete="given-name" required><label for="first-${page.key || page.slug}">First name*</label></div>
@@ -418,7 +426,6 @@ function renderAnimal(page) {
   <section class="section texture"><div class="container two-col"><div>${heading("What to expect", page.answerTitle)}<p class="lead">${esc(page.answer)}</p></div><dl class="fact-list">${page.facts.map(([term, desc]) => `<div><dt>${esc(term)}</dt><dd>${esc(desc)}</dd></div>`).join("")}</dl></div></section>${intentRouter(page)}
   <section class="section section--white"><div class="container">${heading("Inspection pattern", "See the route, then choose the work")}${flashlight()}</div></section>
   <section class="section section--navy"><div class="container">${heading("A complete service conversation", "What the plan can cover")}<div class="feature-grid">${page.features.map(([title, desc]) => `<article class="feature-card"><h3>${esc(title)}</h3><p>${esc(desc)}</p></article>`).join("")}</div></div></section>
-  <section class="section texture"><div class="container">${heading("Learn before you decide", "Three useful next reads")}${articleCards(page.articles)}</div></section>
   ${reviews(page)}${faqs(page.faqs, page)}${form(page)}${footer()}`;
   return `${head(page, page.faqs)}${header(page)}${hero(page)}
   <section class="section texture"><div class="container two-col"><div>${heading("What to expect", page.answerTitle)}<p class="lead">${esc(page.answer)}</p></div><dl class="fact-list">${page.facts.map(([term, desc]) => `<div><dt>${esc(term)}</dt><dd>${esc(desc)}</dd></div>`).join("")}</dl></div></section>${intentRouter(page)}
@@ -441,15 +448,15 @@ function animalArt(name) {
 }
 
 function countyMap(profile) {
-  return `<svg class="service-map" viewBox="0 0 520 340" role="img" aria-labelledby="map-${profile.slug}-title map-${profile.slug}-desc"><title id="map-${profile.slug}-title">${esc(profile.city)} county service context</title><desc id="map-${profile.slug}-desc">Schematic local review map showing ${esc(profile.city)} in ${esc(profile.county)}. It is not a legal boundary map.</desc><path class="county" d="M70 45 L425 35 L480 128 L420 285 L155 305 L50 205 Z"></path><circle class="city-dot" cx="270" cy="165" r="11"></circle><text x="287" y="160" font-size="22" font-weight="700">${esc(profile.city)}</text><text x="287" y="187" font-size="15">${esc(profile.county)}</text><text x="70" y="326" font-size="13">Schematic service context — review only</text></svg>`;
+  return `<svg class="service-map" viewBox="0 0 520 340" role="img" aria-labelledby="map-${profile.slug}-title map-${profile.slug}-desc"><title id="map-${profile.slug}-title">${esc(profile.city)} county service context</title><desc id="map-${profile.slug}-desc">Schematic service-area context showing ${esc(profile.city)} in ${esc(profile.county)}. It is not a legal boundary map.</desc><path class="county" d="M70 45 L425 35 L480 128 L420 285 L155 305 L50 205 Z"></path><circle class="city-dot" cx="270" cy="165" r="11"></circle><text x="287" y="160" font-size="22" font-weight="700">${esc(profile.city)}</text><text x="287" y="187" font-size="15">${esc(profile.county)}</text><text x="70" y="326" font-size="13">Schematic service-area context</text></svg>`;
 }
 
 function cityFaqs(city) {
   return [
-    [`Do you provide pest and wildlife removal in ${city}?`, `This local/review page covers service intent in ${city}. Availability for a specific address, service, and schedule must be confirmed by the ASAP team.`],
+    [`Do you provide pest and wildlife removal in ${city}?`, `This page covers service intent in ${city}. Availability for a specific address, service, and schedule must be confirmed by the ASAP team.`],
     ["What happens during an inspection?", "The technician reviews signs, likely access, affected areas, site conditions, and the service requested. The proposal should separate control, removal, repair, cleanup, and recurring work."],
     ["Do you handle both pests and wildlife?", "ASAP offers pest-control and wildlife-removal services. The exact service, method, schedule, and warranty depend on the inspection and written scope."],
-    ["Can I request service online?", "The quote form captures page, city, service, campaign, and click context for the future integration contract. In this local/review build it validates only and sends nothing."]
+    ["How can I request service?", "Call the ASAP team or use the contact page. The team will confirm the address, service, and scheduling details."]
   ];
 }
 
@@ -466,7 +473,7 @@ function renderCity(profile) {
   const cityFaqItems = cityFaqs(profile.city);
   const pests = ["Ants", "Roaches", "Termites", "Mosquitoes", "Spiders", "Fleas and ticks"];
   return `${head(page, cityFaqItems)}${header(page)}${hero(page)}
-  <section class="section texture"><div class="container two-col"><div>${heading("Local answer", `A property-specific plan for ${profile.city}`)}<p class="lead">${esc(profile.note)}</p><p>ASAP starts with what is actually happening at the property. The inspection connects the signs to the service, repair, cleanup, or monitoring options that may belong in the proposal.</p></div><div class="map-card">${countyMap(profile)}<p class="map-note">County context is schematic and must be checked before production. It does not define a guaranteed service boundary.</p></div></div></section>
+  <section class="section texture"><div class="container two-col"><div>${heading("Local answer", `A property-specific plan for ${profile.city}`)}<p class="lead">${esc(profile.note)}</p><p>ASAP starts with what is actually happening at the property. The inspection connects the signs to the service, repair, cleanup, or monitoring options that may belong in the proposal.</p></div><div class="map-card">${countyMap(profile)}<p class="map-note">County context is schematic and does not define a guaranteed service boundary.</p></div></div></section>
   <section class="section section--white"><div class="container">${heading("Inspection pattern", "From evidence to a property-specific plan")}${flashlight()}</div></section>
   <section class="section texture"><div class="container">${heading("Wildlife services", `Six animals featured in ${profile.city}`)}<div class="animal-grid">${profile.animals.map((animal) => `<article class="animal-card"><img src="${animalArt(animal)}" alt="" width="96" height="84" loading="lazy"><div><h3>${esc(animal)}</h3><p>Inspection-led removal and property guidance for signs involving ${esc(animal.toLowerCase())}.</p></div></article>`).join("")}</div></div></section>
   <section class="section section--navy"><div class="container">${heading("Dedicated pest-control section", `Pest control for ${profile.city} properties`)}<p class="lead narrow">Pest control is its own service path. The plan should identify the pest, affected area, contributing conditions, treatment method, follow-up, safety context, and any recurring schedule.</p><div class="pest-grid">${pests.map((pest) => `<article class="feature-card"><h3>${esc(pest)}</h3><p>Identification, treatment planning, prevention guidance, and follow-up shaped to the property.</p></article>`).join("")}</div><div class="actions"><a class="button button--cream" href="/pest-control-services/">Explore pest control</a></div></div></section>
@@ -509,9 +516,12 @@ if (onlySlug) {
   process.exit(0);
 }
 
-for (const page of animals) write(`${page.slug}/index.html`, renderAnimal(page));
-for (const profile of cityProfiles) write(`${profile.slug}/index.html`, renderCity(profile));
-write("pest-control-services/index.html", renderPest());
+if (buildMode === "animal") {
+  for (const page of animals) write(`${page.slug}/index.html`, renderAnimal(page));
+} else {
+  for (const profile of cityProfiles) write(`${profile.slug}/index.html`, renderCity(profile));
+  write("pest-control-services/index.html", renderPest());
+}
 
 const inventory = {
   generated_at: "2026-08-13",
@@ -526,6 +536,8 @@ const inventory = {
   ],
   held_gate: "No missing article is represented as written, approved, or published. Existing Medium content also needs editorial and claim review before production attachment."
 };
-write("content/asap-article-inventory.json", `${JSON.stringify(inventory, null, 2)}\n`);
+if (buildMode === "animal") write("content/asap-article-inventory.json", `${JSON.stringify(inventory, null, 2)}\n`);
 
-console.log(JSON.stringify({ ok: true, pages: animals.length + cityProfiles.length + 1, animals: animals.map((x) => x.slug), cities: cityProfiles.map((x) => x.slug), pest: "pest-control-services" }));
+console.log(JSON.stringify(buildMode === "animal"
+  ? { ok: true, mode: buildMode, pages: animals.length, animals: animals.map((x) => x.slug), cities: [], pest: null }
+  : { ok: true, mode: buildMode, pages: cityProfiles.length + 1, animals: [], cities: cityProfiles.map((x) => x.slug), pest: "pest-control-services" }));

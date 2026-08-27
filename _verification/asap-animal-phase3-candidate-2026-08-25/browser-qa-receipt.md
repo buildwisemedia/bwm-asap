@@ -1,40 +1,17 @@
-# ASAP animal pages — fresh browser QA receipt
+# ASAP Rodent correction — browser QA receipt
 
-Date: 2026-08-25 (Eastern)
+Date: 2026-08-27 Eastern. State: private local review. No external action occurred.
 
-State: private PR preview only. No client send, integration, merge, or production action was performed.
+`qa/rodent-browser-qa.py` passed all eight required renders: 1440 DPR2; 980/768/641 DPR2; 390 DPR1/2/3; and 320 DPR2, plus a JavaScript-disabled run.
 
-## Exact routes
+- Exactly one Rodent hero resource loaded at each size and matched `currentSrc`.
+- 390 DPR1 selected the 420 px asset; 390 DPR2/3 and 320 DPR2 selected the 700 px asset; 641 px and above selected the 1,100 px asset.
+- Zero horizontal overflow, broken images, console errors, failed requests, or API calls.
+- Header phone, email, and menu controls were at least 44 px high at every width through 980 px.
+- Keyboard navigation opened the native menu at every responsive width.
+- After 1.2 seconds of smooth-scroll settlement, `#estimate` remained below the sticky header at every width.
+- The review form validated locally with `passed-no-send`; without JavaScript its submit stayed disabled, its action stayed `#estimate`, and it made zero API calls.
 
-- `/peace-of-mind-from/rodents/`
-- `/wildlife/mouse-rat/`
-- `/wildlife/gray-squirrel/`
-- `/wildlife/raccoon/`
-- `/wildlife/bats/`
+Pixel inspection of initial-state screenshots at desktop (1440 DPR2), tablet (768 DPR2), and mobile (390 DPR3) confirmed a sharp inward-facing hero, intact responsive hierarchy, and no visible clipping or collisions. Screenshots are local QA output under `/tmp/asap-rodent-browser-qa`; they were not published.
 
-## Fresh render sweep
-
-The five routes were loaded from a local HTTP server in a fresh headless Google Chrome context at 1440×1000 and 390×844.
-
-- 10/10 desktop and mobile route renders returned HTTP 200.
-- 0 mobile interactive targets were below 44×44 CSS pixels.
-- 0 routes had horizontal overflow.
-- 0 images were broken.
-- 0 browser console errors were emitted.
-- 0 requests failed and 0 local responses returned an error status.
-- The primary phone CTA was visible on all 10 renders.
-- All five pages declared their exact source page and remained `fixture-only`.
-- A local fixture form submission returned: `Review fixture passed. No email, Monday.com item, Make.com run, or customer message was created.`
-- 0 outbound requests were observed during the fixture test.
-
-The mobile tap-area fix was applied after the first sweep found sub-44px links and consent controls, then the full 10-render sweep was repeated. A later exact link audit found that the five replacement-page navigation bars pointed to the nonexistent `/commercial/` route. Those links and their generator were corrected to `/commercial-services/`; the complete candidate and lead-flow checks were rerun afterward.
-
-## Deterministic checks
-
-- Candidate QA: 462/462 checks passed after the navigation-link correction.
-- Repository lead-flow audit: 38 public form pages, 11 local-review fixtures, and zero unsupported forms, missing handlers, missing attribution, bad phone links, placeholder emails, broken static links, or fetched-link failures.
-- Design gate: 93.2, `premium-candidate`.
-
-## Promotion boundary
-
-The five-page candidate is green within its exact scope. Repository-wide promotion remains held because the inherited production homepage has separate performance/validation/CTA gate failures, and the repo-wide pre-ship scan has inherited Webflow-color and vendor-name findings outside this five-page change.
+The sitemap/indexability gate passed across generator-owned routes: no sitemap URL contains noindex, local-review state, review fixture copy, or a fixture form. `/rodent-removal/` is absent from the sitemap and remains noindex/private-review.
