@@ -239,8 +239,17 @@ const esc = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp
 const json = (value) => JSON.stringify(value).replace(/</g, "\\u003c");
 const heroArt = (page, width) => `/assets/images/animals/hero-v2/${page.artBase}-${width}.webp`;
 const mobileArtSrcset = (page) => [420, 840, 1260].map((width) => `${heroArt(page, width)} ${width}w`).join(", ");
-const desktopArtSrcset = (page) => [700, 1400, 2100].map((width) => `${heroArt(page, width)} ${width}w`).join(", ");
-const heroSizes = "(max-width: 640px) calc(100vw - 20px), (max-width: 980px) min(calc(100vw - 32px), 700px), min(43vw, 600px)";
+const desktopArtSrcset = (page) => [420, 700, 840, 1260, 1400, 2100].map((width) => `${heroArt(page, width)} ${width}w`).join(", ");
+// These widths mirror the rendered image box, including the CSS max-height cap.
+// Tall artwork therefore advertises less width than landscape artwork without
+// changing the approved layout, scale, direction, or responsive composition.
+const heroSizes = {
+  rodent: "(max-width: 640px) min(calc(100vw - 20px), 374px), (max-width: 980px) 458px, min(calc(44.2vw - 15px), 519px)",
+  "rat-mouse": "(max-width: 640px) min(calc(100vw - 20px), 374px), (max-width: 980px) 458px, min(calc(44.2vw - 15px), 519px)",
+  squirrel: "(max-width: 640px) 238px, (max-width: 980px) 291px, 379px",
+  raccoon: "(max-width: 640px) min(calc(100vw - 20px), 362px), (max-width: 980px) 443px, min(calc(44.2vw - 15px), 519px)"
+};
+const heroSize = (page) => heroSizes[page.key];
 
 function baseSchema(page, faqs) {
   return {
@@ -342,13 +351,13 @@ function hero(page) {
   if (page.key !== "rodent") return `<main id="main"><section class="hero texture"><div class="hero-inner">
   <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1>${esc(page.name)}</h1><p class="hero-location">Metro Atlanta, Georgia</p><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
   <div class="actions"><a class="button" href="#estimate">Get a free estimate</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
-${heroAnnotation}  <figure class="hero-art">${page.artBase ? `<picture><source media="(max-width: 640px)" srcset="${mobileArtSrcset(page)}" sizes="${heroSizes}"><img src="${heroArt(page, 1400)}" srcset="${desktopArtSrcset(page)}" sizes="${heroSizes}" alt="${esc(page.artAlt)}" width="${page.artWidth}" height="${page.artHeight}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
+${heroAnnotation}  <figure class="hero-art">${page.artBase ? `<picture><source media="(max-width: 640px)" srcset="${mobileArtSrcset(page)}" sizes="${heroSize(page)}"><img src="${heroArt(page, 1400)}" srcset="${desktopArtSrcset(page)}" sizes="${heroSize(page)}" alt="${esc(page.artAlt)}" width="${page.artWidth}" height="${page.artHeight}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
 </div></section>
 <div class="proof-strip"><ul class="proof-list"><li><strong>Inspect</strong><span>Confirm the animal and route</span></li><li><strong>Remove</strong><span>Match the method to the site</span></li><li><strong>Repair</strong><span>Address documented openings</span></li><li><strong>Clean up</strong><span>Scope affected areas clearly</span></li></ul></div>`;
   return `<main id="main"><section class="hero texture"><div class="hero-inner">
   <div class="hero-copy"><h1><span class="outline">${esc(page.outlined || page.name)}</span>${page.second ? esc(page.second) : ""}</h1><p class="eyebrow">${esc(page.eyebrow)}</p><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
   <div class="actions"><a class="button" href="#estimate">Get a free estimate</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
-${heroAnnotation}  <figure class="hero-art">${page.artBase ? `<picture><source media="(max-width: 640px)" srcset="${mobileArtSrcset(page)}" sizes="${heroSizes}"><img src="${heroArt(page, 1400)}" srcset="${desktopArtSrcset(page)}" sizes="${heroSizes}" alt="${esc(page.artAlt)}" width="${page.artWidth}" height="${page.artHeight}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
+${heroAnnotation}  <figure class="hero-art">${page.artBase ? `<picture><source media="(max-width: 640px)" srcset="${mobileArtSrcset(page)}" sizes="${heroSize(page)}"><img src="${heroArt(page, 1400)}" srcset="${desktopArtSrcset(page)}" sizes="${heroSize(page)}" alt="${esc(page.artAlt)}" width="${page.artWidth}" height="${page.artHeight}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
 </div></section>`;
 }
 

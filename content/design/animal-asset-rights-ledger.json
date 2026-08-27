@@ -1,5 +1,11 @@
 {
   "schema_version": "asap-animal-asset-rights/1.0.0",
+  "derivative_source_dimensions": {
+    "assets/images/animals/rat-navy.png": {"width": 1333, "height": 961},
+    "assets/images/wildlife-grid/mouse-rat.png": {"width": 908, "height": 654},
+    "assets/images/animals/squirrel.webp": {"width": 2865, "height": 3250},
+    "assets/images/wildlife-grid/raccoon.png": {"width": 778, "height": 580}
+  },
   "captured_at": "2026-08-24",
   "phase": 3,
   "state": "decision-ready-candidate-external-decisions-open",

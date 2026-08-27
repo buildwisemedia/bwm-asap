@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 
 const root = process.cwd();
 const routes = [
@@ -221,6 +222,16 @@ check(rightsLedger.schema_version === "asap-animal-asset-rights/1.0.0", "Asset r
 check(rightsLedger.phase === 3 && rightsLedger.local_review_clear === true && rightsLedger.production_clear === false, "Asset rights: local-review clearance stays distinct from production clearance");
 check(rightsLedger.client_supplied_page_logos.length === 5, "Asset rights: five client-supplied page logos are bound");
 check(rightsLedger.existing_client_site_assets.length === 48, "Asset rights: original, responsive, optimized, and permitted homepage review assets are bound");
+const derivativeSourceDimensions = rightsLedger.derivative_source_dimensions || {};
+for (const [sourcePath, recorded] of Object.entries(derivativeSourceDimensions)) {
+  const metadata = execFileSync("sips", ["-g", "pixelWidth", "-g", "pixelHeight", join(root, sourcePath)], { encoding: "utf8" });
+  const width = Number(metadata.match(/pixelWidth:\s*(\d+)/)?.[1]);
+  const height = Number(metadata.match(/pixelHeight:\s*(\d+)/)?.[1]);
+  check(width === recorded.width && height === recorded.height, `Asset provenance: ${sourcePath} native dimensions are truthful`, `${width}x${height}`);
+}
+const rasterDerivatives = rightsLedger.existing_client_site_assets.filter((asset) => /\/hero-v2\/[^/]+-(?:420|700|840|1260|1400|2100)\.webp$/.test(asset.path));
+check(rasterDerivatives.length === 24 && rasterDerivatives.every((asset) => derivativeSourceDimensions[asset.derivative_source]), "Asset provenance: every raster hero derivative resolves to a measured native source");
+check(rasterDerivatives.every((asset) => !/recover(?:ed|s)? detail|enhanc(?:ed|es)? detail/i.test(asset.transformation || "")), "Asset provenance: no resize claims recovered source detail");
 for (const asset of rightsAssets) {
   const assetBuffer = readFileSync(join(root, asset.path));
   check(sha256(assetBuffer) === asset.sha256, `Asset rights: ${asset.path} SHA-256 matches ledger`);
