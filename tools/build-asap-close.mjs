@@ -399,7 +399,7 @@ function form(page) {
     <div class="field field--full"><select id="issue-${page.key || page.slug}" name="issue" required><option value="">Select one…</option><option>Wildlife removal</option><option>Rat or mouse</option><option>Squirrel</option><option>Raccoon</option><option>Bat or guano</option><option>Pest control</option><option>Other</option></select><label for="issue-${page.key || page.slug}">I need peace with…*</label></div>
     <div class="field field--full"><textarea id="details-${page.key || page.slug}" name="details" maxlength="1200"></textarea><label for="details-${page.key || page.slug}">What are you noticing?</label></div>
     <label class="consent"><input name="sms_consent" type="checkbox" required><span>I agree to receive messages about my inquiry. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Review our <a href="/privacy-policy/">Privacy Policy</a>. *</span></label>
-    <button class="button button--cream" type="submit">${page.key === "rodent" ? "Request an estimate" : "Validate review fixture"}</button><p class="form-status" tabindex="-1" role="status" aria-live="polite" data-form-status>${page.key === "rodent" ? "" : "Submitting here never contacts a client or creates a live CRM record."}</p>
+    <button class="button button--cream" type="submit">${page.key === "rodent" ? "SUBMIT" : "Validate review fixture"}</button><p class="form-status" tabindex="-1" role="status" aria-live="polite" data-form-status>${page.key === "rodent" ? "" : "Submitting here never contacts a client or creates a live CRM record."}</p>
   </form></div></section>`;
 }
 
@@ -492,6 +492,15 @@ function write(relative, content) {
   const path = join(root, relative);
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, content);
+}
+
+const onlySlug = process.argv.find((argument) => argument.startsWith("--only="))?.slice("--only=".length);
+if (onlySlug) {
+  const page = animals.find((candidate) => candidate.slug === onlySlug);
+  if (!page) throw new Error(`Unknown --only animal slug: ${onlySlug}`);
+  write(`${page.slug}/index.html`, renderAnimal(page));
+  console.log(JSON.stringify({ ok: true, pages: 1, animals: [page.slug], cities: [], pest: null }));
+  process.exit(0);
 }
 
 for (const page of animals) write(`${page.slug}/index.html`, renderAnimal(page));

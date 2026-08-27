@@ -82,6 +82,13 @@ const rat = readFileSync(join(root, "wildlife/mouse-rat/index.html"), "utf8");
 check(rat.includes("Recurring bait stations") && rat.includes("Do mice and rats cause any diseases?"), "Rat/mouse: recurring stations and disease FAQ");
 
 const rodent = readFileSync(join(root, "rodent-removal/index.html"), "utf8");
+const rodentSubmitButtons = [...rodent.matchAll(/<button\b[^>]*type="submit"[^>]*>([\s\S]*?)<\/button>/gi)].map((match) => plainText(match[1]));
+const rodentVisibleText = plainText(rodent.replace(/<script\b[\s\S]*?<\/script>/gi, "").replace(/<style\b[\s\S]*?<\/style>/gi, ""));
+check(rodentSubmitButtons.length === 1 && rodentSubmitButtons[0] === "SUBMIT", "Rodent: submit button text is exactly SUBMIT", rodentSubmitButtons.join(", "));
+check(![/local\/review/i, /private review/i, /review fixture/i, /held for review/i, /editorial gap/i, /internal scaffolding/i].some((pattern) => pattern.test(rodentVisibleText)), "Rodent: no client-visible internal or review scaffolding");
+check(!rodent.includes('class="flashlight"') && !/flashlight placeholder/i.test(rodentVisibleText), "Rodent: no flashlight placeholder");
+check(!/droppings[- ]photo placeholder/i.test(rodentVisibleText) && !/data-placeholder=["']droppings-photo["']/i.test(rodent), "Rodent: no droppings-photo placeholder");
+check(rodent.includes('data-integration-state="fixture-only"') && rodent.includes('<meta name="robots" content="noindex,nofollow,noarchive">'), "Rodent: fixture-only machine behavior and noindex are preserved");
 const rodentIntentTargets = [
   ["rat-mouse", "/wildlife/mouse-rat/"],
   ["squirrel", "/wildlife/gray-squirrel/"],
