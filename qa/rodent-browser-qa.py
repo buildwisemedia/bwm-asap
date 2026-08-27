@@ -33,24 +33,26 @@ async def inspect(browser,slug,route,hero_name,private,width,height,dpr):
     page.on("console",lambda m:errors.append(m.text) if m.type=="error" else None); page.on("requestfailed",lambda r:failed.append(r.url)); page.on("request",lambda r:api.append(r.url) if "/api/" in r.url else None)
     response=await page.goto(ORIGIN+route,wait_until="networkidle"); await page.screenshot(path=str(OUT/f"{slug}-{width}-{dpr}x.png"),full_page=False)
     hero=page.locator(".hero-art img"); current=await hero.evaluate("n=>n.currentSrc"); resources=await page.evaluate("name=>performance.getEntriesByType('resource').map(e=>e.name).filter(n=>n.includes('/hero-v2/'+name))",hero_name)
+    hero_pixels=await hero.evaluate("async n=>{const r=n.getBoundingClientRect(),raw=new Image();raw.src=n.currentSrc;await raw.decode();return{intrinsic:[raw.naturalWidth,raw.naturalHeight],rendered:[r.width,r.height],needed:[Math.ceil(r.width*devicePixelRatio),Math.ceil(r.height*devicePixelRatio)]}}")
     broken=await page.locator("img").evaluate_all("imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.currentSrc||i.src)"); overflow=await page.evaluate("document.documentElement.scrollWidth-document.documentElement.clientWidth"); header=await page.locator(".site-header").evaluate("n=>n.getBoundingClientRect().bottom")
     await page.locator('a[href="#estimate"]').first.click();await settled(page,"#estimate");await settle_visual_state(page);await settled(page,"#estimate");anchor=await page.locator("#estimate").evaluate("n=>n.getBoundingClientRect().top")
     tap=await page.evaluate("""() => [...document.querySelectorAll('button,summary,.button,input:not([type=hidden]),select,textarea')].filter(el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'&&!el.disabled&&(r.width<44||r.height<44)}).map(el=>({tag:el.tagName,className:el.className,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height}))""") if width<=980 else []
-    aria=await page.evaluate(ARIA_JS); contrast=await page.evaluate(CONTRAST_JS); result={"route":route,"viewport":[width,height],"dpr":dpr,"status":response.status if response else None,"currentSrc":current,"heroResources":resources,"overflow":overflow,"broken":broken,"tapIssues":tap,"headerBottom":round(header,2),"anchorTop":round(anchor,2),"contrast":contrast,"aria":aria,"api":api,"errors":errors,"failed":failed}
+    aria=await page.evaluate(ARIA_JS); contrast=await page.evaluate(CONTRAST_JS); result={"route":route,"viewport":[width,height],"dpr":dpr,"status":response.status if response else None,"currentSrc":current,"heroResources":resources,"heroPixels":hero_pixels,"overflow":overflow,"broken":broken,"tapIssues":tap,"headerBottom":round(header,2),"anchorTop":round(anchor,2),"contrast":contrast,"aria":aria,"api":api,"errors":errors,"failed":failed}
     assert result["status"]==200 and len(resources)==1 and "undefined" not in current,result
+    if slug!="bats": assert hero_pixels["intrinsic"][0]>=hero_pixels["needed"][0] and hero_pixels["intrinsic"][1]>=hero_pixels["needed"][1],result
     assert overflow<=0 and not broken and not api and not errors and not failed,result
     assert header-3<=anchor<=header+3,result
     assert not tap and not contrast and not aria["duplicates"] and not aria["missing"] and not aria["unnamed"],result
-    if slug=="raccoon" and width<=640: assert current.endswith("raccoon-hero-mobile.webp" if dpr==1 else "raccoon-hero.webp"),result
     if private:
         form=page.locator("[data-asap-lead-form]")
         for name,value in [("first_name","Test"),("last_name","Homeowner"),("phone","7705550100"),("email","test@example.com")]:await form.locator(f'[name="{name}"]').fill(value)
         await form.locator('[name="issue"]').select_option(label="Rat or mouse");await form.locator('[name="sms_consent"]').check();await form.locator('button[type="submit"]').click();assert await form.get_attribute("data-fixture-result")=="passed-no-send" and not api,result
     await context.close();return result
 
-async def inspect_anchor_and_cta(browser, route, width, height, dpr, check_anchor):
-    context=await browser.new_context(viewport={"width":width,"height":height},device_scale_factor=dpr);page=await context.new_page();errors=[];failed=[]
+async def inspect_anchor_and_cta(browser, route, width, height, dpr, check_anchor, check_fixture=False):
+    context=await browser.new_context(viewport={"width":width,"height":height},device_scale_factor=dpr);page=await context.new_page();errors=[];failed=[];api=[]
     page.on("console",lambda m:errors.append(m.text) if m.type=="error" else None);page.on("requestfailed",lambda r:failed.append(r.url))
+    page.on("request",lambda r:api.append(r.url) if "/api/" in r.url else None)
     response=await page.goto(ORIGIN+route,wait_until="networkidle")
     cta=page.locator(".contact-copy .button--cream")
     if await cta.count():
@@ -60,12 +62,18 @@ async def inspect_anchor_and_cta(browser, route, width, height, dpr, check_ancho
     if check_anchor:
         await page.locator('a[href="#estimate"]').first.click();await settled(page,"#estimate");await settle_visual_state(page);await settled(page,"#estimate")
         header=await page.locator(".site-header").evaluate("n=>n.getBoundingClientRect().bottom");anchor=await page.locator("#estimate").evaluate("n=>n.getBoundingClientRect().top")
-    result={"route":route,"viewport":[width,height],"dpr":dpr,"status":response.status if response else None,"headerBottom":round(header,2) if header is not None else None,"anchorTop":round(anchor,2) if anchor is not None else None,"errors":errors,"failed":failed}
-    assert result["status"]==200 and (not check_anchor or header-3<=anchor<=header+3) and not errors and not failed,result
+    fixture=None
+    if check_fixture:
+        form=page.locator("[data-asap-lead-form]")
+        for name,value in [("first_name","Test"),("last_name","Homeowner"),("phone","7705550100"),("email","test@example.com")]:await form.locator(f'[name="{name}"]').fill(value)
+        await form.locator('[name="issue"]').select_option(label="Rat or mouse");await form.locator('[name="sms_consent"]').check();await form.locator('button[type="submit"]').click();fixture=await form.get_attribute("data-fixture-result")
+    contrast=await page.evaluate(CONTRAST_JS)
+    result={"route":route,"viewport":[width,height],"dpr":dpr,"status":response.status if response else None,"headerBottom":round(header,2) if header is not None else None,"anchorTop":round(anchor,2) if anchor is not None else None,"contrast":contrast,"fixture":fixture,"api":api,"errors":errors,"failed":failed}
+    assert result["status"]==200 and (not check_anchor or header-3<=anchor<=header+3) and not contrast and (not check_fixture or fixture=="passed-no-send") and not api and not errors and not failed,result
     await context.close();return result
 
 async def no_js(browser):
-    context=await browser.new_context(viewport={"width":390,"height":844},device_scale_factor=2,java_script_enabled=False);page=await context.new_page();api=[];page.on("request",lambda r:api.append(r.url) if "/api/" in r.url else None);await page.goto(ORIGIN+ROUTES["rodent"][0],wait_until="networkidle");result={"disabled":await page.locator("[data-fixture-submit]").is_disabled(),"action":await page.locator("[data-asap-lead-form]").get_attribute("action"),"api":api};assert result=={"disabled":True,"action":"#estimate","api":[]},result;await context.close();return result
+    context=await browser.new_context(viewport={"width":390,"height":844},device_scale_factor=2,java_script_enabled=False);page=await context.new_page();api=[];page.on("request",lambda r:api.append(r.url) if "/api/" in r.url else None);await page.goto(ORIGIN+LEGACY_ROUTE,wait_until="networkidle");result={"route":LEGACY_ROUTE,"disabled":await page.locator("[data-fixture-submit]").is_disabled(),"action":await page.locator("[data-asap-lead-form]").get_attribute("action"),"api":api};assert result=={"route":LEGACY_ROUTE,"disabled":True,"action":"#estimate","api":[]},result;await context.close();return result
 
 async def main():
     OUT.mkdir(parents=True,exist_ok=True)
@@ -77,7 +85,7 @@ async def main():
         for route in SHARED_ROUTES:
             for item in SHARED_MATRIX:print(f"checking shared {route} {item}",flush=True);shared.append(await inspect_anchor_and_cta(browser,route,*item,False))
         legacy=[]
-        for item in LEGACY_MATRIX:print(f"checking legacy {item}",flush=True);legacy.append(await inspect_anchor_and_cta(browser,LEGACY_ROUTE,*item,True))
+        for item in LEGACY_MATRIX:print(f"checking legacy {item}",flush=True);legacy.append(await inspect_anchor_and_cta(browser,LEGACY_ROUTE,*item,True,True))
         output={"ok":True,"routes":len(ROUTES),"renders":len(results),"matrix":results,"sharedRegression":shared,"legacyAnchorRegression":legacy,"noJs":await no_js(browser),"screenshots":str(OUT)};await browser.close()
     print(json.dumps(output,indent=2))
 if __name__=="__main__":

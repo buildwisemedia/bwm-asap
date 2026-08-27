@@ -33,7 +33,7 @@
       "title": "Rodent Removal in Metro Atlanta | ASAP Pest & Wildlife",
       "h1": "RODENT REMOVAL",
       "owner_phrase": "rodent removal Metro ATL",
-      "page_sha256": "6630558cda0e4cca81ee54095103bddd2e4f45c3c0c21151465c531f8c5f713f",
+      "page_sha256": "f2335443e46aa7599b3045e64be193906aa20497db30a331d090c511a89d3fc6",
       "logo_path": "assets/images/page-logos/rodent.png",
       "logo_sha256": "c159022ecec17adfa01f45b266be5ac20b1515355a7163785bda589ed7f06358",
       "review_state": "go4-private-review-primary-client-approval-pending",
@@ -46,7 +46,7 @@
       "title": "Rat and Mouse Removal in Metro ATL | ASAP Pest & Wildlife",
       "h1": "Rat and Mouse Removal",
       "owner_phrase": "rat and mouse removal Metro ATL",
-      "page_sha256": "9f1edad4ed1eec60df50d38bc3313ba2954f0f5741f1e32eec866ce529a0a407",
+      "page_sha256": "98d5a6b773603ce9894b8cf8f5201748e6962f152bb3ae909cbc98c6de6755f3",
       "logo_path": "assets/images/page-logos/rat-mouse.png",
       "logo_sha256": "804aebdd4cd4831e47dc784a1ad037e6ecfe65724947b8a8e641ab7b916805da",
       "review_state": "replacement-after-visual-rejection-independent-recheck-pending",
@@ -59,7 +59,7 @@
       "title": "Squirrel Removal in Metro ATL | ASAP Pest & Wildlife",
       "h1": "Squirrel Removal",
       "owner_phrase": "squirrel removal Metro ATL",
-      "page_sha256": "f37238e99cb49c4140afc818ac3decae6883a39c7d2443aeef6f1d656c7940fc",
+      "page_sha256": "176c34fd16309436de93cc3c8906a1d34d499a90fed2cb256b67bdb05d3fc5fa",
       "logo_path": "assets/images/page-logos/squirrel.png",
       "logo_sha256": "e6319411069f8c8af25d1e9f881c9793c78fbd2704802cd664ad44ce9df76b26",
       "review_state": "replacement-after-visual-rejection-independent-recheck-pending",
@@ -72,7 +72,7 @@
       "title": "Raccoon Removal in Metro ATL | ASAP Pest & Wildlife",
       "h1": "Raccoon Removal",
       "owner_phrase": "raccoon removal Metro ATL",
-      "page_sha256": "4155122991edfd424796211abd2930c1bff8584b9d057fb336f53cdace0ffe11",
+      "page_sha256": "593dc142229848bbca0c0e32edfa1a30b142be8cc1da2a7e85d381394f6d4099",
       "logo_path": "assets/images/page-logos/raccoon.png",
       "logo_sha256": "8449716bbcdebc59bfeeb23c0a55affb382c173495afb9fd4ba722973d202cda",
       "review_state": "replacement-after-visual-rejection-independent-recheck-pending",
@@ -115,6 +115,6 @@
     "James and client have not accepted the composed set",
     "The mobile/tablet site-level navigation choice is awaiting human direction",
     "Editorial-gap cards are not published articles; held legacy articles are not linked and require separate remediation and editorial approval before reattachment",
-    "Deployment, production form delivery, per-page attribution tests, redirects, and live QA are unproven"
+    "N4 production cutover hold: sitemap membership, indexability, redirects, canonicals, production form delivery, per-page attribution tests, deployment, and live QA remain unchanged and unproven"
   ]
 }

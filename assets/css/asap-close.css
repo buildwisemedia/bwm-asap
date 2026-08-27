@@ -47,7 +47,7 @@ button, input, select, textarea { font: inherit; }
 .brand img { width: 175px; height: auto; }
 .nav-list { display: flex; justify-content: center; flex-wrap: wrap; gap: .35rem 1.25rem; margin: 0; padding: 0; list-style: none; }
 .nav-list a {
-  color: var(--orange); text-decoration: none; text-transform: uppercase;
+  color: var(--orange-dark); text-decoration: none; text-transform: uppercase;
   font-family: var(--display-font); font-weight: 800;
   font-size: .88rem; letter-spacing: .07em;
 }

@@ -26,6 +26,8 @@ const budgets = {
   "assets/images/animals/hero-v2/rodent-hero.webp": 320_000,
   "assets/images/page-logos/rodent.png": 100_000
 };
+const heroAssetBuilder = readFileSync(join(root, "tools/build-asap-hero-assets.sh"), "utf8");
+check(heroAssetBuilder.includes("cwebp -quiet -q 92 -alpha_q 100 -m 6 -sharp_yuv -metadata none") && heroAssetBuilder.includes("420 700 840 1260 1400 2100"), "Hero assets: deterministic executable builder binds codec settings and widths");
 
 function check(ok, label, detail = "") {
   results.push({ ok: Boolean(ok), label, detail });
@@ -105,6 +107,8 @@ check(bat.includes("guano") && bat.includes("DSV-labeled") && bat.includes("insu
 
 const rat = readFileSync(join(root, "wildlife/mouse-rat/index.html"), "utf8");
 check(rat.includes("Recurring bait stations") && rat.includes("Do mice and rats cause any diseases?"), "Rat/mouse: recurring stations and disease FAQ");
+const ratMeta = rat.match(/<meta name="description" content="([^"]+)">/)?.[1] || "";
+check(ratMeta.length >= 150 && ratMeta.length <= 160, "Rat/mouse: meta description is 150–160 characters", `${ratMeta.length}`);
 
 const rodent = readFileSync(join(root, "rodent-removal/index.html"), "utf8");
 const rodentSubmitButtons = [...rodent.matchAll(/<button\b[^>]*type="submit"[^>]*>([\s\S]*?)<\/button>/gi)].map((match) => plainText(match[1]));
@@ -131,9 +135,9 @@ check(rodent.includes('action="#estimate"') && rodent.includes("disabled data-fi
 check(!rodent.includes("/api/lead-intent"), "Rodent: fixture HTML has no nonexistent API endpoint");
 check(rodent.includes('class="mobile-nav"') && rodent.includes('aria-label="Mobile navigation"') && rodent.includes("<summary>Menu</summary>"), "Rodent: native keyboard-accessible mobile navigation is present");
 check(!rodent.includes('<link rel="preload" as="image"'), "Rodent: no conflicting hero preload duplicates picture selection");
-check(rodent.includes('<source media="(max-width: 640px)" srcset="/assets/images/animals/hero-v2/rodent-hero-mobile.webp 1x, /assets/images/animals/hero-v2/rodent-hero-medium.webp 2x">'), "Rodent: responsive hero preserves high-density mobile art");
+check(rodent.includes('rodent-hero-420.webp 420w') && rodent.includes('rodent-hero-840.webp 840w') && rodent.includes('rodent-hero-1260.webp 1260w') && rodent.includes('rodent-hero-2100.webp 2100w'), "Rodent: responsive hero exposes physical-pixel-safe width candidates");
 const raccoonResponsiveHtml = readFileSync(join(root, "wildlife/raccoon/index.html"), "utf8");
-check(!raccoonResponsiveHtml.includes("undefined") && raccoonResponsiveHtml.includes('<source media="(max-width: 640px)" srcset="/assets/images/animals/hero-v2/raccoon-hero-mobile.webp 1x, /assets/images/animals/hero-v2/raccoon-hero.webp 2x">'), "Raccoon: responsive hero uses guarded high-density fallback");
+check(!raccoonResponsiveHtml.includes("undefined") && raccoonResponsiveHtml.includes('raccoon-hero-1260.webp 1260w') && raccoonResponsiveHtml.includes('raccoon-hero-2100.webp 2100w'), "Raccoon: responsive hero exposes physical-pixel-safe width candidates");
 const rodentIntentTargets = [
   ["rat-mouse", "/wildlife/mouse-rat/"],
   ["squirrel", "/wildlife/gray-squirrel/"],
@@ -216,14 +220,19 @@ const rightsAssets = [...rightsLedger.client_supplied_page_logos, ...rightsLedge
 check(rightsLedger.schema_version === "asap-animal-asset-rights/1.0.0", "Asset rights: schema version is explicit");
 check(rightsLedger.phase === 3 && rightsLedger.local_review_clear === true && rightsLedger.production_clear === false, "Asset rights: local-review clearance stays distinct from production clearance");
 check(rightsLedger.client_supplied_page_logos.length === 5, "Asset rights: five client-supplied page logos are bound");
-check(rightsLedger.existing_client_site_assets.length === 24, "Asset rights: original, responsive, optimized, and permitted homepage review assets are bound");
+check(rightsLedger.existing_client_site_assets.length === 48, "Asset rights: original, responsive, optimized, and permitted homepage review assets are bound");
 for (const asset of rightsAssets) {
   const assetBuffer = readFileSync(join(root, asset.path));
   check(sha256(assetBuffer) === asset.sha256, `Asset rights: ${asset.path} SHA-256 matches ledger`);
 }
 for (const page of lineup.pages) {
   const html = readFileSync(join(root, page.path), "utf8");
-  const imagePaths = [...html.matchAll(/<img[^>]+src="\/([^"?#]+)[^"]*"/gi)].map((match) => match[1]);
+  const imagePaths = [
+    ...html.matchAll(/<img[^>]+src="\/([^"?#]+)[^"]*"/gi),
+    ...html.matchAll(/(?:srcset)="([^"]+)"/gi)
+  ].flatMap((match) => match[0].startsWith("srcset")
+    ? match[1].split(",").map((candidate) => candidate.trim().split(/\s+/)[0].replace(/^\//, ""))
+    : [match[1]]);
   check(imagePaths.every((path) => rightsAssets.some((asset) => asset.path === path)), `Asset rights: ${page.path} uses only bound visual assets`, imagePaths.join(", "));
   const faviconPath = html.match(/<link[^>]+rel="icon"[^>]+href="\/([^"?#]+)[^"]*"/i)?.[1];
   check(faviconPath && rightsAssets.some((asset) => asset.path === faviconPath), `Asset rights: ${page.path} favicon is bound`, faviconPath || "missing");
@@ -261,7 +270,9 @@ for (const protectedPhrase of rodentDecision?.protected_from_title_h1 || []) {
   check(!rodentTitleH1.includes(protectedPhrase.toLowerCase()), `SEO intent: rodent title/H1 does not claim ${protectedPhrase}`);
 }
 
-const css = `${readFileSync(join(root, "assets/css/asap-close.css"), "utf8")}\n${readFileSync(join(root, "assets/css/asap-animal-v2.css"), "utf8")}`;
+const closeCss = readFileSync(join(root, "assets/css/asap-close.css"), "utf8");
+const animalCss = readFileSync(join(root, "assets/css/asap-animal-v2.css"), "utf8");
+const css = `${closeCss}\n${animalCss}`;
 for (const token of ["#f2eddc", "#212936", "#333333", "#b77537", "#ffffff"]) check(css.includes(token), `CSS: required token ${token}`);
 check(css.includes("prefers-reduced-motion"), "CSS: reduced-motion parity");
 check(css.includes("min-height: 50px") && css.includes("min-height: 52px"), "CSS: touch/input targets exceed 44px");
@@ -271,7 +282,12 @@ check(css.includes("--sticky-offset: 164px;") && css.includes(".rodent-page { --
 check(css.includes(".contact-copy a:not(.button) { color: var(--cream); }") && css.includes(".contact-copy .button--cream { color: var(--navy); }"), "CSS: cream CTA retains navy text inside contact copy");
 const legacyRodent = readFileSync(join(root, "peace-of-mind-from/rodents/index.html"), "utf8");
 check(legacyRodent.includes('class="animal-page legacy-rodent-page"') && css.includes(".legacy-rodent-page { --sticky-offset: 164px; }") && css.includes(".legacy-rodent-page { --sticky-offset: 182px; }") && css.includes(".legacy-rodent-page { --sticky-offset: 215px; }"), "Legacy Rodent: page-specific responsive anchor offsets cover the taller retained header");
-check(css.includes("color: var(--orange-dark); text-decoration: none; text-transform: uppercase"), "CSS: small cream-canvas navigation uses the darker orange token");
+const closeNavRule = closeCss.match(/\.nav-list a\s*\{([^}]+)\}/)?.[1] || "";
+check(closeNavRule.includes("color: var(--orange-dark)") && !closeNavRule.includes("color: var(--orange);"), "CSS: shared small cream-canvas navigation uses dark orange in the correct stylesheet rule");
+check(!closeCss.match(/\.nav-list a\s*\{[^}]*color:\s*var\(--orange\);/), "CSS: shared navigation cannot regress to the 3.19:1 orange token");
+const legacyFixture = readFileSync(join(root, "peace-of-mind-from/rodents/index.html"), "utf8");
+check(legacyFixture.includes('action="#estimate"') && legacyFixture.includes("disabled data-fixture-submit") && legacyFixture.includes("<noscript><p class=\"form-status\">Online requests are turned off"), "Legacy Rodent: no-JS form is inert and visibly disabled");
+check(!legacyFixture.includes("/api/lead-intent"), "Legacy Rodent: fixture HTML contains zero API action targets");
 
 const headers = readFileSync(join(root, "_headers"), "utf8");
 check(headers.includes("/rodent-removal/*") && headers.includes("X-Robots-Tag: noindex, nofollow, noarchive") && headers.includes("coordinated production"), "Headers: private Rodent route has a documented noindex backstop");

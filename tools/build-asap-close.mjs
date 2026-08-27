@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 const root = process.cwd();
@@ -34,7 +34,7 @@ const animals = [
     name: "Rodent Removal", title: "Rodent Removal in Metro Atlanta", outlined: "RODENT REMOVAL", second: "",
     eyebrow: "Mice · Rats · Squirrels · Flying Squirrels · Chipmunks",
     description: "Rodent removal for Metro Atlanta homes. We inspect the home, identify the animal, and explain the options for removal, repairs, cleanup, and follow-up.",
-    logo: "/assets/images/page-logos/rodent.png", art: "/assets/images/animals/hero-v2/rodent-hero.webp", artMobile: "/assets/images/animals/hero-v2/rodent-hero-mobile.webp", artMedium: "/assets/images/animals/hero-v2/rodent-hero-medium.webp", artAlt: "ASAP illustrated rat facing the rodent removal headline", artWidth: 1100, artHeight: 794,
+    logo: "/assets/images/page-logos/rodent.png", artBase: "rodent-hero", artAlt: "ASAP illustrated rat facing the rodent removal headline", artWidth: 2100, artHeight: 1514,
     warmth: "You deserve to feel at ease in your home again. We explain what we find and what comes next.",
     answerTitle: "What does a complete rodent plan include?",
     answer: "First, we identify the animal and find where it is active. Then we check how it may be getting inside. Your written plan explains the removal or control work, repair options, and any cleanup or follow-up that fits your home.",
@@ -103,8 +103,8 @@ const animals = [
     kind: "animal", slug: "wildlife/mouse-rat", key: "rat-mouse",
     name: "Rat and Mouse Removal", title: "Rat and Mouse Removal in Metro ATL", outlined: "Rat + Mouse", second: "Removal",
     eyebrow: "Inspection · Control · Exclusion · Monitoring",
-    description: "Rat and mouse removal in Metro Atlanta with species-aware inspection, a clear control plan, entry-point repair options, and recurring bait-station programs where appropriate.",
-    logo: "/assets/images/page-logos/rat-mouse.png", art: "/assets/images/animals/hero-v2/mouse-rat-hero.webp", artMobile: "/assets/images/animals/hero-v2/mouse-rat-hero-mobile.webp", artMedium: "/assets/images/animals/hero-v2/mouse-rat-hero-medium.webp", artAlt: "ASAP illustrated mouse facing the rat and mouse removal headline", artWidth: 908, artHeight: 654,
+    description: "Rat and mouse removal in Metro Atlanta with species-aware inspection, a clear control plan, entry-point repairs, and recurring bait stations where appropriate.",
+    logo: "/assets/images/page-logos/rat-mouse.png", artBase: "mouse-rat-hero", artAlt: "ASAP illustrated mouse facing the rat and mouse removal headline", artWidth: 2100, artHeight: 1513,
     warmth: "Hearing movement in a wall or attic can make a home feel unfamiliar. We help turn the noise into a clear plan.",
     answerTitle: "A plan should solve the source — not just today’s sighting",
     answer: "Mice, roof rats, and Norway rats behave differently. A good plan connects the evidence indoors with travel routes, food and water pressure, exterior activity, and the openings that may be allowing entry. That keeps control, repair, cleanup, and monitoring decisions understandable.",
@@ -134,7 +134,7 @@ const animals = [
     name: "Squirrel Removal", title: "Squirrel Removal in Metro ATL", outlined: "Squirrel", second: "Removal",
     eyebrow: "Gray and Flying Squirrel Control",
     description: "Humane gray and flying squirrel removal in Metro Atlanta, with attic inspection, route identification, repair planning, cleanup options, and clear next steps.",
-    logo: "/assets/images/page-logos/squirrel.png", art: "/assets/images/animals/hero-v2/squirrel-hero.webp", artMobile: "/assets/images/animals/hero-v2/squirrel-hero-mobile.webp", artMedium: "/assets/images/animals/hero-v2/squirrel-hero-medium.webp", artAlt: "ASAP illustrated squirrel facing the squirrel removal headline", artWidth: 900, artHeight: 1021,
+    logo: "/assets/images/page-logos/squirrel.png", artBase: "squirrel-hero", artAlt: "ASAP illustrated squirrel facing the squirrel removal headline", artWidth: 2100, artHeight: 2382,
     warmth: "We know the scratching overhead can wear on your peace. We’ll show you what we found and walk through the plan.",
     answerTitle: "Why are squirrels getting into the attic?",
     answer: "Squirrels may use roofline gaps, vents, soffits, fascia, or other vulnerable areas. Gray and flying squirrels can create different patterns of activity. The inspection should identify the animal, the route in, and any timing considerations before removal or repair begins.",
@@ -164,7 +164,7 @@ const animals = [
     name: "Raccoon Removal", title: "Raccoon Removal in Metro ATL", outlined: "Raccoon", second: "Removal",
     eyebrow: "Humane Inspection · Removal · Repair",
     description: "Humane raccoon removal in Metro Atlanta, with attic and roofline inspection, a plan for adults or dependent young, entry-point repair, and cleanup options.",
-    logo: "/assets/images/page-logos/raccoon.png", art: "/assets/images/animals/hero-v2/raccoon-hero.webp", artMobile: "/assets/images/animals/hero-v2/raccoon-hero-mobile.webp", artAlt: "ASAP illustrated raccoon facing the raccoon removal headline", artWidth: 778, artHeight: 580,
+    logo: "/assets/images/page-logos/raccoon.png", artBase: "raccoon-hero", artAlt: "ASAP illustrated raccoon facing the raccoon removal headline", artWidth: 2100, artHeight: 1566,
     warmth: "A raccoon in the attic feels personal. We respond calmly, protect the home, and explain each decision.",
     answerTitle: "What should I do if I suspect a raccoon?",
     answer: "Avoid cornering or handling the animal. Note where and when you hear activity, keep people and pets away from the area, and arrange an inspection. The plan should account for access, possible young, contamination, repair, and applicable wildlife rules.",
@@ -237,9 +237,10 @@ const pestIcons = {
 
 const esc = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
 const json = (value) => JSON.stringify(value).replace(/</g, "\\u003c");
-const mobileArtSrcset = (page) => page.artMobile
-  ? [page.artMobile, page.artMedium || page.art].filter(Boolean).map((src, index) => `${src} ${index + 1}x`).join(", ")
-  : "";
+const heroArt = (page, width) => `/assets/images/animals/hero-v2/${page.artBase}-${width}.webp`;
+const mobileArtSrcset = (page) => [420, 840, 1260].map((width) => `${heroArt(page, width)} ${width}w`).join(", ");
+const desktopArtSrcset = (page) => [700, 1400, 2100].map((width) => `${heroArt(page, width)} ${width}w`).join(", ");
+const heroSizes = "(max-width: 640px) calc(100vw - 20px), (max-width: 980px) min(calc(100vw - 32px), 700px), min(43vw, 600px)";
 
 function baseSchema(page, faqs) {
   return {
@@ -341,13 +342,13 @@ function hero(page) {
   if (page.key !== "rodent") return `<main id="main"><section class="hero texture"><div class="hero-inner">
   <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1>${esc(page.name)}</h1><p class="hero-location">Metro Atlanta, Georgia</p><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
   <div class="actions"><a class="button" href="#estimate">Get a free estimate</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
-${heroAnnotation}  <figure class="hero-art">${page.artMobile ? `<picture><source media="(max-width: 640px)" srcset="${mobileArtSrcset(page)}"><img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
+${heroAnnotation}  <figure class="hero-art">${page.artBase ? `<picture><source media="(max-width: 640px)" srcset="${mobileArtSrcset(page)}" sizes="${heroSizes}"><img src="${heroArt(page, 1400)}" srcset="${desktopArtSrcset(page)}" sizes="${heroSizes}" alt="${esc(page.artAlt)}" width="${page.artWidth}" height="${page.artHeight}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
 </div></section>
 <div class="proof-strip"><ul class="proof-list"><li><strong>Inspect</strong><span>Confirm the animal and route</span></li><li><strong>Remove</strong><span>Match the method to the site</span></li><li><strong>Repair</strong><span>Address documented openings</span></li><li><strong>Clean up</strong><span>Scope affected areas clearly</span></li></ul></div>`;
   return `<main id="main"><section class="hero texture"><div class="hero-inner">
   <div class="hero-copy"><h1><span class="outline">${esc(page.outlined || page.name)}</span>${page.second ? esc(page.second) : ""}</h1><p class="eyebrow">${esc(page.eyebrow)}</p><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
   <div class="actions"><a class="button" href="#estimate">Get a free estimate</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
-${heroAnnotation}  <figure class="hero-art">${page.artMobile ? `<picture><source media="(max-width: 640px)" srcset="${mobileArtSrcset(page)}"><img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
+${heroAnnotation}  <figure class="hero-art">${page.artBase ? `<picture><source media="(max-width: 640px)" srcset="${mobileArtSrcset(page)}" sizes="${heroSizes}"><img src="${heroArt(page, 1400)}" srcset="${desktopArtSrcset(page)}" sizes="${heroSizes}" alt="${esc(page.artAlt)}" width="${page.artWidth}" height="${page.artHeight}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
 </div></section>`;
 }
 
@@ -509,6 +510,21 @@ function write(relative, content) {
   writeFileSync(path, content);
 }
 
+function repairLegacyRodentFixture() {
+  const relative = "peace-of-mind-from/rodents/index.html";
+  let html = readFileSync(join(root, relative), "utf8");
+  const activeForm = '<form class="lead-form" action="/api/lead-intent" method="post" data-asap-lead-form';
+  const inertForm = '<form class="lead-form" action="#estimate" method="get" data-asap-lead-form';
+  if (html.includes(activeForm)) html = html.replace(activeForm, inertForm);
+  if (!html.includes(inertForm)) throw new Error("Legacy rodent fixture form boundary drifted");
+  const activeButton = '<button class="button button--cream" type="submit">Validate review fixture</button>';
+  const inertButton = '<button class="button button--cream" type="submit" disabled data-fixture-submit>Validate review fixture</button><noscript><p class="form-status">Online requests are turned off on this review page. No form information can be sent. Please call 770-691-3636 if you need help.</p></noscript>';
+  if (html.includes(activeButton)) html = html.replace(activeButton, inertButton);
+  if (!html.includes(inertButton)) throw new Error("Legacy rodent fixture submit boundary drifted");
+  if (html.includes("/api/lead-intent")) throw new Error("Legacy rodent fixture retains an API action");
+  write(relative, html);
+}
+
 const onlySlug = process.argv.find((argument) => argument.startsWith("--only="))?.slice("--only=".length);
 if (onlySlug) {
   const page = animals.find((candidate) => candidate.slug === onlySlug);
@@ -523,6 +539,7 @@ if (buildMode === "animal") {
 } else {
   for (const profile of cityProfiles) write(`${profile.slug}/index.html`, renderCity(profile));
   write("pest-control-services/index.html", renderPest());
+  repairLegacyRodentFixture();
 }
 
 const inventory = {
