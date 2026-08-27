@@ -1,17 +1,17 @@
-# ASAP Rodent correction — browser QA receipt
+# ASAP animal-page correction — browser QA receipt
 
-Date: 2026-08-27 Eastern. State: private local review. No external action occurred.
+Date: 2026-08-27 Eastern. State: mixed private review and local indexable correction candidate. No external action occurred.
 
-`qa/rodent-browser-qa.py` passed all eight required renders: 1440 DPR2; 980/768/641 DPR2; 390 DPR1/2/3; and 320 DPR2, plus a JavaScript-disabled run.
+`qa/rodent-browser-qa.py` passed 40 rendered runs: all five animal routes at 1440 DPR2; 980/768/641 DPR2; 390 DPR1/2/3; and 320 DPR2, plus a JavaScript-disabled Rodent run.
 
-- Exactly one Rodent hero resource loaded at each size and matched `currentSrc`.
-- 390 DPR1 selected the 420 px asset; 390 DPR2/3 and 320 DPR2 selected the 700 px asset; 641 px and above selected the 1,100 px asset.
-- Zero horizontal overflow, broken images, console errors, failed requests, or API calls.
-- Header phone, email, and menu controls were at least 44 px high at every width through 980 px.
-- Keyboard navigation opened the native menu at every responsive width.
-- After 1.2 seconds of smooth-scroll settlement, `#estimate` remained below the sticky header at every width.
-- The review form validated locally with `passed-no-send`; without JavaScript its submit stayed disabled, its action stayed `#estimate`, and it made zero API calls.
+- Each route loaded exactly one hero resource at every matrix cell; no responsive source contained `undefined`.
+- Raccoon selected its 420 px mobile asset at 390 DPR1 and its sharp full asset at 390 DPR2/3 and 320 DPR2.
+- Zero horizontal overflow, broken images, contrast failures, console errors, failed requests, or API calls.
+- Enabled form and navigation controls measured at least 44 × 44 px through 980 px.
+- Every ARIA ID reference resolved; there were zero duplicate IDs and zero unnamed interactive controls.
+- After animation-frame settlement, the two-sided assertion held `headerBottom - 3px <= #estimate top <= headerBottom + 3px` in every render. Observed anchor tops ranged from 133.59 px to 183.73 px.
+- The Rodent fixture validated locally with `passed-no-send`; without JavaScript its submit stayed disabled, its action stayed `#estimate`, and it made zero API calls.
 
-Pixel inspection of initial-state screenshots at desktop (1440 DPR2), tablet (768 DPR2), and mobile (390 DPR3) confirmed a sharp inward-facing hero, intact responsive hierarchy, and no visible clipping or collisions. Screenshots are local QA output under `/tmp/asap-rodent-browser-qa`; they were not published.
+Pixel inspection of every route at desktop 1440 DPR2 and mobile 390 DPR3 confirmed intact ASAP composition, sharp hero rendering, no clipping or collisions, and all five animals facing inward toward the copy. Screenshots remain local QA output under `/tmp/asap-animal-browser-qa`; they were not published.
 
-The sitemap/indexability gate passed across generator-owned routes: no sitemap URL contains noindex, local-review state, review fixture copy, or a fixture form. `/rodent-removal/` is absent from the sitemap and remains noindex/private-review.
+The sitemap/indexability gate covers every generator-owned route: sitemap URLs contain no noindex state, local-review state, review fixture copy, or fixture form. `/rodent-removal/` remains absent from the sitemap, noindex, private-review, and fixture-only.

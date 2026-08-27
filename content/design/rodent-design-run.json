@@ -21,11 +21,11 @@
   "truth_packet": {
     "frozen": true,
     "content_hash": "7b1b67910b637f7360075f8517e76d8190f709d2a1332ce4854aa0c8a07318ff",
-    "scope_hash": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a",
+    "scope_hash": "f642e3e5494310002015bcded839f7ec6b2dda530152f8f1cd5080cc8bcd60a3",
     "asset_manifest_hash": "4d369afdb8736a1376316e38fc518c9b46465b5e2ee4064ddb29788600893c18",
-    "proof_manifest_hash": "cc21092d5bbd6c2eab4c7ded5ea87eec698e94774dd0516eb4df68d0be02483a",
+    "proof_manifest_hash": "f642e3e5494310002015bcded839f7ec6b2dda530152f8f1cd5080cc8bcd60a3",
     "anchor_manifest_path": "rodent-design-anchor-manifest.json",
-    "anchor_manifest_sha256": "9eeee83fa51ad36c10d8b4108729baac6e814cf9ea4bbe6755db562f2d3914dd"
+    "anchor_manifest_sha256": "8a12d0104daa5ed69d596f56ba7597eedcbfc40a91acccaf92f67917d82c7785"
   },
   "provenance": {
     "author_family": "sol",
@@ -47,18 +47,18 @@
   },
   "inherited_direction": {
     "record_path": "rodent-accepted-direction.json",
-    "record_sha256": "4bdd2662d48fb14f4d151009cd33345cbb6747354ec3ead62fb74e272fa1a97e"
+    "record_sha256": "2acf96a0d0aa30d85876b526125e7bcd103bf7cec527cb1fd9b2ad759554e5fc"
   },
   "evidence": {
     "items": [
       {"class": "A", "type": "desktop", "locator": "rodent-desktop-evidence.md", "sha256": "d81839a22ad385b18799853e1a5e3b401c284cf9b3cdaa601857e99c50de2840"},
-      {"class": "A", "type": "mobile", "locator": "rodent-mobile-evidence.md", "sha256": "2c3bb9548dea4a000550c81262db9f0ff00fa54d5ce34f8ddffd5980959d23dd"},
+      {"class": "A", "type": "mobile", "locator": "rodent-mobile-evidence.md", "sha256": "01ff85bc69866d7115568e9a98af50997840b2402dd5ab05445ce6e812f34b38"},
       {"class": "I", "type": "focus", "locator": "rodent-focus-evidence.md", "sha256": "806ecae6abb3982a1216c3e7007ba4482f08c39d7fde79c1937cc13e45c35e6d"},
       {"class": "I", "type": "primary-action", "locator": "rodent-primary-action-evidence.md", "sha256": "78886a842461b1e89100b809daa031906f27ca16022a2aa52d84f9e59c8b8990"},
       {"class": "S", "type": "source-proof", "locator": "rodent-source-proof.md", "sha256": "8a76225e65408a17da811e294cbf41f0f62b66db5fb3e7cb1b58ef5e083457e8"},
       {"class": "S", "type": "provider-verification", "locator": "rodent-provider-verification.md", "sha256": "dec9b569ca9c635c67629fd504b269825c83afd8599b44d564d4efd831ae6d26"},
-      {"class": "S", "type": "copy-evidence-packet", "locator": "rodent-copy-evidence.json", "sha256": "55a8339ac94048f64fcd073240ab8101250c633caa0ad1bc8995d5c7165f79d0"},
-      {"class": "J", "type": "performance-budget", "locator": "rodent-performance-budget.md", "sha256": "169b263d2f4d370fc874142fefab0697d161ee0dde0f1d2a4d9f61b97ad531fb"},
+      {"class": "S", "type": "copy-evidence-packet", "locator": "rodent-copy-evidence.json", "sha256": "e6152ee036aca9d1a4a226c21054fdd53d28ed3f9361fa78815b9ce96b4b8aa9"},
+      {"class": "J", "type": "performance-budget", "locator": "rodent-performance-budget.md", "sha256": "5125dfd50ba811327753307a22b253f8cb99059f1073dfeec1a0abdce0e98955"},
       {"class": "J", "type": "seo-technical", "locator": "rodent-seo-technical-evidence.md", "sha256": "94680d14ef183fc8ed5f625042aaec16c78439cf2aed2f95ae99b6e108d7661d"},
       {"class": "S", "type": "aeo-answer-surface", "locator": "rodent-aeo-answer-evidence.md", "sha256": "17d57c640e9190055bda6735f7a2322384a5f8ad2ce3eedd6d40133f04397e3e"},
       {"class": "I", "type": "conversion-path", "locator": "rodent-conversion-path-evidence.md", "sha256": "abfdbfbd2730eaf14f708fea592c7095de3f9009725d3576e3ffee6e8eac1028"},

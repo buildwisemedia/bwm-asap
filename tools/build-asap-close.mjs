@@ -237,7 +237,9 @@ const pestIcons = {
 
 const esc = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
 const json = (value) => JSON.stringify(value).replace(/</g, "\\u003c");
-const artSrcset = (page) => [page.artMobile ? `${page.artMobile} 420w` : "", page.artMedium ? `${page.artMedium} 700w` : "", page.artWidth ? `${page.art} ${page.artWidth}w` : ""].filter(Boolean).join(", ");
+const mobileArtSrcset = (page) => page.artMobile
+  ? [page.artMobile, page.artMedium || page.art].filter(Boolean).map((src, index) => `${src} ${index + 1}x`).join(", ")
+  : "";
 
 function baseSchema(page, faqs) {
   return {
@@ -339,13 +341,13 @@ function hero(page) {
   if (page.key !== "rodent") return `<main id="main"><section class="hero texture"><div class="hero-inner">
   <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1>${esc(page.name)}</h1><p class="hero-location">Metro Atlanta, Georgia</p><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
   <div class="actions"><a class="button" href="#estimate">Get a free estimate</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
-${heroAnnotation}  <figure class="hero-art">${page.artMobile ? `<picture><source media="(max-width: 640px)" srcset="${page.artMobile} 1x, ${page.artMedium} 2x"><img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
+${heroAnnotation}  <figure class="hero-art">${page.artMobile ? `<picture><source media="(max-width: 640px)" srcset="${mobileArtSrcset(page)}"><img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
 </div></section>
 <div class="proof-strip"><ul class="proof-list"><li><strong>Inspect</strong><span>Confirm the animal and route</span></li><li><strong>Remove</strong><span>Match the method to the site</span></li><li><strong>Repair</strong><span>Address documented openings</span></li><li><strong>Clean up</strong><span>Scope affected areas clearly</span></li></ul></div>`;
   return `<main id="main"><section class="hero texture"><div class="hero-inner">
   <div class="hero-copy"><h1><span class="outline">${esc(page.outlined || page.name)}</span>${page.second ? esc(page.second) : ""}</h1><p class="eyebrow">${esc(page.eyebrow)}</p><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
   <div class="actions"><a class="button" href="#estimate">Get a free estimate</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
-${heroAnnotation}  <figure class="hero-art">${page.artMobile ? `<picture><source media="(max-width: 640px)" srcset="${page.artMobile} 1x, ${page.artMedium} 2x"><img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
+${heroAnnotation}  <figure class="hero-art">${page.artMobile ? `<picture><source media="(max-width: 640px)" srcset="${mobileArtSrcset(page)}"><img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async"></picture>` : `<img src="${page.art}" alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async">`}</figure>
 </div></section>`;
 }
 

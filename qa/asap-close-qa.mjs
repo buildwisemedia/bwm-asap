@@ -17,6 +17,15 @@ const sitemapRoutes = new Set([...sitemapXml.matchAll(/<loc>https:\/\/removeasap
 const cities = ["Canton", "Woodstock", "Acworth", "Kennesaw", "Cartersville"];
 const badTokens = ["#0c2340", "#a6411d", "#dc5b2a", "#8d3718", "#ffb38f", "770-450-1744", "7704501744"];
 const results = [];
+const budgets = {
+  "rodent-removal/index.html": 200_000,
+  "assets/css/asap-animal-v2.css": 50_000,
+  "assets/js/asap-close.js": 20_000,
+  "assets/images/animals/hero-v2/rodent-hero-mobile.webp": 80_000,
+  "assets/images/animals/hero-v2/rodent-hero-medium.webp": 160_000,
+  "assets/images/animals/hero-v2/rodent-hero.webp": 320_000,
+  "assets/images/page-logos/rodent.png": 100_000
+};
 
 function check(ok, label, detail = "") {
   results.push({ ok: Boolean(ok), label, detail });
@@ -30,6 +39,11 @@ function plainText(value) {
     .replace(/&amp;/g, "&")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+for (const [path, ceiling] of Object.entries(budgets)) {
+  const size = statSync(join(root, path)).size;
+  check(size <= ceiling, `Performance budget: ${path} at or below ${ceiling}B`, `${size}B`);
 }
 
 for (const route of routes) {
@@ -115,6 +129,8 @@ check(!rodent.includes("/api/lead-intent"), "Rodent: fixture HTML has no nonexis
 check(rodent.includes('class="mobile-nav"') && rodent.includes('aria-label="Mobile navigation"') && rodent.includes("<summary>Menu</summary>"), "Rodent: native keyboard-accessible mobile navigation is present");
 check(!rodent.includes('<link rel="preload" as="image"'), "Rodent: no conflicting hero preload duplicates picture selection");
 check(rodent.includes('<source media="(max-width: 640px)" srcset="/assets/images/animals/hero-v2/rodent-hero-mobile.webp 1x, /assets/images/animals/hero-v2/rodent-hero-medium.webp 2x">'), "Rodent: responsive hero preserves high-density mobile art");
+const raccoonResponsiveHtml = readFileSync(join(root, "wildlife/raccoon/index.html"), "utf8");
+check(!raccoonResponsiveHtml.includes("undefined") && raccoonResponsiveHtml.includes('<source media="(max-width: 640px)" srcset="/assets/images/animals/hero-v2/raccoon-hero-mobile.webp 1x, /assets/images/animals/hero-v2/raccoon-hero.webp 2x">'), "Raccoon: responsive hero uses guarded high-density fallback");
 const rodentIntentTargets = [
   ["rat-mouse", "/wildlife/mouse-rat/"],
   ["squirrel", "/wildlife/gray-squirrel/"],
@@ -248,6 +264,8 @@ check(css.includes("prefers-reduced-motion"), "CSS: reduced-motion parity");
 check(css.includes("min-height: 50px") && css.includes("min-height: 52px"), "CSS: touch/input targets exceed 44px");
 check(css.includes(".header-contact a { display: inline-flex; min-width: 44px; min-height: 44px") && css.includes(".mobile-nav summary"), "CSS: mobile contact and menu targets meet 44px preference");
 check(!css.includes("#estimate, #reviews-title, #faq-title, #bait-station-title { scroll-margin-top"), "CSS: anchor offset is applied once through scroll padding");
+check(css.includes("--sticky-offset: 164px;") && css.includes(".rodent-page { --sticky-offset: 184px; }") && css.includes(":root { --sticky-offset: 152px; }") && css.includes(".rodent-page { --sticky-offset: 152px; }") && css.includes(":root { --sticky-offset: 134px; }") && css.includes(".rodent-page { --sticky-offset: 134px; }"), "CSS: page-specific and responsive sticky offsets clear the measured header heights");
+check(css.includes(".contact-copy a:not(.button) { color: var(--cream); }") && css.includes(".contact-copy .button--cream { color: var(--navy); }"), "CSS: cream CTA retains navy text inside contact copy");
 check(css.includes("color: var(--orange-dark); text-decoration: none; text-transform: uppercase"), "CSS: small cream-canvas navigation uses the darker orange token");
 
 const headers = readFileSync(join(root, "_headers"), "utf8");
