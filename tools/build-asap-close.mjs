@@ -5,6 +5,7 @@ const root = process.cwd();
 const phone = "770-691-3636";
 const tel = "+17706913636";
 const reviewUrl = "https://www.google.com/maps/place/ASAP+Wildlife+Removal/@33.734354,-84.242248,10z/data=!4m8!3m7!1s0x88f51d199bdde957:0x677a4db004e50c72!8m2!3d33.734354!4d-84.242248!9m1!1b1!16s%2Fg%2F11j3147h44?hl=en&entry=ttu";
+const homepageReviewUrl = "https://www.google.com/maps?cid=7456357551456980082";
 
 const articles = {
   ratTunneling: ["Why rats tunnel — and what that can tell you", "Held for review", "https://medium.com/@ASAPwildlife/understanding-the-reasons-behind-rat-tunneling-11c3bf8a4e03"],
@@ -23,7 +24,7 @@ const gap = (title) => [title, "Editorial gap", ""];
 const animals = [
   {
     kind: "animal", slug: "rodent-removal", key: "rodent",
-    name: "Rodent Removal", title: "Rodent Removal | Mice, Rats & Squirrels | ASAP", outlined: "RODENT REMOVAL", second: "",
+    name: "Rodent Removal", title: "Rodent Removal in Metro Atlanta", outlined: "RODENT REMOVAL", second: "",
     eyebrow: "Mice · Rats · Squirrels · Flying Squirrels · Chipmunks",
     description: "Rodent removal for Metro Atlanta homes, with inspection, control, entry-point repair, cleanup options, and a plan shaped to the animal and property.",
     logo: "/assets/images/page-logos/rodent.png", art: "/assets/images/animals/hero-v2/rodent-hero.webp", artMobile: "/assets/images/animals/hero-v2/rodent-hero-mobile.webp", artMedium: "/assets/images/animals/hero-v2/rodent-hero-medium.webp", artAlt: "ASAP illustrated rat facing the rodent removal headline", artWidth: 1100, artHeight: 794,
@@ -247,7 +248,7 @@ function baseSchema(page, faqs) {
       {
         "@type": "Service",
         "@id": `https://removeasap.com/${page.slug}/#service`,
-        name: page.title,
+        name: page.key === "rodent" ? page.name : page.title,
         serviceType: page.name,
         provider: { "@id": "https://removeasap.com/#business" },
         areaServed: page.city ? `${page.city}, Georgia` : "Metro Atlanta, Georgia",
@@ -259,7 +260,7 @@ function baseSchema(page, faqs) {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: "https://removeasap.com/" },
           { "@type": "ListItem", position: 2, name: page.city ? "Service Areas" : "Services", item: page.city ? "https://removeasap.com/services/" : "https://removeasap.com/wildlife/" },
-          { "@type": "ListItem", position: 3, name: page.title, item: `https://removeasap.com/${page.slug}/` }
+          { "@type": "ListItem", position: 3, name: page.key === "rodent" ? page.name : page.title, item: `https://removeasap.com/${page.slug}/` }
         ]
       },
       {
@@ -368,18 +369,20 @@ function intentRouter(page) {
 }
 
 function reviews(page) {
+  const destination = page?.key === "rodent" ? homepageReviewUrl : reviewUrl;
   const cards = [
     ["The service was excellent! Arrived on time. Gave me a detailed overview of the problem and rodents that invaded the house. Gave me 3 different price options for repair and installed the first phase immediately.", "Mark Carroll", "/assets/images/reviews/mark.webp"],
     ["If you have ANY concerns with unwanted animals in/around your home, do yourself a favor and call Chaz! He has taken care of two separate issues at my house and both jobs were completed quickly & thoroughly. Chaz is very professional and is wonderful to work with!", "Kelsey Monaghan", "/assets/images/reviews/kelsey.webp"],
     ["ASAP is an excellent service provider with a team of highly skilled and professional technicians. I’d highly recommend.", "Fred Perry", "/assets/images/reviews/fred.webp"]
   ];
   return `<section class="section texture" aria-labelledby="reviews-title"><div class="container">${heading("What homeowners say", "Real review excerpts", "reviews-title")}
-  <div class="three-col">${cards.map(([quote, name, image]) => `<article class="review-card"><a href="${reviewUrl}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-hidden="true">★★★★★</div><p>“${esc(quote)}”</p>${page?.key === "rodent" ? `<!-- @r020:F2 proof: exact homepage reviewer portrait connects the attributed excerpt to its approved proof instance --><img class="review-avatar" src="${image}" width="78" height="80" alt="${esc(name)}">` : ""}<cite>${esc(name)}</cite></a></article>`).join("")}</div>
-  <div class="actions"><a class="button" href="${reviewUrl}" target="_blank" rel="noopener noreferrer">Read Google reviews</a></div></div></section>`;
+  <div class="three-col">${cards.map(([quote, name, image]) => `<article class="review-card"><a href="${destination}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-hidden="true">★★★★★</div><p>“${esc(quote)}”</p>${page?.key === "rodent" ? `<!-- @r020:F2 proof: exact homepage reviewer portrait connects the attributed excerpt to its approved proof instance --><img class="review-avatar" src="${image}" width="78" height="80" alt="${esc(name)}">` : ""}<cite>${esc(name)}</cite></a></article>`).join("")}</div>
+  <div class="actions"><a class="button" href="${destination}" target="_blank" rel="noopener noreferrer">Read Google reviews</a></div></div></section>`;
 }
 
 function faqs(items, title) {
-  return `<section class="section texture" aria-labelledby="faq-title"><div class="container"><div class="section-heading"><p class="kicker">${esc(title)} FAQ</p><h2 id="faq-title">Common Questions</h2><div class="heading-rule" aria-hidden="true"></div></div><div class="faq-list">${items.map(([question, answer]) => `<details><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join("")}</div></div></section>`;
+  const kicker = title === "Rodent Removal in Metro Atlanta" ? "Helpful answers about rodent removal" : `${title} FAQ`;
+  return `<section class="section texture" aria-labelledby="faq-title"><div class="container"><div class="section-heading"><p class="kicker">${esc(kicker)}</p><h2 id="faq-title">Common Questions</h2><div class="heading-rule" aria-hidden="true"></div></div><div class="faq-list">${items.map(([question, answer]) => `<details><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join("")}</div></div></section>`;
 }
 
 function form(page) {

@@ -80,7 +80,9 @@
       window.__ASAP_LAST_LEAD_FIXTURE = detail;
       window.dispatchEvent(new CustomEvent("asap:lead-intent", { detail }));
       if (status) {
-        status.textContent = "Review fixture passed. No email, Monday.com item, Make.com run, or customer message was created.";
+        status.textContent = form.dataset.sourcePage === "/rodent-removal/"
+          ? "This form is not connected yet, so no request was sent."
+          : "Review fixture passed. No email, Monday.com item, Make.com run, or customer message was created.";
         status.focus();
       }
       form.dataset.fixtureResult = "passed-no-send";

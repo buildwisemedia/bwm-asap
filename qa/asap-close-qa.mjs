@@ -84,11 +84,21 @@ check(rat.includes("Recurring bait stations") && rat.includes("Do mice and rats 
 const rodent = readFileSync(join(root, "rodent-removal/index.html"), "utf8");
 const rodentSubmitButtons = [...rodent.matchAll(/<button\b[^>]*type="submit"[^>]*>([\s\S]*?)<\/button>/gi)].map((match) => plainText(match[1]));
 const rodentVisibleText = plainText(rodent.replace(/<script\b[\s\S]*?<\/script>/gi, "").replace(/<style\b[\s\S]*?<\/style>/gi, ""));
+const rodentSchema = JSON.parse(rodent.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1] || "{}");
+const rodentServiceSchema = rodentSchema["@graph"]?.find((item) => item["@type"] === "Service");
+const rodentBreadcrumbSchema = rodentSchema["@graph"]?.find((item) => item["@type"] === "BreadcrumbList");
+const homepageReviewUrl = "https://www.google.com/maps?cid=7456357551456980082";
 check(rodentSubmitButtons.length === 1 && rodentSubmitButtons[0] === "SUBMIT", "Rodent: submit button text is exactly SUBMIT", rodentSubmitButtons.join(", "));
+check(rodent.includes("<title>Rodent Removal in Metro Atlanta | ASAP Pest &amp; Wildlife</title>"), "Rodent: title uses the brand once in a natural SEO title");
+check(rodentServiceSchema?.name === "Rodent Removal" && rodentBreadcrumbSchema?.itemListElement?.at(-1)?.name === "Rodent Removal", "Rodent: Service and Breadcrumb schema use clean human names");
+check(rodent.includes('<p class="kicker">Helpful answers about rodent removal</p>') && !rodent.includes("Rodent Removal | Mice, Rats &amp; Squirrels | ASAP FAQ"), "Rodent: visible FAQ kicker is natural client copy");
+check(count(rodent, new RegExp(homepageReviewUrl.replace(/[?]/g, "\\?"), "g")) === 4 && !rodent.includes("/maps/place/"), "Rodent: every review link reuses the homepage Google review destination");
 check(![/local\/review/i, /private review/i, /review fixture/i, /held for review/i, /editorial gap/i, /internal scaffolding/i].some((pattern) => pattern.test(rodentVisibleText)), "Rodent: no client-visible internal or review scaffolding");
 check(!rodent.includes('class="flashlight"') && !/flashlight placeholder/i.test(rodentVisibleText), "Rodent: no flashlight placeholder");
 check(!/droppings[- ]photo placeholder/i.test(rodentVisibleText) && !/data-placeholder=["']droppings-photo["']/i.test(rodent), "Rodent: no droppings-photo placeholder");
 check(rodent.includes('data-integration-state="fixture-only"') && rodent.includes('<meta name="robots" content="noindex,nofollow,noarchive">'), "Rodent: fixture-only machine behavior and noindex are preserved");
+const closeJs = readFileSync(join(root, "assets/js/asap-close.js"), "utf8");
+check(closeJs.includes('form.dataset.sourcePage === "/rodent-removal/"') && closeJs.includes("This form is not connected yet, so no request was sent."), "Rodent: local submission message is client-safe and explicitly no-send");
 const rodentIntentTargets = [
   ["rat-mouse", "/wildlife/mouse-rat/"],
   ["squirrel", "/wildlife/gray-squirrel/"],
