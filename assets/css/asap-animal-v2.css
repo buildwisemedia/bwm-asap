@@ -13,9 +13,10 @@
 html[data-font-source="fallback"] { --display-font: "Arial Narrow", Arial, sans-serif; }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: var(--cream); }
+html { scroll-behavior: smooth; scroll-padding-top: 180px; background: var(--cream); }
 body {
   margin: 0;
+  overflow-x: clip;
   color: var(--body);
   background-color: var(--cream);
   /* @r020:F1 emotion: the original ASAP cream paper texture preserves the familiar, calm visual identity clients approved */
@@ -38,8 +39,12 @@ button, input, select, textarea { font: inherit; }
 .skip-link:focus { transform: translateY(0); }
 
 .site-header {
-  position: relative; z-index: 50;
-  background: transparent;
+  position: sticky; z-index: 50; top: 0;
+  background-color: var(--cream);
+  /* @r020:F1 emotion: the approved floral texture keeps the sticky navigation continuous with the calm page canvas */
+  background-image: url("/assets/images/backgrounds/home-mission-bg.webp");
+  background-repeat: repeat;
+  box-shadow: 0 1px 0 rgba(183, 117, 55, .2);
 }
 .header-inner {
   width: min(var(--max), calc(100% - 2rem)); margin: auto; min-height: 164px;
@@ -49,6 +54,7 @@ button, input, select, textarea { font: inherit; }
 }
 .brand { grid-area: brand; align-self: start; }
 .brand img { width: 190px; height: auto; }
+.rodent-page .brand img { width: 220px; }
 .header-contact {
   grid-area: contact; justify-self: end; min-width: min(100%, 480px); padding: .72rem 1.4rem;
   border-radius: 4px 18px; background: var(--navy); color: var(--cream); text-align: center;
@@ -126,8 +132,9 @@ h3 { font-size: 1.3rem; line-height: 1.12; letter-spacing: .035em; }
 .container { width: min(var(--max), calc(100% - 2rem)); margin: auto; }
 .narrow { max-width: 760px; }
 .section-heading { margin-bottom: 2.5rem; }
-.section-heading h2 { max-width: 920px; }
-.heading-rule { width: min(330px, 55vw); height: 8px; margin-top: 1.15rem; background: var(--orange); position: relative; }
+.section-heading { text-align: center; }
+.section-heading h2 { max-width: 920px; margin-inline: auto; }
+.heading-rule { width: min(330px, 55vw); height: 8px; margin: 1.15rem auto 0; background: var(--orange); position: relative; }
 .heading-rule::after { content: ""; position: absolute; right: -16px; top: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 16px solid var(--orange); }
 .lead { font-size: 1.2rem; line-height: 1.65; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
@@ -180,6 +187,7 @@ h3 { font-size: 1.3rem; line-height: 1.12; letter-spacing: .035em; }
 .source-note a { color: var(--navy); font-weight: 700; text-underline-offset: 3px; }
 
 .article-card { display: flex; min-height: 260px; flex-direction: column; align-items: flex-start; }
+.article-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
 .article-card .status { margin-bottom: 1rem; padding: .25rem .65rem; border: 1px solid var(--orange); border-radius: 999px; color: var(--orange-dark); font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
 .article-card a { margin-top: auto; color: var(--navy); font-weight: 700; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .article-card--gap { background: transparent; border-style: dashed; }
@@ -190,6 +198,9 @@ h3 { font-size: 1.3rem; line-height: 1.12; letter-spacing: .035em; }
 .review-card a { display: block; text-decoration: none; }
 .review-card a:hover p, .review-card a:focus-visible p { text-decoration: underline; text-decoration-color: var(--orange); }
 .review-card cite { font-style: normal; font-weight: 800; }
+.review-avatar { width: 78px; height: 80px; margin: 1rem 0 .45rem; border-radius: 50%; object-fit: cover; }
+
+#estimate, #reviews-title, #faq-title, #bait-station-title { scroll-margin-top: 180px; }
 
 .faq-list { display: grid; gap: .8rem; }
 .faq-list details { background: transparent; border-bottom: 2px solid var(--orange); }
@@ -247,16 +258,18 @@ h3 { font-size: 1.3rem; line-height: 1.12; letter-spacing: .035em; }
   .hero-art img { max-height: 330px; }
   .proof-list { grid-template-columns: 1fr 1fr; }
   .process-grid { grid-template-columns: 1fr 1fr; }
-  .feature-grid, .animal-grid, .pest-grid, .three-col { grid-template-columns: 1fr 1fr; }
+  .feature-grid, .animal-grid, .pest-grid, .three-col, .article-grid { grid-template-columns: 1fr 1fr; }
   .intent-grid { grid-template-columns: 1fr 1fr; }
   .flashlight { grid-template-columns: 1fr; }
   .flashlight-icon { display: none; }
 }
 @media (max-width: 640px) {
+  html { scroll-padding-top: 112px; }
   body { font-size: 17px; }
-  .header-inner { width: min(100% - 1rem, var(--max)); grid-template-columns: 108px 1fr; gap: .5rem; min-height: 96px; }
-  .brand img { width: 104px; }
-  .header-contact { min-width: 0; padding: .62rem .75rem; font-size: .72rem; line-height: 1.45; letter-spacing: .045em; }
+  .header-inner { width: min(100% - 1rem, var(--max)); grid-template-columns: 96px minmax(0, 1fr); gap: .5rem; min-height: 96px; }
+  .brand img, .rodent-page .brand img { width: 92px; }
+  .header-contact { width: 100%; min-width: 0; padding: .62rem .55rem; font-size: .66rem; line-height: 1.45; letter-spacing: .025em; overflow-wrap: anywhere; }
+  #estimate, #reviews-title, #faq-title, #bait-station-title { scroll-margin-top: 112px; }
   .hero-inner { width: min(100% - 1.25rem, var(--max)); gap: 1.5rem; padding: 3rem 0; }
   h1 { font-size: clamp(2.75rem, 14vw, 4.7rem); }
   h2 { font-size: clamp(2.25rem, 12vw, 3.6rem); }
@@ -265,7 +278,7 @@ h3 { font-size: 1.3rem; line-height: 1.12; letter-spacing: .035em; }
   .button { width: 100%; padding-left: 1rem; padding-right: 1rem; }
   .hero-art { min-height: 260px; }
   .hero-art img { max-height: 270px; }
-  .proof-list, .process-grid, .feature-grid, .animal-grid, .pest-grid, .three-col, .intent-grid, .lead-form { grid-template-columns: 1fr; }
+  .proof-list, .process-grid, .feature-grid, .animal-grid, .pest-grid, .three-col, .article-grid, .intent-grid, .lead-form { grid-template-columns: 1fr; }
   .intent-card { min-height: auto; }
   .intent-card a,
   .source-note a,
@@ -293,4 +306,3 @@ h3 { font-size: 1.3rem; line-height: 1.12; letter-spacing: .035em; }
   .article-card { min-height: auto; }
   .field--full, .consent, .form-status, .lead-form .button { grid-column: auto; }
 }
-

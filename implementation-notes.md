@@ -189,3 +189,46 @@ not change the user's existing checkout.
   not authorize those changes.
 - No merge, tag, deploy, DNS/sharing change, production mutation, email, Slack,
   or client communication occurred.
+# ASAP rating-page rollout — 2026-08-25
+
+- Reused and revalidated the existing client-specific preflight v4 bindings for `website:/rate review engine`; the direction remains the approved ASAP visual system.
+- Promoted the previously reviewed request-bound front-end hardening onto current `origin/main` in an isolated rollout branch. This removes browser authority over customer identity and adds privacy-safe GA4 events while retaining the public Google option.
+- The page remains `noindex,nofollow`; `/review` remains reserved; no customer send or production deploy occurred during this step.
+- The exact reviewed page is commit
+  `dcb906012698ca467d0478b68687b455f0d6de46`, path `rate/index.html`, SHA-256
+  `e612b127a7f807c80ff0df8509b8a250832eec3da452079aaecde7b3239a562f`.
+  The backend release receipt binds issued requests to those bytes.
+- Final site checks remain 11/11 plus `scripts/production-gate.sh qa-gate` PASS.
+  The page is not production yet; deployment waits on the protected review
+   closeout and coordinated backend/report release.
+
+## 2026-08-27 — Rodent Go4 private-review build
+
+- Merged current `origin/main` into the PR 23 review lineage without rebasing. The rating-page and CAPI-probe security work from main is preserved unchanged; the only conflicts were the implementation journal and rating-page phone markup, resolved in favor of current main behavior.
+- Added `/rodent-removal/` as the private-review primary with `noindex,nofollow,noarchive`, a clean self-canonical, matching Service/FAQ/Breadcrumb schema, and fixture-only form behavior. Production redirects, sitemap membership, indexing, hosting, Monday.com, and Make remain unchanged.
+- Kept the current production `/peace-of-mind-from/rodents/` entry in `sitemap.xml`. Authorized launch must atomically add a 301 from the old indexed URL to `/rodent-removal/`, replace the sitemap URL, update canonicals/schema/internal links and the SEO intent manifest, then verify the real production URL before index state changes.
+- Implemented the accepted Rodent identity/template direction: exact Rodent logo in header/contact, outlined uppercase H1, orange species line, floral cream content canvas, centered display headings, navy limited to the call/contact treatment, linked species routing, two existing Rat & Mouse article links, confirmed-facts-only bait-station language, exact homepage review excerpts/portraits, and sticky-header anchor clearance.
+- Omitted the hero checklist strip, internal review labels, droppings row, and rejected CSS flashlight. No replacement flashlight section is rendered until the sharpened client asset arrives with `WARRANTY` as one word.
+- R020 annotations cover the floral canvas/header, page logo, hero animal, three reviewer portraits, and contact logo.
+
+### Exact verification
+
+- Preflight v4: PASS before edits and again after the main merge (four hash-bound client bindings).
+- Rodent deterministic QA: 466/466 PASS.
+- Production repo QA gate: PASS.
+- Current-main regression tests: attribution 3/3 PASS; rating contract 11/11 PASS; CAPI auth probe 8/8 PASS.
+- Lead-flow audit: 43 HTML pages; 12 fixture-only review pages; 171 phone links with 0 bad numbers; 646 internal links with 0 broken static links; 0 unsupported forms; 0 missing handlers/attribution on live form pages.
+- Structured data: LocalBusiness, Service, FAQPage, and BreadcrumbList parse from the generated JSON-LD; clean canonical and broad Rodent service identity match.
+- Render inspection: Chrome at 1440×900 and 390×844; exact viewport widths, 0 horizontal overflow, 0 console errors, every image loaded, responsive hero selected, and sticky-header anchor clearance PASS (desktop target top 359.5px > header bottom 183.25px; mobile 224.06px > 96px).
+- Lighthouse mobile: accessibility 1.00; SEO 0.69 solely because the intentional `noindex` audit fails crawlability.
+- Design gate: BLOCKED as intended for client-send state because the configured Fable design receipt is hash-bound to the superseded Rodent artifact. A fresh opposite-family artifact review is required before sending a review URL; no premium/client approval is claimed.
+- Canonical pre-ship grep gate: repository-wide FAIL on pre-existing Webflow/root-site banned colors, internal lead-flow vendor names, repeated legacy page images, and legacy perceptual duplicates. The Rodent deterministic scope and production QA gate are green; no exclusion or ratcheting workaround was added.
+
+### Client-input launch blockers
+
+- Four labeled droppings photos with usable size cues.
+- Final sharpened flashlight/process graphic with `WARRANTY` as one word.
+- Public-use confirmation for the exact page logo and review portraits/direct-review destinations.
+- Approved bait-station visit frequency and any safety, warranty, or service wording beyond the confirmed facts currently shown.
+- Decision on Medium migration versus external linking, plus final editorial approval of the two linked articles.
+- Client approval of the Rodent template, followed by separate integration, test-lead, publish, redirect, sitemap, canonical, schema, internal-link, and index authority.

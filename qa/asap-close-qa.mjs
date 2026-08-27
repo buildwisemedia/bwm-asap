@@ -4,12 +4,12 @@ import { createHash } from "node:crypto";
 
 const root = process.cwd();
 const routes = [
-  "peace-of-mind-from/rodents", "wildlife/mouse-rat", "wildlife/gray-squirrel", "wildlife/raccoon", "wildlife/bats",
+  "rodent-removal", "wildlife/mouse-rat", "wildlife/gray-squirrel", "wildlife/raccoon", "wildlife/bats",
   "wildlife-removal-canton", "wildlife-removal-woodstock", "wildlife-removal-acworth", "wildlife-removal-kennesaw", "wildlife-removal-cartersville",
   "pest-control-services"
 ];
 const alignedAnimalRoutes = new Set([
-  "peace-of-mind-from/rodents", "wildlife/mouse-rat", "wildlife/gray-squirrel", "wildlife/raccoon", "wildlife/bats"
+  "rodent-removal", "wildlife/mouse-rat", "wildlife/gray-squirrel", "wildlife/raccoon", "wildlife/bats"
 ]);
 const cities = ["Canton", "Woodstock", "Acworth", "Kennesaw", "Cartersville"];
 const badTokens = ["#0c2340", "#a6411d", "#dc5b2a", "#8d3718", "#ffb38f", "770-450-1744", "7704501744"];
@@ -52,7 +52,7 @@ for (const route of routes) {
   for (const field of ["lead_id", "source_page", "utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"]) {
     check(html.includes(`name="${field}"`), `${route}: attribution field ${field}`);
   }
-  check((html.includes("Local/review fixture") && html.includes("sends nothing")) || html.includes("no external delivery"), `${route}: no-send state disclosed`);
+  check(html.includes('data-integration-state="fixture-only"'), `${route}: no-send state is machine-enforced without visible review scaffolding`);
   check(html.includes("skip-link") && html.includes('aria-live="polite"'), `${route}: skip link and live form state`);
   if (html.includes('aria-labelledby="reviews-title"')) {
     check(html.includes('id="reviews-title"'), `${route}: reviews section has an accessible name`);
@@ -81,7 +81,7 @@ check(bat.includes("guano") && bat.includes("DSV-labeled") && bat.includes("insu
 const rat = readFileSync(join(root, "wildlife/mouse-rat/index.html"), "utf8");
 check(rat.includes("Recurring bait stations") && rat.includes("Do mice and rats cause any diseases?"), "Rat/mouse: recurring stations and disease FAQ");
 
-const rodent = readFileSync(join(root, "peace-of-mind-from/rodents/index.html"), "utf8");
+const rodent = readFileSync(join(root, "rodent-removal/index.html"), "utf8");
 const rodentIntentTargets = [
   ["rat-mouse", "/wildlife/mouse-rat/"],
   ["squirrel", "/wildlife/gray-squirrel/"],
@@ -106,7 +106,7 @@ check(home.includes("770-691-3636") && !home.includes("770-450-1744") && !home.i
 
 const articleInventory = JSON.parse(readFileSync(join(root, "content/asap-article-inventory.json"), "utf8"));
 check(articleInventory.pages.length === 5, "Article inventory: five core pages");
-check(articleInventory.pages.every((page) => page.slots.length === 3), "Article inventory: exactly three slots per core page");
+check(articleInventory.pages.every((page) => page.service === "Rodent Removal" ? page.slots.length === 2 : page.slots.length === 3), "Article inventory: Rodent has two approved links and sibling pages retain three slots");
 check(articleInventory.pages.some((page) => page.slots.some((slot) => slot.status === "Editorial gap")), "Article inventory: gaps explicit");
 const heldArticleSlots = articleInventory.pages.flatMap((page) => page.slots).filter((slot) => slot.url);
 check(new Set(heldArticleSlots.map((slot) => slot.url)).size === 9, "Article inventory: nine distinct held Medium sources remain traceable internally");
@@ -114,7 +114,7 @@ check(heldArticleSlots.every((slot) => slot.status === "Held for review"), "Arti
 
 const lineup = JSON.parse(readFileSync(join(root, "content/design/animal-lineup-manifest.json"), "utf8"));
 const namedPaths = [
-  "peace-of-mind-from/rodents/index.html",
+  "rodent-removal/index.html",
   "wildlife/mouse-rat/index.html",
   "wildlife/gray-squirrel/index.html",
   "wildlife/raccoon/index.html",
@@ -141,8 +141,8 @@ for (const page of lineup.pages) {
   check(html.includes(`data-source-page="${page.url_path}"`), `Animal lineup: ${page.path} source attribution is page-specific`);
   check(html.includes('data-integration-state="fixture-only"') && html.includes('name="source_page"'), `Animal lineup: ${page.path} stays fixture-only with source field`);
   check(!html.includes("AggregateRating") && !html.includes("ratingValue"), `Animal lineup: ${page.path} does not publish an aggregate-rating claim`);
-  check(count(html, /class="article-card(?:\s|\")/g) === 3, `Animal lineup: ${page.path} has exactly three article slots`);
-  check(!html.includes("medium.com/"), `Animal lineup: ${page.path} publishes no held Medium link`);
+  check(count(html, /class="article-card(?:\s|\")/g) === (page.role === "umbrella-router" ? 2 : 3), `Animal lineup: ${page.path} has the authorized article count`);
+  check(page.role === "umbrella-router" ? count(html, /medium\.com\//g) === 2 : !html.includes("medium.com/"), `Animal lineup: ${page.path} publishes only authorized article links`);
 }
 
 const ratLineup = lineup.pages.find((page) => page.url_path === "/wildlife/mouse-rat/");
@@ -155,8 +155,8 @@ check(bat.includes("April 1 through July 31") && bat.includes("does not mean eve
 check(rodentIntentTargets.every(([target, href]) => rodent.includes(`data-intent-target="${target}"`) && rodent.includes(`href="${href}"`)), "Animal lineup: umbrella routes to all four protected owners");
 check(lineup.pages.every((page) => {
   const inventoryPage = articleInventory.pages.find((item) => item.page === page.url_path || item.page_path === page.url_path || item.path === page.url_path || item.url === page.url_path);
-  return inventoryPage ? inventoryPage.slots.length === 3 : false;
-}), "Animal lineup: every named page has a three-slot inventory record");
+  return inventoryPage ? inventoryPage.slots.length === (page.role === "umbrella-router" ? 2 : 3) : false;
+}), "Animal lineup: every named page has its authorized inventory record");
 check(lineup.shared_contract?.missing_articles_must_remain_explicit_gaps === true && lineup.human_and_release_gates?.some((gate) => gate.includes("not published articles")), "Animal lineup: editorial gaps stay explicit and unpublished");
 
 const rightsLedger = JSON.parse(readFileSync(join(root, "content/design/animal-asset-rights-ledger.json"), "utf8"));
@@ -164,7 +164,7 @@ const rightsAssets = [...rightsLedger.client_supplied_page_logos, ...rightsLedge
 check(rightsLedger.schema_version === "asap-animal-asset-rights/1.0.0", "Asset rights: schema version is explicit");
 check(rightsLedger.phase === 3 && rightsLedger.local_review_clear === true && rightsLedger.production_clear === false, "Asset rights: local-review clearance stays distinct from production clearance");
 check(rightsLedger.client_supplied_page_logos.length === 5, "Asset rights: five client-supplied page logos are bound");
-check(rightsLedger.existing_client_site_assets.length === 21, "Asset rights: original, responsive, and optimized ASAP visual assets, including favicon, are bound");
+check(rightsLedger.existing_client_site_assets.length === 24, "Asset rights: original, responsive, optimized, and permitted homepage review assets are bound");
 for (const asset of rightsAssets) {
   const assetBuffer = readFileSync(join(root, asset.path));
   check(sha256(assetBuffer) === asset.sha256, `Asset rights: ${asset.path} SHA-256 matches ledger`);
@@ -189,16 +189,18 @@ check(rightsLedger.tagline_color_reconciliation?.includes("CreamTagline") && rig
 check(rightsLedger.open_gates?.length === 4, "Asset rights: four remaining human/release gates are explicit");
 
 const sitemap = readFileSync(join(root, "sitemap.xml"), "utf8");
-for (const route of routes) check(sitemap.includes(`https://removeasap.com/${route}/`), `${route}: included in sitemap`);
+for (const route of routes.filter((route) => route !== "rodent-removal")) check(sitemap.includes(`https://removeasap.com/${route}/`), `${route}: included in sitemap`);
+check(!sitemap.includes("https://removeasap.com/rodent-removal/"), "Rodent: clean review primary is not prematurely added to production sitemap");
+check(sitemap.includes("https://removeasap.com/peace-of-mind-from/rodents/"), "Rodent: current production URL remains in sitemap until authorized launch migration");
 const intent = JSON.parse(readFileSync(join(root, "seo-intent-ownership.json"), "utf8"));
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-check(intent.pages.length === sitemapUrls.length, "SEO intent: every sitemap URL has an owner", `${intent.pages.length}/${sitemapUrls.length}`);
+check(intent.pages.length === sitemapUrls.length, "SEO intent: private review owner replaces current production owner one-for-one", `${intent.pages.length}/${sitemapUrls.length}`);
 check(new Set(intent.pages.map((page) => page.owner_phrase)).size === intent.pages.length, "SEO intent: owner phrases are unique");
 for (const route of routes) {
   const url = `https://removeasap.com/${route}/`;
   check(intent.pages.some((page) => page.url === url && page.owner_type === "curated-exact"), `${route}: curated intent owner`);
 }
-const rodentDecision = intent.pages.find((page) => page.url === "https://removeasap.com/peace-of-mind-from/rodents/");
+const rodentDecision = intent.pages.find((page) => page.url === "https://removeasap.com/rodent-removal/");
 check(rodentDecision?.intent_role === "umbrella-router", "SEO intent: rodent page is an umbrella router");
 check(rodentDecision?.routes_to_distinct_owners?.length === 4, "SEO intent: rodent router names four distinct owners");
 check(rodentDecision?.protected_from_title_h1?.length === 4, "SEO intent: four specific phrases protected from rodent title/H1");

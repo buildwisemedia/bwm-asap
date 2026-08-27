@@ -1,10 +1,10 @@
 {
   "schema_version": "asap-rodent-intent-evidence/1.0.0",
-  "verified_at": "2026-08-17",
+  "verified_at": "2026-08-27",
   "state": "local-review",
   "page_job": "Own broad Metro Atlanta rodent-removal intent and route species or symptom-specific visitors to the correct service owner without duplicating those owners in the title or H1.",
   "intent_owners": [
-    {"path": "/peace-of-mind-from/rodents/", "role": "umbrella-router", "phrase": "rodent removal Metro ATL"},
+    {"path": "/rodent-removal/", "role": "umbrella-router-private-review-primary", "phrase": "rodent removal Metro ATL"},
     {"path": "/wildlife/mouse-rat/", "role": "specific-service-owner", "phrase": "rat and mouse removal Metro ATL"},
     {"path": "/wildlife/gray-squirrel/", "role": "specific-service-owner", "phrase": "squirrel removal Metro ATL"},
     {"path": "/wildlife/raccoon/", "role": "specific-service-owner", "phrase": "raccoon removal Metro ATL"},
@@ -38,6 +38,6 @@
     "Symptoms are routing clues, not a species diagnosis.",
     "Raccoon and bat are explicitly labeled as non-rodent lookalikes.",
     "No ranking, lead, response-time, warranty, or health-outcome claim is made.",
-    "No page, form, provider, or production state is changed by this evidence packet."
+    "The clean review URL is not added to the production sitemap and does not change production redirects or index state."
   ]
 }

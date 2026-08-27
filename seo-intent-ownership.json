@@ -326,8 +326,8 @@
       "state": "legacy-inventory"
     },
     {
-      "url": "https://removeasap.com/peace-of-mind-from/rodents/",
-      "local_file": "peace-of-mind-from/rodents/index.html",
+      "url": "https://removeasap.com/rodent-removal/",
+      "local_file": "rodent-removal/index.html",
       "owner_phrase": "rodent removal Metro ATL",
       "owner_type": "curated-exact",
       "intent_role": "umbrella-router",
@@ -343,9 +343,9 @@
         "raccoon removal Metro ATL",
         "bat removal Metro ATL"
       ],
-      "canonical_required": "https://removeasap.com/peace-of-mind-from/rodents/",
+      "canonical_required": "https://removeasap.com/rodent-removal/",
       "h1_required": 1,
-      "state": "active-local-review-scope"
+      "state": "private-review-primary-not-in-production-sitemap"
     },
     {
       "url": "https://removeasap.com/peace-of-mind-from/bees-wasps-and-hornets/",

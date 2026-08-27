@@ -4,23 +4,18 @@
   "requirement": "Three related article slots per core animal page; gaps are explicit and not fabricated as published.",
   "pages": [
     {
-      "page": "/peace-of-mind-from/rodents/",
+      "page": "/rodent-removal/",
       "service": "Rodent Removal",
       "slots": [
+        {
+          "title": "Why rats tunnel — and what that can tell you",
+          "status": "Held for review",
+          "url": "https://medium.com/@ASAPwildlife/understanding-the-reasons-behind-rat-tunneling-11c3bf8a4e03"
+        },
         {
           "title": "Why rodents move inside when it gets cold",
           "status": "Held for review",
           "url": "https://medium.com/@ASAPwildlife/rodent-winter-roommates-why-rodents-move-in-when-its-cold-d51cb888c843"
-        },
-        {
-          "title": "13 traits rats and squirrels share",
-          "status": "Held for review",
-          "url": "https://medium.com/@ASAPwildlife/rats-sqrls-are-bffs-13-crazy-common-traits-ef190a50c3c6"
-        },
-        {
-          "title": "How to compare trapping, exclusion, and recurring monitoring",
-          "status": "Editorial gap",
-          "url": null
         }
       ]
     },

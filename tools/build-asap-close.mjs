@@ -22,8 +22,8 @@ const gap = (title) => [title, "Editorial gap", ""];
 
 const animals = [
   {
-    kind: "animal", slug: "peace-of-mind-from/rodents", key: "rodent",
-    name: "Rodent Removal", title: "Rodent Removal in Metro ATL", outlined: "Rodent", second: "Removal",
+    kind: "animal", slug: "rodent-removal", key: "rodent",
+    name: "Rodent Removal", title: "Rodent Removal | Mice, Rats & Squirrels | ASAP", outlined: "RODENT REMOVAL", second: "",
     eyebrow: "Mice · Rats · Squirrels · Flying Squirrels · Chipmunks",
     description: "Rodent removal for Metro Atlanta homes, with inspection, control, entry-point repair, cleanup options, and a plan shaped to the animal and property.",
     logo: "/assets/images/page-logos/rodent.png", art: "/assets/images/animals/hero-v2/rodent-hero.webp", artMobile: "/assets/images/animals/hero-v2/rodent-hero-mobile.webp", artMedium: "/assets/images/animals/hero-v2/rodent-hero-medium.webp", artAlt: "ASAP illustrated rat facing the rodent removal headline", artWidth: 1100, artHeight: 794,
@@ -31,9 +31,9 @@ const animals = [
     answerTitle: "What does a complete rodent plan include?",
     answer: "A useful rodent plan identifies the species, traces activity and access points, selects the right control method, and addresses openings that can allow the problem to return. Cleanup, monitoring, and warranty options depend on the inspection and written scope.",
     facts: [
-      ["Umbrella intent", "This page helps visitors compare mice, rats, squirrels, flying squirrels, and chipmunks before choosing a specific service page."],
-      ["Property-specific", "The right plan depends on the animal, the location of activity, the entry route, and the condition of the structure."],
-      ["Recurring monitoring", "Exterior bait-station programs may be considered for ongoing mouse and rat pressure after inspection; they do not replace structural repair where repair is needed."]
+      ["Not sure which service fits?", "Start with the clues you have. Wall or lower-level activity often belongs on our Rat & Mouse page; roofline or attic activity may belong on our Squirrel page."],
+      ["Every home is different", "The animal, location of activity, entry route, and condition of the structure shape the next step."],
+      ["Bait stations", "Exterior bait stations are one control option for mice and rats. An inspection determines whether they fit the property; structural openings are evaluated separately."]
     ],
     intentRoutes: [
       {
@@ -77,14 +77,19 @@ const animals = [
       ["Entry-point repair", "Document vulnerable openings and present repair options that match the inspection findings."],
       ["Cleanup and monitoring", "Separate removal, sanitation, repair, and recurring monitoring so each recommendation stays clear."]
     ],
+    baitStation: [
+      ["One available tool", "Exterior bait stations can be used for mouse and rat control when the inspection supports that approach."],
+      ["Separate from repairs", "Bait stations do not close entry points. Openings and repair needs are evaluated as a separate part of the inspection."],
+      ["Built around the property", "The written plan identifies what work is proposed for the home. Visit schedules, safety terms, warranty terms, and other service details are included only when they are written into that plan."]
+    ],
     faqs: [
       ["How do I know which rodent is in my home?", "Noises, droppings, tracks, nesting material, timing, and the location of damage can narrow the answer. An inspection should confirm the animal before the work is scoped."],
       ["Is trapping enough?", "Trapping can address animals that are present, but the inspection may also identify openings or conditions that need repair. The plan should explain control and exclusion as separate parts of the solution."],
-      ["Do you offer recurring rodent bait stations?", "Recurring exterior bait-station service can be discussed for ongoing mouse and rat pressure. Placement, product choice, visit frequency, and safety controls require a property-specific service plan."],
+      ["Can bait stations be part of a rodent plan?", "Exterior bait stations are one control option for mouse and rat activity. An inspection determines whether that option fits the property and what other work may be needed."],
       ["Does rodent activity create health concerns?", "Rodents can contaminate areas with droppings, urine, nesting material, and parasites. The level of risk and the right cleanup method depend on the affected area and should not be guessed from a webpage."],
       ["Should I sweep or vacuum droppings before the inspection?", "No. CDC guidance says not to sweep or vacuum dry rodent urine, droppings, or nests because that can put contaminated particles into the air. Avoid disturbing the area and follow current safe-cleanup guidance for the site conditions."]
     ],
-    articles: [articles.winterRodents, articles.rodentTraits, gap("How to compare trapping, exclusion, and recurring monitoring")]
+    articles: [articles.ratTunneling, articles.winterRodents]
   },
   {
     kind: "animal", slug: "wildlife/mouse-rat", key: "rat-mouse",
@@ -301,10 +306,10 @@ function header(page) {
   const identityAnnotation = page.kind === "animal"
     ? "  <!-- @r020:identity nav lockup: client logo at navigation scale -->\n"
     : "";
-  return `<body class="animal-page">
+  return `<body class="animal-page${page.key === "rodent" ? " rodent-page" : ""}">
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header"><div class="header-inner">
-${identityAnnotation}  <a class="brand" href="/" aria-label="ASAP Pest and Wildlife home"><img src="/assets/images/logos/logo-orange.webp" width="260" height="179" alt="ASAP Pest and Wildlife Removal"></a>
+${identityAnnotation}  <a class="brand" href="/" aria-label="ASAP Pest and Wildlife home"><img src="${page.key === "rodent" ? page.logo : "/assets/images/logos/logo-orange.webp"}" width="${page.key === "rodent" ? 320 : 260}" height="${page.key === "rodent" ? 220 : 179}" alt="${page.key === "rodent" ? esc(page.name) : "ASAP Pest and Wildlife Removal"}"></a>
   <div class="header-contact">Call now: <a href="tel:${tel}" data-track="header-phone">${phone}</a> or <a href="/contact/">Email us</a> for quote</div>
   <nav aria-label="Main navigation"><ul class="nav-list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/wildlife/">Wildlife</a></li><li><a href="/pest-control-services/">Pest control</a></li><li><a href="/commercial-services/">Commercial</a></li><li><a href="/services/">Services</a></li><li><a href="/blog/">Blog</a></li></ul></nav>
 </div></header>`;
@@ -320,12 +325,17 @@ function hero(page) {
   const heroAnnotation = page.kind === "animal"
     ? "  <!-- @r020:F1 emotion: calm species illustration makes the urgent problem recognizable without fear imagery -->\n"
     : "";
-  return `<main id="main"><section class="hero texture"><div class="hero-inner">
+  if (page.key !== "rodent") return `<main id="main"><section class="hero texture"><div class="hero-inner">
   <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1>${esc(page.name)}</h1><p class="hero-location">Metro Atlanta, Georgia</p><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
   <div class="actions"><a class="button" href="#estimate">Get a free estimate</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div><p class="review-note">Private review build. Final scope, availability, and any warranty are confirmed after inspection.</p></div>
 ${heroAnnotation}  <figure class="hero-art"><img src="${page.art}"${page.artMobile ? ` srcset="${artSrcset(page)}" sizes="(max-width: 640px) calc(100vw - 20px), min(43vw, 540px)"` : ""} alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async"></figure>
 </div></section>
 <div class="proof-strip"><ul class="proof-list"><li><strong>Inspect</strong><span>Confirm the animal and route</span></li><li><strong>Remove</strong><span>Match the method to the site</span></li><li><strong>Repair</strong><span>Address documented openings</span></li><li><strong>Clean up</strong><span>Scope affected areas clearly</span></li></ul></div>`;
+  return `<main id="main"><section class="hero texture"><div class="hero-inner">
+  <div class="hero-copy"><h1><span class="outline">${esc(page.outlined || page.name)}</span>${page.second ? esc(page.second) : ""}</h1><p class="eyebrow">${esc(page.eyebrow)}</p><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
+  <div class="actions"><a class="button" href="#estimate">Get a free estimate</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
+${heroAnnotation}  <figure class="hero-art"><img src="${page.art}"${page.artMobile ? ` srcset="${artSrcset(page)}" sizes="(max-width: 640px) calc(100vw - 20px), min(43vw, 540px)"` : ""} alt="${esc(page.artAlt)}" width="${page.artWidth || 600}" height="${page.artHeight || 520}" fetchpriority="high" decoding="async"></figure>
+</div></section>`;
 }
 
 function heading(kicker, title, id = "") {
@@ -337,13 +347,19 @@ function flashlight() {
   return `<div class="flashlight"><div class="flashlight-icon" aria-hidden="true"></div><div><h3>From evidence to a property-specific plan</h3><ol><li>Find active signs and access</li><li>Match the method to the animal</li><li>Scope repair and cleanup clearly</li></ol><p><strong>Warranty:</strong> any warranty applies only to the written work and terms included in the final proposal.</p></div></div>`;
 }
 
-function articleCards(items) {
-  return `<div class="three-col">${items.map(([title, status, url]) => `<article class="article-card article-card--gap"><span class="status">${esc(status)}</span><h3>${esc(title)}</h3><p>${url ? "This older ASAP article is hidden while its claims and copy are reviewed." : "A source-backed brief is scaffolded in the editorial gap inventory. This is not silently treated as published."}</p><span>${url ? "Link withheld pending editorial approval" : "Editorial source review required before publication"}</span></article>`).join("")}</div>`;
+function articleCards(items, active = false) {
+  if (!active) return `<div class="three-col">${items.map(([title, status, url]) => `<article class="article-card article-card--gap"><span class="status">${esc(status)}</span><h3>${esc(title)}</h3><p>${url ? "This older ASAP article is hidden while its claims and copy are reviewed." : "A source-backed brief is scaffolded in the editorial gap inventory. This is not silently treated as published."}</p><span>${url ? "Link withheld pending editorial approval" : "Editorial source review required before publication"}</span></article>`).join("")}</div>`;
+  return `<div class="article-grid">${items.map(([title, , url]) => `<article class="article-card"><h3>${esc(title)}</h3><p>Read this existing ASAP article for more context, then return here when you are ready to talk through what you are seeing.</p><a href="${url}" target="_blank" rel="noopener noreferrer">Read the article <span aria-hidden="true">→</span></a></article>`).join("")}</div>`;
+}
+
+function baitStationSection(page) {
+  if (!page.baitStation) return "";
+  return `<section class="section texture" aria-labelledby="bait-station-title"><div class="container">${heading("Mouse and rat control", "Where bait stations may fit", "bait-station-title")}<div class="feature-grid">${page.baitStation.map(([title, desc]) => `<article class="feature-card"><h3>${esc(title)}</h3><p>${esc(desc)}</p></article>`).join("")}</div></div></section>`;
 }
 
 function intentRouter(page) {
   if (!page.intentRoutes?.length) return "";
-  return `<section class="section section--white intent-router" aria-labelledby="intent-router-title" data-intent-role="umbrella-support"><div class="container">
+  return `<section class="section texture intent-router" aria-labelledby="intent-router-title" data-intent-role="umbrella-support"><div class="container">
   ${heading("Choose the right service page", "What are you hearing or finding?")}
   <p class="lead narrow" id="intent-router-title">The broad Rodent page helps you sort the first clues. It does not replace the specific Rat + Mouse, Squirrel, Raccoon, or Bat service pages.</p>
   <div class="intent-grid">${page.intentRoutes.map((route) => `<article class="intent-card" data-intent-target="${esc(route.target)}"><span class="intent-label">${esc(route.label)}</span><h3>${esc(route.title)}</h3><p>${esc(route.description)}</p><a href="${route.href}">${esc(route.cta)} <span aria-hidden="true">→</span></a></article>`).join("")}</div>
@@ -351,14 +367,14 @@ function intentRouter(page) {
   </div></section>`;
 }
 
-function reviews() {
+function reviews(page) {
   const cards = [
-    ["The service was excellent! Arrived on time. Gave me a detailed overview of the problem and rodents that invaded the house. Gave me 3 different price options for repair and installed the first phase immediately.", "Mark Carroll"],
-    ["If you have ANY concerns with unwanted animals in/around your home, do yourself a favor and call Chaz! He has taken care of two separate issues at my house and both jobs were completed quickly & thoroughly. Chaz is very professional and is wonderful to work with!", "Kelsey Monaghan"],
-    ["ASAP is an excellent service provider with a team of highly skilled and professional technicians. I’d highly recommend.", "Fred Perry"]
+    ["The service was excellent! Arrived on time. Gave me a detailed overview of the problem and rodents that invaded the house. Gave me 3 different price options for repair and installed the first phase immediately.", "Mark Carroll", "/assets/images/reviews/mark.webp"],
+    ["If you have ANY concerns with unwanted animals in/around your home, do yourself a favor and call Chaz! He has taken care of two separate issues at my house and both jobs were completed quickly & thoroughly. Chaz is very professional and is wonderful to work with!", "Kelsey Monaghan", "/assets/images/reviews/kelsey.webp"],
+    ["ASAP is an excellent service provider with a team of highly skilled and professional technicians. I’d highly recommend.", "Fred Perry", "/assets/images/reviews/fred.webp"]
   ];
   return `<section class="section texture" aria-labelledby="reviews-title"><div class="container">${heading("What homeowners say", "Real review excerpts", "reviews-title")}
-  <div class="three-col">${cards.map(([quote, name]) => `<article class="review-card"><a href="${reviewUrl}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-hidden="true">★★★★★</div><p>“${esc(quote)}”</p><cite>${esc(name)}</cite></a></article>`).join("")}</div>
+  <div class="three-col">${cards.map(([quote, name, image]) => `<article class="review-card"><a href="${reviewUrl}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-hidden="true">★★★★★</div><p>“${esc(quote)}”</p>${page?.key === "rodent" ? `<!-- @r020:F2 proof: exact homepage reviewer portrait connects the attributed excerpt to its approved proof instance --><img class="review-avatar" src="${image}" width="78" height="80" alt="${esc(name)}">` : ""}<cite>${esc(name)}</cite></a></article>`).join("")}</div>
   <div class="actions"><a class="button" href="${reviewUrl}" target="_blank" rel="noopener noreferrer">Read Google reviews</a></div></div></section>`;
 }
 
@@ -373,7 +389,7 @@ function form(page) {
     ? "<!-- @r020:F3 cta-pull: page-specific service lockup anchors attention beside the request form -->"
     : "";
   return `<section id="estimate" class="section section--navy"><div class="container contact-shell">
-  <div class="contact-copy">${logoAnnotation}<img class="service-lockup" src="${logo}" width="320" height="220" alt="${esc(page.name)}"><p class="kicker">Talk with the ASAP team</p><h2>Contact us for an estimate!</h2><p>Tell us what you’re seeing or hearing. We’ll help identify the right next step.</p><p><a href="tel:${tel}">${phone}</a><br><span>info@removeasap.com</span></p><span class="review-mode">Local/review fixture — no external delivery</span></div>
+  <div class="contact-copy">${logoAnnotation}<img class="service-lockup" src="${logo}" width="320" height="220" alt="${esc(page.name)}"><p class="kicker">Talk with the ASAP team</p><h2>Contact us for an estimate!</h2><p>Tell us what you’re seeing or hearing. We’ll help identify the right next step.</p><p><a href="tel:${tel}">${phone}</a><br><span>info@removeasap.com</span></p>${page.key === "rodent" ? "" : '<span class="review-mode">Local/review fixture — no external delivery</span>'}</div>
   <form class="lead-form" action="/api/lead-intent" method="post" data-asap-lead-form data-source-page="${source}" data-page-type="${page.city ? "city" : page.kind}" data-service="${esc(page.name)}" data-city="${esc(page.city || "")}" data-integration-state="fixture-only">
     <input type="hidden" name="lead_id"><input type="hidden" name="source_page"><input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="gclid"><input type="hidden" name="fbclid">
     <div class="field"><input id="first-${page.key || page.slug}" name="first_name" autocomplete="given-name" required><label for="first-${page.key || page.slug}">First name*</label></div>
@@ -383,21 +399,27 @@ function form(page) {
     <div class="field field--full"><select id="issue-${page.key || page.slug}" name="issue" required><option value="">Select one…</option><option>Wildlife removal</option><option>Rat or mouse</option><option>Squirrel</option><option>Raccoon</option><option>Bat or guano</option><option>Pest control</option><option>Other</option></select><label for="issue-${page.key || page.slug}">I need peace with…*</label></div>
     <div class="field field--full"><textarea id="details-${page.key || page.slug}" name="details" maxlength="1200"></textarea><label for="details-${page.key || page.slug}">What are you noticing?</label></div>
     <label class="consent"><input name="sms_consent" type="checkbox" required><span>I agree to receive messages about my inquiry. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Review our <a href="/privacy-policy/">Privacy Policy</a>. *</span></label>
-    <button class="button button--cream" type="submit">Validate review fixture</button><p class="form-status" tabindex="-1" role="status" aria-live="polite" data-form-status>Submitting here never contacts a client or creates a live CRM record.</p>
+    <button class="button button--cream" type="submit">${page.key === "rodent" ? "Request an estimate" : "Validate review fixture"}</button><p class="form-status" tabindex="-1" role="status" aria-live="polite" data-form-status>${page.key === "rodent" ? "" : "Submitting here never contacts a client or creates a live CRM record."}</p>
   </form></div></section>`;
 }
 
 function footer() {
-  return `</main><footer class="site-footer"><div class="footer-inner"><span>© ASAP Pest &amp; Wildlife Removal</span><span><a href="/privacy-policy/">Privacy</a> · <a href="/terms-of-service/">Terms</a> · <a href="tel:${tel}">${phone}</a></span></div></footer><script src="/assets/js/asap-close.js" defer></script></body></html>`;
+  return `</main><footer class="site-footer"><div class="footer-inner"><span>© ASAP Pest &amp; Wildlife Removal</span><span><a href="/privacy-policy/">Privacy</a> · <a href="/terms-of-service/">Terms</a> · <a href="tel:${tel}">${phone}</a></span></div></footer><script src="/assets/js/asap-close.js" defer></script></body></html>\n`;
 }
 
 function renderAnimal(page) {
-  return `${head(page, page.faqs)}${header(page)}${hero(page)}
+  if (page.key !== "rodent") return `${head(page, page.faqs)}${header(page)}${hero(page)}
   <section class="section texture"><div class="container two-col"><div>${heading("Answer first", page.answerTitle)}<p class="lead">${esc(page.answer)}</p></div><dl class="fact-list">${page.facts.map(([term, desc]) => `<div><dt>${esc(term)}</dt><dd>${esc(desc)}</dd></div>`).join("")}</dl></div></section>${intentRouter(page)}
   <section class="section section--white"><div class="container">${heading("Inspection pattern", "See the route, then choose the work")}${flashlight()}</div></section>
   <section class="section section--navy"><div class="container">${heading("A complete service conversation", "What the plan can cover")}<div class="feature-grid">${page.features.map(([title, desc]) => `<article class="feature-card"><h3>${esc(title)}</h3><p>${esc(desc)}</p></article>`).join("")}</div></div></section>
   <section class="section texture"><div class="container">${heading("Learn before you decide", "Three useful next reads")}${articleCards(page.articles)}</div></section>
-  ${reviews()}${faqs(page.faqs, page.title)}${form(page)}${footer()}`;
+  ${reviews(page)}${faqs(page.faqs, page.title)}${form(page)}${footer()}`;
+  return `${head(page, page.faqs)}${header(page)}${hero(page)}
+  <section class="section texture"><div class="container two-col"><div>${heading("Answer first", page.answerTitle)}<p class="lead">${esc(page.answer)}</p></div><dl class="fact-list">${page.facts.map(([term, desc]) => `<div><dt>${esc(term)}</dt><dd>${esc(desc)}</dd></div>`).join("")}</dl></div></section>${intentRouter(page)}
+  <section class="section texture"><div class="container">${heading("A complete service conversation", "What the plan can cover")}<div class="feature-grid">${page.features.map(([title, desc]) => `<article class="feature-card"><h3>${esc(title)}</h3><p>${esc(desc)}</p></article>`).join("")}</div></div></section>
+  ${baitStationSection(page)}
+  <section class="section texture"><div class="container">${heading("Learn before you decide", `${page.articles.length === 2 ? "Two" : "Three"} useful next reads`)}${articleCards(page.articles, true)}</div></section>
+  ${reviews(page)}${faqs(page.faqs, page.title)}${form(page)}${footer()}`;
 }
 
 function animalArt(name) {

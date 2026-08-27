@@ -6,7 +6,7 @@ const sitemap = readFileSync(join(root, "sitemap.xml"), "utf8");
 const urls = [...sitemap.matchAll(/<loc>(https:\/\/removeasap\.com\/[^<]*)<\/loc>/g)].map((match) => match[1]);
 const curated = {
   "/": { phrase: "pest and wildlife removal Metro Atlanta", role: "site-category-owner" },
-  "/peace-of-mind-from/rodents/": {
+  "/rodent-removal/": {
     phrase: "rodent removal Metro ATL",
     role: "umbrella-router",
     routes_to_distinct_owners: [
