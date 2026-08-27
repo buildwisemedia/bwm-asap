@@ -80,6 +80,9 @@ for (const route of routes) {
     check(html.includes('id="reviews-title"'), `${route}: reviews section has an accessible name`);
     check(!html.includes("5 out of 5 stars") && html.includes('<div class="stars" aria-hidden="true">'), `${route}: review motif does not assert an unverified rating`);
   }
+  if (route === "pest-control-services" || route.startsWith("wildlife-removal-")) {
+    check(html.includes('<div class="contact-copy">') && html.includes('<a class="button button--cream" href="/contact/">Request an estimate</a>'), `${route}: shared contact CTA uses the protected cream-button class`);
+  }
   check(!/<img(?![^>]*\balt=)[^>]*>/i.test(html), `${route}: every image has alt attribute`);
 }
 
@@ -266,6 +269,8 @@ check(css.includes(".header-contact a { display: inline-flex; min-width: 44px; m
 check(!css.includes("#estimate, #reviews-title, #faq-title, #bait-station-title { scroll-margin-top"), "CSS: anchor offset is applied once through scroll padding");
 check(css.includes("--sticky-offset: 164px;") && css.includes(".rodent-page { --sticky-offset: 184px; }") && css.includes(":root { --sticky-offset: 152px; }") && css.includes(".rodent-page { --sticky-offset: 152px; }") && css.includes(":root { --sticky-offset: 134px; }") && css.includes(".rodent-page { --sticky-offset: 134px; }"), "CSS: page-specific and responsive sticky offsets clear the measured header heights");
 check(css.includes(".contact-copy a:not(.button) { color: var(--cream); }") && css.includes(".contact-copy .button--cream { color: var(--navy); }"), "CSS: cream CTA retains navy text inside contact copy");
+const legacyRodent = readFileSync(join(root, "peace-of-mind-from/rodents/index.html"), "utf8");
+check(legacyRodent.includes('class="animal-page legacy-rodent-page"') && css.includes(".legacy-rodent-page { --sticky-offset: 164px; }") && css.includes(".legacy-rodent-page { --sticky-offset: 182px; }") && css.includes(".legacy-rodent-page { --sticky-offset: 215px; }"), "Legacy Rodent: page-specific responsive anchor offsets cover the taller retained header");
 check(css.includes("color: var(--orange-dark); text-decoration: none; text-transform: uppercase"), "CSS: small cream-canvas navigation uses the darker orange token");
 
 const headers = readFileSync(join(root, "_headers"), "utf8");

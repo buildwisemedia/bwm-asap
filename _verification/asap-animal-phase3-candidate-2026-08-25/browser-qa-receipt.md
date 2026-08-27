@@ -1,17 +1,19 @@
-# ASAP animal-page correction — browser QA receipt
+# ASAP animal-page final correction — browser QA receipt
 
-Date: 2026-08-27 Eastern. State: mixed private review and local indexable correction candidate. No external action occurred.
+Date: 2026-08-27 Eastern. State: mixed private-review and local indexable correction candidate. No push, deploy, publish, email, or Brain write occurred.
 
-`qa/rodent-browser-qa.py` passed 40 rendered runs: all five animal routes at 1440 DPR2; 980/768/641 DPR2; 390 DPR1/2/3; and 320 DPR2, plus a JavaScript-disabled Rodent run.
+`qa/rodent-browser-qa.py` passed three consecutive expanded runs after the correction. Each run retained the original 40 rendered animal cells: all five approved animal routes at 1440 DPR2; 980/768/641 DPR2; 390 DPR1/2/3; and 320 DPR2, plus the JavaScript-disabled Rodent run.
 
-- Each route loaded exactly one hero resource at every matrix cell; no responsive source contained `undefined`.
-- Raccoon selected its 420 px mobile asset at 390 DPR1 and its sharp full asset at 390 DPR2/3 and 320 DPR2.
-- Zero horizontal overflow, broken images, contrast failures, console errors, failed requests, or API calls.
-- Enabled form and navigation controls measured at least 44 × 44 px through 980 px.
-- Every ARIA ID reference resolved; there were zero duplicate IDs and zero unnamed interactive controls.
-- After animation-frame settlement, the two-sided assertion held `headerBottom - 3px <= #estimate top <= headerBottom + 3px` in every render. Observed anchor tops ranged from 133.59 px to 183.73 px.
-- The Rodent fixture validated locally with `passed-no-send`; without JavaScript its submit stayed disabled, its action stayed `#estimate`, and it made zero API calls.
+- Before every contrast sample, the pointer moved away from the clicked CTA and the gate waited 250 ms, exceeding the 180 ms CTA transition, then re-verified layout settlement.
+- The strict two-sided assertion remained unchanged: `headerBottom - 3px <= #estimate top <= headerBottom + 3px` in all 40 original animal cells.
+- Each original animal cell loaded exactly one responsive hero resource, with zero overflow, broken images, contrast failures, console errors, failed requests, API calls, ARIA-reference defects, duplicate IDs, unnamed controls, or sub-44px enabled controls through 980 px.
+- The Rodent fixture remained `passed-no-send`; without JavaScript its submit remained disabled, action remained `#estimate`, and it made zero API calls.
 
-Pixel inspection of every route at desktop 1440 DPR2 and mobile 390 DPR3 confirmed intact ASAP composition, sharp hero rendering, no clipping or collisions, and all five animals facing inward toward the copy. Screenshots remain local QA output under `/tmp/asap-animal-browser-qa`; they were not published.
+Each expanded run also covered:
 
-The sitemap/indexability gate covers every generator-owned route: sitemap URLs contain no noindex state, local-review state, review fixture copy, or fixture form. `/rodent-removal/` remains absent from the sitemap, noindex, private-review, and fixture-only.
+- `pest-control-services` and all five `wildlife-removal-*` location pages at 1440 DPR2 and 390 DPR2 (12 rendered cells per run). Every shared `.contact-copy .button--cream` computed to navy text `rgb(33, 41, 54)` on cream `rgb(242, 237, 220)`.
+- `/peace-of-mind-from/rodents/` at 768, 641, 390, and 320 px (DPR2). Its page-specific offsets aligned `#estimate` to the taller retained header within the same two-sided ±3 px bound at every width.
+
+Static QA passed 447/447 checks. Animal and `legacy-review` generator modes each reproduced byte-for-byte across two consecutive generations, including all five animal pages plus inventory and all six shared indexable pages respectively.
+
+Screenshots remain local QA output under `/tmp/asap-animal-browser-qa`; they were not published. `/rodent-removal/` remains absent from the sitemap, noindex, private-review, and fixture-only. The sitemap, redirects, copy, indexability boundary, hero direction, hero assets, and five approved animal designs were not changed.
