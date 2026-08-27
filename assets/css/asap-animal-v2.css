@@ -9,11 +9,12 @@
   --max: 1180px;
   --shadow: 0 18px 45px rgba(33, 41, 54, 0.12);
   --display-font: urw-din, "Arial Narrow", Arial, sans-serif;
+  --sticky-offset: 180px;
 }
 html[data-font-source="fallback"] { --display-font: "Arial Narrow", Arial, sans-serif; }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 180px; background: var(--cream); }
+html { scroll-behavior: smooth; scroll-padding-top: var(--sticky-offset); background: var(--cream); }
 body {
   margin: 0;
   overflow-x: clip;
@@ -62,9 +63,10 @@ button, input, select, textarea { font: inherit; }
 }
 .header-contact a { color: var(--cream); text-underline-offset: 3px; }
 .header-inner nav { grid-area: nav; }
+.mobile-nav { display: none; grid-area: nav; }
 .nav-list { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: .35rem 1.55rem; margin: 0; padding: 0; list-style: none; }
 .nav-list a {
-  color: var(--orange); text-decoration: none; text-transform: uppercase;
+  color: var(--orange-dark); text-decoration: none; text-transform: uppercase;
   font-family: var(--display-font); font-weight: 800;
   font-size: .83rem; letter-spacing: .08em;
 }
@@ -117,6 +119,7 @@ h3 { font-size: 1.3rem; line-height: 1.12; letter-spacing: .035em; }
 .actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.7rem; }
 .review-note { max-width: 620px; margin-top: 1.2rem; color: #68655d; font-size: .78rem; }
 .hero-art { position: relative; display: grid; place-items: center; min-height: 390px; margin: 0; }
+.hero-art picture { display: grid; place-items: center; max-width: 100%; }
 .hero-art img { max-height: 430px; max-width: 100%; width: auto; height: auto; object-fit: contain; filter: drop-shadow(0 22px 20px rgba(33,41,54,.14)); }
 
 .proof-strip { background: var(--navy); color: var(--cream); }
@@ -200,8 +203,6 @@ h3 { font-size: 1.3rem; line-height: 1.12; letter-spacing: .035em; }
 .review-card cite { font-style: normal; font-weight: 800; }
 .review-avatar { width: 78px; height: 80px; margin: 1rem 0 .45rem; border-radius: 50%; object-fit: cover; }
 
-#estimate, #reviews-title, #faq-title, #bait-station-title { scroll-margin-top: 180px; }
-
 .faq-list { display: grid; gap: .8rem; }
 .faq-list details { background: transparent; border-bottom: 2px solid var(--orange); }
 .faq-list summary { min-height: 58px; padding: 1rem 3.2rem 1rem .2rem; cursor: pointer; color: var(--navy); font-family: var(--display-font); font-weight: 900; text-transform: uppercase; letter-spacing: .045em; list-style: none; position: relative; }
@@ -248,9 +249,20 @@ h3 { font-size: 1.3rem; line-height: 1.12; letter-spacing: .035em; }
 @media (forced-colors: active) { .outline { color: CanvasText; -webkit-text-stroke: 0; } }
 
 @media (max-width: 980px) {
+  :root { --sticky-offset: 132px; }
   .header-inner { grid-template-columns: 150px 1fr; min-height: 116px; gap: .5rem 1rem; }
   .brand img { width: 140px; }
-  .header-inner nav { display: none; }
+  .header-inner .desktop-nav { display: none; }
+  .mobile-nav { display: block; justify-self: end; }
+  .mobile-nav summary {
+    display: inline-flex; min-width: 88px; min-height: 44px; align-items: center; justify-content: center;
+    border: 2px solid var(--navy); border-radius: 4px 15px; color: var(--navy);
+    font-family: var(--display-font); font-weight: 900; text-transform: uppercase; cursor: pointer;
+  }
+  .mobile-nav summary::marker, .mobile-nav summary::-webkit-details-marker { display: none; content: ""; }
+  .mobile-nav[open] { width: 100%; }
+  .mobile-nav .nav-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem .75rem; padding-top: .75rem; }
+  .mobile-nav .nav-list a { display: flex; min-height: 44px; align-items: center; justify-content: flex-end; }
   .header-contact { font-size: .82rem; letter-spacing: .08em; }
   .hero-inner, .two-col, .map-layout, .contact-shell { grid-template-columns: 1fr; }
   .hero-inner { min-height: auto; padding-top: 4rem; }
@@ -264,12 +276,13 @@ h3 { font-size: 1.3rem; line-height: 1.12; letter-spacing: .035em; }
   .flashlight-icon { display: none; }
 }
 @media (max-width: 640px) {
-  html { scroll-padding-top: 112px; }
+  :root { --sticky-offset: 116px; }
   body { font-size: 17px; }
   .header-inner { width: min(100% - 1rem, var(--max)); grid-template-columns: 96px minmax(0, 1fr); gap: .5rem; min-height: 96px; }
   .brand img, .rodent-page .brand img { width: 92px; }
-  .header-contact { width: 100%; min-width: 0; padding: .62rem .55rem; font-size: .66rem; line-height: 1.45; letter-spacing: .025em; overflow-wrap: anywhere; }
-  #estimate, #reviews-title, #faq-title, #bait-station-title { scroll-margin-top: 112px; }
+  .header-contact { width: 100%; min-width: 0; padding: .15rem .45rem; font-size: .66rem; line-height: 1.2; letter-spacing: .025em; overflow-wrap: anywhere; }
+  .header-contact a { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+  .mobile-nav .nav-list { grid-template-columns: 1fr; }
   .hero-inner { width: min(100% - 1.25rem, var(--max)); gap: 1.5rem; padding: 3rem 0; }
   h1 { font-size: clamp(2.75rem, 14vw, 4.7rem); }
   h2 { font-size: clamp(2.25rem, 12vw, 3.6rem); }

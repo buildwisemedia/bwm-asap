@@ -92,13 +92,21 @@ check(rodentSubmitButtons.length === 1 && rodentSubmitButtons[0] === "SUBMIT", "
 check(rodent.includes("<title>Rodent Removal in Metro Atlanta | ASAP Pest &amp; Wildlife</title>"), "Rodent: title uses the brand once in a natural SEO title");
 check(rodentServiceSchema?.name === "Rodent Removal" && rodentBreadcrumbSchema?.itemListElement?.at(-1)?.name === "Rodent Removal", "Rodent: Service and Breadcrumb schema use clean human names");
 check(rodent.includes('<p class="kicker">Helpful answers about rodent removal</p>') && !rodent.includes("Rodent Removal | Mice, Rats &amp; Squirrels | ASAP FAQ"), "Rodent: visible FAQ kicker is natural client copy");
+check(!rodent.includes("Answer first") && rodent.includes("Not sure what is in your home?"), "Rodent: homeowner language replaces architecture labels");
+check(rodent.includes("What animals does this rodent page cover?") && rodent.includes("Which service page should I use?") && rodent.includes("What should I note before the inspection?"), "Rodent: umbrella FAQs identify and route without duplicating rat/mouse service FAQs");
+check(!rodent.includes("Is trapping enough?") && !rodent.includes("Can bait stations be part of a rodent plan?"), "Rodent: trapping and bait FAQ ownership stays on the rat/mouse page");
 check(count(rodent, new RegExp(homepageReviewUrl.replace(/[?]/g, "\\?"), "g")) === 4 && !rodent.includes("/maps/place/"), "Rodent: every review link reuses the homepage Google review destination");
 check(![/local\/review/i, /private review/i, /review fixture/i, /held for review/i, /editorial gap/i, /internal scaffolding/i].some((pattern) => pattern.test(rodentVisibleText)), "Rodent: no client-visible internal or review scaffolding");
 check(!rodent.includes('class="flashlight"') && !/flashlight placeholder/i.test(rodentVisibleText), "Rodent: no flashlight placeholder");
 check(!/droppings[- ]photo placeholder/i.test(rodentVisibleText) && !/data-placeholder=["']droppings-photo["']/i.test(rodent), "Rodent: no droppings-photo placeholder");
 check(rodent.includes('data-integration-state="fixture-only"') && rodent.includes('<meta name="robots" content="noindex,nofollow,noarchive">'), "Rodent: fixture-only machine behavior and noindex are preserved");
 const closeJs = readFileSync(join(root, "assets/js/asap-close.js"), "utf8");
-check(closeJs.includes('form.dataset.sourcePage === "/rodent-removal/"') && closeJs.includes("This form is not connected yet, so no request was sent."), "Rodent: local submission message is client-safe and explicitly no-send");
+check(closeJs.includes("No request was sent and no customer record was created.") && !/Monday\.com|Make\.com/i.test(closeJs), "Animal forms: local submission message is client-safe, vendor-neutral, and explicitly no-send");
+check(rodent.includes('action="#estimate"') && rodent.includes("disabled data-fixture-submit") && rodent.includes("<noscript><p class=\"form-status\">Online requests are turned off"), "Rodent: fixture has an inert no-JS fallback and no API action");
+check(!rodent.includes("/api/lead-intent"), "Rodent: fixture HTML has no nonexistent API endpoint");
+check(rodent.includes('class="mobile-nav"') && rodent.includes('aria-label="Mobile navigation"') && rodent.includes("<summary>Menu</summary>"), "Rodent: native keyboard-accessible mobile navigation is present");
+check(rodent.includes('href="/assets/images/animals/hero-v2/rodent-hero-mobile.webp" media="(max-width: 640px)"') && rodent.includes('href="/assets/images/animals/hero-v2/rodent-hero.webp" media="(min-width: 641px)"'), "Rodent: hero preloads match mobile and desktop resources");
+check(rodent.includes('<source media="(max-width: 640px)" srcset="/assets/images/animals/hero-v2/rodent-hero-mobile.webp 1x, /assets/images/animals/hero-v2/rodent-hero-medium.webp 2x">'), "Rodent: responsive hero preserves high-density mobile art");
 const rodentIntentTargets = [
   ["rat-mouse", "/wildlife/mouse-rat/"],
   ["squirrel", "/wildlife/gray-squirrel/"],
@@ -230,6 +238,12 @@ const css = `${readFileSync(join(root, "assets/css/asap-close.css"), "utf8")}\n$
 for (const token of ["#f2eddc", "#212936", "#333333", "#b77537", "#ffffff"]) check(css.includes(token), `CSS: required token ${token}`);
 check(css.includes("prefers-reduced-motion"), "CSS: reduced-motion parity");
 check(css.includes("min-height: 50px") && css.includes("min-height: 52px"), "CSS: touch/input targets exceed 44px");
+check(css.includes(".header-contact a { display: inline-flex; min-width: 44px; min-height: 44px") && css.includes(".mobile-nav summary"), "CSS: mobile contact and menu targets meet 44px preference");
+check(!css.includes("#estimate, #reviews-title, #faq-title, #bait-station-title { scroll-margin-top"), "CSS: anchor offset is applied once through scroll padding");
+check(css.includes("color: var(--orange-dark); text-decoration: none; text-transform: uppercase"), "CSS: small cream-canvas navigation uses the darker orange token");
+
+const headers = readFileSync(join(root, "_headers"), "utf8");
+check(headers.includes("/rodent-removal/*") && headers.includes("X-Robots-Tag: noindex, nofollow, noarchive") && headers.includes("coordinated production"), "Headers: private Rodent route has a documented noindex backstop");
 
 const failures = results.filter((item) => !item.ok);
 console.log(JSON.stringify({ ok: failures.length === 0, checks: results.length, passed: results.length - failures.length, failed: failures.length, failures }, null, 2));

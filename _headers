@@ -10,3 +10,8 @@
 /lead-flow/*
   X-Robots-Tag: noindex, nofollow, noarchive
   Cache-Control: no-store
+
+# PRIVATE REVIEW HOLD: remove this block only with the coordinated production
+# release that removes the matching page-level robots meta directive.
+/rodent-removal/*
+  X-Robots-Tag: noindex, nofollow, noarchive

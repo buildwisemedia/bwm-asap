@@ -39,6 +39,8 @@
   }
 
   document.querySelectorAll("[data-asap-lead-form]").forEach(function (form) {
+    const submit = form.querySelector("[data-fixture-submit]");
+    if (reviewOnly && submit) submit.disabled = false;
     setField(form, "lead_id", uuid());
     setField(form, "source_page", form.dataset.sourcePage);
     setField(form, "utm_source", queryValue("utm_source"));
@@ -80,9 +82,7 @@
       window.__ASAP_LAST_LEAD_FIXTURE = detail;
       window.dispatchEvent(new CustomEvent("asap:lead-intent", { detail }));
       if (status) {
-        status.textContent = form.dataset.sourcePage === "/rodent-removal/"
-          ? "This form is not connected yet, so no request was sent."
-          : "Review fixture passed. No email, Monday.com item, Make.com run, or customer message was created.";
+        status.textContent = "Form check complete. No request was sent and no customer record was created.";
         status.focus();
       }
       form.dataset.fixtureResult = "passed-no-send";
