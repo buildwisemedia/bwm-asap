@@ -3,11 +3,12 @@ set -eu
 
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 output="$root/assets/images/animals/hero-v2"
+widths=$(python3 -c 'import json,sys; print(" ".join(map(str,json.load(open(sys.argv[1]))["widths"])))' "$root/content/design/hero-responsive-widths.json")
 
 build_set() {
   name=$1
   source=$2
-  for width in 420 700 840 1260 1400 2100; do
+  for width in $widths; do
     cwebp -quiet -q 92 -alpha_q 100 -m 6 -sharp_yuv -metadata none \
       -resize "$width" 0 "$root/$source" -o "$output/$name-$width.webp"
   done

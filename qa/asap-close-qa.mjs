@@ -28,7 +28,9 @@ const budgets = {
   "assets/images/page-logos/rodent.png": 100_000
 };
 const heroAssetBuilder = readFileSync(join(root, "tools/build-asap-hero-assets.sh"), "utf8");
-check(heroAssetBuilder.includes("cwebp -quiet -q 92 -alpha_q 100 -m 6 -sharp_yuv -metadata none") && heroAssetBuilder.includes("420 700 840 1260 1400 2100"), "Hero assets: deterministic executable builder binds codec settings and widths");
+const responsiveHeroWidths = JSON.parse(readFileSync(join(root, "content/design/hero-responsive-widths.json"), "utf8")).widths;
+check(JSON.stringify(responsiveHeroWidths) === JSON.stringify([420, 700, 840, 1260, 1400, 2100]), "Hero assets: intended six-width inventory is exact");
+check(heroAssetBuilder.includes("cwebp -quiet -q 92 -alpha_q 100 -m 6 -sharp_yuv -metadata none") && heroAssetBuilder.includes("hero-responsive-widths.json"), "Hero assets: deterministic executable builder consumes the intended width inventory");
 
 function check(ok, label, detail = "") {
   results.push({ ok: Boolean(ok), label, detail });
@@ -136,9 +138,19 @@ check(rodent.includes('action="#estimate"') && rodent.includes("disabled data-fi
 check(!rodent.includes("/api/lead-intent"), "Rodent: fixture HTML has no nonexistent API endpoint");
 check(rodent.includes('class="mobile-nav"') && rodent.includes('aria-label="Mobile navigation"') && rodent.includes("<summary>Menu</summary>"), "Rodent: native keyboard-accessible mobile navigation is present");
 check(!rodent.includes('<link rel="preload" as="image"'), "Rodent: no conflicting hero preload duplicates picture selection");
-check(rodent.includes('rodent-hero-420.webp 420w') && rodent.includes('rodent-hero-840.webp 840w') && rodent.includes('rodent-hero-1260.webp 1260w') && rodent.includes('rodent-hero-2100.webp 2100w'), "Rodent: responsive hero exposes physical-pixel-safe width candidates");
-const raccoonResponsiveHtml = readFileSync(join(root, "wildlife/raccoon/index.html"), "utf8");
-check(!raccoonResponsiveHtml.includes("undefined") && raccoonResponsiveHtml.includes('raccoon-hero-1260.webp 1260w') && raccoonResponsiveHtml.includes('raccoon-hero-2100.webp 2100w'), "Raccoon: responsive hero exposes physical-pixel-safe width candidates");
+const responsiveRasterPages = [
+  ["rodent", "rodent-hero", rodent],
+  ["mouse-rat", "mouse-rat-hero", readFileSync(join(root, "wildlife/mouse-rat/index.html"), "utf8")],
+  ["gray-squirrel", "squirrel-hero", readFileSync(join(root, "wildlife/gray-squirrel/index.html"), "utf8")],
+  ["raccoon", "raccoon-hero", readFileSync(join(root, "wildlife/raccoon/index.html"), "utf8")]
+];
+for (const [label, artBase, html] of responsiveRasterPages) {
+  const sourceSrcset = html.match(/<source media="\(max-width: 640px\)" srcset="([^"]+)"/)?.[1];
+  const imgSrcset = html.match(/<img src="[^"]+" srcset="([^"]+)"/)?.[1];
+  const expected = responsiveHeroWidths.map((width) => `/assets/images/animals/hero-v2/${artBase}-${width}.webp ${width}w`).join(", ");
+  check(sourceSrcset === expected, `${label}: mobile source srcset exposes the exact intended inventory`, sourceSrcset || "missing");
+  check(imgSrcset === expected, `${label}: desktop img srcset exposes the exact intended inventory`, imgSrcset || "missing");
+}
 const rodentIntentTargets = [
   ["rat-mouse", "/wildlife/mouse-rat/"],
   ["squirrel", "/wildlife/gray-squirrel/"],
