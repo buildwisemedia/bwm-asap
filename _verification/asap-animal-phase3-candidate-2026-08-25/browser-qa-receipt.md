@@ -1,4 +1,6 @@
-# ASAP animal-page final correction — browser QA receipt
+# HISTORICAL / SUPERSEDED — ASAP animal-page browser QA receipt
+
+This 447/447 receipt is retained only as historical evidence. It is superseded by `_verification/peer1-opus-f1-f4-correction-2026-08-28.txt` and is not bound as current evidence by either current manifest.
 
 Date: 2026-08-27 Eastern. State: mixed private-review and local indexable correction candidate. No push, deploy, publish, email, or Brain write occurred.
 

@@ -1,0 +1,57 @@
+ASAP ANIMAL PRIVATE-REVIEW CLEANUP — PEER ONE EVIDENCE RECEIPT
+Date: 2026-08-28 (America/New_York)
+Starting commit: e28eb40ff5c3cdc555205bf1b85aac67f7b2a324
+Scope state: local/private-review candidate only
+
+IMPLEMENTED CORRECTIONS
+- The cleanup repaired 11 stale current manifest bindings inherited from parent e28eb40. Six of those stale bindings were pre-existing drift unrelated to the squirrel intrinsic-height correction; all current bindings now fail closed against disk.
+- Rebuilt this receipt as a complete evidence record with headings; no chat transcript or truncated bullet remains.
+- Browser QA now loads every emitted raster candidate and asserts each srcset descriptor width equals that file's actual intrinsic width.
+- Candidate adequacy still requires both intrinsic width and intrinsic height to cover rendered DPR demand.
+- Selected body-size proof now uses encodedBodySize only. Missing evidence fails with an explicit message; transferSize is not accepted because it includes response headers.
+- Static QA now derives the responsive-width matcher and expected derivative total from content/design/hero-responsive-widths.json and the measured source inventory. No responsive-width alternation or derivative total remains hard-coded.
+- Static QA verifies every configured width exactly once for every measured raster source/art base, verifies generator artWidth/artHeight against each emitted 2100w file, validates both current manifests against disk, and validates the explicitly labeled base-page pin against its named commit.
+- Browser QA now derives source-native dimensions from content/design/animal-asset-rights-ledger.json; the duplicate native-dimension table was removed.
+- The gray-squirrel source-of-truth intrinsic height is corrected from 2382 to 2383 in tools/build-asap-close.mjs. Deterministic regeneration updated wildlife/gray-squirrel/index.html and the bound hashes.
+- The gray-squirrel page now owns gray-squirrel intent only across title, description, Open Graph metadata, H1, eyebrow, body, schema, and owner phrase. One contextual link routes nighttime/flying-squirrel visitors to the unchanged separate service page.
+- The 447/447 browser receipt is explicitly historical/superseded. This receipt is the current non-circular evidence binding.
+- Source-native/source-upscaled provenance language, rights limits, client/N4 holds, copy, intent ownership, artwork direction, no-JS fixture, navigation, sitemap, canonicals, redirects, and index state are unchanged.
+
+OPUS INFORMATIONAL FINDINGS — DECISIONS
+- Identical mobile source: retained. The source and img inventories are intentionally identical and browser selection is correct. Removing generated picture markup would churn the approved architecture without a reliability gain.
+- Exact 110092-byte regression pin: replaced with a file-derived positive-savings assertion while preserving the 700w selection requirement. The observed saving remains 110092 bytes in all three runs, but an encoder-version byte change no longer creates a false regression.
+- python3 dependency: retained. Python is already required for the mandated Playwright browser matrix, so replacing only the JSON read in the asset builder would not remove a project dependency or materially improve reliability.
+
+EXECUTABLE VERIFICATION RECEIPTS
+- Preflight: bwm-design-gate preflight --marker .bwm-preflight-passed --build-dir .
+  Result: PASS; client identity, site mode, four valid hash bindings.
+- Deterministic generation: SHA-256 snapshot of 13 generated outputs; ran animal and legacy-review modes; compared the second snapshot.
+  Result: PASS; byte-for-byte identical, zero diff.
+- Static QA: node qa/asap-close-qa.mjs
+  Result: PASS, 585/585 checks, 0 failures.
+- Production repository QA: bash scripts/production-gate.sh qa-gate .
+  Result: PASS.
+- Browser QA: python3 qa/rodent-browser-qa.py, run three consecutive times against 127.0.0.1 local files.
+  Result per run: 40/40 animal renders, 12/12 shared-route regressions, 4/4 legacy-anchor regressions, and one no-JS fixture check.
+  Aggregate: 120/120 animal renders, 36/36 shared-route regressions, 12/12 legacy-anchor regressions, 3/3 no-JS checks.
+  Run receipt SHA-256 values: all three local JSON receipts = 0b22c2060a2f9a4b9b1082f09eab7391237fe01b933046ac7143c3a0cf08f619.
+- Representative squirrel cell, 390x844 DPR2, identical in all runs: rendered 237.71875x269.984375; DPR need 476x540; selected 700x795 candidate; encoded body and disk size 325102 bytes; avoided 110092 bytes versus 840w.
+- Rendered-pixel inspection: PASS on desktop and mobile candidate screenshots, including Rodent and corrected Gray Squirrel. Approved inward-facing art, composition, typography, CTA hierarchy, navigation, and contrast remain intact; no clipping or overflow observed.
+- Design gate: bwm-design-gate run content/design/rodent-design-run.json
+  Result: PASS; review-state premium-candidate, composite 93.2. This is not human/client production acceptance.
+- Whitespace gate: git diff --check
+  Result: PASS.
+- Independent review: codex review --uncommitted
+  Review passes found three real P2s: stale evidence claims, an Open Graph assertion that inspected only the first matching field, and a generator-dimension scan that did not prove it found every raster declaration. All three were fixed; the final rerun was clean.
+
+PRIVATE-REVIEW VERDICT
+PASS WITH PRODUCTION HOLDS. The candidate is mechanically and visually safe for Nehemiah private review. This receipt does not authorize preview exposure, delivery, deployment, publication, or production cutover.
+
+REMAINING PRODUCTION HOLDS
+- Rights ledger remains production_clear:false; local-review clearance is not production clearance.
+- Existing client/human approval and release gates remain binding.
+- N4 holds remain intact: sitemap membership, indexability, redirects, canonicals, production form delivery, per-page attribution tests, deployment, and live production QA are unchanged and unproven.
+- Source-native/upscaled provenance remains explicit; upscaled derivatives do not claim recovered source detail.
+
+NO EXTERNAL ACTION
+No push, deploy, publish, email, client communication, Brain write, provider mutation, sitemap/canonical/redirect/index-state change, or production action occurred.

@@ -132,20 +132,20 @@ const animals = [
   },
   {
     kind: "animal", slug: "wildlife/gray-squirrel", key: "squirrel",
-    name: "Squirrel Removal", title: "Squirrel Removal in Metro ATL", outlined: "Squirrel", second: "Removal",
-    eyebrow: "Gray and Flying Squirrel Control",
-    description: "Humane gray and flying squirrel removal in Metro Atlanta, with attic inspection, route identification, repair planning, cleanup options, and clear next steps.",
-    logo: "/assets/images/page-logos/squirrel.png", artBase: "squirrel-hero", artAlt: "ASAP illustrated squirrel facing the squirrel removal headline", artWidth: 2100, artHeight: 2382,
+    name: "Gray Squirrel Removal", title: "Gray Squirrel Removal in Metro Atlanta", outlined: "Gray Squirrel", second: "Removal",
+    eyebrow: "Gray Squirrel Inspection · Removal · Repair",
+    description: "Humane gray squirrel removal in Metro Atlanta, with attic inspection, route identification, repair planning, cleanup options, and clear next steps.",
+    logo: "/assets/images/page-logos/squirrel.png", artBase: "squirrel-hero", artAlt: "ASAP illustrated squirrel facing the squirrel removal headline", artWidth: 2100, artHeight: 2383,
     warmth: "We know the scratching overhead can wear on your peace. We’ll show you what we found and walk through the plan.",
-    answerTitle: "Why are squirrels getting into the attic?",
-    answer: "Squirrels may use roofline gaps, vents, soffits, fascia, or other vulnerable areas. Gray and flying squirrels can create different patterns of activity. The inspection should identify the animal, the route in, and any timing considerations before removal or repair begins.",
+    answerTitle: "Why are gray squirrels getting into the attic?",
+    answer: "Gray squirrels may use roofline gaps, vents, soffits, fascia, or other vulnerable areas. The inspection should confirm gray squirrel activity, identify the route in, and account for timing before removal or repair begins.",
     facts: [
       ["Gray squirrels", "Often noticed during daytime activity. Roofline access and nesting areas should be inspected before work is planned."],
-      ["Flying squirrels", "Often active at night and may live in groups. Latrine areas and disturbed insulation can be part of the inspection."],
+      ["Different nighttime activity?", "Sounds that happen mainly at night may point to a different animal and a separate service plan."],
       ["Season-aware", "Dependent young can change how removal should be handled. The site findings and applicable wildlife rules guide the plan."]
     ],
     features: [
-      ["Identify the animal", "Use timing, sound, droppings, nesting, and access evidence to distinguish gray from flying squirrels."],
+      ["Confirm gray squirrel activity", "Use timing, sound, droppings, nesting, and access evidence to confirm the animal before work begins."],
       ["Choose a humane method", "Match the removal approach to the animal, building, season, and inspection findings."],
       ["Repair the route in", "Scope vulnerable openings only after the active-animal plan is clear."],
       ["Review nearby weak points", "Document adjacent roofline or ventilation areas that may need attention."],
@@ -153,7 +153,7 @@ const animals = [
       ["Explain the warranty", "State the included repair areas, duration, renewal options, and exclusions in the written proposal."]
     ],
     faqs: [
-      ["How can I tell gray squirrels from flying squirrels?", "Daytime versus nighttime activity can be a clue, but an inspection should use multiple signs before confirming the animal."],
+      ["What if the activity happens mostly at night?", "Gray squirrels are usually active during the day. Nighttime activity may point to a different animal, so note the timing and arrange an inspection before choosing a service plan."],
       ["Can you seal the opening right away?", "The active-animal and dependent-young situation should be resolved before a primary route is closed. The technician should explain the sequence for the property."],
       ["Do squirrels damage attics?", "Squirrels can disturb insulation and gnaw materials. The inspection documents actual conditions rather than assuming damage."],
       ["What happens after removal?", "The next steps may include repair, sanitation, monitoring, and a written warranty for the included work."]
@@ -434,8 +434,9 @@ function footer() {
 }
 
 function renderAnimal(page) {
+  const adjacencyLink = page.key === "squirrel" ? '<p class="lead">Hearing activity mainly at night? <a href="/wildlife/flying-squirrel/">See our separate flying squirrel removal service</a>.</p>' : "";
   if (page.key !== "rodent") return `${head(page, page.faqs)}${header(page)}${hero(page)}
-  <section class="section texture"><div class="container two-col"><div>${heading("What to expect", page.answerTitle)}<p class="lead">${esc(page.answer)}</p></div><dl class="fact-list">${page.facts.map(([term, desc]) => `<div><dt>${esc(term)}</dt><dd>${esc(desc)}</dd></div>`).join("")}</dl></div></section>${intentRouter(page)}
+  <section class="section texture"><div class="container two-col"><div>${heading("What to expect", page.answerTitle)}<p class="lead">${esc(page.answer)}</p>${adjacencyLink}</div><dl class="fact-list">${page.facts.map(([term, desc]) => `<div><dt>${esc(term)}</dt><dd>${esc(desc)}</dd></div>`).join("")}</dl></div></section>${intentRouter(page)}
   <section class="section section--white"><div class="container">${heading("Inspection pattern", "See the route, then choose the work")}${flashlight()}</div></section>
   <section class="section section--navy"><div class="container">${heading("A complete service conversation", "What the plan can cover")}<div class="feature-grid">${page.features.map(([title, desc]) => `<article class="feature-card"><h3>${esc(title)}</h3><p>${esc(desc)}</p></article>`).join("")}</div></div></section>
   ${reviews(page)}${faqs(page.faqs, page)}${form(page)}${footer()}`;

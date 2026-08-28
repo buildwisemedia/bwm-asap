@@ -29,7 +29,7 @@ const budgets = {
 };
 const heroAssetBuilder = readFileSync(join(root, "tools/build-asap-hero-assets.sh"), "utf8");
 const responsiveHeroWidths = JSON.parse(readFileSync(join(root, "content/design/hero-responsive-widths.json"), "utf8")).widths;
-check(JSON.stringify(responsiveHeroWidths) === JSON.stringify([420, 700, 840, 1260, 1400, 2100]), "Hero assets: intended six-width inventory is exact");
+check(responsiveHeroWidths.length > 0 && responsiveHeroWidths.every((width, index) => Number.isInteger(width) && width > 0 && (index === 0 || width > responsiveHeroWidths[index - 1])), "Hero assets: intended width inventory is nonempty, unique, and ascending");
 check(heroAssetBuilder.includes("cwebp -quiet -q 92 -alpha_q 100 -m 6 -sharp_yuv -metadata none") && heroAssetBuilder.includes("hero-responsive-widths.json"), "Hero assets: deterministic executable builder consumes the intended width inventory");
 
 function check(ok, label, detail = "") {
@@ -38,6 +38,14 @@ function check(ok, label, detail = "") {
 function count(html, pattern) { return [...html.matchAll(pattern)].length; }
 function strip(url) { return url.replace("https://removeasap.com/", ""); }
 function sha256(value) { return createHash("sha256").update(value).digest("hex"); }
+function fileSha(path) { return sha256(readFileSync(path)); }
+function intrinsicDimensions(path) {
+  const output = execFileSync("sips", ["-g", "pixelWidth", "-g", "pixelHeight", path], { encoding: "utf8" });
+  const width = Number(output.match(/pixelWidth:\s*(\d+)/)?.[1]);
+  const height = Number(output.match(/pixelHeight:\s*(\d+)/)?.[1]);
+  if (!width || !height) throw new Error(`Could not read intrinsic dimensions: ${path}`);
+  return { width, height };
+}
 function plainText(value) {
   return value
     .replace(/<[^>]+>/g, " ")
@@ -217,7 +225,16 @@ for (const page of lineup.pages) {
 const ratLineup = lineup.pages.find((page) => page.url_path === "/wildlife/mouse-rat/");
 check(ratLineup && rat.includes("species-aware") && rat.includes("Recurring bait stations") && rat.includes("scoped separately from trapping or baiting") && rat.includes("Risk varies by species, exposure, and site conditions"), "Animal lineup: rat/mouse proof stays species-, control-, exclusion-, and exposure-qualified");
 const squirrel = readFileSync(join(root, "wildlife/gray-squirrel/index.html"), "utf8");
-check(squirrel.includes("Gray and Flying Squirrel Control") && squirrel.includes("Dependent young can change") && squirrel.includes("only after the active-animal plan is clear"), "Animal lineup: squirrel proof preserves species and dependent-young timing");
+const squirrelVisible = plainText(squirrel.replace(/<script\b[\s\S]*?<\/script>/gi, ""));
+const squirrelSchema = JSON.parse(squirrel.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1] || "{}");
+check(squirrel.includes("Gray Squirrel Inspection · Removal · Repair") && squirrel.includes("Dependent young can change") && squirrel.includes("only after the active-animal plan is clear"), "Animal lineup: gray-squirrel proof preserves intent and dependent-young timing");
+check(squirrel.includes('<title>Gray Squirrel Removal in Metro Atlanta | ASAP Pest &amp; Wildlife</title>') && squirrel.includes("<h1>Gray Squirrel Removal</h1>"), "SEO ownership: gray-squirrel title and H1 own only gray-squirrel intent");
+const squirrelMetaDescription = squirrel.match(/<meta name="description" content="([^"]*)"/)?.[1] || "";
+const squirrelOgTitle = squirrel.match(/<meta property="og:title" content="([^"]*)"/)?.[1] || "";
+const squirrelOgDescription = squirrel.match(/<meta property="og:description" content="([^"]*)"/)?.[1] || "";
+check([squirrelMetaDescription, squirrelOgTitle, squirrelOgDescription].every((value) => value && !/flying squirrel/i.test(value)), "SEO ownership: gray-squirrel description, OG title, and OG description do not target flying squirrels");
+check(!/flying squirrel/i.test(JSON.stringify(squirrelSchema)) && !/flying squirrel/i.test(squirrelVisible.replace(/See our separate flying squirrel removal service/gi, "")), "SEO ownership: schema and general gray-squirrel body do not target flying-squirrel intent");
+check(count(squirrel, /href="\/wildlife\/flying-squirrel\/"/g) === 1 && squirrel.includes("See our separate flying squirrel removal service"), "SEO ownership: gray-squirrel page has one contextual link to the separate flying-squirrel service");
 const raccoon = readFileSync(join(root, "wildlife/raccoon/index.html"), "utf8");
 check(raccoon.includes("possible young") && raccoon.includes("Not until the active-animal and possible-young situation is understood") && raccoon.includes("Evaluate droppings, nesting material, odor, and insulation before specifying cleanup"), "Animal lineup: raccoon proof blocks premature sealing and invented cleanup scope");
 check(bat.includes("April 1 through July 31") && bat.includes("does not mean every bat-related service stops") && bat.includes("Guano and insulation") && bat.includes("DSV-labeled"), "Animal lineup: bat proof preserves season, service, cleanup, and label boundaries");
@@ -241,8 +258,44 @@ for (const [sourcePath, recorded] of Object.entries(derivativeSourceDimensions))
   const height = Number(metadata.match(/pixelHeight:\s*(\d+)/)?.[1]);
   check(width === recorded.width && height === recorded.height, `Asset provenance: ${sourcePath} native dimensions are truthful`, `${width}x${height}`);
 }
-const rasterDerivatives = rightsLedger.existing_client_site_assets.filter((asset) => /\/hero-v2\/[^/]+-(?:420|700|840|1260|1400|2100)\.webp$/.test(asset.path));
-check(rasterDerivatives.length === 24 && rasterDerivatives.every((asset) => derivativeSourceDimensions[asset.derivative_source]), "Asset provenance: every raster hero derivative resolves to a measured native source");
+const responsiveWidthPattern = responsiveHeroWidths.map((width) => String(width).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+const rasterDerivativePattern = new RegExp(`/hero-v2/[^/]+-(?:${responsiveWidthPattern})\\.webp$`);
+const rasterDerivatives = rightsLedger.existing_client_site_assets.filter((asset) => rasterDerivativePattern.test(asset.path));
+const rasterHeroSourceCount = Object.keys(derivativeSourceDimensions).length;
+const artBaseBySource = {
+  "assets/images/animals/rat-navy.png": "rodent-hero",
+  "assets/images/wildlife-grid/mouse-rat.png": "mouse-rat-hero",
+  "assets/images/animals/squirrel.webp": "squirrel-hero",
+  "assets/images/wildlife-grid/raccoon.png": "raccoon-hero"
+};
+check(rasterHeroSourceCount > 0 && Object.keys(artBaseBySource).length === rasterHeroSourceCount, "Asset provenance: every measured raster source maps to one art base");
+for (const [sourcePath, artBase] of Object.entries(artBaseBySource)) {
+  for (const width of responsiveHeroWidths) {
+    const matches = rasterDerivatives.filter((asset) => asset.derivative_source === sourcePath && asset.path === `assets/images/animals/hero-v2/${artBase}-${width}.webp`);
+    check(matches.length === 1, `Asset provenance: ${artBase} has configured width ${width} exactly once`, `${matches.length}`);
+  }
+  const unexpected = rasterDerivatives.filter((asset) => asset.derivative_source === sourcePath && !responsiveHeroWidths.some((width) => asset.path === `assets/images/animals/hero-v2/${artBase}-${width}.webp`));
+  check(unexpected.length === 0, `Asset provenance: ${artBase} has no unconfigured or misnamed derivatives`, unexpected.map((asset) => asset.path).join(", "));
+}
+
+const animalBuilderSource = readFileSync(join(root, "tools/build-asap-close.mjs"), "utf8");
+const generatorRasterDeclarations = [...animalBuilderSource.matchAll(/artBase:\s*"([^"]+)"[^\n]*artWidth:\s*(\d+),\s*artHeight:\s*(\d+)/g)];
+check(JSON.stringify(generatorRasterDeclarations.map((match) => match[1]).sort()) === JSON.stringify(Object.values(artBaseBySource).sort()), "Generator dimensions: scan finds every expected raster art base exactly once");
+for (const match of generatorRasterDeclarations) {
+  const [, artBase, declaredWidth, declaredHeight] = match;
+  const actual = intrinsicDimensions(join(root, `assets/images/animals/hero-v2/${artBase}-2100.webp`));
+  check(actual.width === Number(declaredWidth) && actual.height === Number(declaredHeight), `Generator dimensions: ${artBase} matches emitted 2100w intrinsic size`, `${declaredWidth}x${declaredHeight} declared; ${actual.width}x${actual.height} actual`);
+}
+
+const exactManifest = JSON.parse(readFileSync(join(root, "_verification/asap-animal-phase3-candidate-2026-08-25/exact-candidate-manifest.json"), "utf8"));
+for (const binding of exactManifest.files) check(fileSha(join(root, binding.path)) === binding.sha256, `Exact candidate manifest: current binding matches ${binding.path}`);
+const packetPath = join(root, "content/design/rodent-review-packet-manifest.json");
+const packet = JSON.parse(readFileSync(packetPath, "utf8"));
+for (const binding of packet.current_files) check(fileSha(join(root, binding.path)) === binding.sha256, `Review packet: current binding matches ${binding.path}`);
+for (const binding of packet.evidence_files) check(fileSha(join(root, binding.path)) === binding.sha256, `Review packet: current evidence binding matches ${binding.path}`);
+for (const binding of packet.supporting_files) check(fileSha(join(root, "content/design", binding.path)) === binding.sha256, `Review packet: supporting binding matches ${binding.path}`);
+const basePage = execFileSync("git", ["show", `${packet.correction_base_commit}:${packet.correction_base_page_path}`]);
+check(sha256(basePage) === packet.correction_base_page_sha256, "Review packet: historical base-page pin matches the named base commit");
 check(rasterDerivatives.every((asset) => !/recover(?:ed|s)? detail|enhanc(?:ed|es)? detail/i.test(asset.transformation || "")), "Asset provenance: no resize claims recovered source detail");
 for (const asset of rightsAssets) {
   const assetBuffer = readFileSync(join(root, asset.path));
@@ -267,7 +320,7 @@ check(rightsLedger.medium_articles?.items?.every((item) => item.status === "hold
 check(rightsLedger.medium_articles?.hold_semantics?.includes("withheld from all five") && rightsLedger.medium_articles?.hold_semantics?.includes("traceable"), "Asset rights: Medium hold semantics match the exact artifact");
 check(rightsLedger.medium_articles?.body_content_copied_into_site === false, "Asset rights: no Medium body content is copied into the site");
 check(rightsLedger.page_proof?.production_clear === false && rightsLedger.page_proof?.named_google_review_excerpts === 3, "Asset rights: three verified review excerpts remain human-approval gated");
-check(rightsLedger.intent_adjacency?.five_page_set_cannibalization === false && rightsLedger.intent_adjacency?.production_clear === false, "Asset rights: five-page intent passes while legacy adjacency remains open");
+check(rightsLedger.intent_adjacency?.cannibalization_resolved === true && rightsLedger.intent_adjacency?.production_clear === false, "Asset rights: gray/flying squirrel intent is separated while production approval remains closed");
 check(rightsLedger.promotion_hygiene?.css_cache_buster_aligned === true && rightsLedger.promotion_hygiene?.artifact_change_warning?.includes("successor candidate manifest"), "Asset rights: cache-buster is aligned and bound to successor verification");
 check(rightsLedger.tagline_color_reconciliation?.includes("CreamTagline") && rightsLedger.tagline_color_reconciliation?.includes("white-tagline"), "Asset rights: cream-versus-white tagline wording is reconciled");
 check(rightsLedger.open_gates?.length === 4, "Asset rights: four remaining human/release gates are explicit");

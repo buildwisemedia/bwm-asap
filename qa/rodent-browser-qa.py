@@ -8,7 +8,9 @@ from playwright.async_api import async_playwright
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = "http://127.0.0.1:18991"
 ROUTES = {"rodent":("/rodent-removal/","rodent-hero",True),"mouse-rat":("/wildlife/mouse-rat/","mouse-rat-hero",False),"gray-squirrel":("/wildlife/gray-squirrel/","squirrel-hero",False),"raccoon":("/wildlife/raccoon/","raccoon-hero",False),"bats":("/wildlife/bats/","bat-hero",False)}
-SOURCE_NATIVE = {"rodent":(1333,961),"mouse-rat":(908,654),"gray-squirrel":(2865,3250),"raccoon":(778,580)}
+RIGHTS_LEDGER = json.loads((ROOT / "content/design/animal-asset-rights-ledger.json").read_text())
+SOURCE_BY_ROUTE = {"rodent":"assets/images/animals/rat-navy.png","mouse-rat":"assets/images/wildlife-grid/mouse-rat.png","gray-squirrel":"assets/images/animals/squirrel.webp","raccoon":"assets/images/wildlife-grid/raccoon.png"}
+SOURCE_NATIVE = {route:(RIGHTS_LEDGER["derivative_source_dimensions"][path]["width"], RIGHTS_LEDGER["derivative_source_dimensions"][path]["height"]) for route,path in SOURCE_BY_ROUTE.items()}
 INTENDED_WIDTHS = json.loads((ROOT / "content/design/hero-responsive-widths.json").read_text())["widths"]
 SHARED_ROUTES = ["/pest-control-services/", "/wildlife-removal-canton/", "/wildlife-removal-woodstock/", "/wildlife-removal-acworth/", "/wildlife-removal-kennesaw/", "/wildlife-removal-cartersville/"]
 SHARED_MATRIX = [(1440, 900, 2), (390, 844, 2)]
@@ -37,7 +39,7 @@ async def inspect(browser,slug,route,hero_name,private,width,height,dpr):
     page.on("console",lambda m:errors.append(m.text) if m.type=="error" else None); page.on("requestfailed",lambda r:failed.append(r.url)); page.on("request",lambda r:api.append(r.url) if "/api/" in r.url else None)
     response=await page.goto(ORIGIN+route,wait_until="networkidle"); await page.screenshot(path=str(OUT/f"{slug}-{width}-{dpr}x.png"),full_page=False)
     hero=page.locator(".hero-art img"); current=await hero.evaluate("n=>n.currentSrc"); resources=await page.evaluate("name=>performance.getEntriesByType('resource').map(e=>e.name).filter(n=>n.includes('/hero-v2/'+name))",hero_name)
-    hero_pixels=await hero.evaluate("""async n=>{const r=n.getBoundingClientRect(),picture=n.closest('picture'),active=[...(picture?.querySelectorAll('source')||[])].find(s=>!s.media||matchMedia(s.media).matches),srcset=active?.srcset||n.srcset,parse=srcset?srcset.split(',').map(item=>{const [raw,width]=item.trim().split(/\\s+/);return{url:new URL(raw,document.baseURI).href,descriptorWidth:Number(width.replace('w',''))}}):[],candidates=await Promise.all(parse.map(async candidate=>{const raw=new Image();raw.src=candidate.url;await raw.decode();return{...candidate,intrinsic:[raw.naturalWidth,raw.naturalHeight]}})),selected=candidates.find(candidate=>candidate.url===n.currentSrc),entry=performance.getEntriesByName(n.currentSrc).at(-1);return{intrinsic:selected?.intrinsic||[n.naturalWidth,n.naturalHeight],rendered:[r.width,r.height],needed:[Math.ceil(r.width*devicePixelRatio),Math.ceil(r.height*devicePixelRatio)],selectedBytes:entry?.encodedBodySize||entry?.transferSize||0,activeSrcset:srcset,candidates}}""")
+    hero_pixels=await hero.evaluate("""async n=>{const r=n.getBoundingClientRect(),picture=n.closest('picture'),active=[...(picture?.querySelectorAll('source')||[])].find(s=>!s.media||matchMedia(s.media).matches),srcset=active?.srcset||n.srcset,parse=srcset?srcset.split(',').map(item=>{const [raw,width]=item.trim().split(/\\s+/);return{url:new URL(raw,document.baseURI).href,descriptorWidth:Number(width.replace('w',''))}}):[],candidates=await Promise.all(parse.map(async candidate=>{const raw=new Image();raw.src=candidate.url;await raw.decode();return{...candidate,intrinsic:[raw.naturalWidth,raw.naturalHeight]}})),selected=candidates.find(candidate=>candidate.url===n.currentSrc),entry=performance.getEntriesByName(n.currentSrc).at(-1);return{intrinsic:selected?.intrinsic||[n.naturalWidth,n.naturalHeight],rendered:[r.width,r.height],needed:[Math.ceil(r.width*devicePixelRatio),Math.ceil(r.height*devicePixelRatio)],selectedBytes:entry?.encodedBodySize??null,activeSrcset:srcset,candidates}}""")
     broken=await page.locator("img").evaluate_all("imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.currentSrc||i.src)"); overflow=await page.evaluate("document.documentElement.scrollWidth-document.documentElement.clientWidth"); header=await page.locator(".site-header").evaluate("n=>n.getBoundingClientRect().bottom")
     await page.locator('a[href="#estimate"]').first.click();await settled(page,"#estimate");await settle_visual_state(page);await settled(page,"#estimate");anchor=await page.locator("#estimate").evaluate("n=>n.getBoundingClientRect().top")
     tap=await page.evaluate("""() => [...document.querySelectorAll('button,summary,.button,input:not([type=hidden]),select,textarea')].filter(el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'&&!el.disabled&&(r.width<44||r.height<44)}).map(el=>({tag:el.tagName,className:el.className,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height}))""") if width<=980 else []
@@ -48,6 +50,7 @@ async def inspect(browser,slug,route,hero_name,private,width,height,dpr):
         selected_width, selected_height=hero_pixels["intrinsic"]
         needed_width, needed_height=hero_pixels["needed"]
         candidates=hero_pixels["candidates"]
+        assert all(candidate["descriptorWidth"]==candidate["intrinsic"][0] for candidate in candidates),{"message":"srcset descriptor width does not match the candidate's actual intrinsic width","result":result}
         adequate=sorted((candidate for candidate in candidates if candidate["intrinsic"][0]>=needed_width and candidate["intrinsic"][1]>=needed_height),key=lambda candidate:candidate["descriptorWidth"])
         assert [candidate["descriptorWidth"] for candidate in candidates]==INTENDED_WIDTHS and adequate,result
         smallest_adequate=adequate[0]
@@ -60,11 +63,12 @@ async def inspect(browser,slug,route,hero_name,private,width,height,dpr):
         result["heroPixels"]["actualSelectedBytes"]=actual_selected_bytes
         assert selected_width>=needed_width and selected_height>=needed_height,result
         assert current==smallest_adequate["url"],result
+        assert hero_pixels["selectedBytes"] is not None,{"message":"encodedBodySize evidence is unavailable; transferSize includes response headers and is not valid body-size evidence","result":result}
         assert hero_pixels["selectedBytes"]==actual_selected_bytes>0,result
         if slug=="gray-squirrel" and (width,height,dpr)==(390,844,2):
             avoided=(ROOT / "assets/images/animals/hero-v2/squirrel-hero-840.webp").stat().st_size-actual_selected_bytes
             result["heroPixels"]["avoidedBytesVersus840"]=avoided
-            assert current.endswith("/squirrel-hero-700.webp") and avoided==110_092,result
+            assert current.endswith("/squirrel-hero-700.webp") and avoided>0,result
     assert overflow<=0 and not broken and not api and not errors and not failed,result
     assert header-3<=anchor<=header+3,result
     assert not tap and not contrast and not aria["duplicates"] and not aria["missing"] and not aria["unnamed"],result

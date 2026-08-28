@@ -118,12 +118,14 @@
   },
   "intent_adjacency": {
     "curated_page": "/wildlife/gray-squirrel/",
-    "curated_owner_phrase": "squirrel removal Metro ATL",
+    "curated_owner_phrase": "gray squirrel removal Metro Atlanta",
     "legacy_page": "/wildlife/flying-squirrel/",
     "legacy_owner_phrase": "flying squirrel removal atlanta",
     "five_page_set_cannibalization": false,
+    "cannibalization_resolved": true,
     "production_clear": false,
-    "required_decision": "Either keep the curated title/H1 general and explicitly preserve the legacy owner, or consolidate flying-squirrel intent into the curated page with an approved redirect/canonical/internal-link plan."
+    "resolution": "The curated page owns gray-squirrel intent only and links contextually to the unchanged legacy flying-squirrel owner. URLs, sitemap, index state, redirects, canonicals, and forms are unchanged.",
+    "required_decision": "Human review of the specialized gray-squirrel copy remains required before production release."
   },
   "promotion_hygiene": {
     "css_cache_buster_aligned": true,

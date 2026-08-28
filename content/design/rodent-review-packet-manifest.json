@@ -1,24 +1,28 @@
 {
   "schema_version": "asap-rodent-review-packet/1.0.0",
   "state": "local-review-independent-pass-premium-candidate",
-  "page_sha256": "6630558cda0e4cca81ee54095103bddd2e4f45c3c0c21151465c531f8c5f713f",
+  "correction_base_page_path": "rodent-removal/index.html",
+  "correction_base_page_sha256": "6630558cda0e4cca81ee54095103bddd2e4f45c3c0c21151465c531f8c5f713f",
   "implementation_commit": "8dc79a0829c92588e406f51fa4bfecad6d8d6764",
   "correction_base_commit": "1352d5362670e9126d197aac6ad98c0a4a392585",
   "correction_verification": {
-    "deterministic_qa": "447/447",
+    "deterministic_qa": "585/585",
     "browser_qa": "3 consecutive expanded passes; original 40 animal cells retained, plus 12 shared CTA cells and 4 legacy anchor cells",
     "generator_reproducibility": "animal and legacy-review modes reproduced byte-for-byte across two consecutive generations",
     "production_hold_closed": "/peace-of-mind-from/rodents/ anchor clears its retained taller header at 768, 641, 390, and 320 px"
   },
-  "correction_files": [
-    {"path": "assets/css/asap-close.css", "sha256": "2d300ecb84353c5ca89634869beb504809a69643ab96bd288d037c6b87f51d9d"},
+  "current_files": [
+    {"path": "assets/css/asap-close.css", "sha256": "dfd7cb19c481e7b00d121b258894a074a91acc0d7e106b7be2dc34c144781cf6"},
     {"path": "assets/css/asap-animal-v2.css", "sha256": "c89dad2ab45f545b8518dffbc018fd3a6b81c2777e4c3ee87eb72a065d2d4956"},
-    {"path": "peace-of-mind-from/rodents/index.html", "sha256": "33c9f0ad33089fdd6dc3973d5a4206817e25068511695da63e6c212c2b83de8a"},
-    {"path": "qa/asap-close-qa.mjs", "sha256": "90f3c9b1e2dceb0d7a27544d8f212c65843992fa002937bf2cf4f65c979edda6"},
-    {"path": "qa/rodent-browser-qa.py", "sha256": "f14384c9df2f7db9902c73a36ce622acb8716a2a9c590d05b48fa0fc0f1427ea"},
-    {"path": "_verification/asap-animal-phase3-candidate-2026-08-25/browser-qa-receipt.md", "sha256": "1331f10e711221f15267033fa69a186c79588e30370932c3479e47df853465c3"}
+    {"path": "peace-of-mind-from/rodents/index.html", "sha256": "78f9a715ca2ae6e61f5efdafdc439f68d4af0e12e6808dc89fe67378c5428988"},
+    {"path": "qa/asap-close-qa.mjs", "sha256": "7ed025160093daee09d14de3e5b8f06997b366e7013ceb2c50943d67f39599fd"},
+    {"path": "qa/rodent-browser-qa.py", "sha256": "c4bb1149cb6fa8511a9bfcc015e9fce6c3e6e5a299e0d11e2d4859e253afb8b2"},
+    {"path": "wildlife/gray-squirrel/index.html", "sha256": "7344a782f323223f8860eb7e4e1f9508981774fa712f9fca2e103365ff4aaad4"}
   ],
-  "files": [
+  "evidence_files": [
+    {"path": "_verification/peer1-opus-f1-f4-correction-2026-08-28.txt", "sha256": "b615ffb50747f82f6cf3d579426ff91ea67e148c8cf4d9c5241c3d5e7b0ff17b"}
+  ],
+  "supporting_files": [
     {"path": "rodent-accepted-direction.json", "sha256": "2acf96a0d0aa30d85876b526125e7bcd103bf7cec527cb1fd9b2ad759554e5fc"},
     {"path": "rodent-design-anchor-manifest.json", "sha256": "8a12d0104daa5ed69d596f56ba7597eedcbfc40a91acccaf92f67917d82c7785"},
     {"path": "rodent-copy-evidence.json", "sha256": "e6152ee036aca9d1a4a226c21054fdd53d28ed3f9361fa78815b9ce96b4b8aa9"},
