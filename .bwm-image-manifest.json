@@ -1,0 +1,376 @@
+{
+  "version": 1,
+  "tool": "bwm-fleet-speed-sweep",
+  "entries": {
+    "assets/images/animals/andmore.png": {
+      "sha256": "99815c439673b2511d658ddb6beee460e6d0baa84d96671cc74252fd63662c5e",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/animals/armadillo.png": {
+      "sha256": "7837c959aa344b5326d9e3fa4edf1a436948c2eeb86495e86d4a54c32092f87c",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/animals/beaver-navy.png": {
+      "sha256": "3c2b588c43c165b9958324e56e5e64fb8845ba167ba7dcbe90c71f4bcb825a0d",
+      "action": "optimized",
+      "before": 485437,
+      "after": 418798,
+      "at": "2026-09-01"
+    },
+    "assets/images/animals/bee.png": {
+      "sha256": "0aa8993b0de5b5ee7849c0d75ec789f0f6c328c642b21cff627df4bda97535c3",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/animals/groundhog.png": {
+      "sha256": "c2ab8f8f56e452f5c6e13fb24f04e04d27ec16701b90dd657c9db836fd066114",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/animals/raccoon.png": {
+      "sha256": "c0517a6a8a94b69aaec668c0506c4fdbfa74aa68a4e8957cccb9f59bcd074742",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/animals/rat-navy.png": {
+      "sha256": "f387b57541edc66ace427fe18d1e3be0f190e206ad302c7ecff550722b5ecd00",
+      "action": "optimized",
+      "before": 384488,
+      "after": 353982,
+      "at": "2026-09-01"
+    },
+    "assets/images/icons/arrow-navy.png": {
+      "sha256": "ebff2464298f9cbe6c9651e9e1d3f585ce38722686d63a9dcbaf31aebf098558",
+      "action": "optimized",
+      "before": 12541,
+      "after": 6124,
+      "at": "2026-09-01"
+    },
+    "assets/images/logos/brand-mark.png": {
+      "sha256": "319f18943beed545cbe8d459e5cc3a8c7667f7255fcf0bb223aa3c1064a264c6",
+      "action": "optimized",
+      "before": 59182,
+      "after": 55337,
+      "at": "2026-09-01"
+    },
+    "assets/images/logos/logo-blue.png": {
+      "sha256": "9ec394d1d051880579bcee07581c99d60808211e068d337e58367fa2ce3d30d8",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/logos/logo-orange-canonical.png": {
+      "sha256": "e6db076bc9494bb4d4e33cacc0d250863a0c90df8d871aa0160ebbd107e2f5bb",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/logos/logo-orange-tagline.png": {
+      "sha256": "7237000e753272049985fb270a8747f0d679acd9a4c0d443901000920026c3cb",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/logos/logo-orange.png": {
+      "sha256": "e6db076bc9494bb4d4e33cacc0d250863a0c90df8d871aa0160ebbd107e2f5bb",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/logos/monster-icon.png": {
+      "sha256": "f598443cbc16764e188db68cb71b6092f259398f6f266a55ed082792aec44817",
+      "action": "optimized",
+      "before": 26247,
+      "after": 23845,
+      "at": "2026-09-01"
+    },
+    "assets/images/logos/pest-hero-mascot.png": {
+      "sha256": "319f18943beed545cbe8d459e5cc3a8c7667f7255fcf0bb223aa3c1064a264c6",
+      "action": "optimized",
+      "before": 59182,
+      "after": 55337,
+      "at": "2026-09-01"
+    },
+    "assets/images/logos/services-hero-mascot.png": {
+      "sha256": "461ba67bff97182d9a48a65569a42371a5d0516fbf030cfff2ceefc3f75e993b",
+      "action": "optimized",
+      "before": 59373,
+      "after": 55137,
+      "at": "2026-09-01"
+    },
+    "assets/images/partners/bank-of-america.png": {
+      "sha256": "a694ff62605c6dab0ac6ad076ef57e8159661da899e5fbbcde5bab3825f7c119",
+      "action": "optimized",
+      "before": 131257,
+      "after": 109893,
+      "at": "2026-09-01"
+    },
+    "assets/images/partners/chick-fil-a.png": {
+      "sha256": "33a6d41eb527c54bb281b54840cb331f0d42ba59755163e2c1a75a74b1c5cd40",
+      "action": "optimized",
+      "before": 143623,
+      "after": 124777,
+      "at": "2026-09-01"
+    },
+    "assets/images/partners/nmsdc-2024.png": {
+      "sha256": "fe7d03635debfa15ef7fd10a1074c7fe79b299d2ade28df5aa846e08014b1031",
+      "action": "optimized",
+      "before": 18060,
+      "after": 16498,
+      "at": "2026-09-01"
+    },
+    "assets/images/partners/partner-misc.png": {
+      "sha256": "0024136e2d51f9f5e2a5d28728830f5fdd94b0ff6e48fff1819b49554a0f7a60",
+      "action": "optimized",
+      "before": 40541,
+      "after": 33090,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/gallery-1.png": {
+      "sha256": "8275dbc330e4604dd6ad80a34e122e99fc7b41a5bc4603bfef86f64f664c9aa2",
+      "action": "optimized",
+      "before": 532213,
+      "after": 233897,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/gallery-2.jpg": {
+      "sha256": "61bbb110a7d4ebbd997169dcb7719f0df4672ca375042a29ef0a35f9606d305d",
+      "action": "optimized",
+      "before": 287900,
+      "after": 195916,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/gallery-3.jpg": {
+      "sha256": "d24cb976a73f6abcad7549283f7ab1f9233ef4051c374d0b1f344e28dc0be9a2",
+      "action": "optimized",
+      "before": 324621,
+      "after": 218635,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/gallery-4.jpg": {
+      "sha256": "4e9c81215d1e159f5f58e4384bfe2b3fdfad111f98f03acdbbb0cfd524674c3c",
+      "action": "optimized",
+      "before": 142929,
+      "after": 96354,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/gallery-5.jpg": {
+      "sha256": "afcc320840b4fb620db545e0c45b4f401ba6539ce29e4920fe275034b59d8fa3",
+      "action": "optimized",
+      "before": 207903,
+      "after": 154065,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/gallery-6.jpg": {
+      "sha256": "00cbc6b8da6ff8de6a93604202d861b50dffabb4bdb3ff79fe94ab70fda5f13a",
+      "action": "optimized",
+      "before": 269727,
+      "after": 178012,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/gallery-7.png": {
+      "sha256": "7086ee3bca06a9ac5858ab29c665c128428ee9b6d154821195e54941cbe53403",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/gallery-8.jpg": {
+      "sha256": "ce9f20e4dff3d949529c4a513f9cfb9449e1490d84aff72021371f667b90db1d",
+      "action": "optimized",
+      "before": 120498,
+      "after": 55600,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/gallery-9.jpg": {
+      "sha256": "4d9b0a6b9a0ef71ff89866d8e2818a121d64808c42736fd9961b7cabde1b023b",
+      "action": "optimized",
+      "before": 840035,
+      "after": 110305,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/services-transition.png": {
+      "sha256": "8275dbc330e4604dd6ad80a34e122e99fc7b41a5bc4603bfef86f64f664c9aa2",
+      "action": "optimized",
+      "before": 532213,
+      "after": 233897,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/slider-1.png": {
+      "sha256": "1e184c77e6bd5f5cd672c66baf7e3298e0a4495bb5c3270f3b48ad67a4c2b59e",
+      "action": "optimized",
+      "before": 421501,
+      "after": 305195,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/slider-2.png": {
+      "sha256": "b1e0d40f27fc2d3ea62a25d8c98b5df2a204b83791ae2eac6b0d17e2da432bcb",
+      "action": "optimized",
+      "before": 509918,
+      "after": 375196,
+      "at": "2026-09-01"
+    },
+    "assets/images/photos/slider-3.png": {
+      "sha256": "347992669d8ed68cf842d3375e1854318801c139e7d4cdc074a1f73528ed9f14",
+      "action": "optimized",
+      "before": 2228830,
+      "after": 2015161,
+      "at": "2026-09-01"
+    },
+    "assets/images/reviews/benjamin.png": {
+      "sha256": "31616da26062395f69e24763a3db4ecdfb658f8f033a8e7fb2032ddaf8844c0e",
+      "action": "optimized",
+      "before": 196931,
+      "after": 186858,
+      "at": "2026-09-01"
+    },
+    "assets/images/reviews/charlie.png": {
+      "sha256": "e782419e1da39eb31e2f999d5d6e38021001a7efce4b2268c9503829e7c5d6c8",
+      "action": "optimized",
+      "before": 170787,
+      "after": 148033,
+      "at": "2026-09-01"
+    },
+    "assets/images/reviews/fred.png": {
+      "sha256": "b25591b0821952dff0ffc5dabc4a65830033f2807e25396ffd5f63d6d633adb2",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/reviews/kelsey.png": {
+      "sha256": "d3ca3e4ef063afaf491c16a6c488f3f1e7d809cec26a8739603eb54c93bca975",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/reviews/mark.png": {
+      "sha256": "4953593c057b74710d849f992ceeaaf17a7e620f37e68d8a08d1237ef77d15cc",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/reviews/yashica.png": {
+      "sha256": "8e1773d3c04c05230a92f53f2befb1dfc2c340d92650fe3223a92fcca251b8ed",
+      "action": "optimized",
+      "before": 153389,
+      "after": 133008,
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/armadillo.png": {
+      "sha256": "8b594da4f0259ed1dd114d15f999c2a8dd4948ae5f03f9b4be7779fd8d9255e2",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/bat.png": {
+      "sha256": "01b36c432a1ffa96fcd257096c41823122f6532617782eafba77e28976f5e4ed",
+      "action": "optimized",
+      "before": 149529,
+      "after": 136779,
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/beaver.png": {
+      "sha256": "dad4773a2b511fccfc72aef607b3ec479426c67e5a569b396c833753aaaff576",
+      "action": "optimized",
+      "before": 563200,
+      "after": 515747,
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/bee.png": {
+      "sha256": "e7f87a9a137c121a1c21ca55881a6db308a0aa7b65bf014bc9bfe68a7a63006e",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/bird.png": {
+      "sha256": "0c522afdf2a460223ca537a991c9c0aaaac62123f7aa16dc8a6dbf1b7f545f0f",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/coyote.png": {
+      "sha256": "a03795b6b9bcf31838bb1b9d7dad02b604993b2509c86cb5e514016a525d9e23",
+      "action": "optimized",
+      "before": 598228,
+      "after": 541416,
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/flying-squirrel.png": {
+      "sha256": "70ecbc50d77b8c999070860c2fdfa9af0a1c01cb7a8ee235c0560209fada6389",
+      "action": "optimized",
+      "before": 706165,
+      "after": 640817,
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/fox.png": {
+      "sha256": "4509e642a6d3e14864053cd62285062b54a564df952bd2e43d33c395fedb00bc",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/geese.png": {
+      "sha256": "a939f23a630871b404e37d94435a91fdad7f2e7e41c0b0d6fb4ebe2eff1b1ece",
+      "action": "optimized",
+      "before": 92671,
+      "after": 83042,
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/gopher.png": {
+      "sha256": "f42cec94aeef09765e40644b6637e23688c8ebfeaa157d019ba67f4999a48a48",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/gray-squirrel.png": {
+      "sha256": "b8ce484c3607c5a98af77abdec198fa24579c1c16fab5a3fad2725ee0bd18986",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/mole.png": {
+      "sha256": "86ae56f3784c56ace6e75f8d777805e7ee7e0e3ec5fc0a1c325e19cfdcca35b2",
+      "action": "optimized",
+      "before": 249437,
+      "after": 225480,
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/mouse-rat.png": {
+      "sha256": "dd1fc1064f12789c5075ecc633eb1f42a9d200e11d8d2e985aba0538f92c3006",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/opossum.png": {
+      "sha256": "93a1cfa7e5a9f03e9cc7bd9742ace3fc8c828e007a9df5c1b747ffe76f04f1da",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/otter.png": {
+      "sha256": "b69d0f3f8d5e87bc170d92abcb159d857e25eb699c16648412cb46dd753437db",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/rabbit.png": {
+      "sha256": "104d23900d31f01efb608442bfc12be0f6a458c5d650648d733eb2d241653790",
+      "action": "optimized",
+      "before": 131544,
+      "after": 118431,
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/raccoon.png": {
+      "sha256": "c0517a6a8a94b69aaec668c0506c4fdbfa74aa68a4e8957cccb9f59bcd074742",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/snake.png": {
+      "sha256": "75ba8bb5fbf7e5bf8a0eb1815fc27761a31baa70425f18fc5fb53416dbfa5f27",
+      "action": "optimized",
+      "before": 299580,
+      "after": 266789,
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/turtle.png": {
+      "sha256": "d434ecd38d02ddbbf5d7b4b17c986c2fb8ee90cffec4ffce3348673f8bbd0244",
+      "action": "optimized",
+      "before": 246665,
+      "after": 230617,
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/vole.png": {
+      "sha256": "d55ae667b472a58b3598ae8a917c8a6c8995cdd703dcce242019cd4531ebf5de",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    },
+    "assets/images/wildlife-grid/wild-hog.png": {
+      "sha256": "0b298777675bd5f18de0449e104b5f6d095dfbce76a4feb9b2b7cd73bea156ac",
+      "action": "no-gain",
+      "at": "2026-09-01"
+    }
+  }
+}
