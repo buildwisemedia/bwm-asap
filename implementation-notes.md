@@ -108,3 +108,8 @@ Verified locally (iframe harness, fetch/XHR instrumented): every page class = ex
 - Migrated the affected client asset locks to those approved WebP derivatives and retained original-asset provenance in the markup; all 1,086 perceptual locks pass.
 - Removed the stale same-origin tracking request that produced repeated 404s. Canonical BWM analytics and attribution remain in place.
 - Scope is isolated in `codex/asap-performance-2026-07-15` for full-page verification before release.
+
+# 2026-09-06 — Rating heading typeface
+
+- Match only the existing rating-page title to the homepage's URW DIN typeface and weight using the existing font kit.
+- Preserve its wording, mixed case, size, spacing, layout, and all rating behavior. This candidate starts from the production branch and includes no review-flow rollout.
