@@ -251,10 +251,29 @@ const heroSizes = {
 };
 const heroSize = (page) => heroSizes[page.key];
 
+// Bind each existing answer to a readable, stable fragment. Reordering FAQs
+// must not change links, and schema must use the same IDs as the visible HTML.
+function faqAnchor(question) {
+  return question.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
 function baseSchema(page, faqs) {
+  const canonical = `https://removeasap.com/${page.slug}/`;
+  const animalPage = page.kind === "animal";
   return {
     "@context": "https://schema.org",
     "@graph": [
+      ...(animalPage ? [{
+        "@type": "WebPage",
+        "@id": `${canonical}#webpage`,
+        url: canonical,
+        name: page.title,
+        description: page.description,
+        inLanguage: "en-US",
+        mainEntity: { "@id": `${canonical}#service` },
+        breadcrumb: { "@id": `${canonical}#breadcrumb` },
+        hasPart: { "@id": `${canonical}#faq-title` }
+      }] : []),
       {
         "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
         "@id": "https://removeasap.com/#business",
@@ -267,6 +286,7 @@ function baseSchema(page, faqs) {
       {
         "@type": "Service",
         "@id": `https://removeasap.com/${page.slug}/#service`,
+        ...(animalPage ? { mainEntityOfPage: { "@id": `${canonical}#webpage` } } : {}),
         name: page.key === "rodent" ? page.name : page.title,
         serviceType: page.name,
         provider: { "@id": "https://removeasap.com/#business" },
@@ -276,6 +296,7 @@ function baseSchema(page, faqs) {
       },
       {
         "@type": "BreadcrumbList",
+        ...(animalPage ? { "@id": `${canonical}#breadcrumb` } : {}),
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: "https://removeasap.com/" },
           { "@type": "ListItem", position: 2, name: page.city ? "Service Areas" : "Services", item: page.city ? "https://removeasap.com/services/" : "https://removeasap.com/wildlife/" },
@@ -284,7 +305,22 @@ function baseSchema(page, faqs) {
       },
       {
         "@type": "FAQPage",
-        mainEntity: faqs.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } }))
+        ...(animalPage ? {
+          "@id": `${canonical}#faq-title`,
+          isPartOf: { "@id": `${canonical}#webpage` },
+          about: { "@id": `${canonical}#service` },
+          inLanguage: "en-US"
+        } : {}),
+        mainEntity: faqs.map(([question, answer]) => ({
+          "@type": "Question",
+          ...(animalPage ? { "@id": `${canonical}#question-${faqAnchor(question)}`, url: `${canonical}#answer-${faqAnchor(question)}` } : {}),
+          name: question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            ...(animalPage ? { "@id": `${canonical}#answer-${faqAnchor(question)}` } : {}),
+            text: answer
+          }
+        }))
       }
     ]
   };
@@ -377,7 +413,7 @@ function articleCards(items, active = false) {
 
 function baitStationSection(page) {
   if (!page.baitStation) return "";
-  return `<section class="section texture" aria-labelledby="bait-station-title"><div class="container">${heading("Mouse and rat control", "Where bait stations may fit", "bait-station-title")}<div class="feature-grid">${page.baitStation.map(([title, desc]) => `<article class="feature-card"><h3>${esc(title)}</h3><p>${esc(desc)}</p></article>`).join("")}</div></div></section>`;
+  return `<section class="section texture" aria-labelledby="bait-station-title"><div class="container">${heading("Mouse and rat control", "Recurring Rodent Bait Stations", "bait-station-title")}<div class="feature-grid">${page.baitStation.map(([title, desc]) => `<article class="feature-card"><h3>${esc(title)}</h3><p>${esc(desc)}</p></article>`).join("")}</div></div></section>`;
 }
 
 function intentRouter(page) {
@@ -404,7 +440,11 @@ function reviews(page) {
 
 function faqs(items, page) {
   const kicker = page.key === "rodent" ? "Helpful answers about rodent removal" : `${page.title} FAQ`;
-  return `<section class="section texture" aria-labelledby="faq-title"><div class="container"><div class="section-heading"><p class="kicker">${esc(kicker)}</p><h2 id="faq-title">Common Questions</h2><div class="heading-rule" aria-hidden="true"></div></div><div class="faq-list">${items.map(([question, answer]) => `<details><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join("")}</div></div></section>`;
+  const animalPage = page.kind === "animal";
+  if (animalPage && new Set(items.map(([question]) => faqAnchor(question))).size !== items.length) {
+    throw new Error(`Duplicate FAQ anchors on ${page.slug}`);
+  }
+  return `<section class="section texture" aria-labelledby="faq-title"><div class="container"><div class="section-heading"><p class="kicker">${esc(kicker)}</p><h2 id="faq-title">Common Questions</h2><div class="heading-rule" aria-hidden="true"></div></div><div class="faq-list">${items.map(([question, answer]) => `<details><summary${animalPage ? ` id="question-${faqAnchor(question)}"` : ""}>${esc(question)}</summary><p${animalPage ? ` id="answer-${faqAnchor(question)}"` : ""}>${esc(answer)}</p></details>`).join("")}</div></div></section>`;
 }
 
 function form(page) {

@@ -1,5 +1,14 @@
 # Implementation Notes
 
+## 2026-09-06 — September3 source-only animal-page increment
+
+- Base is the existing August27 candidate `48a6ff685bf634fb62b41f52f6d04d9680bcf2d3`, not the older PR23 head. Fresh Brain Delivery Strategy and August26 client corrections govern; March design directions are superseded.
+- Connected each existing animal page to its Service, breadcrumb and FAQ entities. All 23 structured answers match visible questions/answers and use readable fragment URLs that open the native answer disclosure.
+- Applied the client's exact Rodent section heading, `Recurring Rodent Bait Stations`. The section content, styles, assets and other visible copy are unchanged. The four sibling pages remain pixel-identical to the base; the Rodent page retains its existing design with this heading correction only.
+- Validation: `python3 qa/animal-answer-links.py` checks all five routes and rejects stale-answer, wrong-canonical and duplicate-ID mutations. The existing animal QA suite and generator reproducibility were rerun. Local browser evidence is in the root worker's `RECEIPT.json`; physical phones and WebKit are not verified.
+- Current canonical phone remains `770-691-3636` / `+17706913636`; the August5 phone narrative below is historical and superseded. No phone or routing value is changed here.
+- No CSS, imagery, fonts, forms, tracking, sitemap, robots, redirect, backend or deployment workflow changed. No publish, send, CRM call or held ASAP412/413 operation occurred. Historical scores and reviews do not accept these new bytes. Root owns independent review, integration and any later release.
+
 ## 2026-08-25 - Animal-page mobile interaction closeout
 
 - Renewed the exact five-page animal candidate after Robert authorized the build to proceed.

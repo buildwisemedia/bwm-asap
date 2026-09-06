@@ -1,58 +1,159 @@
 {
   "schema_version": "asap-rodent-review-packet/1.0.0",
-  "state": "local-review-independent-pass-premium-candidate",
+  "state": "source-only-sept3-candidate-pending-independent-review",
   "correction_base_page_path": "rodent-removal/index.html",
   "correction_base_page_sha256": "6630558cda0e4cca81ee54095103bddd2e4f45c3c0c21151465c531f8c5f713f",
-  "implementation_commit": "8dc79a0829c92588e406f51fa4bfecad6d8d6764",
   "correction_base_commit": "1352d5362670e9126d197aac6ad98c0a4a392585",
-  "correction_verification": {
-    "deterministic_qa": "585/585",
-    "browser_qa": "3 consecutive expanded passes; original 40 animal cells retained, plus 12 shared CTA cells and 4 legacy anchor cells",
-    "generator_reproducibility": "animal and legacy-review modes reproduced byte-for-byte across two consecutive generations",
-    "production_hold_closed": "/peace-of-mind-from/rodents/ anchor clears its retained taller header at 768, 641, 390, and 320 px"
-  },
   "current_files": [
-    {"path": "assets/css/asap-close.css", "sha256": "dfd7cb19c481e7b00d121b258894a074a91acc0d7e106b7be2dc34c144781cf6"},
-    {"path": "assets/css/asap-animal-v2.css", "sha256": "c89dad2ab45f545b8518dffbc018fd3a6b81c2777e4c3ee87eb72a065d2d4956"},
-    {"path": "peace-of-mind-from/rodents/index.html", "sha256": "78f9a715ca2ae6e61f5efdafdc439f68d4af0e12e6808dc89fe67378c5428988"},
-    {"path": "qa/asap-close-qa.mjs", "sha256": "7ed025160093daee09d14de3e5b8f06997b366e7013ceb2c50943d67f39599fd"},
-    {"path": "qa/rodent-browser-qa.py", "sha256": "c4bb1149cb6fa8511a9bfcc015e9fce6c3e6e5a299e0d11e2d4859e253afb8b2"},
-    {"path": "wildlife/gray-squirrel/index.html", "sha256": "7344a782f323223f8860eb7e4e1f9508981774fa712f9fca2e103365ff4aaad4"}
+    {
+      "path": "assets/css/asap-close.css",
+      "sha256": "dfd7cb19c481e7b00d121b258894a074a91acc0d7e106b7be2dc34c144781cf6"
+    },
+    {
+      "path": "assets/css/asap-animal-v2.css",
+      "sha256": "c89dad2ab45f545b8518dffbc018fd3a6b81c2777e4c3ee87eb72a065d2d4956"
+    },
+    {
+      "path": "peace-of-mind-from/rodents/index.html",
+      "sha256": "78f9a715ca2ae6e61f5efdafdc439f68d4af0e12e6808dc89fe67378c5428988"
+    },
+    {
+      "path": "qa/asap-close-qa.mjs",
+      "sha256": "7ed025160093daee09d14de3e5b8f06997b366e7013ceb2c50943d67f39599fd"
+    },
+    {
+      "path": "qa/rodent-browser-qa.py",
+      "sha256": "c4bb1149cb6fa8511a9bfcc015e9fce6c3e6e5a299e0d11e2d4859e253afb8b2"
+    },
+    {
+      "path": "wildlife/gray-squirrel/index.html",
+      "sha256": "99b7ece4eb539a371930ed4c7bfeab5366619bcd3c5ef17ee16ca0514e6f19a4"
+    }
   ],
   "evidence_files": [
-    {"path": "_verification/peer1-opus-f1-f4-correction-2026-08-28.txt", "sha256": "b615ffb50747f82f6cf3d579426ff91ea67e148c8cf4d9c5241c3d5e7b0ff17b"}
+    {
+      "path": "_verification/peer1-opus-f1-f4-correction-2026-08-28.txt",
+      "sha256": "b615ffb50747f82f6cf3d579426ff91ea67e148c8cf4d9c5241c3d5e7b0ff17b"
+    }
   ],
   "supporting_files": [
-    {"path": "rodent-accepted-direction.json", "sha256": "2acf96a0d0aa30d85876b526125e7bcd103bf7cec527cb1fd9b2ad759554e5fc"},
-    {"path": "rodent-design-anchor-manifest.json", "sha256": "8a12d0104daa5ed69d596f56ba7597eedcbfc40a91acccaf92f67917d82c7785"},
-    {"path": "rodent-copy-evidence.json", "sha256": "e6152ee036aca9d1a4a226c21054fdd53d28ed3f9361fa78815b9ce96b4b8aa9"},
-    {"path": "copy-sources/client-corrections.md", "sha256": "6073e0f5d693cca3c5428826f7ee1aa5baebe86a09f0f6f89680650ecffb5698"},
-    {"path": "copy-sources/client-working-session.md", "sha256": "e1604360dc7f599062774df1d98d29a85edd4a3d4d226acbad1c63871a8f3fec"},
-    {"path": "copy-sources/official-guidance.md", "sha256": "61eca98a348142169061659eb03ee55a65dedcee14f39bc904dcc82a3006d07e"},
-    {"path": "copy-sources/customer-reviews.md", "sha256": "7f7a2c48383eaf8bf61fa5114c9520cb976c77c0ad8d0ddd479b2f8b057fc8cf"},
-    {"path": "copy-sources/article-inventory.md", "sha256": "817644772625bc495ac4a6f426561ca7d069815c78ac7b9c1dd99d1d9028c102"},
-    {"path": "rodent-source-proof.md", "sha256": "8a76225e65408a17da811e294cbf41f0f62b66db5fb3e7cb1b58ef5e083457e8"},
-    {"path": "rodent-provider-verification.md", "sha256": "dec9b569ca9c635c67629fd504b269825c83afd8599b44d564d4efd831ae6d26"},
-    {"path": "rodent-fable-route-receipt.md", "sha256": "0bcfc73db87ba7d6930b1c4f4bd08c276095d7c7aae355e32e69a22e1f7bee01"},
-    {"path": "rodent-fable-exact-review-font-restored.md", "sha256": "0b5c57f897d62a00ed8f6ed0fc8edd294ba60616140d46d2cc0afe1739026c82"},
-    {"path": "rodent-desktop-evidence.md", "sha256": "d81839a22ad385b18799853e1a5e3b401c284cf9b3cdaa601857e99c50de2840"},
-    {"path": "rodent-mobile-evidence.md", "sha256": "01ff85bc69866d7115568e9a98af50997840b2402dd5ab05445ce6e812f34b38"},
-    {"path": "rodent-focus-evidence.md", "sha256": "806ecae6abb3982a1216c3e7007ba4482f08c39d7fde79c1937cc13e45c35e6d"},
-    {"path": "rodent-primary-action-evidence.md", "sha256": "78886a842461b1e89100b809daa031906f27ca16022a2aa52d84f9e59c8b8990"},
-    {"path": "rodent-performance-budget.md", "sha256": "5125dfd50ba811327753307a22b253f8cb99059f1073dfeec1a0abdce0e98955"},
-    {"path": "rodent-seo-technical-evidence.md", "sha256": "94680d14ef183fc8ed5f625042aaec16c78439cf2aed2f95ae99b6e108d7661d"},
-    {"path": "rodent-aeo-answer-evidence.md", "sha256": "17d57c640e9190055bda6735f7a2322384a5f8ad2ce3eedd6d40133f04397e3e"},
-    {"path": "rodent-conversion-path-evidence.md", "sha256": "abfdbfbd2730eaf14f708fea592c7095de3f9009725d3576e3ffee6e8eac1028"},
-    {"path": "rodent-analytics-evidence.md", "sha256": "cc7a8e4b93f45b6f30295e363822424d723474df6cc0ef2f4f757b8faa3393fa"},
-    {"path": "rodent-brain-read-receipt.json", "sha256": "8ca39bceb39646957e4df6145ce3cc30f449c359e9479e683d5fd693420b26e9"},
-    {"path": "rodent-author-route-receipt.json", "sha256": "c015bb15c4ba38ffeeb0588e1071698a71fc00515f6c1131d77aea39876841f3"},
-    {"path": "rodent-design-run.json", "sha256": "0474c7c7444bb9705d5e62474a4d16be692a7bc063da9b41aad1941b5c176fd7"},
-    {"path": "rodent-design-gate.md", "sha256": "184cb2667e4ebef091a6fc2e3fc4b2dda13b2a1c3dda75c510f96e6ff3003ae8"}
+    {
+      "path": "rodent-accepted-direction.json",
+      "sha256": "2acf96a0d0aa30d85876b526125e7bcd103bf7cec527cb1fd9b2ad759554e5fc"
+    },
+    {
+      "path": "rodent-design-anchor-manifest.json",
+      "sha256": "8a12d0104daa5ed69d596f56ba7597eedcbfc40a91acccaf92f67917d82c7785"
+    },
+    {
+      "path": "rodent-copy-evidence.json",
+      "sha256": "e6152ee036aca9d1a4a226c21054fdd53d28ed3f9361fa78815b9ce96b4b8aa9"
+    },
+    {
+      "path": "copy-sources/client-corrections.md",
+      "sha256": "6073e0f5d693cca3c5428826f7ee1aa5baebe86a09f0f6f89680650ecffb5698"
+    },
+    {
+      "path": "copy-sources/client-working-session.md",
+      "sha256": "e1604360dc7f599062774df1d98d29a85edd4a3d4d226acbad1c63871a8f3fec"
+    },
+    {
+      "path": "copy-sources/official-guidance.md",
+      "sha256": "61eca98a348142169061659eb03ee55a65dedcee14f39bc904dcc82a3006d07e"
+    },
+    {
+      "path": "copy-sources/customer-reviews.md",
+      "sha256": "7f7a2c48383eaf8bf61fa5114c9520cb976c77c0ad8d0ddd479b2f8b057fc8cf"
+    },
+    {
+      "path": "copy-sources/article-inventory.md",
+      "sha256": "817644772625bc495ac4a6f426561ca7d069815c78ac7b9c1dd99d1d9028c102"
+    },
+    {
+      "path": "rodent-source-proof.md",
+      "sha256": "8a76225e65408a17da811e294cbf41f0f62b66db5fb3e7cb1b58ef5e083457e8"
+    },
+    {
+      "path": "rodent-provider-verification.md",
+      "sha256": "dec9b569ca9c635c67629fd504b269825c83afd8599b44d564d4efd831ae6d26"
+    },
+    {
+      "path": "rodent-fable-route-receipt.md",
+      "sha256": "0bcfc73db87ba7d6930b1c4f4bd08c276095d7c7aae355e32e69a22e1f7bee01"
+    },
+    {
+      "path": "rodent-fable-exact-review-font-restored.md",
+      "sha256": "0b5c57f897d62a00ed8f6ed0fc8edd294ba60616140d46d2cc0afe1739026c82"
+    },
+    {
+      "path": "rodent-desktop-evidence.md",
+      "sha256": "d81839a22ad385b18799853e1a5e3b401c284cf9b3cdaa601857e99c50de2840"
+    },
+    {
+      "path": "rodent-mobile-evidence.md",
+      "sha256": "01ff85bc69866d7115568e9a98af50997840b2402dd5ab05445ce6e812f34b38"
+    },
+    {
+      "path": "rodent-focus-evidence.md",
+      "sha256": "806ecae6abb3982a1216c3e7007ba4482f08c39d7fde79c1937cc13e45c35e6d"
+    },
+    {
+      "path": "rodent-primary-action-evidence.md",
+      "sha256": "78886a842461b1e89100b809daa031906f27ca16022a2aa52d84f9e59c8b8990"
+    },
+    {
+      "path": "rodent-performance-budget.md",
+      "sha256": "5125dfd50ba811327753307a22b253f8cb99059f1073dfeec1a0abdce0e98955"
+    },
+    {
+      "path": "rodent-seo-technical-evidence.md",
+      "sha256": "94680d14ef183fc8ed5f625042aaec16c78439cf2aed2f95ae99b6e108d7661d"
+    },
+    {
+      "path": "rodent-aeo-answer-evidence.md",
+      "sha256": "17d57c640e9190055bda6735f7a2322384a5f8ad2ce3eedd6d40133f04397e3e"
+    },
+    {
+      "path": "rodent-conversion-path-evidence.md",
+      "sha256": "abfdbfbd2730eaf14f708fea592c7095de3f9009725d3576e3ffee6e8eac1028"
+    },
+    {
+      "path": "rodent-analytics-evidence.md",
+      "sha256": "cc7a8e4b93f45b6f30295e363822424d723474df6cc0ef2f4f757b8faa3393fa"
+    },
+    {
+      "path": "rodent-brain-read-receipt.json",
+      "sha256": "8ca39bceb39646957e4df6145ce3cc30f449c359e9479e683d5fd693420b26e9"
+    },
+    {
+      "path": "rodent-author-route-receipt.json",
+      "sha256": "c015bb15c4ba38ffeeb0588e1071698a71fc00515f6c1131d77aea39876841f3"
+    },
+    {
+      "path": "rodent-design-run.json",
+      "sha256": "0474c7c7444bb9705d5e62474a4d16be692a7bc063da9b41aad1941b5c176fd7"
+    },
+    {
+      "path": "rodent-design-gate.md",
+      "sha256": "184cb2667e4ebef091a6fc2e3fc4b2dda13b2a1c3dda75c510f96e6ff3003ae8"
+    }
   ],
   "unresolved": [
     "Human approval of the composed Rodent page and representative protected pattern, including the deliberate mobile-navigation choice",
     "Robert's exact preview-delivery and send authorization",
     "Pre-cutover confirmation that the privacy disclosure covers the existing Adobe kit telemetry",
     "Deployment authorization, production cutover, and live QA"
-  ]
+  ],
+  "predecessor_implementation_commit": "8dc79a0829c92588e406f51fa4bfecad6d8d6764",
+  "predecessor_verification": {
+    "deterministic_qa": "585/585",
+    "browser_qa": "3 consecutive expanded passes; original 40 animal cells retained, plus 12 shared CTA cells and 4 legacy anchor cells",
+    "generator_reproducibility": "animal and legacy-review modes reproduced byte-for-byte across two consecutive generations",
+    "production_hold_closed": "/peace-of-mind-from/rodents/ anchor clears its retained taller header at 768, 641, 390, and 320 px"
+  },
+  "current_verification": {
+    "source_base": "48a6ff685bf634fb62b41f52f6d04d9680bcf2d3",
+    "independent_review": "pending; worker forbidden to launch models",
+    "evidence_receipt": "root worker RECEIPT.json; historical design score not renewed"
+  }
 }

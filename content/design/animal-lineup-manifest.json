@@ -1,7 +1,7 @@
 {
   "schema_version": "asap-animal-lineup/1.0.0",
-  "captured_at": "2026-08-24",
-  "state": "replacement-local-review-candidate-after-client-rejection",
+  "captured_at": "2026-09-06",
+  "state": "source-only-sept3-seo-aeo-candidate-pending-root-review",
   "scope": "Approved named ASAP animal-page set from the August 11 correction record",
   "lineup_source": {
     "primary_locator": "/Users/robertechevarria/Documents/Codex/2026-08-13/i-m-going-to-bed-but-2/work/asap-evidence/email/Nehemiah-ASAP-command-center-notes-2026-08-11.txt",
@@ -33,11 +33,16 @@
       "title": "Rodent Removal in Metro Atlanta | ASAP Pest & Wildlife",
       "h1": "RODENT REMOVAL",
       "owner_phrase": "rodent removal Metro ATL",
-      "page_sha256": "f350ec3126c602648df63cfd32d07085b9c952c1e266747d37eb2c25b35f3fb5",
+      "page_sha256": "a1fc11ef07896b23fff3af32b2b5d92f0eca4ce715c13ebc7d09cdea623802fe",
       "logo_path": "assets/images/page-logos/rodent.png",
       "logo_sha256": "c159022ecec17adfa01f45b266be5ac20b1515355a7163785bda589ed7f06358",
-      "review_state": "go4-private-review-primary-client-approval-pending",
-      "required_proof": ["UGA symptom-routing boundary", "CDC dry-waste cleanup boundary", "Georgia DNR bat-routing boundary", "four distinct protected owners"]
+      "review_state": "sept3-source-only-structural-metadata-change-pending-independent-review",
+      "required_proof": [
+        "UGA symptom-routing boundary",
+        "CDC dry-waste cleanup boundary",
+        "Georgia DNR bat-routing boundary",
+        "four distinct protected owners"
+      ]
     },
     {
       "role": "specific-service-owner",
@@ -46,11 +51,16 @@
       "title": "Rat and Mouse Removal in Metro ATL | ASAP Pest & Wildlife",
       "h1": "Rat and Mouse Removal",
       "owner_phrase": "rat and mouse removal Metro ATL",
-      "page_sha256": "e8202440524fe45a9b95c9ea322aab6738821c73bef5134af395bb0d4c7b8d31",
+      "page_sha256": "1c8d7fd8dd46925784ab5c1bd5b1f949ab4b4aa257c8950b92b7b79e19907aa2",
       "logo_path": "assets/images/page-logos/rat-mouse.png",
       "logo_sha256": "804aebdd4cd4831e47dc784a1ad037e6ecfe65724947b8a8e641ab7b916805da",
-      "review_state": "replacement-after-visual-rejection-independent-recheck-pending",
-      "required_proof": ["species-aware plan", "recurring bait stations", "exclusion separated from control", "disease FAQ remains exposure-qualified"]
+      "review_state": "sept3-source-only-structural-metadata-change-pending-independent-review",
+      "required_proof": [
+        "species-aware plan",
+        "recurring bait stations",
+        "exclusion separated from control",
+        "disease FAQ remains exposure-qualified"
+      ]
     },
     {
       "role": "specific-service-owner",
@@ -59,11 +69,17 @@
       "title": "Gray Squirrel Removal in Metro Atlanta | ASAP Pest & Wildlife",
       "h1": "Gray Squirrel Removal",
       "owner_phrase": "gray squirrel removal Metro Atlanta",
-      "page_sha256": "7344a782f323223f8860eb7e4e1f9508981774fa712f9fca2e103365ff4aaad4",
+      "page_sha256": "99b7ece4eb539a371930ed4c7bfeab5366619bcd3c5ef17ee16ca0514e6f19a4",
       "logo_path": "assets/images/page-logos/squirrel.png",
       "logo_sha256": "e6319411069f8c8af25d1e9f881c9793c78fbd2704802cd664ad44ce9df76b26",
-      "review_state": "replacement-after-visual-rejection-independent-recheck-pending",
-      "required_proof": ["gray squirrel intent specialization", "contextual link to separate flying-squirrel service", "dependent-young timing", "gray squirrel illustration continuity", "repair follows active-animal plan"]
+      "review_state": "sept3-source-only-structural-metadata-change-pending-independent-review",
+      "required_proof": [
+        "gray squirrel intent specialization",
+        "contextual link to separate flying-squirrel service",
+        "dependent-young timing",
+        "gray squirrel illustration continuity",
+        "repair follows active-animal plan"
+      ]
     },
     {
       "role": "specific-service-owner",
@@ -72,11 +88,16 @@
       "title": "Raccoon Removal in Metro ATL | ASAP Pest & Wildlife",
       "h1": "Raccoon Removal",
       "owner_phrase": "raccoon removal Metro ATL",
-      "page_sha256": "499cc376ba8cd20efd0fe32896f7ede33d860d2c028413546ce7e4d89bf4aba2",
+      "page_sha256": "9e61f28b1948a294c9bc943ac5fe36007f0318c72f16f4f8c05bdd34a271e3de",
       "logo_path": "assets/images/page-logos/raccoon.png",
       "logo_sha256": "8449716bbcdebc59bfeeb23c0a55affb382c173495afb9fd4ba722973d202cda",
-      "review_state": "replacement-after-visual-rejection-independent-recheck-pending",
-      "required_proof": ["possible dependent young", "no immediate-seal promise", "inspection-led repair", "cleanup scope remains evidence-based"]
+      "review_state": "sept3-source-only-structural-metadata-change-pending-independent-review",
+      "required_proof": [
+        "possible dependent young",
+        "no immediate-seal promise",
+        "inspection-led repair",
+        "cleanup scope remains evidence-based"
+      ]
     },
     {
       "role": "specific-service-owner",
@@ -85,11 +106,16 @@
       "title": "Bat Removal in Metro ATL | ASAP Pest & Wildlife",
       "h1": "Bat and Guano Removal",
       "owner_phrase": "bat removal Metro ATL",
-      "page_sha256": "9dce54a52c0b6ad3e7df4c3e612b2c29a8ba07da4e4cb83b3df4082291fd78dc",
+      "page_sha256": "d4e2ad4f79679e56f8de56e3e3cb8633c3e8afdc937f4df9aa59cee6101f1697",
       "logo_path": "assets/images/page-logos/bat.png",
       "logo_sha256": "f9cd235e7805f676b588082c678c6346e89a5f1b50934767317a7b60fbb4a94e",
-      "review_state": "replacement-after-visual-rejection-independent-recheck-pending",
-      "required_proof": ["April 1 through July 31 maternity boundary", "inspection and emergency work are not blanket-blocked", "guano and insulation scope", "DSV products remain label- and site-qualified"]
+      "review_state": "sept3-source-only-structural-metadata-change-pending-independent-review",
+      "required_proof": [
+        "April 1 through July 31 maternity boundary",
+        "inspection and emergency work are not blanket-blocked",
+        "guano and insulation scope",
+        "DSV products remain label- and site-qualified"
+      ]
     }
   ],
   "set_review": {
@@ -103,8 +129,8 @@
     "receipt_sha256": "c983df44e41cb24c835fa89d86d1a374e4029581e77b26bc839a99210d2370cc",
     "representative_artifact_receipt": "rodent-fable-exact-review-font-restored.md",
     "representative_machine_outcome": "premium-candidate",
-    "representative_promotion_eligible": true,
-    "current_candidate_note": "The prior five-page visual direction was rejected by the client on 2026-08-25. This successor restores the existing ASAP cream texture, orange logo, navy contact bar, narrow navigation, and restrained typography while keeping the lean semantic implementation. All hero animals use high-resolution existing ASAP source art, sit opposite the copy, and face inward. The pages omit the Adobe Fonts loader, use the animal-only v=1 CSS bundle so unrelated city and pest review pages do not change, withhold all nine legacy Medium links, and remain private local/review artifacts pending fresh independent and client review."
+    "representative_promotion_eligible": false,
+    "current_candidate_note": "September6 source-only successor of 48a6ff6. Existing content gains entity/FAQ links and native answer fragments; Rodent uses the exact client-requested Recurring Rodent Bait Stations heading. Historical reviews do not cover these bytes. No deployment or send."
   },
   "non_blocking_review_findings": [
     "Retain the mobile/tablet navigation choice as a human decision before release",
