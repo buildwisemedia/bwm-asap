@@ -66,7 +66,7 @@ test('phone_click event includes privacy-safe required fields', function () {
   click('tel:7706913636');
   const event = window.dataLayer.find((entry) => entry.event === 'phone_click');
   assert(event, 'phone_click event should be in dataLayer');
-  assert(event.phone_number_redacted === '1744', 'only the last four digits should be stored');
+  assert(event.phone_number_redacted === '3636', 'only the last four digits should be stored');
   assert(event.page_path === '/services/', 'page_path should be present');
   assert(event.page_referrer === 'https://www.google.com/', 'page_referrer should be present');
   assert(window.gtagCalls[0][0] === 'event' && window.gtagCalls[0][1] === 'phone_click');
