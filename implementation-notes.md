@@ -241,3 +241,13 @@ not change the user's existing checkout.
 - Approved bait-station visit frequency and any safety, warranty, or service wording beyond the confirmed facts currently shown.
 - Decision on Medium migration versus external linking, plus final editorial approval of the two linked articles.
 - Client approval of the Rodent template, followed by separate integration, test-lead, publish, redirect, sitemap, canonical, schema, internal-link, and index authority.
+
+## 2026-09-07 — September 3 punchlist: expanded mobile menu anchor correction
+
+- Continues accepted local source b51075e92c71c7d6f6db1c7fcbd08f1366652489, client punchlist item 16 / meeting A19. Website module, locked-direction implementation; existing preflight v4 validated with all four bindings.
+- Reproduced the open-menu estimate-anchor defect at 390px on Bat: expanded header bottom 476.78px versus target top 133.70px, obscuring the destination.
+- The shared script now collapses the mobile menu before native same-document fragment navigation on only the five assigned animal routes. Escape dismisses an open menu and returns focus to its summary. It preserves native links/history and ignores modified clicks, other targets, missing/malformed fragments, and unrelated routes.
+- All five HTML pages, CSS, generator, imagery, copy, form logic, noindex state, and rights/approval records remain byte-identical to the accepted source. No new visuals were authored; no new visual acceptance or screenshot loop is claimed.
+- Focused localhost navigation test passed all five routes at 390px and 320px, including repeated hashes, Escape focus, invalid fragments, and unrelated-route isolation. Zero outbound/API requests; no form focus or submission. Existing answer-link validation passed 23 answers and three negative cases. No held fixtures or full suites were invoked.
+- One implementation attempt; the initial test completed ten assigned-route cells then timed out because the unrelated legacy control had no mobile-menu DOM. The second run corrected that test setup and passed. No production-code repair round was needed.
+- Source-only local commit for root independent review. No push, merge, preview exposure, deploy, release, client message, production-data write, or held ASAP370/412/413 execution. Human approval, article/image rights, physical-phone and release checks remain separate.

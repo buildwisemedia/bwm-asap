@@ -107,3 +107,50 @@
     });
   });
 })();
+
+
+// Keep the accepted five-page mobile header clear of in-page destinations.
+// This shared asset also serves other review pages; leave their behavior alone.
+(function () {
+  "use strict";
+  const routes = new Set([
+    "/rodent-removal/",
+    "/wildlife/mouse-rat/",
+    "/wildlife/gray-squirrel/",
+    "/wildlife/raccoon/",
+    "/wildlife/bats/"
+  ]);
+  const path = window.location.pathname.replace(/\/index\.html$/, "/");
+  if (!routes.has(path)) return;
+  const menu = document.querySelector(".site-header details.mobile-nav");
+  if (!menu) return;
+
+  document.addEventListener("click", function (event) {
+    if (!menu.open || event.defaultPrevented || event.button !== 0 ||
+        event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest("a[href]");
+    if (!link || link.hasAttribute("download") ||
+        (link.target && link.target !== "_self")) return;
+    const destination = new URL(link.href, window.location.href);
+    if (destination.origin !== window.location.origin ||
+        destination.pathname !== window.location.pathname ||
+        destination.search !== window.location.search || !destination.hash) return;
+    let id;
+    try {
+      id = decodeURIComponent(destination.hash.slice(1));
+    } catch (_) {
+      return;
+    }
+    if (!document.getElementById(id)) return;
+    // Close before native fragment navigation calculates the scroll position.
+    // Preserve the link's normal hash, browser history, and keyboard behavior.
+    menu.open = false;
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key !== "Escape" || !menu.open || event.defaultPrevented) return;
+    menu.open = false;
+    menu.querySelector("summary").focus();
+    event.preventDefault();
+  });
+})();

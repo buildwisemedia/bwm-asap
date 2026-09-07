@@ -1,10 +1,10 @@
 {
   "schema_version": "asap-animal-phase3-candidate/1.2.0",
-  "captured_at": "2026-09-06",
-  "state": "source-only-sept3-candidate-pending-independent-review",
-  "base_candidate_head": "48a6ff685bf634fb62b41f52f6d04d9680bcf2d3",
-  "branch": "codex/asap-sept3-punchlist-20260906",
-  "scope": "Five existing animal pages: connected page/service/FAQ graph and native answer fragments; Rodent exact client-requested bait-section heading. No new advisory claims, layout, assets, forms, indexing or integration execution.",
+  "captured_at": "2026-09-07",
+  "state": "source-only-sept3-navigation-pending-independent-review",
+  "base_candidate_head": "b51075e92c71c7d6f6db1c7fcbd08f1366652489",
+  "branch": "codex/asap-punchlist-build-20260907",
+  "scope": "Five assigned animal routes: close expanded mobile menu before native same-document anchor navigation and support Escape focus return. Accepted page HTML, CSS, assets, copy, forms, generator and owner approvals are unchanged.",
   "files": [
     {
       "path": "rodent-removal/index.html",
@@ -40,7 +40,7 @@
     },
     {
       "path": "assets/js/asap-close.js",
-      "sha256": "e4901a3c737b0eebb69d7a0d5f823abd8389f494315aa9e0126e18192c56d750"
+      "sha256": "273413450b871549ccf292e8913452c178cc459b1d332ec13c156f2b22c1f545"
     },
     {
       "path": "tools/build-asap-close.mjs",
@@ -108,11 +108,15 @@
     },
     {
       "path": "implementation-notes.md",
-      "sha256": "a29148aad58f2a3ce3010c5ea8472d472c17088fb046c22bfb6cd0307efff1af"
+      "sha256": "7f93bfaa25ea197ba1e7afb1e7472f43aad6a758421d224b06f98bcd987636c6"
     },
     {
       "path": "qa/animal-answer-links.py",
       "sha256": "86f2250c226f589be7c292900b22729f20b6d122c771e1896ef7d33663f4152a"
+    },
+    {
+      "path": "qa/animal-navigation.py",
+      "sha256": "0b20bd4401173283943f6e4d420a6bac4e2f7af219bd6f6b1d8cf3e71d7ff27c"
     }
   ],
   "production_clear": false,
@@ -132,8 +136,11 @@
     "design_gate": "PASS \u2014 93.2 premium-candidate; human signoff still pending"
   },
   "verification": {
-    "preflight": "PASS; current local bindings validated",
-    "independent_review": "pending; no model launches allowed",
-    "design_acceptance": "not renewed; no current premium claim"
+    "preflight": "PASS; inherited actual four bindings validated before edits",
+    "navigation": "PASS; 10 mobile cells, Escape focus, repeat anchors, malformed fragments and unrelated-route control; zero outbound/API requests; forms untouched",
+    "answer_links": "PASS; 23 answers and 3 negative cases",
+    "independent_review": "pending; root budgets separately; no nested models",
+    "design_acceptance": "not renewed; no new visuals or current premium claim",
+    "full_suites": "not run; explicit held-scope boundary"
   }
 }
