@@ -135,7 +135,19 @@ check(rodent.includes('<p class="kicker">Helpful answers about rodent removal</p
 check(!rodent.includes("Answer first") && rodent.includes("Not sure what is in your home?"), "Rodent: homeowner language replaces architecture labels");
 check(rodent.includes("What animals does this rodent page cover?") && rodent.includes("Which service page should I use?") && rodent.includes("What should I note before the inspection?"), "Rodent: umbrella FAQs identify and route without duplicating rat/mouse service FAQs");
 check(!rodent.includes("Is trapping enough?") && !rodent.includes("Can bait stations be part of a rodent plan?"), "Rodent: trapping and bait FAQ ownership stays on the rat/mouse page");
-check(count(rodent, new RegExp(homepageReviewUrl.replace(/[?]/g, "\\?"), "g")) === 4 && !rodent.includes("/maps/place/"), "Rodent: every review link reuses the homepage Google review destination");
+const verifiedReviews = JSON.parse(readFileSync(join(root, "content/google-review-permalinks.json"), "utf8"));
+const individualReviewUrls = new Map(verifiedReviews.reviews.map(({ name, url }) => [name, url]));
+check(individualReviewUrls.size === 5 && new Set(individualReviewUrls.values()).size === 5, "Reviews: five distinct provider-issued destinations are recorded");
+for (const route of alignedAnimalRoutes) {
+  const cards = [...readFileSync(join(root, route, "index.html"), "utf8").matchAll(/<article class="review-card"><a href="([^"]+)"[^>]*>[\s\S]*?<cite>([^<]+)<\/cite><\/a><\/article>/g)];
+  check(cards.length === 3 && new Set(cards.map((card) => card[2])).size === 3, `${route}: three distinct attributed review cards`);
+  check(cards.every((card) => individualReviewUrls.get(card[2]) === card[1]), `${route}: each review card opens that exact author's Google review`);
+}
+check(count(rodent, new RegExp(homepageReviewUrl.replace(/[?]/g, "\\?"), "g")) === 1, "Rodent: general review button retains the business listing destination");
+const homepage = readFileSync(join(root, "index.html"), "utf8");
+const homepageReviewLinks = [...homepage.matchAll(/<a class="review-wrapper review-direct" href="([^"]+)"[^>]*aria-label="Read ([^’]+)’s full Google review \(opens in a new tab\)">/g)];
+check(homepageReviewLinks.length === 8 && homepageReviewLinks.every((card) => individualReviewUrls.get(card[2]) === card[1]), "Homepage: all eight verified desktop/mobile cards have the matching direct review link");
+check(!individualReviewUrls.has("Charlie Cichetti") && !homepageReviewLinks.some((card) => card[2] === "Charlie Cichetti"), "Homepage: missing Charlie permalink is not invented");
 check(![/local\/review/i, /private review/i, /review fixture/i, /held for review/i, /editorial gap/i, /internal scaffolding/i].some((pattern) => pattern.test(rodentVisibleText)), "Rodent: no client-visible internal or review scaffolding");
 check(!rodent.includes('class="flashlight"') && !/flashlight placeholder/i.test(rodentVisibleText), "Rodent: no flashlight placeholder");
 check(!/droppings[- ]photo placeholder/i.test(rodentVisibleText) && !/data-placeholder=["']droppings-photo["']/i.test(rodent), "Rodent: no droppings-photo placeholder");

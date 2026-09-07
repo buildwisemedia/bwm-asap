@@ -14,6 +14,7 @@ const phone = "770-691-3636";
 const tel = "+17706913636";
 const reviewUrl = "https://www.google.com/maps/place/ASAP+Wildlife+Removal/@33.734354,-84.242248,10z/data=!4m8!3m7!1s0x88f51d199bdde957:0x677a4db004e50c72!8m2!3d33.734354!4d-84.242248!9m1!1b1!16s%2Fg%2F11j3147h44?hl=en&entry=ttu";
 const homepageReviewUrl = "https://www.google.com/maps?cid=7456357551456980082";
+const individualReviewUrls = Object.fromEntries(JSON.parse(readFileSync(join(root, "content/google-review-permalinks.json"), "utf8")).reviews.map(({ name, url }) => [name, url]));
 
 const articles = {
   ratTunneling: ["Why rats tunnel — and what that can tell you", "Held for review", "https://medium.com/@ASAPwildlife/understanding-the-reasons-behind-rat-tunneling-11c3bf8a4e03"],
@@ -434,7 +435,7 @@ function reviews(page) {
     ["ASAP is an excellent service provider with a team of highly skilled and professional technicians. I’d highly recommend.", "Fred Perry", "/assets/images/reviews/fred.webp"]
   ];
   return `<section class="section texture" aria-labelledby="reviews-title"><div class="container">${heading("What homeowners say", "Real review excerpts", "reviews-title")}
-  <div class="three-col">${cards.map(([quote, name, image]) => `<article class="review-card"><a href="${destination}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-hidden="true">★★★★★</div><p>“${esc(quote)}”</p>${page?.key === "rodent" && image ? `<!-- @r020:F2 proof: exact homepage reviewer portrait connects the attributed excerpt to its approved proof instance --><img class="review-avatar" src="${image}" width="78" height="80" alt="${esc(name)}">` : ""}<cite>${esc(name)}</cite></a></article>`).join("")}</div>
+  <div class="three-col">${cards.map(([quote, name, image]) => `<article class="review-card"><a href="${page?.kind === "animal" ? (individualReviewUrls[name] || destination) : destination}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-hidden="true">★★★★★</div><p>“${esc(quote)}”</p>${page?.key === "rodent" && image ? `<!-- @r020:F2 proof: exact homepage reviewer portrait connects the attributed excerpt to its approved proof instance --><img class="review-avatar" src="${image}" width="78" height="80" alt="${esc(name)}">` : ""}<cite>${esc(name)}</cite></a></article>`).join("")}</div>
   <div class="actions"><a class="button" href="${destination}" target="_blank" rel="noopener noreferrer">Read Google reviews</a></div></div></section>`;
 }
 
