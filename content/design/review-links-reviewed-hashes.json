@@ -1,0 +1,16 @@
+{
+  "_verification/asap-animal-phase3-candidate-2026-08-25/exact-candidate-manifest.json": "cc950a37da58e2ab577b8861d2a011b03752cab12b2c5f95f493d36f12e4dfc8",
+  "content/design/animal-lineup-manifest.json": "f2f808121d98cc93a1f0a9c3d823ff4b6d2e972467fa0bec979a158bb00a29d0",
+  "content/design/rodent-review-packet-manifest.json": "b2aa9614f190347da2e952702fd9d36e64500c83cec071a66a07a47d8f53bc2b",
+  "index.html": "96e6638a8573b96e52f899f4bb3803538def8fa8c950daea605ec57391beafb4",
+  "qa/asap-close-qa.mjs": "aac98f2c62b2285e33c10433e6a8f5fd0612a9f6d2334baf5097f34be8b6c563",
+  "rodent-removal/index.html": "58d15b0b50ace9326844dd0bd61831386d3ce53a2672a9b309c9af9743c70f88",
+  "tools/build-asap-close.mjs": "6ff9186fd1e85c3d0c5aaa6196a1bd1d1b114170003668e2ae145b05bdef7cb5",
+  "wildlife/bats/index.html": "95d7f12bf186a3d5285f693ec02dd8b9885d115755af112971f30086f0563ab6",
+  "wildlife/gray-squirrel/index.html": "baa9178271bb6b9b2da510fcac6c92f4f4bd7d54f0e46347cfba1591c56608aa",
+  "wildlife/mouse-rat/index.html": "095aba6ec081a13b096dd1a0e72180be10ad8068003879d3f438a329ec3553e5",
+  "wildlife/raccoon/index.html": "a016d00916afe2e082d4bae1650af8e3d14dc570dea05b44129e50532ece1ebe",
+  "content/google-review-permalinks.json": "ac8d307d532fefe66bc1b052f6e6e476a0e06bcddaa04e8b3167a9a60522f995",
+  "assets/css/webflow.shared.css": "a6bf89d2de5a2bc0e19b80e056e43ad85af03ae2e2fa5d86f117754135021591",
+  "assets/css/asap-animal-v2.css": "c89dad2ab45f545b8518dffbc018fd3a6b81c2777e4c3ee87eb72a065d2d4956"
+}
