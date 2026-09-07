@@ -1,0 +1,51 @@
+{
+  "source_capture": "ASAP-GOOGLE-REVIEWS-20260907",
+  "captured_at": "2026-09-07",
+  "business": "ASAP Pest & Wildlife Removal",
+  "listing": "https://www.google.com/maps?cid=7456357551456980082",
+  "method": "Google Maps visible review and native share dialog; search is review body text, not reviewer name.",
+  "reviews": [
+    {
+      "name": "Mark Carroll",
+      "url": "https://maps.app.goo.gl/31rhtxDM23w1LT7c7",
+      "query": "overview",
+      "text": "The service was excellent! Arrived on time. Gave me a detailed overview of the problem and rodents that invaded the house. Gave me 3 different price options for repair and installed the first phase immediately. Wish I’ve known them sooner but I will refer ASAP to all my neighbors, friends and family!",
+      "captured_text_is_excerpt": false
+    },
+    {
+      "name": "Kelsey Monaghan",
+      "query": "unwanted",
+      "url": "https://maps.app.goo.gl/fdpS9PhMoSqUwNtH8",
+      "text": "If you have ANY concerns with unwanted animals in/around your home, do yourself a favor and call Chaz! He has taken care of two separate issues at my house and both jobs were completed quickly & thoroughly. Chaz is very professional and is wonderful to work with!",
+      "captured_text_is_excerpt": false
+    },
+    {
+      "name": "Fred Perry",
+      "url": "https://maps.app.goo.gl/bxMQCXrwU2gLZQ857",
+      "query": "skilled",
+      "text": "ASAP is an excellent service provider with a team of highly skilled and professional technicians. I’d highly recommend.",
+      "captured_text_is_excerpt": false
+    },
+    {
+      "name": "Benjamin Olmstead",
+      "url": "https://maps.app.goo.gl/bQdBUFYytQgHNdPr7",
+      "query": "roofline",
+      "text": "Great. Went above and beyond to make sure they protected my roofline after rats and squirrels chewed thru the soffit. Great service. Would use again and recommended them to a colleague at work.",
+      "captured_text_is_excerpt": false
+    },
+    {
+      "name": "Yashica Marshall",
+      "url": "https://maps.app.goo.gl/kiqY65ZVG58ufpTk7",
+      "query": "respectful",
+      "text": "ASAP Wildlife Removal Services is an outstanding service provider! They are extremely professional and respectful of your home and property.",
+      "captured_text_is_excerpt": true
+    }
+  ],
+  "unresolved": [
+    {
+      "name": "Charlie Cichetti",
+      "reason": "Name and exact website excerpt not returned by visible Google review search. Searches: No more squirrels, getting, Charlie. Website excerpt remains prior evidence; no individual link invented."
+    }
+  ],
+  "excerpt_note": "The text field records the captured review text. captured_text_is_excerpt marks a partial source capture; website cards may retain shorter existing excerpts."
+}

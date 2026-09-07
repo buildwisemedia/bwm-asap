@@ -1,30 +1,30 @@
 {
   "schema_version": "asap-animal-phase3-candidate/1.2.0",
   "captured_at": "2026-09-07",
-  "state": "source-only-sept3-navigation-pending-independent-review",
-  "base_candidate_head": "b51075e92c71c7d6f6db1c7fcbd08f1366652489",
-  "branch": "codex/asap-punchlist-build-20260907",
-  "scope": "Five assigned animal routes: close expanded mobile menu before native same-document anchor navigation and support Escape focus return. Accepted page HTML, CSS, assets, copy, forms, generator and owner approvals are unchanged.",
+  "state": "source-only-sept7-review-links-pending-independent-review",
+  "base_candidate_head": "24a9cb83df6c22699360189881b5bef9fad751dd",
+  "branch": "codex/asap-execute-20260907",
+  "scope": "Five animal routes: 15 exact Google review links. Homepage: eight desktop/mobile cards link to five verified reviews. Charlie direct link unresolved. Generator and source ledger preserve links. No production release or client acceptance.",
   "files": [
     {
       "path": "rodent-removal/index.html",
-      "sha256": "a1fc11ef07896b23fff3af32b2b5d92f0eca4ce715c13ebc7d09cdea623802fe"
+      "sha256": "58d15b0b50ace9326844dd0bd61831386d3ce53a2672a9b309c9af9743c70f88"
     },
     {
       "path": "wildlife/mouse-rat/index.html",
-      "sha256": "1c8d7fd8dd46925784ab5c1bd5b1f949ab4b4aa257c8950b92b7b79e19907aa2"
+      "sha256": "095aba6ec081a13b096dd1a0e72180be10ad8068003879d3f438a329ec3553e5"
     },
     {
       "path": "wildlife/gray-squirrel/index.html",
-      "sha256": "99b7ece4eb539a371930ed4c7bfeab5366619bcd3c5ef17ee16ca0514e6f19a4"
+      "sha256": "baa9178271bb6b9b2da510fcac6c92f4f4bd7d54f0e46347cfba1591c56608aa"
     },
     {
       "path": "wildlife/raccoon/index.html",
-      "sha256": "9e61f28b1948a294c9bc943ac5fe36007f0318c72f16f4f8c05bdd34a271e3de"
+      "sha256": "a016d00916afe2e082d4bae1650af8e3d14dc570dea05b44129e50532ece1ebe"
     },
     {
       "path": "wildlife/bats/index.html",
-      "sha256": "d4e2ad4f79679e56f8de56e3e3cb8633c3e8afdc937f4df9aa59cee6101f1697"
+      "sha256": "95d7f12bf186a3d5285f693ec02dd8b9885d115755af112971f30086f0563ab6"
     },
     {
       "path": "assets/css/asap-close.css",
@@ -44,11 +44,11 @@
     },
     {
       "path": "tools/build-asap-close.mjs",
-      "sha256": "34c48a9339ebe6cac85dd03f5c6560c95127a98b96e42a140c25656b3e7d8cd9"
+      "sha256": "6ff9186fd1e85c3d0c5aaa6196a1bd1d1b114170003668e2ae145b05bdef7cb5"
     },
     {
       "path": "content/design/animal-lineup-manifest.json",
-      "sha256": "a7e102f4b0d036592f4a0bc1e27342662968d80b9671219c632b79f5b8d3a646"
+      "sha256": "f2f808121d98cc93a1f0a9c3d823ff4b6d2e972467fa0bec979a158bb00a29d0"
     },
     {
       "path": "content/design/animal-asset-rights-ledger.json",
@@ -60,7 +60,7 @@
     },
     {
       "path": "qa/asap-close-qa.mjs",
-      "sha256": "7ed025160093daee09d14de3e5b8f06997b366e7013ceb2c50943d67f39599fd"
+      "sha256": "aac98f2c62b2285e33c10433e6a8f5fd0612a9f6d2334baf5097f34be8b6c563"
     },
     {
       "path": "qa/rodent-browser-qa.py",
@@ -117,30 +117,33 @@
     {
       "path": "qa/animal-navigation.py",
       "sha256": "0b20bd4401173283943f6e4d420a6bac4e2f7af219bd6f6b1d8cf3e71d7ff27c"
+    },
+    {
+      "path": "index.html",
+      "sha256": "96e6638a8573b96e52f899f4bb3803538def8fa8c950daea605ec57391beafb4"
+    },
+    {
+      "path": "content/google-review-permalinks.json",
+      "sha256": "ac8d307d532fefe66bc1b052f6e6e476a0e06bcddaa04e8b3167a9a60522f995"
     }
   ],
   "production_clear": false,
   "preview_authorized": false,
   "send_authorized": false,
   "predecessor_verification": {
-    "preflight": "PASS",
-    "deterministic_qa": "585/585",
-    "browser_routes": "3 consecutive passes: 5 routes \u00d7 8 viewport-DPR renders (40/40) plus Rodent no-JS, 12 shared CTA cells, and 4 legacy Rodent anchor cells",
-    "generator_reproducibility": "PASS \u2014 animal and legacy-review modes each reproduced byte-for-byte across two consecutive generations",
-    "mobile_tap_targets_below_44px": 0,
-    "horizontal_overflow_routes": 0,
-    "broken_images": 0,
-    "console_errors": 0,
-    "failed_requests": 0,
-    "fixture_form_outbound_requests": 0,
-    "design_gate": "PASS \u2014 93.2 premium-candidate; human signoff still pending"
-  },
-  "verification": {
     "preflight": "PASS; inherited actual four bindings validated before edits",
     "navigation": "PASS; 10 mobile cells, Escape focus, repeat anchors, malformed fragments and unrelated-route control; zero outbound/API requests; forms untouched",
     "answer_links": "PASS; 23 answers and 3 negative cases",
     "independent_review": "pending; root budgets separately; no nested models",
     "design_acceptance": "not renewed; no new visuals or current premium claim",
     "full_suites": "not run; explicit held-scope boundary"
+  },
+  "verification": {
+    "preflight": "PASS; four actual inherited bindings validated before edits",
+    "answer_links": "PASS; 23 answers and three negative cases",
+    "review_links": "pending source and rendered checks",
+    "independent_review": "pending fresh protected Fable route",
+    "design_acceptance": "not renewed; client composed-page acceptance pending",
+    "production_deployed": false
   }
 }

@@ -33,7 +33,7 @@
       "title": "Rodent Removal in Metro Atlanta | ASAP Pest & Wildlife",
       "h1": "RODENT REMOVAL",
       "owner_phrase": "rodent removal Metro ATL",
-      "page_sha256": "a1fc11ef07896b23fff3af32b2b5d92f0eca4ce715c13ebc7d09cdea623802fe",
+      "page_sha256": "58d15b0b50ace9326844dd0bd61831386d3ce53a2672a9b309c9af9743c70f88",
       "logo_path": "assets/images/page-logos/rodent.png",
       "logo_sha256": "c159022ecec17adfa01f45b266be5ac20b1515355a7163785bda589ed7f06358",
       "review_state": "sept3-source-only-structural-metadata-change-pending-independent-review",
@@ -51,7 +51,7 @@
       "title": "Rat and Mouse Removal in Metro ATL | ASAP Pest & Wildlife",
       "h1": "Rat and Mouse Removal",
       "owner_phrase": "rat and mouse removal Metro ATL",
-      "page_sha256": "1c8d7fd8dd46925784ab5c1bd5b1f949ab4b4aa257c8950b92b7b79e19907aa2",
+      "page_sha256": "095aba6ec081a13b096dd1a0e72180be10ad8068003879d3f438a329ec3553e5",
       "logo_path": "assets/images/page-logos/rat-mouse.png",
       "logo_sha256": "804aebdd4cd4831e47dc784a1ad037e6ecfe65724947b8a8e641ab7b916805da",
       "review_state": "sept3-source-only-structural-metadata-change-pending-independent-review",
@@ -69,7 +69,7 @@
       "title": "Gray Squirrel Removal in Metro Atlanta | ASAP Pest & Wildlife",
       "h1": "Gray Squirrel Removal",
       "owner_phrase": "gray squirrel removal Metro Atlanta",
-      "page_sha256": "99b7ece4eb539a371930ed4c7bfeab5366619bcd3c5ef17ee16ca0514e6f19a4",
+      "page_sha256": "baa9178271bb6b9b2da510fcac6c92f4f4bd7d54f0e46347cfba1591c56608aa",
       "logo_path": "assets/images/page-logos/squirrel.png",
       "logo_sha256": "e6319411069f8c8af25d1e9f881c9793c78fbd2704802cd664ad44ce9df76b26",
       "review_state": "sept3-source-only-structural-metadata-change-pending-independent-review",
@@ -88,7 +88,7 @@
       "title": "Raccoon Removal in Metro ATL | ASAP Pest & Wildlife",
       "h1": "Raccoon Removal",
       "owner_phrase": "raccoon removal Metro ATL",
-      "page_sha256": "9e61f28b1948a294c9bc943ac5fe36007f0318c72f16f4f8c05bdd34a271e3de",
+      "page_sha256": "a016d00916afe2e082d4bae1650af8e3d14dc570dea05b44129e50532ece1ebe",
       "logo_path": "assets/images/page-logos/raccoon.png",
       "logo_sha256": "8449716bbcdebc59bfeeb23c0a55affb382c173495afb9fd4ba722973d202cda",
       "review_state": "sept3-source-only-structural-metadata-change-pending-independent-review",
@@ -106,7 +106,7 @@
       "title": "Bat Removal in Metro ATL | ASAP Pest & Wildlife",
       "h1": "Bat and Guano Removal",
       "owner_phrase": "bat removal Metro ATL",
-      "page_sha256": "d4e2ad4f79679e56f8de56e3e3cb8633c3e8afdc937f4df9aa59cee6101f1697",
+      "page_sha256": "95d7f12bf186a3d5285f693ec02dd8b9885d115755af112971f30086f0563ab6",
       "logo_path": "assets/images/page-logos/bat.png",
       "logo_sha256": "f9cd235e7805f676b588082c678c6346e89a5f1b50934767317a7b60fbb4a94e",
       "review_state": "sept3-source-only-structural-metadata-change-pending-independent-review",
@@ -142,5 +142,13 @@
     "The mobile/tablet site-level navigation choice is awaiting human direction",
     "Editorial-gap cards are not published articles; held legacy articles are not linked and require separate remediation and editorial approval before reattachment",
     "N4 production cutover hold: sitemap membership, indexability, redirects, canonicals, production form delivery, per-page attribution tests, deployment, and live QA remain unchanged and unproven"
-  ]
+  ],
+  "review_link_update": {
+    "date": "2026-09-07",
+    "scope": "Exact Google-issued links on all 15 review cards across the five animal pages. General listing buttons retained.",
+    "source": "../google-review-permalinks.json",
+    "review_status": "pending fresh review; prior acceptance does not cover this update",
+    "client_acceptance": false,
+    "production_deployed": false
+  }
 }

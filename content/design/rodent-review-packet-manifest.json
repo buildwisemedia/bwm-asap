@@ -19,7 +19,7 @@
     },
     {
       "path": "qa/asap-close-qa.mjs",
-      "sha256": "7ed025160093daee09d14de3e5b8f06997b366e7013ceb2c50943d67f39599fd"
+      "sha256": "aac98f2c62b2285e33c10433e6a8f5fd0612a9f6d2334baf5097f34be8b6c563"
     },
     {
       "path": "qa/rodent-browser-qa.py",
@@ -27,7 +27,7 @@
     },
     {
       "path": "wildlife/gray-squirrel/index.html",
-      "sha256": "99b7ece4eb539a371930ed4c7bfeab5366619bcd3c5ef17ee16ca0514e6f19a4"
+      "sha256": "baa9178271bb6b9b2da510fcac6c92f4f4bd7d54f0e46347cfba1591c56608aa"
     }
   ],
   "evidence_files": [
@@ -155,5 +155,10 @@
     "source_base": "48a6ff685bf634fb62b41f52f6d04d9680bcf2d3",
     "independent_review": "pending; worker forbidden to launch models",
     "evidence_receipt": "root worker RECEIPT.json; historical design score not renewed"
+  },
+  "review_link_update": {
+    "date": "2026-09-07",
+    "state": "candidate pending fresh independent review",
+    "scope": "Five animal pages use exact provider-issued Google review links. Prior composed-page acceptance is not renewed."
   }
 }
