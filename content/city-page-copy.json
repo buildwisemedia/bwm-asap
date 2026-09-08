@@ -1,0 +1,492 @@
+[
+  {
+    "city": "Canton",
+    "slug": "wildlife-removal-canton",
+    "county": "Cherokee County",
+    "description": "Wildlife in the yard or noises in the house? Tell us what you have seen at your Canton home. We can help you choose the next step for pests, animal entry, or cleanup.",
+    "warmth": "A walk outside should feel peaceful. So should coming home.",
+    "answerTitle": "A yard sighting is a starting clue",
+    "note": "Canton’s Etowah River Park and Heritage Park connect to trails along the river. Seeing an animal outdoors does not, by itself, show that it has entered your home. Start with where the signs stop: at the fence, near a door, or inside a room.",
+    "context": "If your lot meets trees or a green space, look from the ground for damaged vents or trim. Note sounds and the time they happen. Do not climb onto the roof or follow an animal into cover. An inspection can test whether there is a route inside before you agree to repair work.",
+    "source": [
+      "City of Canton parks and trails",
+      "https://www.cantonga.gov/government/departments/parks-recreation"
+    ],
+    "inspection": [
+      "Separate yard activity from signs inside",
+      "Check the place where the sounds start",
+      "Look for a route through the outer wall or roof",
+      "List removal, repairs, and waste cleanup by area"
+    ],
+    "scenario": [
+      "Start with the room, then work outward",
+      "Suppose you hear scratching above a bedroom after a day of yard activity. Write down which room, which wall, and when it starts. Share a photo of any damage you can see without a ladder. That gives the team a clear place to begin; the sound alone does not identify the animal."
+    ],
+    "animals": [
+      [
+        "Raccoons",
+        "A raccoon crossing the yard is one clue. Repeated sounds above a ceiling or a torn roof edge need a closer look. Keep the two kinds of evidence separate."
+      ],
+      [
+        "Gray squirrels",
+        "Watch from the ground for the point where a squirrel leaves a branch and reaches the house. Note the route without cutting branches or blocking a hole first."
+      ],
+      [
+        "Bats",
+        "A bat flying above a trail is different from one entering a building. If you see an exit at dusk, record its location from a safe distance."
+      ],
+      [
+        "Rats",
+        "Tell us whether signs are near the garage, pantry, or lower wall. Leave droppings alone; a clear note about the room is more useful than a disturbed trail."
+      ],
+      [
+        "Mice",
+        "Small sounds can travel through a wall. List the rooms where you hear them, and mention stored food or pet food nearby so those areas can be checked."
+      ],
+      [
+        "Birds",
+        "A nest in a yard tree is not the same as nesting in a vent. Share the exact location before anyone removes material or closes the opening."
+      ]
+    ],
+    "pests": [
+      [
+        "Ants",
+        "Map the trail from the counter toward a door or window. A photo of the ants helps the team choose the right control plan."
+      ],
+      [
+        "Roaches",
+        "Note whether you see them in one damp room or in several parts of the home. Tell us about leaks that still need repair."
+      ],
+      [
+        "Termites",
+        "Save photos of mud-like tubes or shed wings. Do not assume that all wood damage has the same cause."
+      ],
+      [
+        "Mosquitoes",
+        "After rain, note water held in pots, covers, and other yard items. Include places you cannot reach safely."
+      ],
+      [
+        "Spiders",
+        "Tell us where webs keep returning and whether you have seen the spider. Those details help narrow the inspection."
+      ],
+      [
+        "Fleas and ticks",
+        "Record where people or pets spend time outdoors. Tell the team about pet care already in use before any treatment is planned."
+      ]
+    ],
+    "faqs": [
+      [
+        "Should I call about one animal crossing my Canton yard?",
+        "You can ask for help identifying what you saw. One sighting alone does not establish a home-entry problem. Repeated activity, damage, or signs indoors give the team more to check."
+      ],
+      [
+        "Does living near the Etowah River mean my attic has wildlife?",
+        "No. The parks and river explain the local setting, not the condition of a house. A home inspection must find its own evidence."
+      ],
+      [
+        "What should I record if I only hear a noise?",
+        "Note the room, time, and how long it lasts. Say whether it is scratching, a heavy step, or fluttering. Sound can be a clue, but it is not a firm animal ID."
+      ],
+      [
+        "Can I seal a hole before the visit?",
+        "Wait until the opening and any animals inside have been checked. Closing an active route too soon can trap animals. Ask how removal and repairs will be timed."
+      ],
+      [
+        "How do I arrange help in Canton?",
+        "Call 770-691-3636 with your address and the signs you have noticed. ASAP will confirm the service and an available visit time."
+      ]
+    ]
+  },
+  {
+    "city": "Woodstock",
+    "slug": "wildlife-removal-woodstock",
+    "county": "Cherokee County",
+    "description": "Pest trouble can cross a wall, a roof, or a shared trash area. For your Woodstock property, start with the places you can access and the person who can approve the work.",
+    "warmth": "You should not have to sort out a shared problem on your own.",
+    "answerTitle": "One building can need a shared plan",
+    "note": "Woodstock’s Towne Lake Pass Trail meets the Noonday Creek Trail at Woofstock Park. Homes and shared outdoor spaces can sit close to places people enjoy on foot. The trail is local context; it does not prove a pest problem at any nearby address.",
+    "context": "For a townhome, rental, or building with several units, tell us who handles the roof, outer walls, and waste area. A problem seen in one unit may require access elsewhere to check it. For a detached home, the same first call can focus on your own rooms and yard.",
+    "source": [
+      "City of Woodstock GIS trail tour",
+      "https://storymaps.arcgis.com/stories/3b6cfd92606c4d93b0da3ad46e936747"
+    ],
+    "inspection": [
+      "Mark each unit or shared space with signs",
+      "Confirm who can grant access for inspection",
+      "Check connected walls and outside openings",
+      "Assign each repair and follow-up to an owner"
+    ],
+    "scenario": [
+      "Make a short access list before the visit",
+      "If two neighbors hear movement along the same roof, record each location instead of guessing whose unit caused it. Ask the property manager who can open roof or utility spaces. The visit can then check the shared structure without treating a neighbor’s report as proof of an animal inside your home."
+    ],
+    "animals": [
+      [
+        "Raccoons",
+        "Tell the team whether a damaged area is over your unit or a common entry. Roof access and repair approval may belong to a manager or association."
+      ],
+      [
+        "Gray squirrels",
+        "Activity near adjoining roof edges is worth mapping across the building. Photos from separate viewpoints can help explain which opening needs inspection."
+      ],
+      [
+        "Bats",
+        "If bats use a shared roof space, tell the manager and the inspection team. The plan needs access to the relevant areas and a season-aware removal sequence."
+      ],
+      [
+        "Rats",
+        "Include shared bins, service doors, and storage rooms in your report. Do not place control products in a common area without approval."
+      ],
+      [
+        "Mice",
+        "In an attached home, note signs along pipes or walls shared with another unit. Do not assume that treating one room will cover the whole building."
+      ],
+      [
+        "Birds",
+        "A balcony nest and a blocked building vent call for different checks. Identify the exact spot and who owns or maintains that part of the building."
+      ]
+    ],
+    "pests": [
+      [
+        "Ants",
+        "Compare where trails appear in your kitchen and near common walkways. Report each place without applying products in a neighbor’s space."
+      ],
+      [
+        "Roaches",
+        "Let the team know if several units have reports. Access, food storage, and moisture checks may need one agreed schedule."
+      ],
+      [
+        "Termites",
+        "Ask who holds any existing termite records for the building. Bring the report or agreement so the new inspection has that context."
+      ],
+      [
+        "Mosquitoes",
+        "List shared planters, drains, and other places that hold water. The person who maintains them should be part of the next step."
+      ],
+      [
+        "Spiders",
+        "Report webs around common lights or entry doors to the building manager. A photo helps distinguish an active issue from an old web."
+      ],
+      [
+        "Fleas and ticks",
+        "Tell us which indoor rooms and shared pet areas are involved. Any common-area work needs clear notice and access arrangements."
+      ]
+    ],
+    "faqs": [
+      [
+        "I rent in Woodstock. What should I tell my property manager?",
+        "Send the date, room or unit, photos, and a short description. Ask who can approve an inspection and repairs. Your lease and property arrangements determine the next step."
+      ],
+      [
+        "Can you inspect a shared attic without access to every unit?",
+        "The team will explain what can be checked with the access available. Missing access may limit the findings. Arrange keys or an approved contact before the visit."
+      ],
+      [
+        "Should neighbors book separate treatments for the same building?",
+        "Start by comparing the locations and dates of the reports. If there may be a shared route, ask for a plan that explains how inspections, work, and follow-up will fit together."
+      ],
+      [
+        "Does trail access make wildlife removal necessary?",
+        "No. A nearby trail is not evidence of animal entry. Focus on damage, repeated building activity, or signs indoors before choosing removal work."
+      ],
+      [
+        "What does ASAP need to schedule a Woodstock visit?",
+        "Provide the street address, unit number if any, the access contact, and the concern. Call 770-691-3636 to confirm availability and the work that can be inspected."
+      ]
+    ]
+  },
+  {
+    "city": "Acworth",
+    "slug": "wildlife-removal-acworth",
+    "county": "Cobb County",
+    "description": "Animals near the lake, damage along a bank, and noises in an attic need different kinds of help. Tell us where the issue is at your Acworth address before choosing a service.",
+    "warmth": "Let’s make the next step clear, whether the concern is by the water or under your roof.",
+    "answerTitle": "Check the land as well as the animal",
+    "note": "Acworth’s city wildlife guidance describes natural areas around Lake Acworth and Lake Allatoona, including U.S. Army Corps of Engineers land. The city notes that outdoor wildlife encounters can be part of living near these places.",
+    "context": "For a concern by a lake or creek, say whether it is on your lot, common land, or public land. An animal sighting is different from damage to a building or a blocked water route. Do not enter the water, disturb a dam, or start work on land you do not control.",
+    "source": [
+      "City of Acworth wildlife guidance",
+      "https://acworth-ga.gov/faq-items/what-kinds-of-wildlife-can-be-found-in-acworth/"
+    ],
+    "inspection": [
+      "Locate the damage on the correct property",
+      "Identify the animal and the affected area",
+      "Confirm access and any needed permissions",
+      "Explain building work and water-edge work separately"
+    ],
+    "scenario": [
+      "Bring a location, not just a lake name",
+      "If you find chewed wood near water, take a photo from stable ground. Mark the spot on a property map and note any change in water level. The team needs to identify the animal, land owner, and kind of damage before discussing a plan. A lake-area mailing address alone does not settle those points."
+    ],
+    "animals": [
+      [
+        "Raccoons",
+        "Look for the difference between an animal visiting the shore and one using your home. Tell us about roof damage, repeated entry, or sounds above a room."
+      ],
+      [
+        "Gray squirrels",
+        "A squirrel on a lakeside tree may need no action. A damaged vent or repeated trip into the roof gives the inspection a specific place to check."
+      ],
+      [
+        "Bats",
+        "Flying over water does not mean bats occupy a house. If you see them emerge from trim or a vent, describe that building opening and the time."
+      ],
+      [
+        "Rats",
+        "Record whether signs are around stored food, a shed, or inside the home. Keep feed and trash details separate from any damage along the water."
+      ],
+      [
+        "Birds",
+        "Note whether birds are resting outdoors or using a vent, chimney, or other opening. The species and nest status affect what can be done."
+      ],
+      [
+        "Beavers",
+        "Chewed trees, piled branches, or changed drainage need an on-site check. Confirm whose land and water route are involved before any removal or dam work is proposed."
+      ]
+    ],
+    "pests": [
+      [
+        "Ants",
+        "Tell us if the trail is on a patio, near stored food, or inside. Keep photos clear enough to show the insect as well as its route."
+      ],
+      [
+        "Roaches",
+        "Include sheltered outdoor storage and any indoor damp spots in the inspection notes. Location helps guide the next questions."
+      ],
+      [
+        "Termites",
+        "Show the team wood damage near steps, a deck, or the home itself. Wet or damaged wood should not be labeled termite damage without a check."
+      ],
+      [
+        "Mosquitoes",
+        "Distinguish small items holding water on your lot from the lake or a public drainage area. Each place has a different owner and scope of work."
+      ],
+      [
+        "Spiders",
+        "Record recurring webs on covered porches or stored gear. Tell the team what you use the space for before treatment is considered."
+      ],
+      [
+        "Fleas and ticks",
+        "Mention shoreline walks, yard use, and pets when describing the issue. Any treatment plan should account for those uses and the site."
+      ]
+    ],
+    "faqs": [
+      [
+        "Can ASAP remove wildlife from public land near Acworth?",
+        "Public or shared land needs the correct owner or authority involved. Confirm the location first. A request from a nearby homeowner does not grant permission to work there."
+      ],
+      [
+        "Should I remove a beaver dam myself?",
+        "Do not start by pulling it apart. Have the animal, water route, ownership, and required permissions checked. A removal plan and a drainage plan may involve different work."
+      ],
+      [
+        "Are all animals near Lake Acworth a problem?",
+        "No. The city describes wildlife encounters as part of the local natural setting. Focus on the actual damage or building access, and avoid feeding or approaching wildlife."
+      ],
+      [
+        "My mailing address says Acworth. Is that enough to confirm service?",
+        "Give ASAP the full street address and the kind of issue. Mailing names, city limits, and service availability are different things. The team will confirm the address and visit options."
+      ],
+      [
+        "What photos help with a water-edge concern?",
+        "Use views taken from a safe, dry place. Show the damage, nearby landmarks, and its position on your lot if known. Do not wade in or move branches for a better photo."
+      ]
+    ]
+  },
+  {
+    "city": "Kennesaw",
+    "slug": "wildlife-removal-kennesaw",
+    "county": "Cobb County",
+    "description": "Planning roof work, replacing a vent, or hearing movement behind a wall? For your Kennesaw home, put animal checks and building repairs in the right order.",
+    "warmth": "You deserve to know what will be fixed before work starts.",
+    "answerTitle": "Plan the repair around what is inside",
+    "note": "Kennesaw Building Services handles permits and inspections within city limits. Its guidance says to ask the department if you are unsure whether work needs a permit or whether a property is in the city. That is useful when pest or wildlife work leads to building repairs.",
+    "context": "If a roof, siding, or vent job is already planned, share the date and contractor’s notes. Ask the wildlife team to check active openings before they are closed. The written plan should make clear who removes animals, who repairs the structure, and which tasks need to happen first.",
+    "source": [
+      "City of Kennesaw Building Services",
+      "https://www.kennesaw-ga.gov/buildingservices/"
+    ],
+    "inspection": [
+      "Review the repair area and planned work dates",
+      "Check for animals before closing openings",
+      "Agree on the order of removal and repairs",
+      "Record the finished work and any follow-up terms"
+    ],
+    "scenario": [
+      "Give both teams the same repair notes",
+      "Imagine a roofer finds a loose vent while preparing a repair. Keep a photo and ask whether there are signs of use. If animals may be inside, have that checked before the vent is sealed. Share the agreed work order with both teams so a finished repair does not hide an unresolved entry problem."
+    ],
+    "animals": [
+      [
+        "Raccoons",
+        "Torn trim or a lifted roof edge may involve more than surface damage. Ask for the animal check and the repair area to be described in the same plan."
+      ],
+      [
+        "Gray squirrels",
+        "If siding or fascia work is due, mention scratching and any repeated entry you have seen. A repair should follow the findings about active use."
+      ],
+      [
+        "Bats",
+        "A narrow opening should not be sealed just because it looks small. Bat work needs a check of use, season, and dependent young before closure."
+      ],
+      [
+        "Rats",
+        "Before a pipe or cable opening is patched, ask whether it is part of an active route. Control work and durable repairs should have a clear sequence."
+      ],
+      [
+        "Mice",
+        "Point out gaps around a garage door or lower wall that you plan to repair. An inspection can connect those openings with any signs found indoors."
+      ],
+      [
+        "Birds",
+        "Have a vent checked for an active nest before fitting a cover. Do not pull out material while the species and nest status are unknown."
+      ]
+    ],
+    "pests": [
+      [
+        "Ants",
+        "Tell the team about recent window, door, or kitchen work. Photos of the trail help connect the report with the area being changed."
+      ],
+      [
+        "Roaches",
+        "Mention open walls, plumbing work, and leaks in the repair zone. Those details help decide what can be checked before the space is closed."
+      ],
+      [
+        "Termites",
+        "Bring any past inspection or treatment report to a wood-repair visit. The cause of damage and the repair plan should be clear before boards are replaced."
+      ],
+      [
+        "Mosquitoes",
+        "If yard work changes where water collects, mark the spots that stay wet. Include covers and stored building materials that hold rain."
+      ],
+      [
+        "Spiders",
+        "Note the rooms or exterior spaces affected during building work. Keep the inspection area accessible without reaching into hidden gaps yourself."
+      ],
+      [
+        "Fleas and ticks",
+        "Explain any room closures, yard projects, and pets at the home. Work dates and access limits can affect a suitable treatment schedule."
+      ]
+    ],
+    "faqs": [
+      [
+        "Does every wildlife repair in Kennesaw need a permit?",
+        "Do not assume either way. The city asks owners to contact Building Services when they are unsure. Describe the exact repair and confirm whether the address is within city limits."
+      ],
+      [
+        "Should the roofer seal an opening right away?",
+        "If there are signs of active wildlife use, arrange a check first. The animal and any young inside can affect when an opening should be closed."
+      ],
+      [
+        "Can the inspection use photos from my contractor?",
+        "Yes, share them along with the repair notes and work date. They give useful context, but they do not replace a check of current conditions."
+      ],
+      [
+        "What should a repair proposal explain?",
+        "Ask which openings are included, what materials will be used, how removal is timed, and who handles cleanup. Any warranty should describe the actual work and its terms."
+      ],
+      [
+        "How can I line up the visit with planned work?",
+        "Call 770-691-3636 with your Kennesaw address and the contractor’s schedule. ASAP will confirm availability. Do not assume a same-day visit until the team agrees to it."
+      ]
+    ]
+  },
+  {
+    "city": "Cartersville",
+    "slug": "wildlife-removal-cartersville",
+    "county": "Bartow County",
+    "description": "A pest report may start at a kitchen bin, a garage shelf, or a workroom door. In Cartersville, a clear record of food storage, waste, and access can help shape a practical plan.",
+    "warmth": "We want your home or work space to feel easy to use again.",
+    "answerTitle": "Follow the daily routine around the space",
+    "note": "Cartersville’s curbside guide tells residents to bag and tie household garbage, keep it fully inside the cart, and leave the lid able to close. These local waste steps are a useful starting point when you notice activity near a home’s bins.",
+    "context": "If you also use a garage, workshop, or storage room, tell us what is kept there and when doors stay open. Note deliveries, pet feed, and any waste left overnight. Show the team each affected space, including separate buildings you want checked. Ask which areas are covered by the proposed work.",
+    "source": [
+      "City of Cartersville curbside guide",
+      "https://www.cartersvillega.gov/482/Cartersville-Curbside"
+    ],
+    "inspection": [
+      "Trace the report through storage and work areas",
+      "Check door use, food sources, and waste handling",
+      "Choose control work that fits how the space is used",
+      "Set a review point for repeat activity"
+    ],
+    "scenario": [
+      "Track a repeat problem across a normal week",
+      "If signs keep appearing by a garage shelf, note what is stored there and when you last saw activity. Add details about nearby feed, trash, or an open door. If the space is used for work, name the person who can show the team around. This helps the visit look beyond the single place where a pest was first seen."
+    ],
+    "animals": [
+      [
+        "Raccoons",
+        "Report tipped bins separately from roof or attic signs. Securing a food source and checking a possible building entry are different parts of a useful plan."
+      ],
+      [
+        "Gray squirrels",
+        "In a detached shed or workshop, describe the stored items and any repeated route at the roof edge. Tell us how often the building is used."
+      ],
+      [
+        "Bats",
+        "A quiet upper space needs care if bats may be using it. Avoid disturbing it and explain how the room or building is accessed before the inspection."
+      ],
+      [
+        "Rats",
+        "Share signs around feed, bins, loading doors, or stock shelves. The plan can then address control, openings, and the daily habits that need review."
+      ],
+      [
+        "Mice",
+        "Note damaged packaging and the shelves where you find it. Keep affected items separate and leave waste undisturbed until cleanup steps are clear."
+      ],
+      [
+        "Birds",
+        "Mention repeated activity at a loading canopy, storage bay, or vent. A plan depends on the species, nesting status, and how people use that space."
+      ]
+    ],
+    "pests": [
+      [
+        "Ants",
+        "Track whether the problem returns after meals, waste handling, or a delivery. A simple log can show which areas need a closer look."
+      ],
+      [
+        "Roaches",
+        "Include break areas, kitchens, and stored boxes in your notes. Tell us who can provide access when those rooms are in use."
+      ],
+      [
+        "Termites",
+        "If stored wood or a building part looks damaged, show both its location and condition. Keep treatment and structural repair questions separate."
+      ],
+      [
+        "Mosquitoes",
+        "Look for rain held in unused containers near storage areas. Report larger drainage concerns to the person responsible for that land."
+      ],
+      [
+        "Spiders",
+        "Describe quiet corners, seldom-used equipment, and webs near doors. The inspection should account for who works in or visits those spaces."
+      ],
+      [
+        "Fleas and ticks",
+        "Tell the team where animals rest or enter and whether the space serves both home and work use. That context helps plan safe access during treatment."
+      ]
+    ],
+    "faqs": [
+      [
+        "What should I change around my Cartersville garbage cart?",
+        "Follow the city’s current curbside guide: bag and tie household trash, keep it inside, and let the lid close fully."
+      ],
+      [
+        "Can a garage or workshop be checked with the house?",
+        "Tell ASAP about each structure when you call. The team can confirm access and the requested scope. A house visit does not automatically include every outbuilding."
+      ],
+      [
+        "Why keep a record of repeat pest sightings?",
+        "Dates, rooms, deliveries, and open-door times can give an inspection useful context. A log also gives you a way to discuss whether activity changes after the agreed work."
+      ],
+      [
+        "Does a business need the same plan as a home?",
+        "The plan should account for the space, staff, stored goods, access times, and service needed. Explain those details before agreeing to treatment or a repeat visit schedule."
+      ],
+      [
+        "What should I have ready when I call?",
+        "Give your address, the areas involved, and the name of the access contact. Call 770-691-3636 so ASAP can confirm which services and visit times are available."
+      ]
+    ]
+  }
+]

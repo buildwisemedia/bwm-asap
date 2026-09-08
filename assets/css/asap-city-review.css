@@ -1,0 +1,12 @@
+/* City-only extension of the existing ASAP page pattern. */
+.city-page .flashlight ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.city-page .flashlight li::before { display: none; }
+.city-page [id] { scroll-margin-top: 140px; }
+.city-page .map-card img { display: block; width: 100%; height: auto; }
+@media (max-width: 640px) {
+  .city-page [id] { scroll-margin-top: 102px; }
+  .city-page .flashlight ol { grid-template-columns: 1fr; }
+}
+@media (max-width: 380px) {
+  .city-page .hero h1 .outline { font-size: 48px; letter-spacing: -2px; }
+}
