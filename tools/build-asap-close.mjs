@@ -9,7 +9,7 @@ if (!requestedMode || !modes.has(requestedMode)) {
   throw new Error("Explicit build mode required: --mode=animal or --mode=legacy-review");
 }
 const buildMode = requestedMode;
-const isPrivateReview = (page) => page.kind === "animal" && page.key === "rodent";
+const isPrivateReview = (page) => page.kind === "city" || (page.kind === "animal" && page.key === "rodent");
 const phone = "770-691-3636";
 const tel = "+17706913636";
 const reviewUrl = "https://www.google.com/maps/place/ASAP+Wildlife+Removal/@33.734354,-84.242248,10z/data=!4m8!3m7!1s0x88f51d199bdde957:0x677a4db004e50c72!8m2!3d33.734354!4d-84.242248!9m1!1b1!16s%2Fg%2F11j3147h44?hl=en&entry=ttu";
@@ -225,13 +225,7 @@ const animals = [
   }
 ];
 
-const cityProfiles = [
-  { city: "Canton", slug: "wildlife-removal-canton", county: "Cherokee County", note: "Canton’s mix of established neighborhoods, newer construction, wooded edges, and roofline transitions creates varied pest and wildlife inspection conditions.", animals: ["Raccoons", "Gray squirrels", "Bats", "Rats", "Mice", "Birds"] },
-  { city: "Woodstock", slug: "wildlife-removal-woodstock", county: "Cherokee County", note: "Woodstock properties range from dense neighborhoods to wooded lots, so service begins with the specific structure, access points, and signs on site.", animals: ["Raccoons", "Gray squirrels", "Bats", "Rats", "Mice", "Birds"] },
-  { city: "Acworth", slug: "wildlife-removal-acworth", county: "Cobb and Bartow county context", note: "Acworth’s lake, creek, wooded, and suburban settings can create different wildlife pressure. The page keeps beavers in the local service mix in place of mice, per the client brief.", animals: ["Raccoons", "Gray squirrels", "Bats", "Rats", "Birds", "Beavers"] },
-  { city: "Kennesaw", slug: "wildlife-removal-kennesaw", county: "Cobb County", note: "Kennesaw’s mature trees, rooflines, crawlspaces, and high-use outdoor areas make a site-specific inspection more useful than a one-size-fits-all treatment list.", animals: ["Raccoons", "Gray squirrels", "Bats", "Rats", "Mice", "Birds"] },
-  { city: "Cartersville", slug: "wildlife-removal-cartersville", county: "Bartow County", note: "Cartersville properties can combine older construction, newer subdivisions, open land, and wooded corridors. The inspection connects the signs to the property.", animals: ["Raccoons", "Gray squirrels", "Bats", "Rats", "Mice", "Birds"] }
-];
+const cityProfiles = JSON.parse(readFileSync(join(root, "content/city-page-copy.json"), "utf8"));
 
 const pestIcons = {
   Ants: "⌁", Roaches: "◒", Termites: "◇", Mosquitoes: "⌁", Spiders: "✣", "Fleas and ticks": "•", "Bed bugs": "▰", "Stinging insects": "⬡"
@@ -351,18 +345,18 @@ ${robotsMeta}  <title>${esc(page.title)} | ASAP Pest &amp; Wildlife</title>
   <link rel="icon" href="/assets/images/logos/favicon.png">
   <link rel="stylesheet" href="${cssHref}">
 ${heroPreload}${adobeLoader}  <script type="application/ld+json">${json(baseSchema(page, faqs))}</script>
-</head>`;
+${page.kind === "city" ? '<link rel="stylesheet" href="/assets/css/asap-city-review.css">' : ""}</head>`;
 }
 
 function header(page) {
-  if (page.kind !== "animal") return `<body>
+  if (page.kind !== "animal") return `<body${page.kind === "city" ? ' class="city-page"' : ""}>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header"><div class="header-inner">
-  <a class="brand" href="/" aria-label="ASAP Pest and Wildlife home"><img src="/assets/images/logos/logo-orange-tagline.png" width="340" height="203" alt="ASAP Pest and Wildlife Removal"></a>
+  ${page.kind === "city" ? "<!-- @r020:identity: verified client logo at navigation scale -->" : ""}<a class="brand" href="/" aria-label="ASAP Pest and Wildlife home"><img src="/assets/images/logos/logo-orange-tagline.png" width="340" height="203" alt="ASAP Pest and Wildlife Removal"></a>
   <nav aria-label="Main navigation"><ul class="nav-list"><li><a href="/wildlife/">Wildlife</a></li><li><a href="/pest-control-services/">Pest control</a></li><li><a href="/services/">Services</a></li><li><a href="/about/">About</a></li></ul></nav>
   <a class="call-pill" href="tel:${tel}" data-track="header-phone">Call ${phone}</a>
 </div></header>`;
-  const identityAnnotation = page.kind === "animal"
+  const identityAnnotation = ["animal", "city"].includes(page.kind)
     ? "  <!-- @r020:identity nav lockup: client logo at navigation scale -->\n"
     : "";
   return `<body class="animal-page${page.key === "rodent" ? " rodent-page" : ""}">
@@ -376,6 +370,7 @@ ${identityAnnotation}  <a class="brand" href="/" aria-label="ASAP Pest and Wildl
 }
 
 function hero(page) {
+  if (page.kind === "city") return cityHero(page);
   if (page.kind !== "animal") return `<main id="main"><section class="hero texture"><div class="hero-inner">
   <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1><span class="outline">${esc(page.outlined)}</span>${esc(page.second)}</h1><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p>
   <div class="actions"><a class="button" href="#estimate">Request an inspection</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
@@ -435,11 +430,12 @@ function reviews(page) {
     ["ASAP is an excellent service provider with a team of highly skilled and professional technicians. I’d highly recommend.", "Fred Perry", "/assets/images/reviews/fred.webp"]
   ];
   return `<section class="section texture" aria-labelledby="reviews-title"><div class="container">${heading("What homeowners say", "Real review excerpts", "reviews-title")}
-  <div class="three-col">${cards.map(([quote, name, image]) => `<article class="review-card"><a href="${page?.kind === "animal" ? (individualReviewUrls[name] || destination) : destination}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-hidden="true">★★★★★</div><p>“${esc(quote)}”</p>${page?.key === "rodent" && image ? `<!-- @r020:F2 proof: exact homepage reviewer portrait connects the attributed excerpt to its approved proof instance --><img class="review-avatar" src="${image}" width="78" height="80" alt="${esc(name)}">` : ""}<cite>${esc(name)}</cite></a></article>`).join("")}</div>
+  <div class="three-col">${cards.map(([quote, name, image]) => `<article class="review-card"><a href="${["animal", "city"].includes(page?.kind) ? (individualReviewUrls[name] || destination) : destination}" target="_blank" rel="noopener noreferrer"><div class="stars" aria-hidden="true">★★★★★</div><p>“${esc(quote)}”</p>${page?.key === "rodent" && image ? `<!-- @r020:F2 proof: exact homepage reviewer portrait connects the attributed excerpt to its approved proof instance --><img class="review-avatar" src="${image}" width="78" height="80" alt="${esc(name)}">` : ""}<cite>${esc(name)}</cite></a></article>`).join("")}</div>
   <div class="actions"><a class="button" href="${destination}" target="_blank" rel="noopener noreferrer">Read Google reviews</a></div></div></section>`;
 }
 
 function faqs(items, page) {
+  if (page.kind === "city") return `<section class="section texture" aria-labelledby="faq-title"><div class="container"><div class="section-heading"><h2 id="faq-title">${esc(page.title)} FAQ</h2><p class="kicker">Common questions</p><div class="heading-rule" aria-hidden="true"></div></div><div class="faq-list">${items.map(([question, answer]) => `<details><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join("")}</div></div></section>`;
   const kicker = page.key === "rodent" ? "Helpful answers about rodent removal" : `${page.title} FAQ`;
   const animalPage = page.kind === "animal";
   if (animalPage && new Set(items.map(([question]) => faqAnchor(question))).size !== items.length) {
@@ -451,19 +447,19 @@ function faqs(items, page) {
 function form(page) {
   const logo = page.logo || "/assets/images/logos/logo-orange-tagline.png";
   const source = `/${page.slug}/`;
-  const logoAnnotation = page.kind === "animal"
+  const logoAnnotation = ["animal", "city"].includes(page.kind)
     ? "<!-- @r020:F3 cta-pull: page-specific service lockup anchors attention beside the request form -->"
     : "";
-  if (!isPrivateReview(page)) return `<section id="estimate" class="section section--navy"><div class="container contact-shell"><div class="contact-copy">${logoAnnotation}<img class="service-lockup" src="${logo}" width="320" height="220" alt="${esc(page.name)}"><p class="kicker">Talk with the ASAP team</p><h2>Contact us for an estimate!</h2><p>Tell us what you’re seeing or hearing. We’ll help identify the right next step.</p><p><a href="tel:${tel}">${phone}</a><br><a href="mailto:info@removeasap.com">info@removeasap.com</a></p><div class="actions"><a class="button button--cream" href="/contact/">Request an estimate</a></div></div></div></section>`;
+  if (!isPrivateReview(page)) return `<section id="estimate" class="section section--navy"><div class="container contact-shell"><div class="contact-copy">${logoAnnotation}<img class="service-lockup" src="${logo}" width="320" height="220" alt="${page.kind === "city" ? "ASAP Pest and Wildlife Removal" : esc(page.name)}"><p class="kicker">Talk with the ASAP team</p><h2>Contact us for an estimate!</h2><p>Tell us what you’re seeing or hearing. We’ll help identify the right next step.</p><p><a href="tel:${tel}">${phone}</a>${page.kind === "city" ? "" : '<br><a href="mailto:info@removeasap.com">info@removeasap.com</a>'}</p><div class="actions"><a class="button button--cream" href="/contact/">Request an estimate</a></div></div></div></section>`;
   return `<section id="estimate" class="section section--navy"><div class="container contact-shell">
-  <div class="contact-copy">${logoAnnotation}<img class="service-lockup" src="${logo}" width="320" height="220" alt="${esc(page.name)}"><p class="kicker">Talk with the ASAP team</p><h2>Contact us for an estimate!</h2><p>Tell us what you’re seeing or hearing. We’ll help identify the right next step.</p><p><a href="tel:${tel}">${phone}</a><br><a href="mailto:info@removeasap.com">info@removeasap.com</a></p></div>
+  <div class="contact-copy">${logoAnnotation}<img class="service-lockup" src="${logo}" width="320" height="220" alt="${page.kind === "city" ? "ASAP Pest and Wildlife Removal" : esc(page.name)}"><p class="kicker">Talk with the ASAP team</p><h2>Contact us for an estimate!</h2><p>Tell us what you’re seeing or hearing. We’ll help identify the right next step.</p><p><a href="tel:${tel}">${phone}</a>${page.kind === "city" ? "" : '<br><a href="mailto:info@removeasap.com">info@removeasap.com</a>'}</p></div>
   <form class="lead-form" action="#estimate" method="get" data-asap-lead-form data-source-page="${source}" data-page-type="${page.city ? "city" : page.kind}" data-service="${esc(page.name)}" data-city="${esc(page.city || "")}" data-integration-state="fixture-only">
-    <input type="hidden" name="lead_id"><input type="hidden" name="source_page"><input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="gclid"><input type="hidden" name="fbclid">
+    <input type="hidden" name="lead_id"><input type="hidden" name="source_page"${page.kind === "city" ? ` value="${source}"` : ""}><input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="gclid"><input type="hidden" name="fbclid">
     <div class="field"><input id="first-${page.key || page.slug}" name="first_name" autocomplete="given-name" required><label for="first-${page.key || page.slug}">First name*</label></div>
     <div class="field"><input id="last-${page.key || page.slug}" name="last_name" autocomplete="family-name" required><label for="last-${page.key || page.slug}">Last name*</label></div>
     <div class="field"><input id="phone-${page.key || page.slug}" name="phone" type="tel" autocomplete="tel" required><label for="phone-${page.key || page.slug}">Phone*</label></div>
     <div class="field"><input id="email-${page.key || page.slug}" name="email" type="email" autocomplete="email" required><label for="email-${page.key || page.slug}">Email*</label></div>
-    <div class="field field--full"><select id="issue-${page.key || page.slug}" name="issue" required><option value="">Select one…</option><option>Wildlife removal</option><option>Rat or mouse</option><option>Squirrel</option><option>Raccoon</option><option>Bat or guano</option><option>Pest control</option><option>Other</option></select><label for="issue-${page.key || page.slug}">I need peace with…*</label></div>
+    <div class="field field--full"><select id="issue-${page.key || page.slug}" name="issue" required><option value="">Select one…</option><option>Wildlife removal</option><option>Rat or mouse</option><option>Squirrel</option><option>Raccoon</option><option>Bat or guano</option>${page.kind === "city" && page.slug === "wildlife-removal-acworth" ? "<option>Beaver</option>" : ""}<option>Pest control</option><option>Other</option></select><label for="issue-${page.key || page.slug}">I need peace with…*</label></div>
     <div class="field field--full"><textarea id="details-${page.key || page.slug}" name="details" maxlength="1200"></textarea><label for="details-${page.key || page.slug}">What are you noticing?</label></div>
     <label class="consent"><input name="sms_consent" type="checkbox" required><span>I agree to receive messages about my inquiry. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Review our <a href="/privacy-policy/">Privacy Policy</a>. *</span></label>
     <button class="button button--cream" type="submit" disabled data-fixture-submit>${page.key === "rodent" ? "SUBMIT" : "Check form"}</button><noscript><p class="form-status">Online requests are turned off on this review page. No form information can be sent. Please call ${phone} if you need help.</p></noscript><p class="form-status" tabindex="-1" role="status" aria-live="polite" data-form-status>This review form does not send a request or create a customer record.</p>
@@ -492,7 +488,7 @@ function renderAnimal(page) {
 function animalArt(name) {
   const normalized = name.toLowerCase();
   if (normalized.includes("raccoon")) return "/assets/images/wildlife-grid/raccoon.png";
-  if (normalized.includes("squirrel")) return "/assets/images/wildlife-grid/gray-squirrel.png";
+  if (normalized.includes("squirrel")) return "/assets/images/animals/hero-v2/squirrel-hero-420.webp";
   if (normalized.includes("bat")) return "/assets/images/wildlife-grid/bat.webp";
   if (normalized.includes("rat")) return "/assets/images/animals/rat-navy-optimized.webp";
   if (normalized.includes("mice")) return "/assets/images/wildlife-grid/mouse-rat.png";
@@ -501,17 +497,17 @@ function animalArt(name) {
   return "/assets/images/animals/rat-navy-optimized.webp";
 }
 
-function countyMap(profile) {
-  return `<svg class="service-map" viewBox="0 0 520 340" role="img" aria-labelledby="map-${profile.slug}-title map-${profile.slug}-desc"><title id="map-${profile.slug}-title">${esc(profile.city)} county service context</title><desc id="map-${profile.slug}-desc">Schematic service-area context showing ${esc(profile.city)} in ${esc(profile.county)}. It is not a legal boundary map.</desc><path class="county" d="M70 45 L425 35 L480 128 L420 285 L155 305 L50 205 Z"></path><circle class="city-dot" cx="270" cy="165" r="11"></circle><text x="287" y="160" font-size="22" font-weight="700">${esc(profile.city)}</text><text x="287" y="187" font-size="15">${esc(profile.county)}</text><text x="70" y="326" font-size="13">Schematic service-area context</text></svg>`;
+function cityHero(page) {
+  return `<main id="main"><section class="hero texture"><div class="hero-inner">
+  <div class="hero-copy"><p class="eyebrow">${esc(page.eyebrow)}</p><h1><span class="outline">${esc(page.outlined)}</span>${esc(page.second)}</h1><p class="lede">${esc(page.description)}</p><p>${esc(page.warmth)}</p><div class="actions"><a class="button" href="#estimate">Request an inspection</a><a class="button button--ghost" href="tel:${tel}">Call ${phone}</a></div></div>
+  <!-- @r020:F1 emotion: existing ASAP mascot keeps local service help warm and recognizable -->
+  <div class="hero-art"><img src="${page.art}" alt="${esc(page.artAlt)}" width="600" height="520" fetchpriority="high"></div>
+  </div></section><div class="proof-strip"><ul class="proof-list"><li><strong>Tell us the signs</strong><span>Start with what you see or hear</span></li><li><strong>Check the property</strong><span>Find the cause before the fix</span></li><li><strong>Understand the work</strong><span>Review the plan and its terms</span></li><li><strong>Talk with ASAP</strong><span>${phone}</span></li></ul></div>`;
 }
 
-function cityFaqs(city) {
-  return [
-    [`Do you provide pest and wildlife removal in ${city}?`, `This page covers service intent in ${city}. Availability for a specific address, service, and schedule must be confirmed by the ASAP team.`],
-    ["What happens during an inspection?", "The technician reviews signs, likely access, affected areas, site conditions, and the service requested. The proposal should separate control, removal, repair, cleanup, and recurring work."],
-    ["Do you handle both pests and wildlife?", "ASAP offers pest-control and wildlife-removal services. The exact service, method, schedule, and warranty depend on the inspection and written scope."],
-    ["How can I request service?", "Call the ASAP team or use the contact page. The team will confirm the address, service, and scheduling details."]
-  ];
+function countyMap(profile) {
+  return `<!-- @r020:F2 proof: Census city and county boundaries replace the invented schematic with sourced geographic context -->
+  <img class="service-map" src="/assets/images/city-maps/${profile.city.toLowerCase()}.svg" width="520" height="340" loading="lazy" alt="${esc(profile.city)} city limits and nearby county boundaries from the U.S. Census Bureau"><p class="map-note">Geographic context, not a service boundary. <a href="https://tigerweb.geo.census.gov/tigerweb/">U.S. Census TIGERweb</a>. Address and service availability are confirmed when you call. <a href="/assets/images/city-maps/${profile.city.toLowerCase()}.svg" target="_blank" rel="noopener noreferrer">Open larger map</a>.</p>`;
 }
 
 function renderCity(profile) {
@@ -519,19 +515,22 @@ function renderCity(profile) {
     kind: "city", key: profile.slug, slug: profile.slug, city: profile.city,
     name: `Pest and Wildlife Removal in ${profile.city}`,
     title: `Pest and Wildlife Removal in ${profile.city}, Georgia`,
-    outlined: profile.city, second: "Pest + Wildlife", eyebrow: `${profile.county} service page`,
-    description: `Local pest control and humane wildlife removal information for ${profile.city}, Georgia, with inspection-led service options and a direct path to the ASAP team.`,
-    art: "/assets/images/logos/services-hero-mascot.png", artAlt: "ASAP Pest and Wildlife mascot",
-    warmth: `When something unfamiliar shows up at your ${profile.city} property, you deserve a calm answer and a plan that fits the site.`
+    outlined: profile.city, second: "Pest + Wildlife", eyebrow: `${profile.county} · Georgia`,
+    description: profile.description, warmth: profile.warmth,
+    art: "/assets/images/logos/services-hero-mascot.png", artAlt: "ASAP Pest and Wildlife mascot"
   };
-  const cityFaqItems = cityFaqs(profile.city);
-  const pests = ["Ants", "Roaches", "Termites", "Mosquitoes", "Spiders", "Fleas and ticks"];
-  return `${head(page, cityFaqItems)}${header(page)}${hero(page)}
-  <section class="section texture"><div class="container two-col"><div>${heading("Local answer", `A property-specific plan for ${profile.city}`)}<p class="lead">${esc(profile.note)}</p><p>ASAP starts with what is actually happening at the property. The inspection connects the signs to the service, repair, cleanup, or monitoring options that may belong in the proposal.</p></div><div class="map-card">${countyMap(profile)}<p class="map-note">County context is schematic and does not define a guaranteed service boundary.</p></div></div></section>
-  <section class="section section--white"><div class="container">${heading("Inspection pattern", "From evidence to a property-specific plan")}${flashlight()}</div></section>
-  <section class="section texture"><div class="container">${heading("Wildlife services", `Six animals featured in ${profile.city}`)}<div class="animal-grid">${profile.animals.map((animal) => `<article class="animal-card"><img src="${animalArt(animal)}" alt="" width="96" height="84" loading="lazy"><div><h3>${esc(animal)}</h3><p>Inspection-led removal and property guidance for signs involving ${esc(animal.toLowerCase())}.</p></div></article>`).join("")}</div></div></section>
-  <section class="section section--navy"><div class="container">${heading("Dedicated pest-control section", `Pest control for ${profile.city} properties`)}<p class="lead narrow">Pest control is its own service path. The plan should identify the pest, affected area, contributing conditions, treatment method, follow-up, safety context, and any recurring schedule.</p><div class="pest-grid">${pests.map((pest) => `<article class="feature-card"><h3>${esc(pest)}</h3><p>Identification, treatment planning, prevention guidance, and follow-up shaped to the property.</p></article>`).join("")}</div><div class="actions"><a class="button button--cream" href="/pest-control-services/">Explore pest control</a></div></div></section>
-  ${reviews()}${faqs(cityFaqItems, page)}${form(page)}${footer()}`;
+  const links = { Raccoons: "/wildlife/raccoon/", "Gray squirrels": "/wildlife/gray-squirrel/", Bats: "/wildlife/bats/", Rats: "/wildlife/mouse-rat/", Mice: "/wildlife/mouse-rat/", Birds: "/wildlife/bird/", Beavers: "/peace-of-mind-from/beavers/" };
+  return `${head(page, profile.faqs)}${header(page)}${hero(page)}
+  <section class="section texture" id="local-guidance"><div class="container two-col"><div>${heading(`At your ${profile.city} property`, profile.answerTitle)}<p class="lead">${esc(profile.note)}</p><p class="source-note"><a href="${esc(profile.source[1])}">${esc(profile.source[0])}</a></p><p>${esc(profile.context)}</p></div><div class="map-card">${countyMap(profile)}</div></div></section>
+  <section class="section section--white"><div class="container">${heading("Your inspection", "From signs to a clear plan")}
+  <!-- @r020:F2 proof: the flashlight graphic explains the inspection sequence using the client's existing visual pattern -->
+  <div class="flashlight"><div class="flashlight-icon" aria-hidden="true"></div><div><h3>What the visit needs to establish</h3><ol>${profile.inspection.map((step) => `<li>${esc(step)}</li>`).join("")}</ol><p><strong>Warranty:</strong> only the work and terms in your written agreement apply.</p></div></div>
+  <div class="answer-card"><h3>${esc(profile.scenario[0])}</h3><p>${esc(profile.scenario[1])}</p></div></div></section>
+  <section class="section texture"><div class="container">${heading("Wildlife help", `Animal signs to discuss in ${profile.city}`)}<div class="animal-grid">${profile.animals.map(([animal, description]) => `<!-- @r020:F1 emotion: existing species illustration helps the reader recognize the matching wildlife service -->
+  <article class="animal-card"><img src="${animalArt(animal)}" alt="" width="96" height="84" loading="lazy"><div><h3>${esc(animal)}</h3><p>${esc(description)}</p><a href="${links[animal]}">About ${esc(animal.toLowerCase())}</a></div></article>`).join("")}</div></div></section>
+  <section class="section section--navy"><div class="container">${heading("Pest control", `What to note before you call`)}<div class="pest-grid">${profile.pests.map(([pest, description]) => `<article class="feature-card"><h3>${esc(pest)}</h3><p>${esc(description)}</p></article>`).join("")}</div><div class="actions"><a class="button button--cream" href="/pest-control-services/">Explore pest control</a></div></div></section>
+  <section class="section texture"><div class="container"><aside class="source-note" aria-label="Wildlife and cleanup guidance"><strong>Safe next steps.</strong> Leave animal waste alone. CDC says not to sweep or vacuum dry rodent waste. Wildlife removal and nest work depend on the animal and current rules. Use these guides with the inspection findings: <a href="https://extension.uga.edu/publications/detail.html?number=B1248&amp;title=resolving-human-nuisance-wildlife-conflicts">UGA wildlife guidance</a> · <a href="https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html">CDC rodent cleanup</a> · <a href="https://georgiawildlife.com/ExcludingBatsFromYourHouse">Georgia DNR bat guidance</a>.</aside></div></section>
+  ${reviews(page)}${faqs(profile.faqs, page)}${form(page)}${footer()}`;
 }
 
 function renderPest() {
